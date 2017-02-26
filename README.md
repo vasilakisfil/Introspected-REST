@@ -53,21 +53,33 @@ Great! let's see the API specs proposed as today 2017..
 > on-the-fly (e.g., code-on-demand).
 
 
-## My good old API
+## I miss my good old API
 
 
 ## Introspected APIs
+In the following we will describe the architecture of the Introspected APIs through
+a proposed implementation.
+The reader though should not confuse the proposed implementation details with the actual
+architecture.
 
-### Networked APIs ιδιωματισμοι
-#### Protocol level
+* The simpler the API, the simpler the API description.
+
+### Introduction 
+#### Networked APIs ιδιωματισμοι
+##### Protocol level
 HTTP
 
-#### Message level
+##### Message level
 JSON
 
-#### Application level
+##### Application level
+The API spec
 
 
-### 
+
+## Separate Hypermedia from the actual data (API introspection)
+JSON Hyper Schemas + HTTP OPTIONS on the endpoint
+
+## Automate documentation
 
 
