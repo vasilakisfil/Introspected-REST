@@ -40,49 +40,7 @@ REST?
 As we will show, Introspected REST is an API architectural style that solves that.
 It's a similar model which is mostly based on
 Roy's REST model, brings the same advantages,
-but differentiating on key elements to make it simple, easier to test and easier to implement.
-
-
-**this section should go below explaining HATEOAS**
-
-There are 3 kinds of criticizers of REST model.
-1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
-simpler, yet easier to implement and test and deliver a RESTfull approach
-2. The ones who understand what REST brings on the table but given that they control the client as well,
-why should they bother with the whole HATOAS thing?
-3. The ones who don't understand REST and just want a plain JSON because it's simple enough
-
-
-Introspected REST model is flexible enough to cover all those user cases.
-It's not a model that is black or white: your API is either Introspected-REST-compliant or it isn't, like REST.
-
-We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelemnt
-and backwards compatible.
-The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
-
-
-You see, the shadow fo Roy Fielding is above any API developer:
-we are afraid to deprecate Roy's REST model and as a result what we are doing is that
-we take some elements of Roy's model, apply them, and name our API or spec as RESTSful.
-Eventually however, the final result is even worse. It doesn't have Roy's key elements for
-a Markov-chain-like client (we still have offline contracts) yet we have added complexity
-to our API for little result.
-
-In this Manifesto we will try to kill Roy's model.
-It gave us great insights but let's be pragmatic: it will never work out.
-
-Probably Roy won't like that. He will either:
-* declare that Introspected REST is a stupid manifesto that has nothing to do with his REST or
-* he will declare the Introspected REST is just yet another REST as he defined it and we never
-read his dissertation to actually see that we are defining yet another REST style.
-
-In either case, given that very few has really implemented a Roy-compliant REST API means
-that Roy himself failed to explain his model correctly.
-
-We need to be brave enough and move on.
-
-Introspected REST is an alternative backwards compatible API. No breaking changes are needed.
-
+but differentiates on key elements to make it simple, easier to test and easier to implement.
 
 
 ## Roy's REST model
@@ -90,7 +48,7 @@ Introspected REST is an alternative backwards compatible API. No breaking change
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
 
 Roy has done great work on initial HTTP spec and REST definition.
-Unfortunately, very few people fully people have truly understood the unique characteristics of networked
+Unfortunately, very few people have truly understood the unique characteristics of networked
 APIs which inspired Roy to define the REST.
 
 The idioms of Networked Services are very peculiar.
@@ -165,6 +123,21 @@ architecture.
 * The simpler the API, the simpler the API description.
 
 ### Introduction 
+There are 3 kinds of criticizers of REST model.
+1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
+simpler, yet easier to implement and test and deliver a RESTfull approach
+2. The ones who understand what REST brings on the table but given that they control the client as well,
+why should they bother with the whole HATOAS thing?
+3. The ones who don't understand REST and just want a plain JSON because it's simple enough
+
+
+Introspected REST model is flexible enough to cover all those user cases.
+It's not a model that is black or white: your API is either Introspected-REST-compliant or it isn't, like REST.
+
+We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelemnt
+and backwards compatible.
+The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
+
 #### Networked APIs ιδιωματισμοι
 ##### Protocol level
 HTTP
@@ -190,6 +163,32 @@ JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
 ### Linked Data and Semantic Web
 
+## Outro
+
 It should be noted this model is not something we conceived in a lab. Some [people]()
 have already tried to implement something similar, probably without really knowing
 what they were doing.
+
+You see, the shadow of Roy Fielding is above any API developer:
+we are afraid to deprecate Roy's REST model and as a result what we are doing is that
+we take some elements of Roy's model, apply them, and name our API or spec as RESTSful.
+Eventually however, the final result is even worse. It doesn't have Roy's key elements for
+a Markov-chain-like client (we still have offline contracts) yet we have added complexity
+to our API for little result.
+
+In this Manifesto we will try to kill Roy's model.
+It gave us great insights but let's be pragmatic: it will never work out.
+
+Probably Roy won't like that. He will either:
+* declare that Introspected REST is a stupid manifesto that has nothing to do with his REST or
+* he will declare the Introspected REST is just yet another REST as he defined it and we never
+read his dissertation to actually see that we are defining yet another REST style.
+
+In either case, given that very few has really implemented a Roy-compliant REST API means
+that Roy himself failed to explain his model correctly.
+
+We need to be brave enough and move on.
+
+Introspected REST is an alternative backwards compatible API. No breaking changes are needed.
+
+
