@@ -53,6 +53,7 @@ JSON
 ### Application level
 The API spec
 
+
 ## Roy's REST model
 
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
@@ -91,6 +92,18 @@ There are 5 crucial attributes of REST model:
   * induces evolvable (loose coupling) via late binding of application transitions
 
 
+### Capabilities of a modern API
+
+Provide a ORM to client over HTTP
+* Sparse fields
+* Granular permissions
+* Associations on demand
+* Sorting & pagination
+* Filtering collections
+* Aggregation queries
+* **Date types**
+* Hypermedia Driven
+
 Great! let's see the API specs proposed as today, March 2017..
 
 ## API Specs Today
@@ -102,7 +115,7 @@ Specifically, in our API domain, we have a `User` resource and a `Micropost` res
 * `User`
   * `id`, a String, never empty or NULL, primary ID of the resource
   * `email`, a String, never empty or NULL, with maximum length up to 255 characters, email format
-  * `name`, a String, with maximum length up to 255 characters
+  * `name`, a String, with maximum length up to 150 characters
   * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
   * `microposts_count` an Integer
 
@@ -133,17 +146,17 @@ In plain JSON the resources would look like:
   "id":"9123",
   "name":"Filippos Vasilakis",
   "email":"vasilakisfil@gmail.com",
-  "created-at":"2016-10-06T20:46:55Z",
-  "microposts-count":49
+  "created_at": "2014-01-06T20:46:55Z",
+  "microposts_count":49
 }
 ```
 
 ```json
 {
   "id":"323",
-  "userId": "9123"
+  "user_id": "9123"
   "content":"We are live!",
-  "created-at":"2016-10-06T20:46:55Z"
+  "created_at": "2017-01-06T20:46:55Z",
 }
 ```
 
@@ -152,7 +165,7 @@ in the current API specs:
 
 ### JSONAPI
 
-#### User
+##### User
 ```json
 {
     "data": {
@@ -161,7 +174,7 @@ in the current API specs:
         "attributes": {
             "name": "Filippos Vasilakis",
             "email": "vasilakisfil@gmail.com",
-            "created-at": "2016-10-06T20:46:55Z",
+            "created-at": "2014-01-06T20:46:55Z",
             "microposts-count": 50,
         },
         "relationships": {
@@ -174,7 +187,7 @@ in the current API specs:
 }
 ```
 
-#### Users resource
+##### Users resource
 
 ```json
 {
@@ -185,7 +198,7 @@ in the current API specs:
         "attributes": {
             "name": "Filippos Vasilakis",
             "email": "vasilakisfil@gmail.com",
-            "created-at": "2016-10-06T20:46:55Z",
+            "created-at": "2014-01-06T20:46:55Z",
             "microposts-count": 50,
         },
         "relationships": {
@@ -196,10 +209,21 @@ in the current API specs:
             }
       },
       {
-        .
-        .
-        .
-      }
+        "id": "9124",
+        "type": "users",
+        "attributes": {
+            "name": "Robert Clarsson",
+            "email": "robert.clarsson@gmail.com",
+            "created-at": "2016-10-06T16:01:24Z",
+            "microposts-count": 50,
+        },
+        "relationships": {
+            "microposts": {
+                "links": {
+                    "related": "/api/v1/microposts?user_id=9124"
+                }
+            }
+      },
     ],
     "links": {
         "self": "/api/v1/users?page=1&per_page=10",
@@ -209,9 +233,94 @@ in the current API specs:
 }
 ```
 
+Problems of this spec:
+ * Limited links (no URI templates, treats the client as stupid)
+ * No actions
+ * No info on available attributes
+ * No info on data types
+ * No attributes description, requires documentation
+
 ### HAL
 
-### SIREN
+```json
+{
+    "_links": {
+        "self": {
+            "href": "/api/v1/users/{id}"
+        },
+        "microposts": {
+            "href": "/api/v1/microposts/user_id={id}",
+            "templated": true
+        }
+    },
+    "id": "1",
+    "name": "Filippos Vasilakis",
+    "email": "vasilakisfil@gmail.com",
+    "createdAt": "2014-01-06T20:46:55Z",
+    "micropostsCount": 50,
+}
+```
+
+```json
+{  
+   "_links":{  
+      "self":{  
+         "href":"/api/v1/users"
+      },
+      "curries":[  
+         {  
+            "name":"ea",
+            "href":"http://example.com/docs/rels/{rel}",
+            "templated":true
+         }
+      ]
+   },
+   "_embedded":{  
+      "users":[
+         {  
+            "_links":{  
+               "self":{  
+                  "href":"/api/v1/users/{id}"
+               },
+               "microposts":{  
+                  "href":"/api/v1/microposts?user_id={id}"
+               }
+            },
+            "id": 9123,
+            "name": "Filippos Vasilakis",
+            "email": "vasilakisfil@gmail.com",
+            "createdAt": "2014-01-06T20:46:55Z",
+            "micropostsCount": 50
+         }, {
+            "_links":{  
+               "self":{  
+                  "href":"/api/v1/users/{id}"
+               },
+               "microposts":{  
+                  "href":"/api/v1/microposts?user_id={id}"
+               }
+            },
+            "id": 9123,
+            "name": "Robert Clarsson",
+            "email": "robert.clarsson@gmail.com",
+            "created-at": "2016-10-06T16:01:24Z",
+            "microposts-count": 50,
+         }
+      ]
+   }
+}
+```
+
+Goods:
+ * Links
+
+Problems with this spec:
+ * No actions
+ * No info on available attributes
+ * No info on data types
+ * No attributes description, requires documentation (however it does provide a link to documentation)
+
+### Siren
 
 ### Hydra
 
@@ -232,20 +341,10 @@ in the current API specs:
 > types and resource communication mechanisms, both of which may be improved
 > on-the-fly (e.g., code-on-demand).
 
+* Describe what actions should include. Maybe move that before the specs ?
+
 
 ## I miss my good old API
-
-### Capabilities of a modern API
-
-Provide a ORM to client over HTTP
-* Sparse fields
-* Granular permissions
-* Associations on demand
-* Sorting & pagination
-* Filtering collections
-* Aggregation queries
-* **Date types**
-* Hypermedia Driven
 
 
 ## Introspected APIs
