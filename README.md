@@ -5,7 +5,8 @@ There has been a great confusion of what a REST API is.
 Most people think that REST API is just a CRUD over HTTP. Or a CRUD with some links.
 
 In this manifesto, we will give a specific definition of what REST is, according to Roy,
-and we will propose a new model that brings into the table the same things,
+and see that most current API specs (JSONAPI, HAL etc) fail to follow this model.
+Then, we will propose a new model that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
 ## Definitions
@@ -42,6 +43,15 @@ It's a similar model which is mostly based on
 Roy's REST model, brings the same advantages,
 but differentiates on key elements to make it simple, easier to test and easier to implement.
 
+## Networked APIs
+### Protocol level
+HTTP, CoAP, WebSockets, any URI-like protocol
+
+###Message level
+JSON
+
+### Application level
+The API spec
 
 ## Roy's REST model
 
@@ -61,11 +71,11 @@ As a result the server would help (drive if you will) the client exactly where i
 
 That's the main reason why Roy is against the version on the URL: because it means that
 you take as de-facto that there will be breaking changes at some point.
-Anti8eta, a truly REST API should be able to apply changes on the resources without breaking any client
+Instead, a truly REST API should be able to apply changes on the resources without breaking any client
 because the client.
 
 
-Roy cites the following attributes on a REST API:
+There are 5 crucial attributes of REST model:
 
 * All important resources are identifed by one resource identifer mechanism
   * induces simple, visible, reusable, stateless communication
@@ -84,8 +94,120 @@ Roy cites the following attributes on a REST API:
 Great! let's see the API specs proposed as today, March 2017..
 
 ## API Specs Today
+### Our use case
+In our use case we will follow the aforementioned points of the REST model.
+
+Our use case is a minature of Twitter.
+Specifically, in our API domain, we have a `User` resource and a `Micropost` resource with the following attributes:
+* `User`
+  * `id`, a String, never empty or NULL, primary ID of the resource
+  * `email`, a String, never empty or NULL, with maximum length up to 255 characters, email format
+  * `name`, a String, with maximum length up to 255 characters
+  * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
+  * `microposts_count` an Integer
+
+* `Micropost`
+  * `id`, a String, never empty or NULL, primary ID of the resource
+  * `userId`, a String, never empty or NULL, representing an ID of `User` resource
+  * `content`, a String, never empty or NULL, with maximum length up to 160 characters
+  * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
+
+So given the REST model we have the following routes:
+* `Users` resource (`/users`):
+ * List users (`GET /users`): Gets a collection of `User` resources
+ * Create a new user (`/users`): Creates a new `User` with the specified attributes.
+
+* `User` resource (`/users/{id}`):
+ * Get a user (`GET /users/{id}`): Gets the attributes of the specified `User`
+ * Update a user `PATCH /users/{id}`: Updates a `User` with the specified attributes
+ * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
+
+_these 2 resources are often mistankingly thought as a single, one, resource_
+
+The `User` resource has also some _associations_ (or _relations_/_relationships_ if you prefer).
+
+In plain JSON the resources would look like:
+
+```json
+{
+  "id":"9123",
+  "name":"Filippos Vasilakis",
+  "email":"vasilakisfil@gmail.com",
+  "created-at":"2016-10-06T20:46:55Z",
+  "microposts-count":49
+}
+```
+
+```json
+{
+  "id":"323",
+  "userId": "9123"
+  "content":"We are live!",
+  "created-at":"2016-10-06T20:46:55Z"
+}
+```
+
+Now that we defined the scope of our little API, let's see how this would be implemented
+in the current API specs:
 
 ### JSONAPI
+
+#### User
+```json
+{
+    "data": {
+        "id": "9123",
+        "type": "users",
+        "attributes": {
+            "name": "Filippos Vasilakis",
+            "email": "vasilakisfil@gmail.com",
+            "created-at": "2016-10-06T20:46:55Z",
+            "microposts-count": 50,
+        },
+        "relationships": {
+            "microposts": {
+                "links": {
+                    "related": "/api/v1/microposts?user_id=9123"
+                }
+            }
+    }
+}
+```
+
+#### Users resource
+
+```json
+{
+    "data": [
+      {
+        "id": "9123",
+        "type": "users",
+        "attributes": {
+            "name": "Filippos Vasilakis",
+            "email": "vasilakisfil@gmail.com",
+            "created-at": "2016-10-06T20:46:55Z",
+            "microposts-count": 50,
+        },
+        "relationships": {
+            "microposts": {
+                "links": {
+                    "related": "/api/v1/microposts?user_id=9123"
+                }
+            }
+      },
+      {
+        .
+        .
+        .
+      }
+    ],
+    "links": {
+        "self": "/api/v1/users?page=1&per_page=10",
+        "next": "/api/v1/users?page=2&per_page=10",
+        "last": "/api/v1/users?page=3&per_page=1"
+    }
+}
+```
 
 ### HAL
 
@@ -113,6 +235,18 @@ Great! let's see the API specs proposed as today, March 2017..
 
 ## I miss my good old API
 
+### Capabilities of a modern API
+
+Provide a ORM to client over HTTP
+* Sparse fields
+* Granular permissions
+* Associations on demand
+* Sorting & pagination
+* Filtering collections
+* Aggregation queries
+* **Date types**
+* Hypermedia Driven
+
 
 ## Introspected APIs
 In the following we will describe the architecture of the Introspected APIs through
@@ -122,7 +256,7 @@ architecture.
 
 * The simpler the API, the simpler the API description.
 
-### Introduction 
+### Introduction
 There are 3 kinds of criticizers of REST model.
 1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
 simpler, yet easier to implement and test and deliver a RESTfull approach
@@ -138,19 +272,8 @@ We want to embrace even the simplest APIs and allow them to provide the elements
 and backwards compatible.
 The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
 
-#### Networked APIs ιδιωματισμοι
-##### Protocol level
-HTTP
 
-##### Message level
-JSON
-
-##### Application level
-The API spec
-
-
-
-### Separate Hypermedia from the actual data (API introspection)
+### Separate Hypermedia from the actual data
 JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
 ### Automate documentation
@@ -161,7 +284,7 @@ JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
 
 
-### Linked Data and Semantic Web
+### The case of Linked Data and Semantic Web
 
 ## Outro
 
