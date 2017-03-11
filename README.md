@@ -2,10 +2,12 @@
 (Sliding away from Roy Fielding's REST model)
 
 There has been a great confusion of what a REST API is.
-Most people think that REST API is just a CRUD over HTTP. Or a CRUD with some links.
+Most people think that REST API is just a CRUD over HTTP.
+Or a CRUD with some links.
+Or a nicely formatted, a sophisticated CRUD.
 
 In this manifesto, we will give a specific definition of what REST is, according to Roy,
-and see that most current API specs (JSONAPI, HAL etc) fail to follow this model.
+and see that most current APIs and API specs (JSONAPI, HAL etc) fail to follow this model.
 Then, we will propose a new model that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
@@ -14,7 +16,7 @@ First some definitions, that we will use through the text:
 
 * REST: The model that Roy defined in his [thesis](thesis) (along with his [blog]() comments).
 * RESTfull: APIs that follows some parts of Roy's REST model, mostly links
-* RESTy: APIs that have a plain JSON API (no links)
+* RESTy: APIs that have a plain JSON API without any links (respect REST model other than hypermedia)
 * Introspected REST: APIs that follow the definition we provide here
 
 
@@ -32,7 +34,8 @@ not suitable for short-term APIs?
 
 We firmly believe that REST is much better than any API that does not follow REST principles
 (even RESTfull APIs), even for short-term APIs.
-Networked services have very peculiar characteristics which, until now, only REST has fully addressed them*.
+Networked services have very peculiar characteristics which, until now, only REST has fully addressed them.
+Being able to evolve your API without breaking the clients is critical.
 
 Given that, how can we have a simpler model than REST, yet have the same functionality of
 REST?
@@ -43,15 +46,19 @@ It's a similar model which is mostly based on
 Roy's REST model, brings the same advantages,
 but differentiates on key elements to make it simple, easier to test and easier to implement.
 
-## Networked APIs
+But first let's discuss about Networked Services.
+
+## Networked Services and APIs
 ### Protocol level
 HTTP, CoAP, WebSockets, any URI-like protocol
 
-###Message level
+### Message level
 JSON
 
 ### Application level
 The API spec
+
+#### Profiles
 
 
 ## Roy's REST model
@@ -101,8 +108,8 @@ Provide a ORM to client over HTTP
 * Sorting & pagination
 * Filtering collections
 * Aggregation queries
-* **Date types**
 * Hypermedia Driven
+* **Date types**
 
 Great! let's see the API specs proposed as today, March 2017..
 
@@ -262,27 +269,27 @@ Problems of this spec:
 ```
 
 ```json
-{  
-   "_links":{  
-      "self":{  
+{
+   "_links":{
+      "self":{
          "href":"/api/v1/users"
       },
-      "curries":[  
-         {  
+      "curries":[
+         {
             "name":"ea",
             "href":"http://example.com/docs/rels/{rel}",
             "templated":true
          }
       ]
    },
-   "_embedded":{  
+   "_embedded":{
       "users":[
-         {  
-            "_links":{  
-               "self":{  
+         {
+            "_links":{
+               "self":{ 
                   "href":"/api/v1/users/{id}"
                },
-               "microposts":{  
+               "microposts":{ 
                   "href":"/api/v1/microposts?user_id={id}"
                }
             },
@@ -292,11 +299,11 @@ Problems of this spec:
             "createdAt": "2014-01-06T20:46:55Z",
             "micropostsCount": 50
          }, {
-            "_links":{  
-               "self":{  
+            "_links":{
+               "self":{
                   "href":"/api/v1/users/{id}"
                },
-               "microposts":{  
+               "microposts":{
                   "href":"/api/v1/microposts?user_id={id}"
                }
             },
