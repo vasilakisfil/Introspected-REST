@@ -331,9 +331,13 @@ Problems with this spec:
 
 ### Hydra
 
-### GraphQL
+!### GraphQL
 
-#### Limitations
+!#### Limitations
+
+
+**How many years these specs could sustain ? Are they built with a lifespan of 2-3 years or are they
+built with a life span of 50 years?**
 
 ## Ideal REST API
 > A REST API should be entered with no prior knowledge beyond the initial URI (bookmark)
