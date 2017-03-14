@@ -430,9 +430,15 @@ Introspected REST is an alternative backwards compatible API. No breaking change
 Are we sliding a lot from Roy's initial model? No, we modernize it a little bit.
 
 ##### Roadmap to json-specific defined Introspected REST specs
+As I said modern APIs have specific properties.
+If you want to build the next Introspected-REST spec, you can follow the following reasoning.
+Note that this reasoning is message-agnostic, meaning that we use here JSON just because we know it better
+but your spec could use anything, yaml, xml etc.
+
 * Start with some SANE defaults and the axion: The simpler your API (and the lesser it deviates from defaults), the simpler the introspection-meta-data should be
 * Reach a concencus on a Introspection spec using already defined specs like JSON-Schemas.
 * Reach a concencus on a querying language over url (filter + aggregation)
 * Reach a concencus on an URL-API for attribute/association inclusion
 * Reach a concencus on linking
 * Reach a concencus on denoting linked/semantic data
+* Reach a concencus on document structure (root element, meta attributes which should appear in the simple response as well etc)
