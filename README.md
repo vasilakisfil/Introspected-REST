@@ -56,6 +56,8 @@ HTTP, CoAP, WebSockets, any URI-like protocol
 JSON
 
 ### Application level
+Content negotiation and media types
+
 The API spec
 
 #### Profiles
