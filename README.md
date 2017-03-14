@@ -442,3 +442,6 @@ but your spec could use anything, yaml, xml etc.
 * Reach a concencus on linking
 * Reach a concencus on denoting linked/semantic data
 * Reach a concencus on document structure (root element, meta attributes which should appear in the simple response as well etc)
+
+So we keep 80% of the REST constraints and while we understand the benefits of other 20% we switch it with an on-demand alternative that makes the final thing
+more flexible and powerful while keeping the final data simple.
