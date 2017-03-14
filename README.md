@@ -49,8 +49,10 @@ but differentiates on key elements to make it simple, easier to test and easier 
 But first let's discuss about Networked Services.
 
 ## Networked Services and APIs
+### Subprotocol level
+TCP, UDP, etc
 ### Protocol level
-HTTP, CoAP, WebSockets, any URI-like protocol
+HTTP, CoAP, QUIC, WebSockets, any URI-like protocol
 
 ### Message level
 JSON
