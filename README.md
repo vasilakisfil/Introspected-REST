@@ -455,3 +455,6 @@ It does not describe a specific spec and that's the reason it does not follow th
 It's a manigesto if you wish.
 
 _Anyone can contribute in this manifesto. Just open a pull request._
+
+
+The way the introspection is made is up to the API designer, or better, up to the spec. Here we use HTTP OPTIONS as we feel that it's an approriate way.
