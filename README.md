@@ -447,3 +447,11 @@ but your spec could use anything, yaml, xml etc.
 
 So we keep 80% of the REST constraints and while we understand the benefits of other 20% we switch it with an on-demand alternative that makes the final thing
 more flexible and powerful while keeping the final data simple.
+
+#### Why this document
+This document describes an architectural style.
+It does not describe a specific spec and that's the reason it does not follow the IETF draft standards.
+
+It's a manigesto if you wish.
+
+_Anyone can contribute in this manifesto. Just open a pull request._
