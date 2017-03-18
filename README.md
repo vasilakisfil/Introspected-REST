@@ -176,13 +176,10 @@ In 2017 we have progressed so much on Resty APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
 A modern API should _also_ have the following properties, at least:
 
-##### Sparse fields
+##### Sparse fields (collection/resource)
 The client needs to be able to ask and get specific attributes of the resource representation.
 
-Applies to both collection or resource.
-
-##### Granular permissions
-> for a collection/resource
+##### Granular permissions (collection/resource)
 
 The same representation could have a set of attributes or a subset of that set based
 on the user role and permissions
@@ -191,23 +188,21 @@ on the user role and permissions
 
 The client should be able to ask related associations to the main initial resource, in the same request.
 
-##### Sorting & pagination
+##### Sorting & pagination (collection only)
 
 The client should be able to sort based on one or more attributes and paginate the collection
 based on the page, page size and possible an offset.
 
-###### Filtering collections
+##### Filtering collections (collection only)
 > Collection only
 The client should be able to run any sort of collection filtering, as long as it does not pose
 any security thread or slows down the API performance.
 
-###### Aggregation queries
-> Collection only
+##### Aggregation queries (collection only)
 The client should be able to run any sort of aggregation queries, as long as it does not pose
 any security thread or slows down the API performance.
 
-###### **Data types**
-> Collection and resource
+#### **Data types**
 
 The client should know the data types of the attributes of the requested representation of a resource.
 Message formats (like JSON) provide some data types but they are pretty basic.
