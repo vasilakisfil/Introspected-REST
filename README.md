@@ -14,10 +14,10 @@ yet it's much simpler to implement while at the same time being backwards compat
 ## Definitions
 First some definitions, that we will use through the text:
 
-* REST: The model that Roy defined in his [thesis](thesis) (along with his [blog]() comments).
-* RESTfull: APIs that follows some parts of Roy's REST model, mostly links
-* RESTy: APIs that have a plain JSON API without any links (respect REST model other than hypermedia)
-* Introspected REST: APIs that follow the definition we provide here
+* `REST`: The model that Roy defined in his [thesis](thesis) (along with his [blog]() comments).
+* `RESTfull`: APIs that follows some parts of Roy's `REST` model, mostly links
+* `RESTy`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
+* `Introspected REST`: APIs that follow the definition we provide here
 
 
 ## Introduction
@@ -29,6 +29,7 @@ But most importantly, any implementation of REST model is _very_ complex.
 
 Now, one could say that, APIs are not build with mind to last for decades and maybe
 that's the reason that this model hasn't seen much adoption.
+
 The former is true but even if the latter is also true could it mean that this model is
 not suitable for short-term APIs?
 
@@ -36,14 +37,30 @@ We firmly believe that REST is much better than any API that does not follow RES
 (even RESTfull APIs), even for short-term APIs.
 Networked services have very peculiar characteristics which, until now, only REST has fully addressed them.
 Being able to evolve your API without breaking the clients is critical.
-Imagine if you have deployed a client that talks to a networked API.
-+explain why
+
+Imagine the following scenario: You have built a Online Social Network and an iOS app that talks the API of your backend.
+Now imagine that, after a company meetings, you need to make tiny yet important change in the signup page: require the user
+to fill in her age. Essentially, this means, in API terms, make a form field required.
+
+If your API is RESTfull and not REST, this means that you need to fix the code in the iOS side, test it and send a new iOS app to apple store.
+It takes roughly 1 week for Apple to review your app. This means, if your app hasn't been rejected for some reason, your
+tiny change will take action at least a week later.
+If your API _was_ REST that would mean a change on the server's response denoting which fields are required to submit the form.
+You would have the change deployed 10 minutes later.
+
+Roy notes in his thesis: "A system intending to be as long-lived as the Web must be prepared for change".
+In startup terms this means that if you want to move fast (and not break things), you should build a change-first API:
+an API that can change the state of the client without needing the latter to change.
+
+> Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only. 
+>
+> --- [Test-driven development. (2016, November 20). In Wikipedia, The Free Encyclopedia. Retrieved 23:45, November 20, 2016](https://en.wikipedia.org/w/index.php?title=Test-driven_development&oldid=750634597)
 
 Given that, how can we have a simpler model than REST, yet have the same functionality of
 REST?
 
 As we will show, Introspected REST is an API architectural style that solves that.
-It's not an implementation, it's not a spec either.
+It's not an implementation and it's not a spec either.
 It's an architectural style.
 Introspected REST is based on Roy's initial model but removes the need for runtime HATEOAS.
 Instead, the state is derived using instrospection.
@@ -54,7 +71,7 @@ much more flexible and backwarde compatible with any Restfull API.
 But first let's discuss about Networked Services.
 
 ## Networked Services and APIs
-### Subprotocol level
+### Network level
 TCP, UDP, etc
 ### Protocol level
 HTTP, CoAP, QUIC, WebSockets, any URI-like protocol
