@@ -189,14 +189,14 @@ When Roy talks abouut REST he mentions 5 crucial attributes of REST model:
 ## Capabilities of a modern API
 
 Provide a ORM to client over HTTP
-* Sparse fields
-* Granular permissions
-* Associations on demand
-* Sorting & pagination
-* Filtering collections
-* Aggregation queries
-* Hypermedia Driven
-* **Date types**
+##### Sparse fields
+##### Granular permissions
+##### Associations on demand
+##### Sorting & pagination
+##### Filtering collections
+##### Aggregation queries
+##### Hypermedia Driven
+##### **Date types**
 
 Great! let's see the API specs proposed as today, March 2017..
 
