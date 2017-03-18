@@ -177,22 +177,21 @@ provide an ORM to the client over the HTTP (or any other protocol).
 A modern API should _also_ have the following properties, at least:
 
 ##### Sparse fields
-> for a collection/resource
-
 The client needs to be able to ask and get specific attributes of the resource representation.
-###### Granular permissions
+
+Applies to both collection or resource.
+
+##### Granular permissions
 > for a collection/resource
 
 The same representation could have a set of attributes or a subset of that set based
 on the user role and permissions
 
-###### Associations on demand
-> for a collection/resource
+##### Associations on demand (collection/resource)
 
 The client should be able to ask related associations to the main initial resource, in the same request.
 
-###### Sorting & pagination
-> for a collection
+##### Sorting & pagination
 
 The client should be able to sort based on one or more attributes and paginate the collection
 based on the page, page size and possible an offset.
