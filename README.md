@@ -1,12 +1,12 @@
-# Introspected APIs
-(Sliding away from Roy Fielding's REST model)
+# Introspected REST
+(Sliding away from Roy Fielding's `REST` model)
 
-There has been a great confusion of what a REST API is.
+There has been a great confusion of what a `REST` API is.
 Most people think that REST API is just a CRUD over HTTP.
 Or a CRUD with some links.
 Or a nicely formatted, a sophisticated CRUD.
 
-In this manifesto, we will give a specific definition of what REST is, according to Roy,
+In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
 and see that most current APIs and API specs (JSONAPI, HAL etc) fail to follow this model.
 Then, we will propose a new model that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
@@ -21,7 +21,7 @@ First some definitions, that we will use through the text:
 
 
 ## Introduction
-We believe that REST defined by Roy was an extraordinary, a magnificent piece of work, much ahead of its time
+REST defined by Roy was a magnificent piece of work, much ahead of its time
 which took us 10+ years to understand what its capabilities are.
 However, now, almost 20 years later this REST model shows its age. It's unflexibile,
 difficult to implement, difficult to test, with performance and implementation issues.
@@ -29,22 +29,27 @@ But most importantly, any implementation of REST model is _very_ complex.
 
 Now, one could say that, APIs are not build with mind to last for decades and maybe
 that's the reason that this model hasn't seen much adoption.
-The former is true but even if the later is true could it mean that this model is
+The former is true but even if the latter is also true could it mean that this model is
 not suitable for short-term APIs?
 
 We firmly believe that REST is much better than any API that does not follow REST principles
 (even RESTfull APIs), even for short-term APIs.
 Networked services have very peculiar characteristics which, until now, only REST has fully addressed them.
 Being able to evolve your API without breaking the clients is critical.
+Imagine if you have deployed a client that talks to a networked API.
++explain why
 
 Given that, how can we have a simpler model than REST, yet have the same functionality of
 REST?
 
-
 As we will show, Introspected REST is an API architectural style that solves that.
-It's a similar model which is mostly based on
-Roy's REST model, brings the same advantages,
-but differentiates on key elements to make it simple, easier to test and easier to implement.
+It's not an implementation, it's not a spec either.
+It's an architectural style.
+Introspected REST is based on Roy's initial model but removes the need for runtime HATEOAS.
+Instead, the state is derived using instrospection.
+
+Eventually this brings the same advantages as Roy's model while being it's much simpler,
+much more flexible and backwarde compatible with any Restfull API.
 
 But first let's discuss about Networked Services.
 
@@ -78,8 +83,11 @@ When we have a client talking over the wire to a server,
 neither the client developer nor the server developer has access to the other machine.
 
 This means that if the client needs a specific resource, it must not have an offline contract
-on how to retrieve this resource because that would mean changes on the server's side is difficult.
-As a result the server would help (drive if you will) the client exactly where is needed to.
+on how to retrieve this resource because that would mean
+* changes on the server's side is difficult.
+* automated API clients are not possible without human interaction.
+
+Instead, the server would help (drive if you will) the client exactly where is needed to.
 
 That's the main reason why Roy is against the version on the URL: because it means that
 you take as de-facto that there will be breaking changes at some point.
