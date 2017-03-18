@@ -267,13 +267,13 @@ For our message format, we will use JSON as it's the most popular but it could b
 
 So given the `REST` model properties we _could_ have the following routes:
 * `Users` resource (`/users`):
- * List users (`GET /users`): Gets a collection of `User` resources
- * Create a new user (`/users`): Creates a new `User` with the specified attributes.
+  * List users (`GET /users`): Gets a collection of `User` resources
+  * Create a new user (`/users`): Creates a new `User` with the specified attributes.
 
 * `User` resource (`/users/{id}`):
- * Get a user (`GET /users/{id}`): Gets the attributes of the specified `User`
- * Update a user `PATCH /users/{id}`: Updates a `User` with the specified attributes
- * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
+  * Get a user (`GET /users/{id}`): Gets the attributes of the specified `User`
+  * Update a user `PATCH /users/{id}`: Updates a `User` with the specified attributes
+  * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
 
 _these 2 resources are often mistankingly thought as a single, one, resource_
 
