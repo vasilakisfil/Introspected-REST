@@ -163,6 +163,8 @@ When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 ##### Resources are manipulated through the exchange of representations
 > induces simple, visible, reusable, cacheable, and evolvable (information hiding)
 
+Representation of input could be different of output.
+
 ##### Representations are exchanged via self-descriptive messages
 > induces visible, scalable, available through layered system, cacheable, and shared caches
 > induces evolvable via extensible communication
