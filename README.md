@@ -172,10 +172,10 @@ When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 > induces evolvable (loose coupling) via late binding of application transitions
 
 
-### Requirements from a modern REST API
+## Requirements from a modern REST API
 In 2017 we have been using networked APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
-A modern API should provide at least:
+We feel that a modern API should at least provide the following features.
 
 ##### Sparse fields (collection/resource)
 The client needs to be able to ask and get specific attributes of the resource representation.
@@ -188,7 +188,6 @@ on the user role and permissions
 The client should be able to ask related associations to the main initial resource, in the same request.
 
 ##### Sorting & pagination (collection only)
-
 The client should be able to sort based on one or more attributes and paginate the collection
 based on the page, page size and possible an offset.
 
@@ -210,39 +209,63 @@ Anything more than that we need to define it in the documentations.
 We should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it must follow a specific regex.
 
-###### Why not yet another media type ?
-Creating a new media type to describe the new types and combine it with existing media types
-(like `application/vnd.api+json+my_media_types`) wouldn't work.
+###  HATOEAS or yet another media type ?
+Should we describe those in our API's media type or using HATEOAS ?
+What goes where?
+One idea is to describe the generic capabilities in the media type and let HATOEAS provide resource-specific description.
+
+#### Issues by creating a new media type
+Creating a new media type for our API is genrally considered bad practice.
+Create a new media type only if you are sure that none of the already published
+media types can fit in your API design.
+
+Also, creating a new media type to describe the new types and combine it with existing media types
+(like `application/vnd.api+json+my_media_types`) wouldn't always work.
 The reason is that the client _must_ understand the media type before hand.
-As a result, if we would like to use some custom types in a new API, we would have to publish
+As a result, if we would like to use some _new_ custom types in our (already deployed) API, we would have to publish
 the media type before hand and let humans implement code to fully parse API responses that
 follow this media type or API responses that their media type also include this new media type.
 
+#### HATOEAS can get pretty heavy
+Imagine if you have to describe in a resource, all the available actions along with the available API
+capabilities _in that specific resource_.
+Your API response would just explode in terms of size while making your API super complex.
 
 
+#### An alternative architectural style maybe?
+Most of those media types specifications would not be needed if the APIs were built
+with introspection in mind.
 
-Great! let's see the API specs proposed as today, April 2017..
+Imagine that we have a media type that allows us to describe new media types, called `generic_media_type`.
+Then the clients would only need to understand and parse this `generic_media_type` and derive the other
+media types.
+Of course, this scenario is more difficult than it sounds and the goal of this _manifesto_ is not
+to provide a generic media type.
+Nevertheless, API introspection, as we will see, can provide us with information on API's
+capabilities along with hypermedia in a much flexible and cleaner way, _without having data and hypermedia (representation metadata) tangled together in 
+the representation_.
 
 ## API Specs Today
+Now that we defined what REST is, according to Roy, and what new capabilities new APIs shoulr provide,
+let's see the API specs available as today, April 2017, and what they provide.
+
 ### Our use case
 In our use case we will follow the aforementioned points of the `REST` model.
 
 Our use case is a minature of Twitter.
-Specifically, in our API domain, we have a `User` resource and a `Micropost` resource with the following attributes:
+Specifically, in our API domain, we have a `User` resource which has other, associated resources, like `Micropost`, `Like`, etc
+
+For our message format, we will use JSON as it's the most popular but it could be anything like XML, YAML etc.
+
 * `User`
   * `id`, a String, never empty or NULL, primary ID of the resource
   * `email`, a String, never empty or NULL, with maximum length up to 255 characters, email format
   * `name`, a String, with maximum length up to 150 characters
+  * `birth_date`, a String, representing a Date according to `iso8601`, in `2017-04-01` format.
   * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
   * `microposts_count` an Integer
 
-* `Micropost`
-  * `id`, a String, never empty or NULL, primary ID of the resource
-  * `userId`, a String, never empty or NULL, representing an ID of `User` resource
-  * `content`, a String, never empty or NULL, with maximum length up to 160 characters
-  * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
-
-So given the `REST` model we have the following routes:
+So given the `REST` model properties we _could_ have the following routes:
 * `Users` resource (`/users`):
  * List users (`GET /users`): Gets a collection of `User` resources
  * Create a new user (`/users`): Creates a new `User` with the specified attributes.
@@ -254,100 +277,122 @@ So given the `REST` model we have the following routes:
 
 _these 2 resources are often mistankingly thought as a single, one, resource_
 
-The `User` resource has also some _associations_ (or _relations_/_relationships_ if you prefer).
+As we mentioned, `User` resource has also some _associations_ (or _relations_/_relationships_ if you prefer).
 
-In plain JSON the resources would look like:
-
+In plain JSON the a User resource would look like:
 ```json
 {
-  "id":"9123",
-  "name":"Filippos Vasilakis",
-  "email":"vasilakisfil@gmail.com",
-  "created_at": "2014-01-06T20:46:55Z",
-  "microposts_count":49
+  "user": {
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
 }
 ```
 
+while a collection of `User` resources would look like:
+
 ```json
 {
-  "id":"323",
-  "user_id": "9123"
-  "content":"We are live!",
-  "created_at": "2017-01-06T20:46:55Z",
+  "users": [{
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }, {
+    "id":"9124",
+    "email": "robert.clarsson@gmail.com",
+    "name": "Robert Clarsson",
+    "birth_date": "1940-11-10",
+    "created-at": "2016-10-06T16:01:24Z",
+    "microposts-count": 17,
+  }]
 }
 ```
+
 
 Now that we defined the scope of our little API, let's see how this would be implemented
-in the current API specs:
+in the API specs currently available:
 
 ### JSONAPI
 * [specifications](http://jsonapi.org/format)
 
-##### User
+##### User resource
 ```json
 {
-    "data": {
-        "id": "9123",
-        "type": "users",
-        "attributes": {
-            "name": "Filippos Vasilakis",
-            "email": "vasilakisfil@gmail.com",
-            "created-at": "2014-01-06T20:46:55Z",
-            "microposts-count": 50,
-        },
-        "relationships": {
-            "microposts": {
-                "links": {
-                    "related": "/api/v1/microposts?user_id=9123"
-                }
-            }
+  "data":{
+    "id":"685",
+    "type":"users",
+    "attributes":{
+      "email":"vasilakisfil@gmail.com",
+      "name":"Filippos Vasilakis",
+      "birth_date":"1988-12-12",
+      "created-at":"2014-01-06T20:46:55Z",
+      "microposts-count":50
+    },
+    "relationships":{
+      "microposts":{
+        "links":{
+          "related":"/api/v1/microposts?user_id=6885"
+        }
+      }
     }
+  }
 }
 ```
 
-##### Users resource
+##### Users resource (a collection of User resources)
 
 ```json
 {
-    "data": [
-      {
-        "id": "9123",
-        "type": "users",
-        "attributes": {
-            "name": "Filippos Vasilakis",
-            "email": "vasilakisfil@gmail.com",
-            "created-at": "2014-01-06T20:46:55Z",
-            "microposts-count": 50,
-        },
-        "relationships": {
-            "microposts": {
-                "links": {
-                    "related": "/api/v1/microposts?user_id=9123"
-                }
-            }
+  "data":[
+    {
+      "id":"685",
+      "type":"users",
+      "attributes":{
+        "email":"vasilakisfil@gmail.com",
+        "name":"Filippos Vasilakis",
+        "birth_date":"1988-12-12",
+        "created-at":"2014-01-06T20:46:55Z",
+        "microposts-count":50
       },
-      {
-        "id": "9124",
-        "type": "users",
-        "attributes": {
-            "name": "Robert Clarsson",
-            "email": "robert.clarsson@gmail.com",
-            "created-at": "2016-10-06T16:01:24Z",
-            "microposts-count": 50,
-        },
-        "relationships": {
-            "microposts": {
-                "links": {
-                    "related": "/api/v1/microposts?user_id=9124"
-                }
-            }
+      "relationships":{
+        "microposts":{
+          "links":{
+            "related":"/api/v1/microposts?user_id=685"
+          }
+        }
+      }
+    },
+    {
+      "id":"9124",
+      "type":"users",
+      "attributes":{
+        "email":"robert.clarsson@gmail.com",
+        "name":"Robert Clarsson",
+        "birth_date":"1940-11-10",
+        "created-at":"2016-10-06T16:01:24Z",
+        "microposts-count":17
       },
-    ],
-    "links": {
-        "self": "/api/v1/users?page=1&per_page=10",
-        "next": "/api/v1/users?page=2&per_page=10",
-        "last": "/api/v1/users?page=3&per_page=1"
+      "relationships":{
+        "microposts":{
+          "links":{
+            "related":"/api/v1/microposts?user_id=9124"
+          }
+        }
+      }
     }
+  ],
+  "links":{
+    "self":"/api/v1/users?page=1&per_page=10",
+    "next":"/api/v1/users?page=2&per_page=10",
+    "last":"/api/v1/users?page=3&per_page=1"
+  }
 }
 ```
 
@@ -595,3 +640,10 @@ because the client.
 
 
 * The simpler the API, the simpler the API description.
+
+
+
+Good question.
+Let's let Roy answer it.
+
+We should describe them somehow though in our API without relying in offline contracts (like documentation)
