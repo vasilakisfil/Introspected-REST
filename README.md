@@ -88,7 +88,7 @@ Nowadays JSON has become so popular that people almost forget that there is whol
 protocols below it.
 People also forget that JSON is just a specification in the message level, like XML.
 It's not the only one and definitely it's not the best we could use.
-Nevertheless it's simple, and simplicity is a virtue.
+Nevertheless it's simple and simplicity is a virtue.
 
 When we want to request a resource from a networked hypermedia-based API, we roughly
 have the following levels:
@@ -99,7 +99,7 @@ for only one media type.
 
 `application/json` is a media type that denotes that the data format of the requested
 representation is in JSON data dormat.
-JSON itself is not a media type but a messag format.
+JSON itself is not a media type but a message format.
 
 Media types can be composite as well: `application/vnd.api+json` (roughly) means that the data
 format of the requested representation is in JSON data dormat in the semantics of the `vnd.api`,
@@ -129,15 +129,15 @@ In the protcol level, the requests are usually sent using the HTTP.
 After all, nowadays most of the development happens around the Web and
 HTTP is the only protocol that browsers officially support.
 
-However there are other protocols as well.
+Nonetheless, there are other protocols as well.
 QUIC is a HTTP alternative protocol that is targeted for low latency and uses UDP
 underneath.
-CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is quite heavy for constrainted devices)
-SIP is also a text-based protocol that is used in VoIP.
+CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is quite heavy for constrainted devices).
+SIP is also a text-based protocol with the same semantics as HTTP and is used in VoIP.
 
 ### Network level
 Finally (well for the scope of this manifesto, in networks the lowest protocols are the one found in the Physical level
-which deal with the wire signals), in the network level, the browser (or any other non-browser client) sends the Networked request
+which deal with the wire signals), in the network level, the browser (or any other non-browser client) sends the networked request
 in one of the TCP, UDP, etc
 
 The actual protocol depends on the protocol used by the protocol level.
@@ -152,7 +152,7 @@ aforementioned levels.
 > --- Roy Fielding
 
 
-When Roy talks abouut `REST` he mentions 5 crucial attributes of `REST` model:
+When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 
 ##### All important resources are identifed by one resource identifer mechanism
 > induces simple, visible, reusable, stateless communication
@@ -171,7 +171,7 @@ When Roy talks abouut `REST` he mentions 5 crucial attributes of `REST` model:
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
 
-## Requirements from a modern API
+#### Requirements from a modern API
 In 2017 we have progressed so much on Resty APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
 
