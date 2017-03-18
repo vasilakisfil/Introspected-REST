@@ -2,7 +2,7 @@
 (Sliding away from Roy Fielding's `REST` model)
 
 There has been a great confusion of what a `REST` API is.
-Most people think that REST API is just a CRUD over HTTP.
+Most people think that `REST` API is just a CRUD over HTTP.
 Or a CRUD with some links.
 Or a nicely formatted, a sophisticated CRUD.
 
@@ -15,19 +15,17 @@ yet it's much simpler to implement while at the same time being backwards compat
 First some definitions, that we will use through the text:
 
 * `REST`, `RESTfull`: The model that Roy defined in his [thesis](thesis) (along with his [blog]() comments).
-* `RESTfull`: APIs that follows some parts of Roy's `REST` model, mostly links
-* `RESTly`
-* `RESTless`
-* `RESTy`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
-* `Introspected REST`: APIs that follow the definition we provide here
+* `RESTly`: APIs that follows most parts of `REST` model, lacking full HATEOAS though (spec like JSONAPI, HAL etc)
+* `RESTless`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
+* `Introspected REST`: APIs that follow the definition of the model we provide in this _manifesto_
 
 
 ## Introduction
-REST defined by Roy was a magnificent piece of work, much ahead of its time
+`REST` defined by Roy was a magnificent piece of work, much ahead of its time
 which took us 10+ years to understand what its capabilities are.
-However, now, almost 20 years later REST model shows its age. It's unflexibile,
+However, now, almost 20 years later `REST` model shows its age. It's unflexibile,
 difficult to implement, difficult to test, with performance and implementation issues.
-But most importantly, any implementation of REST model is _very_ complex.
+But most importantly, any implementation of `REST` model is _very_ complex.
 
 Now, one could say that, most APIs are not build with mind to last for decades and maybe
 that's the reason that this model hasn't seen much adoption.
@@ -35,19 +33,19 @@ that's the reason that this model hasn't seen much adoption.
 The former is true but even if the latter is also true could it mean that this model is
 not suitable for short-term APIs?
 
-We firmly believe that REST is much better than any API that does not follow REST principles
-(like RESTfull APIs), even for short-term APIs.
-Networked services have very peculiar characteristics which, until now, only REST has fully addressed them.
+We firmly believe that `REST` is much better than any API that does not follow `REST` principles
+(like `RESTly` APIs), even for short-term APIs.
+Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them.
 Being able to evolve your API without breaking the clients is critical.
 
 Imagine the following scenario: you have built an Online Social Network and an iOS app that talks the API on your backend.
 Now imagine that, after a company meeting, your CEO needs you to make tiny yet important change in the signup page: require the user
 to fill in her age. Essentially, this means, in API terms, make a form field required.
 
-If your API is RESTfull and not REST, this means that you need to fix the code in the iOS side, test it and send a new iOS app to apple store.
+If your API is `RESTly` and not `REST`, this means that you need to fix the code in the iOS side, test it and send a new iOS app to apple store.
 It takes roughly 1 week for Apple to review your app and if your app won't be rejected for some reason, your
 tiny change will take action at least a week later after requested.
-If your API _was_ REST that would mean a change on the server's response denoting which fields are required to submit the form.
+If your API _was_ `REST` that would mean a change on the server's response denoting which fields are required to submit the form.
 You would have the change deployed 10 minutes later.
 
 Roy notes in his thesis:
@@ -64,10 +62,10 @@ Let me rephrase that in terms you will sound familiar to you:
 >
 An API that can change the state of the client without needing the latter to change.
 
-Given that, how can we have a simpler model than REST, yet have the same functionality of
-REST?
+Given that, how can we have a simpler model than `REST`, yet have the same functionality of
+`REST`?
 
-As we will show, Introspected REST is an API architectural style that solves that.
+As we will show, `Introspected REST` is an API architectural style that solves that.
 An architectural style is not an implementation and it's not a spec either.
 As Roy notes:
 
@@ -77,7 +75,7 @@ As Roy notes:
 >
 > --- Roy Fielding
 
-Introspected REST is based on Roy's initial model but removes the need for runtime HATEOAS.
+`Introspected REST` is based on Roy's initial model but removes the need for runtime HATEOAS.
 Instead, the client derives the state using instrospection.
 
 Eventually this brings the same advantages as Roy's model while being it's much simpler,
@@ -92,7 +90,7 @@ People also forget that JSON is just a specification in the message level, like 
 It's not the only one and definitely it's not the best we could use.
 Nevertheless it's simple, and simplicity is a virtue.
 
-When we want to request a resource from a networked hypermedia-based API, we
+When we want to request a resource from a networked hypermedia-based API, we roughly
 have the following levels:
 
 ### Application level
@@ -145,8 +143,8 @@ in one of the TCP, UDP, etc
 The actual protocol depends on the protocol used by the protocol level.
 
 
-## Roy's REST model
-Roy's REST model is an arhictectural style which is not tight to any spec, protocol or format of the
+## Roy's `REST` model
+Roy's `REST` model is an arhictectural style which is not tight to any spec, protocol or format of the
 aforementioned levels.
 
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
@@ -154,20 +152,7 @@ aforementioned levels.
 > --- Roy Fielding
 
 
-When Roy talks abouut REST he mentions 5 crucial attributes of REST model:
-
-* All important resources are identifed by one resource identifer mechanism
-  * induces simple, visible, reusable, stateless communication
-* Access methods have the same semantics for all resources
-  * induces visible, scalable, available through layered system, cacheable, and shared caches
-* Resources are manipulated through the exchange of representations
-  * induces simple, visible, reusable, cacheable, and evolvable (information hiding)
-* Representations are exchanged via self-descriptive messages
-  * induces visible, scalable, available through layered system, cacheable, and shared caches
-  * induces evolvable via extensible communication
-* Hypertext as the engine of application state (HATEOAS)
-  * induces simple, visible, reusable, and cacheable through data-oriented integration
-  * induces evolvable (loose coupling) via late binding of application transitions
+When Roy talks abouut `REST` he mentions 5 crucial attributes of `REST` model:
 
 ##### All important resources are identifed by one resource identifer mechanism
 > induces simple, visible, reusable, stateless communication
@@ -186,23 +171,54 @@ When Roy talks abouut REST he mentions 5 crucial attributes of REST model:
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
 
-## Capabilities of a modern API
+## Requirements from a modern API
+In 2017 we have progressed so much on Resty APIs that now we essentially have to
+provide an ORM to the client over the HTTP (or any other protocol).
 
-Provide a ORM to client over HTTP
-* Sparse fields
-* Granular permissions
-* Associations on demand
-* Sorting & pagination
-* Filtering collections
-* Aggregation queries
-* Hypermedia Driven
-* **Date types**
+###### Sparse fields
+> Collection and resource
 
-Great! let's see the API specs proposed as today, March 2017..
+The client needs to be able to ask and get specific attributes of the resource representation.
+###### Granular permissions
+> Collection and resource
+
+The same representation could have a set of attributes or a subset of that set based
+on the user role and permissions
+
+###### Associations on demand
+> Collection and resource
+
+The client should be able to ask related associations to the main initial resource, in the same request.
+
+###### Sorting & pagination
+> Collection only
+
+The client should be able to sort based on one or more attributes and paginate the collection
+based on the page, page size and possible an offset.
+
+###### Filtering collections
+> Collection only
+The client should be able to run any sort of collection filtering, as long as it does not pose
+any security thread or slows down the API performance.
+
+###### Aggregation queries
+> Collection only
+The client should be able to run any sort of aggregation queries, as long as it does not pose
+any security thread or slows down the API performance.
+
+###### **Data types**
+> Collection and resource
+
+The client should know the data types of the attributes of the requested representation of a resource.
+Message formats (like JSON) provide some data types but they are pretty basic.
+We need to know for instance
+
+
+Great! let's see the API specs proposed as today, April 2017..
 
 ## API Specs Today
 ### Our use case
-In our use case we will follow the aforementioned points of the REST model.
+In our use case we will follow the aforementioned points of the `REST` model.
 
 Our use case is a minature of Twitter.
 Specifically, in our API domain, we have a `User` resource and a `Micropost` resource with the following attributes:
@@ -219,7 +235,7 @@ Specifically, in our API domain, we have a `User` resource and a `Micropost` res
   * `content`, a String, never empty or NULL, with maximum length up to 160 characters
   * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
 
-So given the REST model we have the following routes:
+So given the `REST` model we have the following routes:
 * `Users` resource (`/users`):
  * List users (`GET /users`): Gets a collection of `User` resources
  * Create a new user (`/users`): Creates a new `User` with the specified attributes.
@@ -373,10 +389,10 @@ Problems of this spec:
       "users":[
          {
             "_links":{
-               "self":{ 
+               "self":{
                   "href":"/api/v1/users/{id}"
                },
-               "microposts":{ 
+               "microposts":{
                   "href":"/api/v1/microposts?user_id={id}"
                }
             },
@@ -426,7 +442,7 @@ Problems with this spec:
 **How many years these specs could sustain ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?**
 
-## Ideal REST API
+## Ideal `REST` API
 > A REST API should be entered with no prior knowledge beyond the initial URI (bookmark)
 > and set of standardized media types that are appropriate for the intended audience
 > (i.e., expected to be understood by any client that might use the API).
