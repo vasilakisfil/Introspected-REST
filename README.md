@@ -14,8 +14,10 @@ yet it's much simpler to implement while at the same time being backwards compat
 ## Definitions
 First some definitions, that we will use through the text:
 
-* `REST`: The model that Roy defined in his [thesis](thesis) (along with his [blog]() comments).
+* `REST`, `RESTfull`: The model that Roy defined in his [thesis](thesis) (along with his [blog]() comments).
 * `RESTfull`: APIs that follows some parts of Roy's `REST` model, mostly links
+* `RESTly`
+* `RESTless`
 * `RESTy`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
 * `Introspected REST`: APIs that follow the definition we provide here
 
@@ -23,47 +25,60 @@ First some definitions, that we will use through the text:
 ## Introduction
 REST defined by Roy was a magnificent piece of work, much ahead of its time
 which took us 10+ years to understand what its capabilities are.
-However, now, almost 20 years later this REST model shows its age. It's unflexibile,
+However, now, almost 20 years later REST model shows its age. It's unflexibile,
 difficult to implement, difficult to test, with performance and implementation issues.
 But most importantly, any implementation of REST model is _very_ complex.
 
-Now, one could say that, APIs are not build with mind to last for decades and maybe
+Now, one could say that, most APIs are not build with mind to last for decades and maybe
 that's the reason that this model hasn't seen much adoption.
 
 The former is true but even if the latter is also true could it mean that this model is
 not suitable for short-term APIs?
 
 We firmly believe that REST is much better than any API that does not follow REST principles
-(even RESTfull APIs), even for short-term APIs.
+(like RESTfull APIs), even for short-term APIs.
 Networked services have very peculiar characteristics which, until now, only REST has fully addressed them.
 Being able to evolve your API without breaking the clients is critical.
 
-Imagine the following scenario: You have built a Online Social Network and an iOS app that talks the API of your backend.
-Now imagine that, after a company meetings, you need to make tiny yet important change in the signup page: require the user
+Imagine the following scenario: you have built an Online Social Network and an iOS app that talks the API on your backend.
+Now imagine that, after a company meeting, your CEO needs you to make tiny yet important change in the signup page: require the user
 to fill in her age. Essentially, this means, in API terms, make a form field required.
 
 If your API is RESTfull and not REST, this means that you need to fix the code in the iOS side, test it and send a new iOS app to apple store.
-It takes roughly 1 week for Apple to review your app. This means, if your app hasn't been rejected for some reason, your
-tiny change will take action at least a week later.
+It takes roughly 1 week for Apple to review your app and if your app won't be rejected for some reason, your
+tiny change will take action at least a week later after requested.
 If your API _was_ REST that would mean a change on the server's response denoting which fields are required to submit the form.
 You would have the change deployed 10 minutes later.
 
-Roy notes in his thesis: "A system intending to be as long-lived as the Web must be prepared for change".
-In startup terms this means that if you want to move fast (and not break things), you should build a change-first API:
-an API that can change the state of the client without needing the latter to change.
+Roy notes in his thesis:
 
->  An architectural style is a coordinated set of architectural constraints that restricts the roles/features of architectural elements and the allowed relationships among those elements within any architecture that conforms to that style.
+>  A system intending to be as long-lived as the Web must be prepared for change
 >
 > --- Roy Fielding
+>
+
+Let me rephrase that in terms you will sound familiar to you:
+
+>  If you want to move fast, you should build a change-first API.
+>
+>
+An API that can change the state of the client without needing the latter to change.
 
 Given that, how can we have a simpler model than REST, yet have the same functionality of
 REST?
 
 As we will show, Introspected REST is an API architectural style that solves that.
-It's not an implementation and it's not a spec either.
-It's an architectural style.
+An architectural style is not an implementation and it's not a spec either.
+As Roy notes:
+
+>  An architectural style is a coordinated set of architectural constraints that restricts
+>  the roles/features of architectural elements and the allowed relationships among those
+>  elements within any architecture that conforms to that style.
+>
+> --- Roy Fielding
+
 Introspected REST is based on Roy's initial model but removes the need for runtime HATEOAS.
-Instead, the state is derived using instrospection.
+Instead, the client derives the state using instrospection.
 
 Eventually this brings the same advantages as Roy's model while being it's much simpler,
 much more flexible and backwarde compatible with any Restfull API.
@@ -71,48 +86,75 @@ much more flexible and backwarde compatible with any Restfull API.
 But first let's discuss about Networked Services.
 
 ## Networked Services and APIs
-### Network level
-TCP, UDP, etc
-### Protocol level
-HTTP, CoAP, QUIC, WebSockets, any URI-like protocol
+Nowadays JSON has become so popular that people almost forget that there is whole bunch of
+protocols below it.
+People also forget that JSON is just a specification in the message level, like XML.
+It's not the only one and definitely it's not the best we could use.
+Nevertheless it's simple, and simplicity is a virtue.
 
-### Message level
-JSON
+When we want to request a resource from a networked hypermedia-based API, we
+have the following levels:
 
 ### Application level
-Content negotiation and media types
+In the application level, the client starts content negotiation, usually asking
+for only one media type.
 
-The API spec
+`application/json` is a media type that denotes that the data format of the requested
+representation is in JSON data dormat.
+JSON itself is not a media type but a messag format.
 
-#### Profiles
+Media types can be composite as well: `application/vnd.api+json` (roughly) means that the data
+format of the requested representation is in JSON data dormat in the semantics of the `vnd.api`,
+which is the JSONAPI semantics.
+In theory, JSONAPI spec spemantics could also be applied using XML as the data format (like in the case of HAL),
+however in practice we tend to forget that and we treat all media types as single and not composite.
+
+In the HTTP this is done using the `Accept` header (and server responds with `Content-Type` header).
+
+However, it should also be noted that the media types and the content negotiation in general, are
+not restricted to HTTP only.
+Although HTTP is one of the most popular network protocols today, the same logics could be applied
+in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
+
+To sum up, the application level semantics are not coupled tight to the semantics of the
+message level (like JSON) or the underlying protocol level (like HTTP).
+
++representation metadata
+
+### Message level
+In the message level we find the format that is used for the actual representation.
+We nowadays we have almost mixed the message level with JSON but in practice other
+formats could successfully be used: XML, YAML, TOML to name a few.
+
+### Protocol level
+In the protcol level, the requests are usually sent using the HTTP.
+After all, nowadays most of the development happens around the Web and
+HTTP is the only protocol that browsers officially support.
+
+However there are other protocols as well.
+QUIC is a HTTP alternative protocol that is targeted for low latency and uses UDP
+underneath.
+CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is quite heavy for constrainted devices)
+SIP is also a text-based protocol that is used in VoIP.
+
+### Network level
+Finally (well for the scope of this manifesto, in networks the lowest protocols are the one found in the Physical level
+which deal with the wire signals), in the network level, the browser (or any other non-browser client) sends the Networked request
+in one of the TCP, UDP, etc
+
+The actual protocol depends on the protocol used by the protocol level.
 
 
 ## Roy's REST model
+Roy's REST model is an arhictectural style which is not tight to any spec, protocol or format of the
+aforementioned levels.
 
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
-
-Roy has done great work on initial HTTP spec and REST definition.
-Unfortunately, very few people have truly understood the unique characteristics of networked
-APIs which inspired Roy to define the REST.
-
-The idioms of Networked Services are very peculiar.
-When we have a client talking over the wire to a server,
-neither the client developer nor the server developer has access to the other machine.
-
-This means that if the client needs a specific resource, it must not have an offline contract
-on how to retrieve this resource because that would mean
-* changes on the server's side is difficult.
-* automated API clients are not possible without human interaction.
-
-Instead, the server would help (drive if you will) the client exactly where is needed to.
-
-That's the main reason why Roy is against the version on the URL: because it means that
-you take as de-facto that there will be breaking changes at some point.
-Instead, a truly REST API should be able to apply changes on the resources without breaking any client
-because the client.
+>
+> --- Roy Fielding
 
 
-There are 5 crucial attributes of REST model:
+When Roy talks abouut REST he mentions 5 crucial attributes of REST model:
 
 * All important resources are identifed by one resource identifer mechanism
   * induces simple, visible, reusable, stateless communication
@@ -127,8 +169,24 @@ There are 5 crucial attributes of REST model:
   * induces simple, visible, reusable, and cacheable through data-oriented integration
   * induces evolvable (loose coupling) via late binding of application transitions
 
+##### All important resources are identifed by one resource identifer mechanism
+> induces simple, visible, reusable, stateless communication
 
-### Capabilities of a modern API
+##### Access methods have the same semantics for all resources
+> induces visible, scalable, available through layered system, cacheable, and shared caches
+
+##### Resources are manipulated through the exchange of representations
+> induces simple, visible, reusable, cacheable, and evolvable (information hiding)
+
+##### Representations are exchanged via self-descriptive messages
+> induces visible, scalable, available through layered system, cacheable, and shared caches
+> induces evolvable via extensible communication
+
+##### Hypertext as the engine of application state (HATEOAS)
+> induces simple, visible, reusable, and cacheable through data-oriented integration
+> induces evolvable (loose coupling) via late binding of application transitions
+
+## Capabilities of a modern API
 
 Provide a ORM to client over HTTP
 * Sparse fields
@@ -391,9 +449,8 @@ built with a life span of 50 years?**
 In the following we will describe the architecture of the Introspected APIs through
 a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
-architecture.
+architecture style.
 
-* The simpler the API, the simpler the API description.
 
 ### Introduction
 There are 3 kinds of criticizers of REST model.
@@ -420,6 +477,9 @@ JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
 > Imagine how poor the Web would have been if we had limited HTML to what was
 > needed by an FTP client. That's what most JSON APIs are today.
+>
+> --- Roy Fielding
+>
 
 
 
@@ -449,7 +509,7 @@ read his dissertation to actually see that we are defining yet another REST styl
 In either case, given that very few has really implemented a Roy-compliant REST API means
 that Roy himself failed to explain his model correctly.
 
-We need to be brave enough and move on.
+We need to be brave enough and move on: Roy's HATOEAS-based REST model can be declared as deprecated.
 
 Introspected REST is an alternative backwards compatible API. No breaking changes are needed.
 
@@ -483,3 +543,30 @@ _Anyone can contribute in this manifesto. Just open a pull request._
 
 
 The way the introspection is made is up to the API designer, or better, up to the spec. Here we use HTTP OPTIONS as we feel that it's an approriate way.
+
+
+
+
+
+Roy has done great work on initial HTTP spec and REST definition.
+Unfortunately, very few people have truly understood the unique characteristics of networked
+APIs which inspired Roy to define the REST.
+
+The idioms of Networked Services are very peculiar.
+When we have a client talking over the wire to a server,
+neither the client developer nor the server developer has access to the other machine.
+
+This means that if the client needs a specific resource, it must not have an offline contract
+on how to retrieve this resource because that would mean
+* changes on the server's side is difficult.
+* automated API clients are not possible without human interaction.
+
+Instead, the server would help (drive if you will) the client exactly where is needed to.
+
+That's the main reason why Roy is against the version on the URL: because it means that
+you take as de-facto that there will be breaking changes at some point.
+Instead, a truly REST API should be able to apply changes on the resources without breaking any client
+because the client.
+
+
+* The simpler the API, the simpler the API description.
