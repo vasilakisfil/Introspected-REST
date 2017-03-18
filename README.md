@@ -7,15 +7,15 @@ Or a CRUD with some links.
 Or a nicely formatted, a sophisticated CRUD.
 
 In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
-and see that most current APIs and API specs (JSONAPI, HAL etc) fail to follow this model.
+and see that most current APIs and API specs ([JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) fail to follow this model.
 Then, we will propose a new model that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
 ## Definitions
 First some definitions, that we will use through the text:
 
-* `REST`, `RESTfull`: The model that Roy defined in his [thesis](thesis) (along with his [blog]() comments).
-* `RESTly`: APIs that follows most parts of `REST` model, lacking full HATEOAS though (spec like JSONAPI, HAL etc)
+* `REST`, `RESTfull`: The model that Roy defined in his [thesis](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
+* `RESTly`: APIs that follows most parts of `REST` model, lacking full HATEOAS though (spec like [JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
 * `RESTless`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
 * `Introspected REST`: APIs that follow the definition of the model we provide in this _manifesto_
 
@@ -103,8 +103,8 @@ JSON itself is not a media type but a message format.
 
 Media types can be composite as well: `application/vnd.api+json` (roughly) means that the data
 format of the requested representation is in JSON data dormat in the semantics of the `vnd.api`,
-which is the JSONAPI semantics.
-In theory, JSONAPI spec spemantics could also be applied using XML as the data format (like in the case of HAL),
+which is the [JSONAPI](http://jsonapi.org/format) semantics.
+In theory, [JSONAPI](http://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
 however in practice we tend to forget that and we treat all media types as single and not composite.
 
 In the HTTP this is done using the `Accept` header (and server responds with `Content-Type` header).
@@ -171,21 +171,20 @@ When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
 
-### Requirements from a modern API
-In 2017 we have progressed so much on Resty APIs that now we essentially have to
+
+### Requirements from a modern REST API
+In 2017 we have been using networked APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
-A modern API should _also_ have the following properties, at least:
+A modern API should provide at least:
 
 ##### Sparse fields (collection/resource)
 The client needs to be able to ask and get specific attributes of the resource representation.
 
 ##### Granular permissions (collection/resource)
-
 The same representation could have a set of attributes or a subset of that set based
 on the user role and permissions
 
 ##### Associations on demand (collection/resource)
-
 The client should be able to ask related associations to the main initial resource, in the same request.
 
 ##### Sorting & pagination (collection only)
@@ -202,11 +201,24 @@ any security thread or slows down the API performance.
 The client should be able to run any sort of aggregation queries, as long as it does not pose
 any security thread or slows down the API performance.
 
-#### **Data types**
-
+##### Data types!
 The client should know the data types of the attributes of the requested representation of a resource.
-Message formats (like JSON) provide some data types but they are pretty basic.
-We need to know for instance
+Message formats provide some data types but they are pretty basic.
+For instance, JSON defines `String`, `Boolean`, `Number`, `Array`, and `null`.
+Anything more than that we need to define it in the documentations.
+
+We should be able to provide custom types in an easy way, for instance, a field is `String` but
+has maximum length of 255 characters, it must follow a specific regex.
+
+###### Why not yet another media type ?
+Creating a new media type to describe the new types and combine it with existing media types
+(like `application/vnd.api+json+my_media_types`) wouldn't work.
+The reason is that the client _must_ understand the media type before hand.
+As a result, if we would like to use some custom types in a new API, we would have to publish
+the media type before hand and let humans implement code to fully parse API responses that
+follow this media type or API responses that their media type also include this new media type.
+
+
 
 
 Great! let's see the API specs proposed as today, April 2017..
@@ -269,6 +281,7 @@ Now that we defined the scope of our little API, let's see how this would be imp
 in the current API specs:
 
 ### JSONAPI
+* [specifications](http://jsonapi.org/format)
 
 ##### User
 ```json
@@ -346,6 +359,7 @@ Problems of this spec:
  * No attributes description, requires documentation
 
 ### HAL
+* [specifications](https://tools.ietf.org/html/draft-kelly-json-hal-08)
 
 ```json
 {
