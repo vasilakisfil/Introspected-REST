@@ -174,9 +174,10 @@ When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 ### Requirements from a modern API
 In 2017 we have progressed so much on Resty APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
+A modern API should _also_ have the following properties, at least:
 
+##### Collection and resource properties
 ###### Sparse fields
-> Collection and resource
 
 The client needs to be able to ask and get specific attributes of the resource representation.
 ###### Granular permissions
