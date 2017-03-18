@@ -171,7 +171,7 @@ When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
 
-#### Requirements from a modern API
+### Requirements from a modern API
 In 2017 we have progressed so much on Resty APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
 
