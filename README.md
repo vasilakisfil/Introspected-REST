@@ -594,11 +594,12 @@ but your spec could use anything, yaml, xml etc.
 
 * Start with some SANE defaults and the axion: The simpler your API (and the lesser it deviates from defaults), the simpler the introspection-meta-data should be
 * Reach a concencus on a Introspection spec using already defined specs like JSON-Schemas.
-* Reach a concencus on a querying language over url (filter + aggregation)
+* Reach a concencus on a querying language over url (filter + aggregation + pagination)
 * Reach a concencus on an URL-API for attribute/association inclusion
 * Reach a concencus on linking
 * Reach a concencus on denoting linked/semantic data
 * Reach a concencus on document structure (root element, meta attributes which should appear in the simple response as well etc)
+Each of those could be a separate media type
 
 So we keep 80% of the REST constraints and while we understand the benefits of other 20% we switch it with an on-demand alternative that makes the final thing
 more flexible and powerful while keeping the final data simple.
