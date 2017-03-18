@@ -52,9 +52,9 @@ Roy notes in his thesis: "A system intending to be as long-lived as the Web must
 In startup terms this means that if you want to move fast (and not break things), you should build a change-first API:
 an API that can change the state of the client without needing the latter to change.
 
-> Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only. 
+>  An architectural style is a coordinated set of architectural constraints that restricts the roles/features of architectural elements and the allowed relationships among those elements within any architecture that conforms to that style.
 >
-> --- [Test-driven development. (2016, November 20). In Wikipedia, The Free Encyclopedia. Retrieved 23:45, November 20, 2016](https://en.wikipedia.org/w/index.php?title=Test-driven_development&oldid=750634597)
+> --- Roy Fielding
 
 Given that, how can we have a simpler model than REST, yet have the same functionality of
 REST?
