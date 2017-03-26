@@ -257,11 +257,19 @@ Instead, the server and client must agree on a format that provide such mechanis
 
 
 ## 5. REST Applied in a modern API
+REST model is built for machine-to-machine communication, of any type.
+However, as this form of communication is getting bigger and bigger (2014 was described as the year of APIs),
+clients are requesting and having more and more requirements from a server response.
+It's not enough to just request and get the resource but you should be able to specify
+to the server what transformations you need.
+
 In 2017 we have been using networked APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
-We feel that a modern API should at least provide the following features.
+
 
 ### 5.1. Requirements from a modern REST API
+We feel that a modern API should at least provide the following features.
+
 ##### 5.1.1. Sparse fields (collection/resource)
 The client should be able to ask and get specific attributes of the resource representation.
 Also a representation could have different set of attributes for different clients, usually depending on the
@@ -270,7 +278,7 @@ client's permissions or user role that represents.
 ##### 5.1.2. Associations on demand (collection/resource)
 The client should be able to ask related associations to the main initial resource, in the same request.
 
-What differentiates an association from an attribute? The difference is that an association has
+What deffirintiates an association from an attribute is that the former has
 a dedicated identification which can be used in order to be retrieved by itself.
 
 ##### 5.1.3. Sorting & pagination (collection only)
@@ -294,10 +302,17 @@ Anything more than that we need to define it in the documentations.
 We should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it must follow a specific regex.
 
-### 5.2. HATOEAS vs Media Types
+### 5.2. Media Types vs HATOEAS
 Should we describe those in our API's media type or using HATEOAS ?
 What goes where?
-One idea is to describe the generic capabilities in the media type and let HATOEAS provide resource-specific description.
+
+Usually media types describe the generic capabilities and let HATOEAS provide resource-specific description.
+
+For instance, in pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
+The media type could describe how these parameters work.
+
+HATOEAS should describe if pagination is supported in this resource (or even object) and provide any
+details missing from the Media Type.
 
 #### 5.2.1. Issues by creating a new media type
 Creating a new media type for our API is genrally considered bad practice.
@@ -316,19 +331,9 @@ Imagine if you have to describe in a resource, all the available actions along w
 capabilities _in that specific resource_.
 Your API response would just explode in terms of size while making your API super complex.
 
+#### 5.2.3. Media Types are less optimistic
+Media types can't be very future-proof as they need to make sure foobar
 
-#### 5.3. An alternative architectural style maybe?
-Most of those media types specifications would not be needed if the APIs were built
-with introspection in mind.
-
-Imagine that we have a media type that allows us to describe new media types, called `generic_media_type`.
-Then the clients would only need to understand and parse this `generic_media_type` and derive the other
-media types.
-Of course, this scenario is more difficult than it sounds and the goal of this _manifesto_ is not
-to provide a generic media type.
-Nevertheless, API introspection, as we will see, can provide us with information on API's
-capabilities along with hypermedia in a much flexible and cleaner way, _without having data and hypermedia (representation metadata) tangled together in 
-the representation_.
 
 ## 6. API Specs Today
 Now that we defined what REST is, according to Roy, and what new capabilities new APIs shoulr provide,
@@ -722,3 +727,17 @@ Good question.
 Let's let Roy answer it.
 
 We should describe them somehow though in our API without relying in offline contracts (like documentation)
+
+
+#### 5.3. An alternative architectural style maybe?
+Most of those media types specifications would not be needed if the APIs were built
+with introspection in mind.
+
+Imagine that we have a media type that allows us to describe new media types, called `generic_media_type`.
+Then the clients would only need to understand and parse this `generic_media_type` and derive the other
+media types.
+Of course, this scenario is more difficult than it sounds and the goal of this _manifesto_ is not
+to provide a generic media type.
+Nevertheless, API introspection, as we will see, can provide us with information on API's
+capabilities along with hypermedia in a much flexible and cleaner way, _without having data and hypermedia (representation metadata) tangled together in 
+the representation_.
