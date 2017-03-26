@@ -105,7 +105,7 @@ Media types can be composite as well: `application/vnd.api+json` (roughly) means
 format of the requested representation is in JSON data dormat in the semantics of the `vnd.api`,
 which is the [JSONAPI](http://jsonapi.org/format) semantics.
 In theory, [JSONAPI](http://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
-however in practice we tend to forget that and we treat all media types as single and not composite.
+or even YAML, however in practice we tend to forget that and we treat all media types as single and not composite.
 
 In the HTTP this is done using the `Accept` header (and server responds with `Content-Type` header).
 
@@ -117,11 +117,9 @@ in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
 To sum up, the application level semantics are not coupled tight to the semantics of the
 message level (like JSON) or the underlying protocol level (like HTTP).
 
-+representation metadata
-
 ### Message level
 In the message level we find the format that is used for the actual representation.
-We nowadays we have almost mixed the message level with JSON but in practice other
+Nowadays we have almost mixed the message level with JSON but in practice other
 formats could successfully be used: XML, YAML, TOML to name a few.
 
 ### Protocol level
@@ -156,6 +154,24 @@ When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 
 ##### All important resources are identifed by one resource identifer mechanism
 > induces simple, visible, reusable, stateless communication
+
+Roy explains that very well in his thesis:
+> A resource is a conceptual mapping to a set of entities, not the entity that corresponds to the mapping at any particular point in time
+>
+> More precisely, a resource R is a temporally varying membership function MR(t),
+> which for time t maps to a set of entities, or values, which are equivalent.
+> The values in the set may be resource representations and/or resource identifiers. [...]
+> Some resources are static in the sense that, when examined at any time after their creation,
+> they always correspond to the same value set.
+> Others have a high degree of variance in their value over time.
+> The only thing that is required to be static for a resource is the semantics of the mapping,
+> since the semantics is what distinguishes one resource from another.
+>
+> --- Roy Fielding
+>
+
+
+
 
 ##### Access methods have the same semantics for all resources
 > induces visible, scalable, available through layered system, cacheable, and shared caches
@@ -211,7 +227,7 @@ Anything more than that we need to define it in the documentations.
 We should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it must follow a specific regex.
 
-###  HATOEAS or yet another media type ?
+###  HATOEAS vs Media Types
 Should we describe those in our API's media type or using HATEOAS ?
 What goes where?
 One idea is to describe the generic capabilities in the media type and let HATOEAS provide resource-specific description.
