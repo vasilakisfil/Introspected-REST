@@ -152,7 +152,7 @@ aforementioned levels.
 
 When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 
-##### 4.1. Access methods have the same semantics for all resources
+#### 4.1. Access methods have the same semantics for all resources
 > induces visible, scalable, available through layered system, cacheable, and shared caches
 
 Failure to provide consistency on access would imply that you don't provide a generic interface but instead
@@ -181,7 +181,7 @@ it would be impossible to derive REST:
 > --- Roy Fielding
 >
 
-##### 4.2. All important resources are identifed by one resource identifer mechanism
+#### 4.2. All important resources are identifed by one resource identifer mechanism
 > induces simple, visible, reusable, stateless communication
 
 Roy explains that very well in his thesis:
@@ -201,7 +201,7 @@ Roy explains that very well in his thesis:
 
 
 
-##### 4.3. Resources are manipulated through the exchange of representations
+#### 4.3. Resources are manipulated through the exchange of representations
 > induces simple, visible, reusable, cacheable, and evolvable (information hiding)
 
 The respresentation that you expose from your public API could be totally different from
@@ -209,7 +209,7 @@ your implementation internally (usually in your db).
 It could also be the same.
 Nevertheless the client expects and is expected to manipulate any resource using that representation.
 
-##### 4.4. Representations are exchanged via self-descriptive messages
+#### 4.4. Representations are exchanged via self-descriptive messages
 > induces visible, scalable, available through layered system, cacheable, and shared caches
 > induces evolvable via extensible communication
 
@@ -225,7 +225,7 @@ As a result, the client would be able to parse and understand any part of the re
 
 Otherwise, the client would need an out-of-band information and the response wouldn't be self descriptive.
 
-##### 4.5. Hypertext as the engine of application state (HATEOAS)
+#### 4.5. Hypertext as the engine of application state (HATEOAS)
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
 
