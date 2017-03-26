@@ -158,7 +158,7 @@ When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 Roy explains that very well in his thesis:
 > A resource is a conceptual mapping to a set of entities, not the entity that corresponds to the mapping at any particular point in time
 >
-> More precisely, a resource R is a temporally varying membership function MR(t),
+> More precisely, a resource R is a temporally varying membership function M<sub>R</sub>(t),
 > which for time t maps to a set of entities, or values, which are equivalent.
 > The values in the set may be resource representations and/or resource identifiers. [...]
 > Some resources are static in the sense that, when examined at any time after their creation,
