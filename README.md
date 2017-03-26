@@ -11,7 +11,7 @@ and see that most current APIs and API specs ([JSONAPI](http://jsonapi.org/forma
 Then, we will propose a new model that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
-## Definitions
+## 1. Definitions
 First some definitions, that we will use through the text:
 
 * `REST`, `RESTfull`: The model that Roy defined in his [thesis](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
@@ -20,7 +20,7 @@ First some definitions, that we will use through the text:
 * `Introspected REST`: APIs that follow the definition of the model we provide in this _manifesto_
 
 
-## Introduction
+## 2. Introduction
 `REST` defined by Roy was a magnificent piece of work, much ahead of its time
 which took us 10+ years to understand what its capabilities are.
 However, now, almost 20 years later `REST` model shows its age. It's unflexibile,
@@ -83,7 +83,7 @@ much more flexible and backwarde compatible with any Restfull API.
 
 But first let's discuss about Networked Services.
 
-## Networked Services and APIs
+## 3. Networked Services and APIs
 Nowadays JSON has become so popular that people almost forget that there is whole bunch of
 protocols below it.
 People also forget that JSON is just a specification in the message level, like XML.
@@ -93,7 +93,7 @@ Nevertheless it's simple and simplicity is a virtue.
 When we want to request a resource from a networked hypermedia-based API, we roughly
 have the following levels:
 
-### Application level
+### 3.1. Application level
 In the application level, the client starts content negotiation, usually asking
 for only one media type.
 
@@ -117,12 +117,12 @@ in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
 To sum up, the application level semantics are not coupled tight to the semantics of the
 message level (like JSON) or the underlying protocol level (like HTTP).
 
-### Message level
+### 3.2. Message level
 In the message level we find the format that is used for the actual representation.
 Nowadays we have almost mixed the message level with JSON but in practice other
 formats could successfully be used: XML, YAML, TOML to name a few.
 
-### Protocol level
+### 3.3. Protocol level
 In the protcol level, the requests are usually sent using the HTTP.
 After all, nowadays most of the development happens around the Web and
 HTTP is the only protocol that browsers officially support.
@@ -133,7 +133,7 @@ underneath.
 CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is quite heavy for constrainted devices).
 SIP is also a text-based protocol with the same semantics as HTTP and is used in VoIP.
 
-### Network level
+### 3.4. Network level
 Finally (well for the scope of this manifesto, in networks the lowest protocols are the one found in the Physical level
 which deal with the wire signals), in the network level, the browser (or any other non-browser client) sends the networked request
 in one of the TCP, UDP, etc
@@ -141,7 +141,7 @@ in one of the TCP, UDP, etc
 The actual protocol depends on the protocol used by the protocol level.
 
 
-## Roy's `REST` model
+## 4. Roy's `REST` model
 Roy's `REST` model is an arhictectural style which is not tight to any spec, protocol or format of the
 aforementioned levels.
 
@@ -152,7 +152,36 @@ aforementioned levels.
 
 When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
 
-##### All important resources are identifed by one resource identifer mechanism
+##### 4.1. Access methods have the same semantics for all resources
+> induces visible, scalable, available through layered system, cacheable, and shared caches
+
+Failure to provide consistency on access would imply that you don't provide a generic interface but instead
+you have resource-specific or even object-specific interfaces.
+That would make your API and your client more complex without any apparent reason.
+
+
+Actually that's one of the most crucial parts of REST: without a common uniform interface
+it would be impossible to derive REST:
+
+> The central feature that distinguishes the REST architectural style from other
+> network-based styles is its emphasis on a uniform interface between components.
+> By applying the software engineering principle of generality to the component interface,
+> the overall system architecture is simplified and the visibility of interactions is improved.
+> Implementations are decoupled from the services they provide, which encourages independent
+> evolvability. The trade-off, though, is that a uniform interface degrades efficiency,
+> since information is transferred in a standardized form rather than one which is specific
+> to an application's needs. The REST interface is designed to be efficient for
+> large-grain hypermedia data transfer, optimizing for the common case of the Web,
+> but resulting in an interface that is not optimal for other forms of architectural interaction.
+>
+> In order to obtain a uniform interface, multiple architectural constraints are needed to guide the behavior of components.
+> REST is defined by four interface constraints: identification of resources; manipulation of resources through
+> representations; self-descriptive messages; and, hypermedia as the engine of application state.
+>
+> --- Roy Fielding
+>
+
+##### 4.2. All important resources are identifed by one resource identifer mechanism
 > induces simple, visible, reusable, stateless communication
 
 Roy explains that very well in his thesis:
@@ -172,53 +201,91 @@ Roy explains that very well in his thesis:
 
 
 
-
-##### Access methods have the same semantics for all resources
-> induces visible, scalable, available through layered system, cacheable, and shared caches
-
-##### Resources are manipulated through the exchange of representations
+##### 4.3. Resources are manipulated through the exchange of representations
 > induces simple, visible, reusable, cacheable, and evolvable (information hiding)
 
-Representation of input could be different of output.
+The respresentation that you expose from your public API could be totally different from
+your implementation internally (usually in your db).
+It could also be the same.
+Nevertheless the client expects and is expected to manipulate any resource using that representation.
 
-##### Representations are exchanged via self-descriptive messages
+##### 4.4. Representations are exchanged via self-descriptive messages
 > induces visible, scalable, available through layered system, cacheable, and shared caches
 > induces evolvable via extensible communication
 
-##### Hypertext as the engine of application state (HATEOAS)
+> Interaction is stateless between requests, standard methods and media types are used to
+> indicate semantics and exchange information, and responses explicitly indicate cacheability.
+>
+> --- Roy Fielding
+>
+
+This would mean that the data of the response should follow the media type that the client
+requested.
+As a result, the client would be able to parse and understand any part of the response.
+
+Otherwise, the client would need an out-of-band information and the response wouldn't be self descriptive.
+
+##### 4.5. Hypertext as the engine of application state (HATEOAS)
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
 
+> A REST API should be entered with no prior knowledge beyond the initial URI (bookmark)
+> and set of standardized media types that are appropriate for the intended audience
+> (i.e., expected to be understood by any client that might use the API).
+>
+> From that point on, all application state transitions must be driven by client
+> selection of server-provided choices that are present in the received representations
+> or implied by the user’s manipulation of those representations.
+>
+> The transitions may be determined (or limited by) the client’s knowledge of media
+> types and resource communication mechanisms, both of which may be improved
+> on-the-fly (e.g., code-on-demand).
+>
+> --- Roy Fielding
+>
 
-## Requirements from a modern REST API
+This is one of the most misunderstood parts of Roy's REST model. The idea here is that,
+once the client and server have reached a concensus on the media type after the negotiation,
+the server should strictly provide all the available options for the client to select.
+
+However, one of the requirements for HATEOAS to work is that the media type itself _must_ allow
+to its vocubulary hypermedia and linking.
+For instance, with plain JSON (`application/json`) this wouldn't work as JSON itself
+(`application/json` media type is nothing more than a JSON) does not provide any of those mechanisms.
+
+Instead, the server and client must agree on a format that provide such mechanisms.
+
+
+## 5. REST Applied in a modern API
 In 2017 we have been using networked APIs that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
 We feel that a modern API should at least provide the following features.
 
-##### Sparse fields (collection/resource)
-The client needs to be able to ask and get specific attributes of the resource representation.
+### 5.1. Requirements from a modern REST API
+##### 5.1.1. Sparse fields (collection/resource)
+The client should be able to ask and get specific attributes of the resource representation.
+Also a representation could have different set of attributes for different clients, usually depending on the
+client's permissions or user role that represents.
 
-##### Granular permissions (collection/resource)
-The same representation could have a set of attributes or a subset of that set based
-on the user role and permissions
-
-##### Associations on demand (collection/resource)
+##### 5.1.2. Associations on demand (collection/resource)
 The client should be able to ask related associations to the main initial resource, in the same request.
 
-##### Sorting & pagination (collection only)
+What differentiates an association from an attribute? The difference is that an association has
+a dedicated identification which can be used in order to be retrieved by itself.
+
+##### 5.1.3. Sorting & pagination (collection only)
 The client should be able to sort based on one or more attributes and paginate the collection
 based on the page, page size and possible an offset.
 
-##### Filtering collections (collection only)
-> Collection only
+##### 5.1.4. Filtering collections (collection only)
 The client should be able to run any sort of collection filtering, as long as it does not pose
 any security thread or slows down the API performance.
 
-##### Aggregation queries (collection only)
+##### 5.1.5. Aggregation queries (collection only)
 The client should be able to run any sort of aggregation queries, as long as it does not pose
 any security thread or slows down the API performance.
 
-##### Data types!
+##### 5.1.6. Data types!
 The client should know the data types of the attributes of the requested representation of a resource.
 Message formats provide some data types but they are pretty basic.
 For instance, JSON defines `String`, `Boolean`, `Number`, `Array`, and `null`.
@@ -227,12 +294,12 @@ Anything more than that we need to define it in the documentations.
 We should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it must follow a specific regex.
 
-###  HATOEAS vs Media Types
+### 5.2. HATOEAS vs Media Types
 Should we describe those in our API's media type or using HATEOAS ?
 What goes where?
 One idea is to describe the generic capabilities in the media type and let HATOEAS provide resource-specific description.
 
-#### Issues by creating a new media type
+#### 5.2.1. Issues by creating a new media type
 Creating a new media type for our API is genrally considered bad practice.
 Create a new media type only if you are sure that none of the already published
 media types can fit in your API design.
@@ -244,13 +311,13 @@ As a result, if we would like to use some _new_ custom types in our (already dep
 the media type before hand and let humans implement code to fully parse API responses that
 follow this media type or API responses that their media type also include this new media type.
 
-#### HATOEAS can get pretty heavy
+#### 5.2.2. HATOEAS can get pretty heavy
 Imagine if you have to describe in a resource, all the available actions along with the available API
 capabilities _in that specific resource_.
 Your API response would just explode in terms of size while making your API super complex.
 
 
-#### An alternative architectural style maybe?
+#### 5.3. An alternative architectural style maybe?
 Most of those media types specifications would not be needed if the APIs were built
 with introspection in mind.
 
@@ -263,11 +330,11 @@ Nevertheless, API introspection, as we will see, can provide us with information
 capabilities along with hypermedia in a much flexible and cleaner way, _without having data and hypermedia (representation metadata) tangled together in 
 the representation_.
 
-## API Specs Today
+## 6. API Specs Today
 Now that we defined what REST is, according to Roy, and what new capabilities new APIs shoulr provide,
 let's see the API specs available as today, April 2017, and what they provide.
 
-### Our use case
+### 6.1. Our use case
 In our use case we will follow the aforementioned points of the `REST` model.
 
 Our use case is a minature of Twitter.
@@ -337,7 +404,7 @@ while a collection of `User` resources would look like:
 Now that we defined the scope of our little API, let's see how this would be implemented
 in the API specs currently available:
 
-### JSONAPI
+### 6.2. JSONAPI
 * [specifications](http://jsonapi.org/format)
 
 ##### User resource
@@ -421,7 +488,7 @@ Problems of this spec:
  * No info on data types
  * No attributes description, requires documentation
 
-### HAL
+### 6.3. HAL
 * [specifications](https://tools.ietf.org/html/draft-kelly-json-hal-08)
 
 ```json
@@ -502,9 +569,9 @@ Problems with this spec:
  * No info on data types
  * No attributes description, requires documentation (however it does provide a link to documentation)
 
-### Siren
+### 6.4. Siren
 
-### Hydra
+### 6.5. Hydra
 
 !### GraphQL
 
@@ -514,23 +581,12 @@ Problems with this spec:
 **How many years these specs could sustain ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?**
 
-## Ideal `REST` API
-> A REST API should be entered with no prior knowledge beyond the initial URI (bookmark)
-> and set of standardized media types that are appropriate for the intended audience
-> (i.e., expected to be understood by any client that might use the API).
->
-> From that point on, all application state transitions must be driven by client
-> selection of server-provided choices that are present in the received representations
-> or implied by the user’s manipulation of those representations.
->
-> The transitions may be determined (or limited by) the client’s knowledge of media
-> types and resource communication mechanisms, both of which may be improved
-> on-the-fly (e.g., code-on-demand).
+## 7. Ideal `REST` API
 
 * Describe what actions should include. Maybe move that before the specs ?
 
 
-## I miss my good old API
+### 7.1 I miss my good old API
 
 
 ## Introspected APIs
