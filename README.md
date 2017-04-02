@@ -656,9 +656,12 @@ JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
 
 
-### The case of GraphQL
+## Related Work
+### GraphQL
 
-### The case of Linked Data and Semantic Web
+### Linked Data and Semantic Web
+
+### RESTful API Description Languages
 
 
 ## Outro
@@ -769,3 +772,7 @@ to provide a generic media type.
 Nevertheless, API introspection, as we will see, can provide us with information on API's
 capabilities along with hypermedia in a much flexible and cleaner way, _without having data and hypermedia (representation metadata) tangled together in 
 the representation_.
+
+
+
+JSON-LD + Collection+JSON ? https://sookocheff.com/post/api/on-choosing-a-hypermedia-format/
