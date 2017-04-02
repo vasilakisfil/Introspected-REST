@@ -314,34 +314,6 @@ Now the reader could be wondering: where is the appropriate place to describe th
 in our API's Media Type or using HATEOAS ?
 What goes where?
 
-The idea is that media types descibe the generic capabilities while HATOEAS
-describe the resource-specific capabilities.
-
-However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
-which means that the client must be programmed by a human before hand in order to support that media type.
-
-As a result, the media type can't be very restrictive because that would mean it would restrict the API designer's freedom
-to design the API the way she wants.
-
-For instance, in pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
-If the Media Type describes how to do pagination using, say, a URL template on the resource path (like `/{resource}?page={page}&per={per}&offset={offset}`)
-this would mean that all APIs following this Media Type should have the pagination following that URL template.
-The level of restriction becomes more obvious when describing more capabilities.
-
-On the other hand, if everyone follows that Media Type then it's easier to program our clients.
-Specifically, especially when having a restrictive Media Type, if we create a that parses responses using that Media Type
-then it's easy to "trim" it for another API which also follows that Media Type.
-
-The media type could describe how these parameters work, using URL templates and HATEOAS should describe
-on a per-resource basis if the pagination is supported, what is the maximum page.
-
-For instance, in pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
-The media type could describe how these parameters work, using URL templates and HATEOAS should describe
-on a per-resource basis if the pagination is supported, what is the maximum page.
-
-HATOEAS should describe if pagination is supported in this resource (or even object) and provide any
-details missing from the Media Type.
-
 #### 5.2.1. Defining a new Media Type is not easy and should be avoided
 Creating a new media type for our API is genrally considered bad practice.
 Create a new media type only if you are sure that none of the already published
@@ -359,8 +331,28 @@ Imagine if you have to describe in a resource, all the available actions along w
 capabilities _in that specific resource_.
 Your API response would just explode in terms of size while making your API super complex.
 
-#### 5.2.3. Media Types are less optimistic
-Media types can't be very future-proof as they need to make sure foobar
+#### 5.2.3. Balancing between Media Types and HATOEAS
+The idea is that media types descibe the generic capabilities while HATOEAS
+describe the resource-specific capabilities.
+
+However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
+which means that the client must be programmed by a human before hand in order to support that media type.
+
+As a result, the media type can't be very restrictive because that would mean it would restrict the API designer's freedom
+to design the API the way she wants.
+
+For instance, in pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
+If the Media Type describes how to do pagination using, say, a URL template on the resource path (like `/{resource}?page={page}&per_page={per_page}&offset={offset}`)
+this would mean that all APIs following this Media Type should have the pagination following that URL template.
+The level of restriction becomes more obvious when describing more complex capabilities.
+
+On the other hand, if everyone follows that Media Type then it's easier to program our clients.
+Specifically, especially when having a restrictive Media Type, if we create a client that parses responses using that Media Type
+then it's easy to "configure" it for another API which also follows that Media Type.
+
+HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
+
+Essentially, HATOEAS should provide any details missing from the Media Type for the client to work.
 
 
 ## 6. API Specs Today
@@ -435,7 +427,9 @@ while a collection of `User` resources, the `Users` resource, would look like:
 
 
 Now that we defined the scope of our little API, let's see how this would be implemented
-in the specs for REST(y) APIs currently available:
+in the specs for REST(y) APIs currently available. We feel that most current APIs
+have a lot of similarities with the following specs, namely the HATEOAS part regarding
+linking.
 
 ### 6.2. JSONAPI
 * [specifications](http://jsonapi.org/format)
@@ -444,7 +438,7 @@ in the specs for REST(y) APIs currently available:
 ```json
 {
   "data":{
-    "id":"685",
+    "id":"1",
     "type":"users",
     "attributes":{
       "email":"vasilakisfil@gmail.com",
@@ -456,7 +450,12 @@ in the specs for REST(y) APIs currently available:
     "relationships":{
       "microposts":{
         "links":{
-          "related":"/api/v1/microposts?user_id=6885"
+          "related":"/api/v1/microposts?user_id=1"
+        }
+      },
+      "likes":{
+        "links":{
+          "related":"/api/v1/likes?user_id=1"
         }
       }
     }
@@ -470,7 +469,7 @@ in the specs for REST(y) APIs currently available:
 {
   "data":[
     {
-      "id":"685",
+      "id":"1",
       "type":"users",
       "attributes":{
         "email":"vasilakisfil@gmail.com",
@@ -482,7 +481,12 @@ in the specs for REST(y) APIs currently available:
       "relationships":{
         "microposts":{
           "links":{
-            "related":"/api/v1/microposts?user_id=685"
+            "related":"/api/v1/microposts?user_id=1"
+          }
+        },
+        "likes":{
+          "links":{
+            "related":"/api/v1/likes?user_id=1"
           }
         }
       }
@@ -502,6 +506,11 @@ in the specs for REST(y) APIs currently available:
           "links":{
             "related":"/api/v1/microposts?user_id=9124"
           }
+        },
+        "likes":{
+          "links":{
+            "related":"/api/v1/likes?user_id=9124"
+          }
         }
       }
     }
@@ -509,7 +518,7 @@ in the specs for REST(y) APIs currently available:
   "links":{
     "self":"/api/v1/users?page=1&per_page=10",
     "next":"/api/v1/users?page=2&per_page=10",
-    "last":"/api/v1/users?page=3&per_page=1"
+    "last":"/api/v1/users?page=3&per_page=10"
   }
 }
 ```
@@ -519,7 +528,9 @@ Problems of this spec:
  * No actions
  * No info on available attributes
  * No info on data types
- * No attributes description, requires documentation
+ * No attributes description
+
+To sum up, it requires documentation and involvment of human interaction.
 
 ### 6.3. HAL
 * [specifications](https://tools.ietf.org/html/draft-kelly-json-hal-08)
@@ -532,6 +543,10 @@ Problems of this spec:
         },
         "microposts": {
             "href": "/api/v1/microposts/user_id={id}",
+            "templated": true
+        },
+        "likes": {
+            "href": "/api/v1/likes/user_id={id}",
             "templated": true
         }
     },
@@ -561,12 +576,18 @@ Problems of this spec:
       "users":[
          {
             "_links":{
-               "self":{
-                  "href":"/api/v1/users/{id}"
-               },
-               "microposts":{
-                  "href":"/api/v1/microposts?user_id={id}"
-               }
+              "self":{
+                "href":"/api/v1/users/{id}",
+                "templated": true
+              },
+              "microposts":{
+                "href":"/api/v1/microposts?user_id={id}",
+                "templated": true
+              },
+              "likes": {
+                "href": "/api/v1/likes/user_id={id}",
+                "templated": true
+              }
             },
             "id": 9123,
             "name": "Filippos Vasilakis",
@@ -575,12 +596,18 @@ Problems of this spec:
             "micropostsCount": 50
          }, {
             "_links":{
-               "self":{
-                  "href":"/api/v1/users/{id}"
-               },
-               "microposts":{
-                  "href":"/api/v1/microposts?user_id={id}"
-               }
+              "self":{
+                "href":"/api/v1/users/{id}",
+                "templated": true
+              },
+              "microposts":{
+                "href":"/api/v1/microposts?user_id={id}",
+                "templated": true
+              },
+              "likes": {
+                "href": "/api/v1/likes/user_id={id}",
+                "templated": true
+              }
             },
             "id": 9123,
             "name": "Robert Clarsson",
@@ -602,7 +629,130 @@ Problems with this spec:
  * No info on data types
  * No attributes description, requires documentation (however it does provide a link to documentation)
 
+
+To sum up, it requires documentation and involvment of human interaction (curries facilitate that).
+
 ### 6.4. Siren
+```json
+{
+  "class": [ "user" ],
+  "properties": {
+    "name": "Filippos Vasilakis",
+    "email": "vasilakisfil@gmail.com",
+    "createdAt": "2014-01-06T20:46:55Z",
+    "micropostsCount": 50,
+  },
+  "actions": [
+    {
+      "name": "get-user",
+      "title": "Get User",
+      "method": "GET",
+      "href": "https://example.com/api/v1/users/1",
+      "type": "application/json",
+    },
+    {
+      "name": "update-user",
+      "title": "Update User",
+      "method": "PUT",
+      "href": "https://example.com/api/v1/users/1",
+      "type": "application/json",
+      "fields": [
+        { "name": "name", "type": "text" },
+      ]
+    },
+    {
+      "name": "delete-user",
+      "title": "Get User",
+      "method": "GET",
+      "href": "https://example.com/api/v1/users/1",
+      "type": "application/json",
+    }
+  ],
+  "links":[
+    { "rel":["self"], "href":"https://example.com//api/v1/users/1" },
+    { "rel":["microposts"], "href":"/api/v1/microposts?user_id=1" }
+    { "rel":["likes"], "href":"/api/v1/likes?user_id=1" }
+  ]
+}
+```
+
+```json
+{
+  "class":["users"],
+  "properties":null,
+  "entities":[
+    {
+      "class":["user"],
+      "rel":["https://example.com/v1/users/1"],
+      "href":"https://example.com/v1/users/1",
+      "properties":{
+        "name": "Filippos Vasilakis",
+        "email": "vasilakisfil@gmail.com",
+        "createdAt": "2014-01-06T20:46:55Z",
+        "micropostsCount": 50,
+      },
+      "links":[
+        { "rel":["self"], "href":"https://example.com//api/v1/users/1" },
+        { "rel":["microposts"], "href":"/api/v1/microposts?user_id=1" }
+      ]
+    },
+    {
+      "class":["user"],
+      "rel":["https://example.com/v1/users/9124"],
+      "href":"https://example.com/v1/users/9124",
+      "properties":{
+        "email": "robert.clarsson@gmail.com",
+        "name": "Robert Clarsson",
+        "birth_date": "1940-11-10",
+        "created-at": "2016-10-06T16:01:24Z",
+        "microposts-count": 17,
+      },
+      "links":[
+        { "rel":["self"], "href":"https://example.com/api/v1/users/9124" },
+        { "rel":["microposts"], "href":"https://example.com/api/v1/microposts?user_id=9124" }
+        { "rel":["likes"], "href":"https://example.com/api/v1/likes?user_id=9124" }
+      ]
+    }
+  ],
+  "actions":[
+    {
+      "name":"create-user",
+      "title":"Create User",
+      "method":"POST",
+      "href":"https://example.com/v1/users/",
+      "type":"application/json",
+      "fields": [
+        { "name": "name", "type": "text" },
+        { "name": "email", "type": "text" },
+        { "name": "birth_date", "type": "date" },
+      ]
+    }
+  ],
+  "links":[
+    {"rel":["self"], "href":"https://example.com.api/v1/users"},
+    {"rel":["next"], "href":"https://example.com.api/v1/users?page=2"}
+  ]
+}
+```
+
+
+### 6.5. JSON-LD
+```json
+{
+  "@context": {
+    "id": "@id",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "firstName": "foaf:firstName",
+    "lastName": "foaf:lastName",
+    "workplaceHomepage": "foaf:workplaceHomepage"
+  },
+  "@type": "foaf:Person",
+  "id": "http://thomashoppe.me",
+  "firstName": "Thomas",
+  "lastName": "Hoppe",
+  "workplaceHomepage": "http://www.n-fuse.de"
+}
+```
 
 ### 6.5. Hydra
 
@@ -776,3 +926,25 @@ the representation_.
 
 
 JSON-LD + Collection+JSON ? https://sookocheff.com/post/api/on-choosing-a-hypermedia-format/
+
+
+WRITE ABOUT VERSIONING IN THE URL
+
+
+RFC5988: A means of indicating the relationships between resources on the Web,
+   as well as indicating the type of those relationships, has been
+   available for some time in HTML [W3C.REC-html401-19991224], and more
+   recently in Atom [RFC4287].  These mechanisms, although conceptually
+   similar, are separately specified.  However, links between resources
+   need not be format specific; it can be useful to have typed links
+   that are independent of their serialisation, especially when a
+   resource has representations in multiple formats.
+Oh wait..we just figured out that having the links in there might not be the ideal.
+
+
+Vale kai auta tou Roy pou exei sta presentations tou
+
+
+>Versioning an interface is just a polite way to kill deployed applications
+>
+> Roy Fielding --- 2013 on interview foobar
