@@ -40,7 +40,9 @@ Being able to evolve your API without breaking the clients is critical.
 
 Imagine the following scenario: you have built an Online Social Network and an iOS app that talks the API on your backend.
 Now imagine that, after a company meeting, your CEO needs you to make tiny yet important change in the signup page: require the user
-to fill in her age. Essentially, this means, in API terms, make a form field required.
+to fill in her age, a field in the signup form you didn't have before.
+Essentially, this means, in API terms, this means add an extra field in the accepted object and require it from the client to be filled in
+by the user before sending it over.
 
 If your API is `RESTly` and not `REST`, this means that you need to fix the code in the iOS side, test it and send a new iOS app to apple store.
 It takes roughly 1 week for Apple to review your app and if your app won't be rejected for some reason, your
