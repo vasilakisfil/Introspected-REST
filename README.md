@@ -269,7 +269,7 @@ to parse/identify these semantics.
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
-However, as this form of communication is getting bigger and bigger (2014 was described as the year of APIs),
+However, as this form of communication is getting bigger and bigger,
 clients are requesting and having more and more requirements from a server response.
 It's not enough to just request and get the resource but you should be able to specify
 to the server what transformations you need.
@@ -295,7 +295,7 @@ a dedicated identification which can be used in order to be retrieved by itself.
 
 ##### 5.1.3. Sorting & pagination (collection only)
 The client should be able to sort based on one or more attributes and paginate the collection
-based on the page, page size and possible an offset.
+based on the page, page size and possibly an offset.
 
 ##### 5.1.4. Filtering collections (collection only)
 The client should be able to run any sort of collection filtering, as long as it does not pose
@@ -764,16 +764,78 @@ To sum up, it requires documentation and involvment of human interaction (currie
 ### 6.5. Hydra
 
 
-**How many years these specs could sustain ? Are they built with a lifespan of 2-3 years or are they
-built with a life span of 50 years?**
 
 ## 7. Ideal `REST` API
+**How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
+built with a life span of 50 years?**
 
-* Describe what actions should include. Maybe move that before the specs ?
+### 7.1. UI-based REST API
 
+### 7.2. General purpose REST API
+
+In an ideal REST API, we should be able to tell the client:
+* About the resource returned from the API to the client:
+  * What attributes the resource returns by default
+  * What attributes the user can request apart from the default ones (some attributes could not be in the default response because
+    they are very expensive while being rarely used)
+  * What associations are related and the client can also request in the same request (along with they attributes description)
+  * What capabilities each resource supports along with the details of those capabilities (like max page etc)
+  * What are the data type of each attribute
+* About the resource sent to the API from the client
+  * Which actions the resource supports
+  * Which attributes the client can modify on the resource, per action
+  * Which attributes the resource _must_ have, per action
+  * Which associations (along with their attributes) can be modified as well in the same request, per action
+
+We should note that the reason we don't mention anything about the headers that are required, or, the status codes
+is because we feel that these belong to the Protocol level and not in the Application level.
+Any changes on this level imply that the API breaks the protocol.
+
+Explain why this is very difficult.
 
 ### 7.1 I miss my good old API
+In plain JSON the User resource looks is:
+```json
+{
+  "user": {
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
+}
+```
 
+while a collection of `User` resources, the `Users` resource, is
+
+```json
+{
+  "users": [{
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }, {
+    "id":"9124",
+    "email": "robert.clarsson@gmail.com",
+    "name": "Robert Clarsson",
+    "birth_date": "1940-11-10",
+    "created-at": "2016-10-06T16:01:24Z",
+    "microposts-count": 17,
+  }]
+}
+```
+
+As simple as that.
+
+I miss my good old API (around 2006 I guess) that returned just data. No hypermedia, no HATOEAS, only data.
+Compared with a HATOEAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
+
+Is it possible to build an API that is simple as that, yet be Hypermedia driven ?
 
 ## Introspected APIs
 In the following we will describe the architecture of the Introspected APIs through
@@ -783,26 +845,11 @@ architecture style.
 
 
 ### Introduction
-There are 3 kinds of criticizers of REST model.
-1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
-simpler, yet easier to implement and test and deliver a RESTfull approach
-2. The ones who understand what REST brings on the table but given that they control the client as well,
-why should they bother with the whole HATOAS thing?
-3. The ones who don't understand REST and just want a plain JSON because it's simple enough
 
-
-Introspected REST model is flexible enough to cover all those user cases.
-It's not a model that is black or white: your API is either Introspected-REST-compliant or it isn't, like REST.
-
-We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelemnt
-and backwards compatible.
-The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
-
-
-### Separate Hypermedia from the actual data
+### Separating Hypermedia from the actual data
 JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
-### Automate documentation
+### Automating the documentation generation
 
 
 > Imagine how poor the Web would have been if we had limited HTML to what was
@@ -822,6 +869,24 @@ JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
 
 ## Outro
+
+##############################################################
+
+There are 3 kinds of criticizers of REST model.
+1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
+simpler, yet easier to implement and test and deliver a RESTfull approach
+2. The ones who understand what REST brings on the table but given that they control the client as well,
+why should they bother with the whole HATOAS thing?
+3. The ones who don't understand REST and just want a plain JSON because it's simple enough
+
+
+Introspected REST model is flexible enough to cover all those user cases.
+It's not a model that is black or white: your API is either Introspected-REST-compliant or it isn't, like REST.
+
+We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelement
+and backwards compatible.
+The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
+
 
 It should be noted this model is not something we conceived in a lab. Some [people]()
 have already tried to implement something similar, probably without really knowing
@@ -845,7 +910,7 @@ read his dissertation to actually see that we are defining yet another REST styl
 In either case, given that very few has really implemented a Roy-compliant REST API means
 that Roy himself failed to explain his model correctly.
 
-We need to be brave enough and move on: Roy's HATOEAS-based REST model can be declared as deprecated.
+We need to **be brave enough and move on**: Roy's HATOEAS-based REST model can be declared as deprecated.
 
 Introspected REST is an alternative backwards compatible API. No breaking changes are needed.
 
