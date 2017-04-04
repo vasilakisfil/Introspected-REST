@@ -261,6 +261,11 @@ For instance, with `application/json` Media Type this wouldn't work as JSON itse
 
 Instead, the server and client must agree on a format that provide such mechanisms.
 
+In practice however, we put `application/json` in our Content-Type header denoting
+that the response type follows that Media Type and then inside the response we add
+semantics regarding hypermedia, asking the client to check the documentation how
+to parse/identify these semantics.
+
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
