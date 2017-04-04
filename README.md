@@ -44,7 +44,7 @@ to fill in her age, a field in the signup form you didn't have before.
 Essentially, this means, in API terms, add an extra field in the accepted object and require it from the client to be filled in
 by the user before sending it over.
 
-If your API is `RESTly` and not `REST`, this means that you need to fix the code in the iOS side, test it and send a new iOS app to apple store.
+If your API is `RESTly` and not `REST`, this means that you need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
 It takes roughly 1 week for Apple to review your app and if your app won't be rejected for some reason, your
 tiny change will take action at least a week later after requested.
 If your API _was_ `REST` that would mean a change on the server's response denoting which fields are required to submit the form.
