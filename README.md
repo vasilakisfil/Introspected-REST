@@ -86,9 +86,9 @@ much more flexible and backwarde compatible with any Restfull API.
 But first let's discuss about Networked Services.
 
 ## 3. Networked Services and APIs
-Nowadays JSON has become so popular that people almost forget that there is whole bunch of
+Nowadays JSON has become so popular that developers almost forget that there is whole bunch of
 protocols below it.
-People also forget that JSON is just a specification in the message level, like XML.
+Developers also forget that JSON is just a specification in the message level, like XML.
 It's not the only one and definitely it's not the best we could use.
 Nevertheless it's simple and simplicity is a virtue.
 
@@ -99,12 +99,12 @@ have the following levels:
 In the application level, the client starts content negotiation (or content selection), usually asking
 for only one media type.
 
-In the HTTP this is done using the `Accept` header (and server responds with `Content-Type` header).
+In the HTTP this is done using the `Accept` header and server responds with `Content-Type` header.
 
 `application/json` is a media type that denotes that the data format of the requested
 representation is in JSON data dormat.
 Specifically the type of this media type is `application` while the subtype is `json`.
-JSON itself is not a media type but a message format.
+**JSON itself is not a media type but a message format**.
 
 Media types can be a bit more complex as well: `application/vnd.api+json` (roughly) means that
 * the main type is `application`
@@ -254,10 +254,10 @@ This is one of the most misunderstood parts of Roy's REST model. The idea here i
 once the client and server have reached a concensus on the media type after the negotiation,
 the server should strictly provide all the available options for the client to select.
 
-However, one of the requirements for HATEOAS to work is that the media type itself _must_ allow
-to its vocubulary hypermedia and linking.
-For instance, with plain JSON (`application/json`) this wouldn't work as JSON itself
-(`application/json` media type is nothing more than a JSON) does not provide any of those mechanisms.
+However, **one of the requirements for HATEOAS to work is that the media type itself _must_ allow
+to its vocubulary hypermedia and linking.**
+For instance, with `application/json` Media Type this wouldn't work as JSON itself
+(`application/json` Media Type is nothing more than a JSON) does not provide any of those mechanisms.
 
 Instead, the server and client must agree on a format that provide such mechanisms.
 
@@ -950,3 +950,7 @@ Vale kai auta tou Roy pou exei sta presentations tou
 >Versioning an interface is just a polite way to kill deployed applications
 >
 > Roy Fielding --- 2013 on interview foobar
+>
+
+
+Are you sure you want an architectural style and not an architecture ? (probably yes)
