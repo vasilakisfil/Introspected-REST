@@ -789,7 +789,7 @@ In an ideal REST API, we should be able to tell the client, at a given time:
 * About each resource sent to the API from the client
   * available actions on the resource
   * attributes, per action, the client can modify, based on the user's permissions
-  * required attributes a resource _must_ have when sending over data
+  * required attributes of a resource (attributes a resource _must_ before sending it over)
   * data types of the attributes (could be different from the resource found in the response)
   * associations that are required or can be embedded to the initial request
     * recusrively apply the same information for each association available for embedding
@@ -861,13 +861,9 @@ architecture style.
 JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 
 ### Automating the documentation generation
+documentation generation could have extra stuff, by assigining a param in the url.
 
 
-> Imagine how poor the Web would have been if we had limited HTML to what was
-> needed by an FTP client. That's what most JSON APIs are today.
->
-> --- Roy Fielding
->
 
 
 
@@ -879,58 +875,53 @@ JSON Hyper Schemas + HTTP OPTIONS on the endpoint
 ### RESTful API Description Languages
 
 
-## Outro
+## Future Work
+It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
 
-##############################################################
+We would like to give some guidelines towards that direction.
 
-There are 3 kinds of criticizers of REST model.
-1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
-simpler, yet easier to implement and test and deliver a RESTfull approach
-2. The ones who understand what REST brings on the table but given that they control the client as well,
-why should they bother with the whole HATOAS thing?
-3. The ones who don't understand REST and just want a plain JSON because it's simple enough
+### Microtypes: modules composing a Media Type
+> Imagine how poor the Web would have been if we had limited HTML to what was
+> needed by an FTP client. That's what most JSON APIs are today.
+>
+> --- Roy Fielding
+>
 
+Currently media types serve as a big monolith. Instead we believe that Media Types should be broken in smaller
+media types, each describing very carefully a specific functionality of a modern API.
 
-Introspected REST model is flexible enough to cover all those user cases.
-It's not a model that is black or white: your API is either Introspected-REST-compliant or it isn't, like REST.
+The Content-Type header is limited up to 128 characters so we might need another header for that.
+Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
 
+Clients and Server should still do the regular negotiation flow even for those sub-media-types.
+
+The reasoning is that, in our experience, we have seen that different API specs define the same functionalities in different ways.
+Common foobar should allow us to interchange each of them lorem ipsum.
+
+We will need a microtype for describing each of following:
+
+* querying language over url (filters, aggregations, pagination and sorting)
+* requesting specific attributes/associations of a resource and its associations
+* linking other resources or associations
+  * figure out when links should be placed on the introspection and when in Links header defined by RFC5988
+* semantic data of a response
+* actions supported by the resource
+  * required fields, available fields
+* resource data types
+
+## Conclusion
 We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelement
 and backwards compatible.
 The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
 
-
-It should be noted this model is not something we conceived in a lab. Some [people]()
-have already tried to implement something similar, probably without really knowing
-what they were doing.
-
-You see, the shadow of Roy Fielding is above any API developer:
-we are afraid to deprecate Roy's REST model and as a result what we are doing is that
-we take some elements of Roy's model, apply them, and name our API or spec as RESTSful.
-Eventually however, the final result is even worse. It doesn't have Roy's key elements for
-a Markov-chain-like client (we still have offline contracts) yet we have added complexity
-to our API for little result.
-
 In this Manifesto we will try to kill Roy's model.
 It gave us great insights but let's be pragmatic: it will never work out.
-
-Probably Roy won't like that. He will either:
-* declare that Introspected REST is a stupid manifesto that has nothing to do with his REST or
-* he will declare the Introspected REST is just yet another REST as he defined it and we never
-read his dissertation to actually see that we are defining yet another REST style.
-
-In either case, given that very few has really implemented a Roy-compliant REST API means
-that Roy himself failed to explain his model correctly.
 
 We need to **be brave enough and move on**: Roy's HATOEAS-based REST model can be declared as deprecated.
 
 Introspected REST is an alternative backwards compatible API. No breaking changes are needed.
 
-
-Are we sliding a lot from Roy's initial model? No, we modernize it a little bit.
-
-
-##### Roadmap to json-specific defined Introspected REST specs
-As I said modern APIs have specific properties.
+##############################################################
 If you want to build the next Introspected-REST spec, you can follow the following reasoning.
 Note that this reasoning is message-agnostic, meaning that we use here JSON just because we know it better
 but your spec could use anything, yaml, xml etc.
@@ -946,6 +937,46 @@ Each of those could be a separate Media Type
 
 So we keep 80% of the REST constraints and while we understand the benefits of other 20% we switch it with an on-demand alternative that makes the final thing
 more flexible and powerful while keeping the final data simple.
+
+There are 3 kinds of criticizers of REST model.
+1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
+simpler, yet easier to implement and test and deliver a RESTfull approach
+2. The ones who understand what REST brings on the table but given that they control the client as well,
+why should they bother with the whole HATOAS thing?
+3. The ones who don't understand REST and just want a plain JSON because it's simple enough
+
+
+Introspected REST model is flexible enough to cover all those user cases.
+It's not a model that is black or white: your API is either Introspected-REST-compliant or it isn't, like REST.
+
+
+
+It should be noted this model is not something we conceived in a lab. Some [people]()
+have already tried to implement something similar, probably without really knowing
+what they were doing.
+
+You see, the shadow of Roy Fielding is above any API developer:
+we are afraid to deprecate Roy's REST model and as a result what we are doing is that
+we take some elements of Roy's model, apply them, and name our API or spec as RESTSful.
+Eventually however, the final result is even worse. It doesn't have Roy's key elements for
+a Markov-chain-like client (we still have offline contracts) yet we have added complexity
+to our API for little result.
+
+
+Probably Roy won't like that. He will either:
+* declare that Introspected REST is a stupid manifesto that has nothing to do with his REST or
+* he will declare the Introspected REST is just yet another REST as he defined it and we never
+read his dissertation to actually see that we are defining yet another REST style.
+
+In either case, given that very few has really implemented a Roy-compliant REST API means
+that Roy himself failed to explain his model correctly.
+
+
+
+Are we sliding a lot from Roy's initial model? No, we modernize it a little bit.
+
+
+##### Roadmap to json-specific defined Introspected REST specs
 
 #### Why this document
 This document describes an architectural style.
