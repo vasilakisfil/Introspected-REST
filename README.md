@@ -271,12 +271,12 @@ to parse/identify these semantics, handing off a documentation as well.
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
-However, as this form of communication is getting bigger and bigger,
+However, as this form of communication is getting more and more common,
 clients are requesting and having more and more requirements from a server response.
 It's not enough to just request and get the resource but you should be able to specify
 to the server what transformations you need.
 
-In 2017 we have been using networked APIs that now we essentially have to
+Nowadays we have been using networked APIs so much that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
 
 We provide here a list of features (we call them capabilities) that we think should be built in a modern API (+this list is not mandatory)
