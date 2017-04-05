@@ -266,7 +266,7 @@ Instead, the server and client must agree on a format that provide such mechanis
 In practice however, we put `application/json` in our Content-Type header denoting
 that the response type follows that Media Type and then inside the response we add
 semantics regarding hypermedia, asking the client to check the documentation how
-to parse/identify these semantics.
+to parse/identify these semantics, handing off a documentation as well.
 
 
 ## 5. REST Applied in a modern API
