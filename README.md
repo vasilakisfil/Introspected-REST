@@ -97,24 +97,24 @@ have the following levels:
 
 ### 3.1. Application level
 In the application level, the client starts content negotiation (or content selection), usually asking
-for only one media type.
+for only one Media Type.
 
-In the HTTP this is done using the `Accept` header and server responds with `Content-Type` header.
+In the HTTP this is achieved by using the `Accept` header while server responds with `Content-Type` header.
 
-`application/json` is a media type that denotes that the data format of the requested
+`application/json` is a Media Type that denotes that the data format of the requested
 representation is in JSON data dormat.
-Specifically the type of this media type is `application` while the subtype is `json`.
-**JSON itself is not a media type but a message format**.
+Specifically the type of this Media Type is `application` while the subtype is `json`.
+**JSON itself is not a Media Type but a message format**.
 
 Media types can be a bit more complex as well: `application/vnd.api+json` (roughly) means that
 * the main type is `application`
-* the subtype is `vnd.api` which _roughly_ denotes the media type name
+* the subtype is `vnd.api` which _roughly_ denotes the Media Type name
 * the underlying structure follows JSON semantics
 
 In theory, [JSONAPI](http://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
-or even YAML, however in practice we tend to forget that and we treat all media types as single and not composite.
+or even YAML, however in practice we tend to forget that and we treat all Media Types as single and not composite.
 
-However, it should also be noted that the media types and the content negotiation in general, are
+However, it should also be noted that the Media Types and the content negotiation in general, are
 not restricted to HTTP only.
 Although HTTP is one of the most popular network protocols today, the same logics could be applied
 in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
@@ -127,7 +127,7 @@ In the message level we find the format that is used for the actual representati
 Nowadays we have almost mixed the message level with JSON but in practice other
 formats could successfully be used: XML, YAML, TOML to name a few.
 
-Usually the message format that is used is described by the media type's suffix.
+Usually the message format that is used is described by the Media Type's suffix.
 
 ### 3.3. Protocol level
 In the protcol level, the requests are usually sent using the HTTP.
@@ -218,17 +218,17 @@ you expose.
 > induces visible, scalable, available through layered system, cacheable, and shared caches
 > induces evolvable via extensible communication
 
-> Interaction is stateless between requests, standard methods and media types are used to
+> Interaction is stateless between requests, standard methods and Media Types are used to
 > indicate semantics and exchange information, and responses explicitly indicate cacheability.
 >
 > --- Roy Fielding
 >
 
-This would mean that the data of the response should follow the media type that the client
+This would mean that the data of the response should follow the Media Type that the client
 requested and unrestands.
-Given that the client negotiated for that media type, it should be able to parse and understand any part of the response.
+Given that the client negotiated for that Media Type, it should be able to parse and understand any part of the response.
 
-If you modify the response that breaks the semantics of the media type that was agreed upon, the client
+If you modify the response that breaks the semantics of the Media Type that was agreed upon, the client
 would need an out-of-band information because the response wouldn't be self descriptive.
 
 ### 4.5. Hypertext as the engine of application state (HATEOAS)
@@ -236,7 +236,7 @@ would need an out-of-band information because the response wouldn't be self desc
 > induces evolvable (loose coupling) via late binding of application transitions
 
 > A REST API should be entered with no prior knowledge beyond the initial URI (bookmark)
-> and set of standardized media types that are appropriate for the intended audience
+> and set of standardized Media Types that are appropriate for the intended audience
 > (i.e., expected to be understood by any client that might use the API).
 >
 > From that point on, all application state transitions must be driven by client
@@ -251,10 +251,10 @@ would need an out-of-band information because the response wouldn't be self desc
 >
 
 This is one of the most misunderstood parts of Roy's REST model. The idea here is that,
-once the client and server have reached a concensus on the media type after the negotiation,
+once the client and server have reached a concensus on the Media Type after the negotiation,
 the server should strictly provide all the available options for the client to select.
 
-However, **one of the requirements for HATEOAS to work is that the media type itself _must_ allow
+However, **one of the requirements for HATEOAS to work is that the Media Type itself _must_ allow
 to its vocubulary hypermedia and linking.**
 For instance, with `application/json` Media Type this wouldn't work as JSON itself
 (`application/json` Media Type is nothing more than a JSON) does not provide any of those mechanisms.
@@ -322,16 +322,16 @@ in our API's Media Type or using HATEOAS ?
 What goes where?
 
 #### 5.2.1. Defining a new Media Type is not easy and should be avoided
-Creating a new media type for our API is genrally considered bad practice.
-Create a new media type only if you are sure that none of the already published
-media types can fit in your API design.
+Creating a new Media Type for our API is genrally considered bad practice.
+Create a new Media Type only if you are sure that none of the already published
+Media Types can fit in your API design.
 
-Also, creating a new media type to describe the new types and combine it with existing media types
+Also, creating a new Media Type to describe the new types and combine it with existing media types
 (like `application/vnd.api+json+my_media_types`) wouldn't always work.
-The reason is that the client _must_ understand the media type before hand.
+The reason is that the client _must_ understand the Media Type before hand.
 As a result, if we would like to use some _new_ custom types in our (already deployed) API, we would have to publish
-the media type before hand and let humans implement code to fully parse API responses that
-follow this media type or API responses that their media type also include this new media type.
+the Media Type before hand and let humans implement code to fully parse API responses that
+follow this Media Type or API responses that their media type also include this new media type.
 
 #### 5.2.2. HATOEAS can get pretty heavy
 Imagine if you have to describe in a resource, all the available actions along with the available API
@@ -339,13 +339,13 @@ capabilities _in that specific resource_.
 Your API response would just explode in terms of size while making your API super complex.
 
 #### 5.2.3. Balancing between Media Types and HATOEAS
-The idea is that media types descibe the generic capabilities while HATOEAS
+The idea is that Media Types descibe the generic capabilities while HATOEAS
 describe the resource-specific capabilities.
 
 However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
-which means that the client must be programmed by a human before hand in order to support that media type.
+which means that the client must be programmed by a human before hand in order to support that Media Type.
 
-As a result, the media type can't be very restrictive because that would mean it would restrict the API designer's freedom
+As a result, the Media Type can't be very restrictive because that would mean it would restrict the API designer's freedom
 to design the API the way she wants.
 
 For instance, in pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
@@ -931,7 +931,7 @@ but your spec could use anything, yaml, xml etc.
 * Reach a concencus on linking
 * Reach a concencus on denoting linked/semantic data
 * Reach a concencus on document structure (root element, meta attributes which should appear in the simple response as well etc)
-Each of those could be a separate media type
+Each of those could be a separate Media Type
 
 So we keep 80% of the REST constraints and while we understand the benefits of other 20% we switch it with an on-demand alternative that makes the final thing
 more flexible and powerful while keeping the final data simple.
@@ -983,14 +983,14 @@ We should describe them somehow though in our API without relying in offline con
 
 
 #### 5.3. An alternative architectural style maybe?
-Most of those media types specifications would not be needed if the APIs were built
+Most of those Media Types specifications would not be needed if the APIs were built
 with introspection in mind.
 
-Imagine that we have a media type that allows us to describe new media types, called `generic_media_type`.
+Imagine that we have a Media Type that allows us to describe new media types, called `generic_media_type`.
 Then the clients would only need to understand and parse this `generic_media_type` and derive the other
-media types.
+Media Types.
 Of course, this scenario is more difficult than it sounds and the goal of this _manifesto_ is not
-to provide a generic media type.
+to provide a generic Media Type.
 Nevertheless, API introspection, as we will see, can provide us with information on API's
 capabilities along with hypermedia in a much flexible and cleaner way, _without having data and hypermedia (representation metadata) tangled together in 
 the representation_.
