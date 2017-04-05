@@ -106,7 +106,7 @@ representation is in JSON data dormat.
 Specifically the type of this Media Type is `application` while the subtype is `json`.
 **JSON itself is not a Media Type but a message format**.
 
-Media Types can be a bit more complex as well: `application/vnd.api+json`, [JSONAPI's](http://jsonapi.org/format) spec, (roughly) means that
+Media Types can be a bit more complex as well: `application/vnd.api+json`, the media type of [JSONAPI](http://jsonapi.org/format) spec, (roughly) means that
 * the main type is `application`
 * the subtype is `vnd.api` which _roughly_ denotes the Media Type name
 * the underlying structure follows JSON semantics
