@@ -347,7 +347,7 @@ describe the resource-specific capabilities.
 
 However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
 which means that the client must be programmed by a human before hand in order to support that Media Type.
-
+**
 As a result, the Media Type can't be very restrictive because that would mean it would restrict the API designer's freedom
 to design the API the way she wants.
 
@@ -776,25 +776,48 @@ built with a life span of 50 years?**
 
 ### 7.2. General purpose REST API
 
-In an ideal REST API, we should be able to tell the client:
-* About the resource returned from the API to the client:
-  * What attributes the resource returns by default
-  * What attributes the user can request apart from the default ones (some attributes could not be in the default response because
-    they are very expensive while being rarely used)
-  * What associations are related and the client can also request in the same request (along with they attributes description)
-  * What capabilities each resource supports along with the details of those capabilities (like max page etc)
-  * What are the data type of each attribute
-* About the resource sent to the API from the client
-  * Which actions the resource supports
-  * Which attributes the client can modify on the resource, per action
-  * Which attributes the resource _must_ have, per action
-  * Which associations (along with their attributes) can be modified as well in the same request, per action
+In an ideal REST API, we should be able to tell the client, at a given time:
+* About each resource returned from the API to the client:
+  * default attributes and available attributes of the resource, based on the user's permissions
+    * default attributes is a subset of the available attributes
+  * data types for each attribute in the resource or any embedded association
+  * Sorting/pagination, filtering and aggregation queries availability
+  * data type of each attribute
+  * Ideally some description targeted for humans
+  * default embedded associations and available associations to embed
+    * recusrively apply the same information for each association available for embedding
+* About each resource sent to the API from the client
+  * available actions on the resource
+  * attributes, per action, the client can modify, based on the user's permissions
+  * required attributes a resource _must_ have when sending over data
+  * data types of the attributes (could be different from the resource found in the response)
+  * associations that are required or can be embedded to the initial request
+    * recusrively apply the same information for each association available for embedding
 
 We should note that the reason we don't mention anything about the headers that are required, or, the status codes
 is because we feel that these belong to the Protocol level and not in the Application level.
 Any changes on this level imply that the API breaks the protocol.
 
-Explain why this is very difficult.
+However, we are pragmatic and we understand that an API designer could want to _add_ (not change)
+a status code or a header in a given request/response and as a result, ideally, this should also be possible to be described.
+
+Now to the reader, it should be obvious that even if we manage to offload some of the aforementioned information
+to the Media Type, we would still have a _very_ complex, massive, response from the server for the HATEOAS.
+
+In our experience, such responses are very hard to implement correctly, test, be performant and even debug. After all,
+a human will sit down and write the initial code and debugging the code by the eye is important.
+Simplicity is crucial.
+
+Another thing: Some clients might not be interested in hypermedia and evolvability at all. Only the data.
+However such APIs force the clients to deal with it.
+
+Ideally we would like to give the option to the client to decide the extend of the hypermedia that it
+will support and follow, without taking on defaults. Some clients might want to follow 100% the HATEOAS part
+of the API (and as a result be evolvable) some other clients might want the 50%, some clients might be interested
+only in data.
+
+By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
+them is a bad practice.
 
 ### 7.1 I miss my good old API
 In plain JSON the User resource looks is:
@@ -811,36 +834,21 @@ In plain JSON the User resource looks is:
 }
 ```
 
-while a collection of `User` resources, the `Users` resource, is
-
-```json
-{
-  "users": [{
-    "id":"685",
-    "email":"vasilakisfil@gmail.com",
-    "name":"Filippos Vasilakis",
-    "birth_date": "1988-12-12",
-    "created_at": "2014-01-06T20:46:55Z",
-    "microposts_count":50
-  }, {
-    "id":"9124",
-    "email": "robert.clarsson@gmail.com",
-    "name": "Robert Clarsson",
-    "birth_date": "1940-11-10",
-    "created-at": "2016-10-06T16:01:24Z",
-    "microposts-count": 17,
-  }]
-}
-```
-
 As simple as that.
 
-I miss my good old API (around 2006 I guess) that returned just data. No hypermedia, no HATOEAS, only data.
+A JSON-based API built around 2006 would return just data. No hypermedia, no HATOEAS, only data.
 Compared with a HATOEAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
+And I miss that.
 
-Is it possible to build an API that is simple as that, yet be Hypermedia driven ?
+Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
+the level of HATEOAS it will follow?
 
 ## Introspected APIs
+>  Simple things should be simple and complex things should be possible.
+>
+> --- Alan Kay
+>
+>
 In the following we will describe the architecture of the Introspected APIs through
 a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
