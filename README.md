@@ -235,6 +235,12 @@ would need an out-of-band information because the response wouldn't be self desc
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
 
+This is one of the most misunderstood parts of Roy's REST model. The idea here is that,
+once the client and server have reached a concensus on the Media Type after the negotiation,
+the server should strictly provide all the available options for the client to select.
+
+As Roy notes:
+
 > A REST API should be entered with no prior knowledge beyond the initial URI (bookmark)
 > and set of standardized Media Types that are appropriate for the intended audience
 > (i.e., expected to be understood by any client that might use the API).
@@ -249,10 +255,6 @@ would need an out-of-band information because the response wouldn't be self desc
 >
 > --- Roy Fielding
 >
-
-This is one of the most misunderstood parts of Roy's REST model. The idea here is that,
-once the client and server have reached a concensus on the Media Type after the negotiation,
-the server should strictly provide all the available options for the client to select.
 
 However, **one of the requirements for HATEOAS to work is that the Media Type itself _must_ allow
 to its vocubulary hypermedia and linking.**
