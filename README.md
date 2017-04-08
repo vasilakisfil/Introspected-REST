@@ -272,7 +272,7 @@ semantics regarding hypermedia. Then we hand off out-of-band information to the 
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
 
-##### 4.5.1. The Human interaction principle
+#### 4.5.1. The Human interaction principle
 There are 2 types of human involvement:
 * 1-fold: Programming the client only once to parse the Media Type correctly and let the
 client work for any API that follows that Media Type even when APIs evolve (given that they adhere in the Media Type)
