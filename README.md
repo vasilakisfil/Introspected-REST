@@ -283,7 +283,8 @@ to the server what transformations you need.
 Nowadays we have been using networked APIs so much that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
 
-We provide here a list of features (we call them capabilities) that we think should be built in a modern networked API.
+We provide here a list of features (we call them capabilities) that we think should be built in a modern networked API,
+in 2017.
 
 ### 5.1. Requirements from a modern REST API
 We feel that a modern API should at least provide the following features.
