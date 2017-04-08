@@ -366,8 +366,14 @@ Specifically, especially when having a restrictive Media Type, if we create a cl
 then it's easy to "configure" it for another API which also follows that Media Type.
 
 HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
-
 Essentially, HATOEAS should provide any details missing from the Media Type for the client to work.
+
+#### 5.2.4. An alternative architecture
+We feel that the current Media Type specification and use is dated.
+If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle if used correctly.
+Inspired by that, later, we will suggest a new concept,  Microtypes, small composable modules that combined together can form a Media Type.
+
+As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
 
 
 ## 6. API Specs Today
