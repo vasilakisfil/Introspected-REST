@@ -93,8 +93,8 @@ Developers also forget that JSON is just a specification in the message level, l
 It's not the only one and definitely it's not the best we could use.
 Nevertheless it's simple and simplicity is a virtue.
 
-When describing networks we follow the OSI model description, with TCP/IP following 5 of OSI's 7 layers,
-but in our case we will make a more API-specific description
+OSI model is the conceptual model that we use to describe computer networks, with TCP/IP following 5 out of 7 OSI's abstraction layers.
+In our case however, we will make a more API-specific description.
 
 When we want to request a resource from a networked hypermedia-based API, we _roughly_
 have the following levels:
