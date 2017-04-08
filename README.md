@@ -384,13 +384,14 @@ then it's easy to "configure" it for another API which also follows that Media T
 HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
 Essentially, HATOEAS should provide any details missing from the Media Type for the client to work.
 
-
 #### 5.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
 If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle if used correctly.
 Inspired by that, later, we will suggest a new concept,  Microtypes, small composable modules that combined together can form a Media Type.
 
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
+
+#### 5.3. Clients and Applications
 
 
 ## 6. API Specs Today
@@ -468,6 +469,11 @@ Now that we defined the scope of our little API, let's see how this would be imp
 in the specs for REST(y) APIs currently available. We feel that most current APIs
 have a lot of similarities with the following specs, namely the structure and the HATEOAS part (regarding
 linking), and as a result by comparing those specs with our model would be sufficient.
+
+We will evaluate the specs for the following:
+* whether they follow Roy's `REST` model
+* whether they require documentation in the sense that programming our client depends each time on the API we target
+* whether they require multi-fold human interaction while the API evolves
 
 ### 6.2. [JSONAPI](http://jsonapi.org)
 JSONAPI was originally created by [Yehuda Katz](http://yehudakatz.com/), as part of Ember's ember-data library.
@@ -571,7 +577,8 @@ notable issues. Namely:
  * No info on data types
  * No attributes description
 
-To sum up, it requires documentation and multi-fold human interaction.
+To sum up, it doesn't completely follow `REST` model while it requires both
+documentation and multi-fold human interaction.
 
 ### 6.3. HAL
 * [specifications](https://tools.ietf.org/html/draft-kelly-json-hal-08)
@@ -804,8 +811,6 @@ To sum up, it requires documentation and involvment of human interaction (currie
 built with a life span of 50 years?**
 
 ### 7.1. UI-based REST API
-
-### 7.1. The case of versioning
 
 ### 7.2. General purpose REST API
 
