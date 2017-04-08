@@ -289,30 +289,30 @@ in 2017.
 ### 5.1. Requirements from a modern REST API
 We feel that a modern API should at least provide the following features.
 
-##### 5.1.1. Sparse fields (collection/resource)
+#### 5.1.1. Sparse fields (collection/resource)
 The client should be able to ask and get specific attributes (i.e. a subset) of the resource representation.
 Also related, we should note that a representation of a resource could have completely different set of
 attributes for different clients, usually depending on the client's permissions or user role that it represents.
 
-##### 5.1.2. Associations on demand (collection/resource)
+#### 5.1.2. Associations on demand (collection/resource)
 The client should be able to ask related associations to the main initial resource, in the same request.
 
 What deffirintiates an association from an attribute is that the former has
 a dedicated identification which can be used in order to be retrieved by itself.
 
-##### 5.1.3. Sorting & pagination (collection only)
+#### 5.1.3. Sorting & pagination (collection only)
 The client should be able to sort based on one or more attributes and paginate the collection
 based on the page, page size and possibly an offset.
 
-##### 5.1.4. Filtering collections (collection only)
+#### 5.1.4. Filtering collections (collection only)
 The client should be able to run any sort of collection filtering, as long as it does not pose
 any security thread or slows down the API performance.
 
-##### 5.1.5. Aggregation queries (collection only)
+#### 5.1.5. Aggregation queries (collection only)
 The client should be able to run any sort of aggregation queries, as long as it does not pose
 any security thread or slows down the API performance.
 
-##### 5.1.6. Data types !
+#### 5.1.6. Data types !
 The client should know the data types of the attributes of the requested representation of a resource.
 Message formats provide some data types but they are pretty basic.
 For instance, JSON defines `String`, `Boolean`, `Number`, `Array`, and `null`.
