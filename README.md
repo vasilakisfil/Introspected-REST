@@ -563,7 +563,7 @@ notable issues. Namely:
  * No info on data types
  * No attributes description
 
-To sum up, it requires documentation and involvment of human interaction.
+To sum up, it requires documentation and multi-fold human interaction.
 
 ### 6.3. HAL
 * [specifications](https://tools.ietf.org/html/draft-kelly-json-hal-08)
