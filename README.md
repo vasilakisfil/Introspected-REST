@@ -269,8 +269,8 @@ Instead, the server and client must agree on a format that provide such mechanis
 In practice however, we put `application/json` in our Content-Type header denoting
 that the response type follows that Media Type and then inside the response we add
 semantics regarding hypermedia. Then we hand off out-of-band information to the client,
-like documentation, and ask the client to check those on how
-to parse/identify the hypermedia semantics of our API.
+like documentation, and demand to check them before identifying parsing and using the hypermedia
+semantics of our API.
 
 
 ## 5. REST Applied in a modern API
