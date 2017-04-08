@@ -352,7 +352,7 @@ describe the resource-specific capabilities.
 
 However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
 which means that the client must be programmed by a human before hand in order to support that Media Type.
-**
+
 As a result, the Media Type can't be very restrictive because that would mean it would restrict the API designer's freedom
 to design the API the way she wants.
 
