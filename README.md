@@ -272,6 +272,15 @@ semantics regarding hypermedia. Then we hand off out-of-band information to the 
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
 
+##### 4.5.1. The Human interaction principle
+There are 2 types of human involvement:
+* 1-fold: Programming the client only once to parse the Media Type correctly and let the
+client work for any API that follows that Media Type even when APIs evolve (given that they adhere in the Media Type)
+* multi-fold: Programming the client once to parse the Media Type correctly and then
+oftenly, when that the server adds/removes resources or evolves the API in general.
+The human involvement during the latter phase could be extensive or limited but in any case
+the client cannot cope with the new API versions by itself.
+
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
@@ -341,14 +350,6 @@ As a result, if we would like to use some _new_ custom types in our (already dep
 the Media Type before hand and let humans implement code to fully parse API responses that
 follow this Media Type or API responses that their media type also include this new media type.
 
-##### 5.2.1.1. The Human interaction principle
-There are 2 types of human involvement:
-* 1-fold: Programming the client only once to parse the Media Type correctly and let the
-client work for any API that follows that Media Type even when APIs evolve (given that they adhere in the Media Type)
-* multi-fold: Programming the client once to parse the Media Type correctly and then
-oftenly, when that the server adds/removes resources or evolves the API in general.
-The human involvement during the latter phase could be extensive or limited but in any case
-the client cannot cope with the new API versions by itself.
 
 #### 5.2.2. HATOEAS can get pretty heavy
 Imagine if you have to describe in a resource, all the available actions along with the available API
