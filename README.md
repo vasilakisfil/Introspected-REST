@@ -277,7 +277,7 @@ semantics of our API.
 +human interaction vs human involvement
 +1-fold/multi-fold alternatives
 
-There are 2 types of human involvement:
+There are 2 types of human involvement when building an API client:
 * 1-fold: Programming the client only once to parse the Media Type correctly and let the
 client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
 * multi-fold: Programming the client once to parse the Media Type correctly and then
