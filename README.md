@@ -273,20 +273,20 @@ semantics regarding hypermedia. Then we hand off out-of-band information to the 
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
 
-#### 4.5.1. The Human interaction principle
+#### 4.5.1. The Human interaction principle and API versioning
++human interaction vs human involvement
++1-fold/multi-fold alternatives
+
 There are 2 types of human involvement:
 * 1-fold: Programming the client only once to parse the Media Type correctly and let the
-client work for any API that follows that Media Type even when APIs evolve (given that they adhere in the Media Type)
+client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
 * multi-fold: Programming the client once to parse the Media Type correctly and then
-oftenly, when that the server adds/removes resources or evolves the API in general.
-The human involvement during the latter phase could be extensive or limited but in any case
-the client cannot cope with the new API versions by itself.
+every time the API evolves, reprogram the client accordingly. The extend of human involvement
+during that phase is variable depending on the Media Type.
 
-#### 4.5.2. The case of API Versioning
-Strictly speaking, an API that follows the `REST` model and is evolvable without the need
-of human interaction does not need any versioning in the URL.
-Instead, given that the  Media Type describes the API's capabilities, it's the right place to
-put the versions there.
+Strictly speaking, an API that follows the `REST` model should be evolvable without the need
+of human interaction. As a result, versioning should not take place in the URL but in the Media Type itself.
+
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
