@@ -453,7 +453,8 @@ have a lot of similarities with the following specs, namely the structure and th
 linking), and as a result by comparing those specs with our model would be sufficient.
 
 ### 6.2. JSONAPI
-* [specifications](http://jsonapi.org/format)
+
+### [specifications](http://jsonapi.org/format)
 
 ##### User resource
 ```json
