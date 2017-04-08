@@ -796,6 +796,8 @@ To sum up, it requires documentation and involvment of human interaction (currie
 **How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?**
 
+### 7.1. The case of versioning
+
 ### 7.1. UI-based REST API
 
 ### 7.2. General purpose REST API
