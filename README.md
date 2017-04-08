@@ -333,9 +333,10 @@ Creating a new Media Type for our API is genrally considered bad practice.
 Create a new Media Type only if you are sure that none of the already published
 Media Types can fit in your API design.
 
-Also, creating a new Media Type to describe the new types and combine it with existing media types
-(like `application/vnd.api+json+my_media_types`) wouldn't always work.
-The reason is that **the client _must_ understand the Media Type before hand**.
+Also, extending an existing Media Type or adding a complementing Media Type to an
+existing one (like `application/vnd.api+json+my_custom_data_types`) wouldn't work.
+Not only the existing Media Type specification does not provide any extensibility principles,
+but also, the main reason is that **the client _must_ understand the Media Type before hand**.
 As a result, if we would like to use some _new_ custom types in our (already deployed) API, we would have to publish
 the Media Type before hand and let humans implement code to fully parse API responses that
 follow this Media Type or API responses that their media type also include this new media type.
