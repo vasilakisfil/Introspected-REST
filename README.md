@@ -93,7 +93,8 @@ Developers also forget that JSON is just a specification in the message level, l
 It's not the only one and definitely it's not the best we could use.
 Nevertheless it's simple and simplicity is a virtue.
 
-+OSI level
+When describing networks we follow the OSI model description, with TCP/IP following 5 of OSI's 7 layers,
+in out case we will make an API-specific description
 
 When we want to request a resource from a networked hypermedia-based API, we _roughly_
 have the following levels:
@@ -281,6 +282,11 @@ oftenly, when that the server adds/removes resources or evolves the API in gener
 The human involvement during the latter phase could be extensive or limited but in any case
 the client cannot cope with the new API versions by itself.
 
+#### 4.5.2. The case of API Versioning
+Strictly speaking, an API that follows the `REST` model and is evolvable without the need
+of human interaction does not need any versioning in the URL.
+Instead, given that the  Media Type describes the API's capabilities, it's the right place to
+put the versions there.
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
@@ -377,6 +383,7 @@ then it's easy to "configure" it for another API which also follows that Media T
 
 HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
 Essentially, HATOEAS should provide any details missing from the Media Type for the client to work.
+
 
 #### 5.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
@@ -796,9 +803,9 @@ To sum up, it requires documentation and involvment of human interaction (currie
 **How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?**
 
-### 7.1. The case of versioning
-
 ### 7.1. UI-based REST API
+
+### 7.1. The case of versioning
 
 ### 7.2. General purpose REST API
 
