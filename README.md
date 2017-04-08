@@ -341,6 +341,15 @@ As a result, if we would like to use some _new_ custom types in our (already dep
 the Media Type before hand and let humans implement code to fully parse API responses that
 follow this Media Type or API responses that their media type also include this new media type.
 
+##### 5.2.1.1. The Human interaction principle
+There are 2 types of human involvement:
+* 1-fold: Programming the client only once to parse the Media Type correctly and let the
+client work for any API that follows that Media Type even when APIs evolve (given that they adhere in the Media Type)
+* multi-fold: Programming the client once to parse the Media Type correctly and then
+oftenly, when that the server adds/removes resources or evolves the API in general.
+The human involvement during the latter phase could be extensive or limited but in any case
+the client cannot cope with the new API versions by itself.
+
 #### 5.2.2. HATOEAS can get pretty heavy
 Imagine if you have to describe in a resource, all the available actions along with the available API
 capabilities _in that specific resource_.
@@ -452,9 +461,10 @@ in the specs for REST(y) APIs currently available. We feel that most current API
 have a lot of similarities with the following specs, namely the structure and the HATEOAS part (regarding
 linking), and as a result by comparing those specs with our model would be sufficient.
 
-### 6.2. JSONAPI
-
-### [specifications](http://jsonapi.org/format)
+### 6.2. [JSONAPI](http://jsonapi.org)
+JSONAPI was originally created by [Yehuda Katz](http://yehudakatz.com/), as part of Ember's ember-data library.
+Since then a lot of people have contributed and has rised as one of the most supported
+API specs as of 2017 in terms of tools and libraries.
 
 ##### User resource
 ```json
@@ -545,7 +555,8 @@ linking), and as a result by comparing those specs with our model would be suffi
 }
 ```
 
-Problems of this spec:
+While the spec makes a great effort describing the structure of the document, we see some
+notable issues. Namely:
  * Limited links (no URI templates, treats the client as totally stupid)
  * No actions
  * No info on available attributes
