@@ -93,6 +93,8 @@ Developers also forget that JSON is just a specification in the message level, l
 It's not the only one and definitely it's not the best we could use.
 Nevertheless it's simple and simplicity is a virtue.
 
++OSI level
+
 When we want to request a resource from a networked hypermedia-based API, we _roughly_
 have the following levels:
 
@@ -103,7 +105,7 @@ for only one Media Type.
 In the HTTP this is achieved by using the `Accept` header while server responds with `Content-Type` header.
 
 `application/json` is a Media Type that denotes that the data format of the requested
-representation is in JSON data dormat.
+representation is in JSON data format.
 Specifically the type of this Media Type is `application` while the subtype is `json`.
 **JSON itself is not a Media Type but a message format**.
 
@@ -910,6 +912,14 @@ We will need a microtype for describing each of following:
 * resource data types
 
 ## Conclusion
+We see that people fail to understand the full extend of Roy's initial `REST` model and what is happening is that
+some elements of that REST are applied, some other not and eventually we have a model that has the downsides of both worlds.
+
+In this _manifest_ we showed that we need to separate actual data from resource metadata and hypermedia. Documentation
+should be generated.
+
+No you don't need GraphQL
+
 We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelement
 and backwards compatible.
 The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
