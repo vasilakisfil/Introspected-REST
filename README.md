@@ -15,11 +15,11 @@ yet it's much simpler to implement while at the same time being backwards compat
 First some definitions, that we will use through the text:
 
 * `REST`, `RESTfull`: The model that Roy defined in his [thesis](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
-* `RESTly`: APIs that follows all parts `REST` model, except HATEOAS in which they support mostly links (spec like [JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
+* `RESTly`: APIs that follows all parts `REST` model, except HATEOAS in which they support mostly links (specs like [JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
 * `RESTless`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
 * `Introspected REST`: APIs that follow the definition of the model we provide in this _manifesto_
 
-We will use the term APIs, HTTP APIs and networked APIs interchangeably.
+We will use the term APIs and networked APIs interchangeably.
 
 ## 2. Introduction
 `REST` defined by Roy was a magnificent piece of work, much ahead of its time
