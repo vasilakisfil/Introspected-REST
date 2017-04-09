@@ -123,7 +123,7 @@ not restricted to HTTP only.
 Although HTTP is one of the most popular network protocols today, the same logics could be applied
 in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
 
-To sum up, the application level semantics are not coupled tight to the semantics of the
+To sum up, the application level semantics are defined by the Media Type requested and should not be tightly coupled to the semantics of the
 message level (like JSON) or the underlying protocol level (like HTTP).
 
 ### 3.2. Message level
