@@ -290,8 +290,14 @@ client work for any API that follows that Media Type even when APIs evolve, give
 every time the API evolves, reprogram the client accordingly. The extend of human involvement
 during that phase is variable depending on the Media Type.
 
+>Versioning an interface is just a polite way to kill deployed applications
+>
+> Roy Fielding --- 2013 on interview
+>
+
 Strictly speaking, an API that follows the `REST` model should be evolvable without the need
 of human interaction in the client side. As a result, versioning should not take place in the URL but in the Media Type itself.
+
 
 
 ## 5. REST Applied in a modern API
@@ -1111,11 +1117,6 @@ Oh wait..we just figured out that having the links in there might not be the ide
 
 Vale kai auta tou Roy pou exei sta presentations tou
 
-
->Versioning an interface is just a polite way to kill deployed applications
->
-> Roy Fielding --- 2013 on interview foobar
->
 
 
 Are you sure you want an architectural style and not an architecture ? (probably yes)
