@@ -146,7 +146,7 @@ SIP is also a text-based protocol with the same semantics as HTTP and is used in
 
 ### 3.4. Network level
 Finally, in the network level, the browser (or any other non-browser client) sends the networked request
-in one of the TCP, UDP, etc
+in one of the TCP, UDP, etc.
 
 The actual protocol depends on the protocol used by the protocol level.
 
@@ -193,7 +193,7 @@ it would be impossible to derive REST:
 > induces simple, visible, reusable, stateless communication
 
 Roy explains that very well in his thesis:
-> A resource is a conceptual mapping to a set of entities, not the entity that corresponds to the mapping at any particular point in time
+> A resource is a conceptual mapping to a set of entities, not the entity that corresponds to the mapping at any particular point in time.
 >
 > More precisely, a resource R is a temporally varying membership function M<sub>R</sub>(t),
 > which for time t maps to a set of entities, or values, which are equivalent.
