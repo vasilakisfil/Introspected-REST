@@ -145,8 +145,7 @@ CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is q
 SIP is also a text-based protocol with the same semantics as HTTP and is used in VoIP.
 
 ### 3.4. Network level
-Finally (well for the scope of this manifesto, in networks the lowest protocols are the one found in the Physical level
-which deal with the wire signals), in the network level, the browser (or any other non-browser client) sends the networked request
+Finally, in the network level, the browser (or any other non-browser client) sends the networked request
 in one of the TCP, UDP, etc
 
 The actual protocol depends on the protocol used by the protocol level.
