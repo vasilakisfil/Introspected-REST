@@ -265,7 +265,7 @@ As Roy notes:
 >
 
 However, **one of the requirements for HATEOAS to work is that the Media Type itself _must_ allow
-to its vocubulary hypermedia and linking.**
+to its vocubulary hypermedia.**
 For instance, with `application/json` Media Type this wouldn't work as JSON itself
 (`application/json` Media Type is nothing more than a JSON) does not provide any of those mechanisms.
 
