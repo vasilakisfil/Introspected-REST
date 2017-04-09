@@ -277,7 +277,7 @@ semantics regarding hypermedia. Then we hand off out-of-band information to the 
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
 
-#### 4.5.1. The Human interaction principle and API versioning
+#### 4.5.1. The Human interaction principle
 +human interaction vs human involvement
 +1-fold/multi-fold alternatives
 
