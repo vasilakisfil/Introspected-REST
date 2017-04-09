@@ -289,7 +289,7 @@ every time the API evolves, reprogram the client accordingly. The extend of huma
 during that phase is variable depending on the Media Type.
 
 Strictly speaking, an API that follows the `REST` model should be evolvable without the need
-of human interaction. As a result, versioning should not take place in the URL but in the Media Type itself.
+of human interaction in the client side. As a result, versioning should not take place in the URL but in the Media Type itself.
 
 
 ## 5. REST Applied in a modern API
