@@ -396,6 +396,7 @@ If Software Engineering has learned us something, is that composition can enforc
 Inspired by that, later, we will suggest a new concept,  Microtypes, small composable modules that combined together can form a Media Type.
 
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
++benefits
 
 #### 5.3. Clients and Applications
 
