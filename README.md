@@ -279,12 +279,11 @@ semantics regarding hypermedia. Then we hand off out-of-band information to the 
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
 
-## API Clients and Applications
-### Generic APIs and Specialized APIs
+## 5. API Clients and Applications
 
-#### 4.5.1. Client and Application responibilities
+### 5.1. Client and Application responibilities
 
-#### 4.5.2. The Human interaction principle
+### 5.2. The Human interaction principle
 +human interaction vs human involvement
 +1-fold/multi-fold alternatives
 
@@ -303,6 +302,7 @@ of human interaction in the client side. As a result, versioning should not take
 > Roy Fielding --- 2013 on interview
 >
 
+### 5.3. Generic Data APIs and Specialized APIs
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
