@@ -122,7 +122,7 @@ or even YAML, however in practice we tend to forget that and we treat all Media 
 
 However, it should also be noted that the Media Types and the content negotiation in general, are
 not restricted to HTTP only.
-Although HTTP is one of the most popular network protocols today, the same logics could be applied
+Although HTTP is one of the most popular application network protocols today, the same logics could be applied
 in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
 
 To sum up, the application level semantics are defined by the Media Type requested and should not be tightly coupled to the semantics of the
