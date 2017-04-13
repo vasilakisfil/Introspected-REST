@@ -408,8 +408,6 @@ Inspired by that, later, we will suggest a new concept,  Microtypes, small compo
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
 +benefits
 
-#### 5.3. Clients and Applications
-
 
 ## 6. API Specs Today
 Now that we defined what REST is, according to Roy, and what capabilities modern APIs should provide,
