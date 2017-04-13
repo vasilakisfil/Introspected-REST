@@ -140,7 +140,7 @@ In the protcol level, the requests are usually sent using the HTTP.
 After all, nowadays most of the development happens around the Web and
 HTTP is the only protocol that browsers officially support.
 
-Nonetheless, there are other stateless protocols as well.
+Nonetheless, there are other similar stateless protocols as well.
 QUIC is a HTTP alternative protocol that is targeted for low latency and uses UDP
 underneath.
 CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is quite heavy for constrainted devices).
