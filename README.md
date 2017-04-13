@@ -443,7 +443,7 @@ _`Users` and `User` are 2 distinct resources which are often, mistankingly, miss
 
 As we mentioned, `User` resource has also some associations (or relations/relationships if you prefer).
 
-In plain JSON the a User resource would look like:
+In plain JSON the User resource would look like:
 ```json
 {
   "user": {
