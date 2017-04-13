@@ -279,6 +279,9 @@ semantics regarding hypermedia. Then we hand off out-of-band information to the 
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
 
+## API Clients and Applications
+### Generic APIs and Specialized APIs
+
 #### 4.5.1. Client and Application responibilities
 
 #### 4.5.2. The Human interaction principle
