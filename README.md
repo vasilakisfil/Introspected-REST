@@ -388,7 +388,7 @@ which means that the client must be programmed by a human before hand in order t
 As a result, the Media Type can't be very restrictive because that would mean it would restrict the API designer's freedom
 to design the API the way she wants.
 
-For instance, in pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
+For instance, for pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
 If the Media Type describes how to do pagination using, say, a URL template on the resource path (like `/{resource}?page={page}&per_page={per_page}&offset={offset}`)
 this would mean that all APIs following this Media Type should have the pagination following that URL template.
 The level of restriction becomes more obvious when describing more complex capabilities.
