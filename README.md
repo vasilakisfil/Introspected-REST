@@ -98,7 +98,6 @@ Nevertheless it's simple and simplicity is a virtue.
 
 OSI model is the conceptual model that we use to describe computer networks, with TCP/IP following 5 out of 7 OSI's abstraction layers.
 In our case however, we will make a more API-specific description.
-
 When we want to request a resource from a networked hypermedia-based API, we _roughly_
 have the following levels:
 
