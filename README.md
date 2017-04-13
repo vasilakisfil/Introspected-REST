@@ -487,7 +487,8 @@ linking), and as a result by comparing those specs with our model would be suffi
 
 We will evaluate the specs for the following:
 * whether they follow Roy's `REST` model
-* whether they require documentation in the sense that programming our client depends each time on the API we target
+* whether their messages are **not** self descriptive, meaning that other than supporting the API's Media Type in our client
+we also need to read and understand the documentation to develop our client
 * whether they require multi-fold human interaction while the API evolves
 
 ### 6.2. [JSONAPI](http://jsonapi.org)
@@ -592,7 +593,7 @@ notable issues. Namely:
  * No info on data types
  * No attributes description
 
-To sum up, it doesn't completely follow `REST` model while it requires both
+To sum up, it doesn't entirely follow `REST` model while it requires both
 documentation and multi-fold human interaction.
 
 ### 6.3. HAL
@@ -693,7 +694,7 @@ Problems with this spec:
  * No attributes description, requires documentation (however it does provide a link to documentation)
 
 
-To sum up, it requires documentation and involvment of human interaction (curries facilitate that).
+To sum up, it requires documentation and multi-fold human interaction (curries facilitate that).
 
 ### 6.4. Siren
 ```json
@@ -828,8 +829,9 @@ built with a life span of 50 years?**
 ### 7.1. UI-based REST API
 
 ### 7.2. General purpose REST API
+In an ideal REST API, the client should be able to have all the necessary information for both
+the request and response.
 
-In an ideal REST API, we should be able to tell the client, at a given time:
 * About each resource returned from the API to the client:
   * default attributes and available attributes of the resource, based on the user's permissions
     * default attributes is a subset of the available attributes
@@ -872,8 +874,10 @@ only in data.
 By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
-### 7.1 I miss my good old API
-In plain JSON the User resource looks is:
+### 7.1. A JSON API back in time
+A JSON-based API built around 2006 would return just data. No hypermedia, no HATOEAS, only data.
+
+In our use case, User resource would look like this:
 ```json
 {
   "user": {
@@ -889,9 +893,7 @@ In plain JSON the User resource looks is:
 
 As simple as that.
 
-A JSON-based API built around 2006 would return just data. No hypermedia, no HATOEAS, only data.
 Compared with a HATOEAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
-And I miss that.
 
 Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
 the level of HATEOAS it will follow?
@@ -908,32 +910,162 @@ The reader though should not confuse the proposed implementation details with th
 architecture style.
 
 
-### Introduction
+We will use JSON and JSON Schemas.
+But the reader could apply the same ideas using any message format.
 
-### Separating Hypermedia from the actual data
-JSON Hyper Schemas + HTTP OPTIONS on the endpoint
+### Separating meta-data from the actual data
+#### Plain Data
+
+The main purpose of introspected REST _manifest_ is to separate actual data from resource meta-data, like hypermedia.
+In order to achieve that we start with the data first.
+
+When the client requests a resource (using `GET` method), it should get only the data:
+
+```json
+{
+  "user": {
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
+}
+```
+
+
+#### Meta-Data
+In order to describe our data, we will use JSON Schemas.
+It's a vocubulary that enabled to describe and as a result validate JSON data.
+
+For our use case the JSON schema would be the following:
+
+##### User resource
+
+```json
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://example.com/example.json",
+	"properties": {
+		"user": {
+			"properties": {
+				"id": {
+					"maxLength": 255,
+					"type": "string"
+				},
+				"email": {
+					"maxLength": 255,
+					"type": "string",
+					"format": "email"
+				},
+				"name": {
+					"maxLength": 255,
+					"type": "string"
+				},
+				"birth_date": {
+					"type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+				},
+				"created_at": {
+					"maxLength": 255,
+					"type": "string",
+					"formate": "date-time"
+				},
+				"microposts_count": {
+					"type": "integer"
+				}
+			},
+			"required": [
+				"id",
+				"email",
+				"name",
+				"birth_date",
+				"created_at",
+				"microposts_count",
+			],
+			"type": "object"
+		}
+	},
+	"required": [
+		"user"
+	],
+	"type": "object"
+}
+```
+
+##### Users resource
+
+```json
+{
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "id":"http://example.com/example.json",
+  "properties":{
+    "users":{
+      "items":{
+        "additionalProperties":false,
+        "properties":{
+          "id":{
+            "type":"string"
+          },
+          "email":{
+            "type":"string"
+          },
+          "name":{
+            "type":"string"
+          }
+          "birth_date":{
+            "type":"string"
+          },
+          "created_at":{
+            "type":"string"
+          },
+          "microposts_count":{
+            "type":"integer"
+          },
+        },
+        "required":[
+          "name",
+          "created_at",
+          "email",
+          "microposts_count",
+          "birth_date",
+          "id"
+        ],
+        "type":"object"
+      },
+      "type":"array",
+      "uniqueItems":true
+    }
+  },
+  "required":[
+    "users"
+  ],
+  "type":"object"
+}
+```
+Essentially the JSON Schema describes the data types and the structure of the data document.
+
+### Request Response inconsistency
+
+
+
+### Hypermedia
+For the Hypermedia part we will use JSON Hyper Schemas
+
+
+
+### Methods of transport
+The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
+The reason we choose `OPTIONS` here is because this method has been historically used
+for getting informtation on methods supported on a specific resource.
 
 ### Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
 
 
 
-
-
-## Related Work
-### GraphQL
-
-### Linked Data and Semantic Web
-
-### RESTful API Description Languages
-
-
-## Future Work
-It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
-
-We would like to give some guidelines towards that direction.
-
-### Microtypes: modules composing a Media Type
+### MicroTypes: modules composing a Media Type
 > Imagine how poor the Web would have been if we had limited HTML to what was
 > needed by an FTP client. That's what most JSON APIs are today.
 >
@@ -961,6 +1093,21 @@ We will need a microtype for describing each of following:
 * actions supported by the resource
   * required fields, available fields
 * resource data types
+
+
+## Related Work
+### GraphQL
+
+### Linked Data and Semantic Web
+
+### RESTful API Description Languages
+
+
+## Future Work
+It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
+
+We would like to give some guidelines towards that direction.
+
 
 ## Conclusion
 We see that people fail to understand the full extend of Roy's initial `REST` model and what is happening is that
