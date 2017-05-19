@@ -237,7 +237,7 @@ Given that the client negotiated for that Media Type, **it should be able to par
 If your Media Type is very week (like `application/json`) and you need functionality that the Media Type does not describe
 then you need to define another Media Typew which will describe the new semantics and wait until client(s) incorporate the new Media Type changes.
 
-Breaking your Media Type's semantics, or just extending them with new functionality will have the same result for the client:
+Breaking your Media Type's semantics, or just extending them with new functionality, will have exatly the same result for the client:
 not self-descriptive messages that will require out-of-band information, like documentation.
 
 ### 4.5. Hypertext as the engine of application state (HATEOAS)
