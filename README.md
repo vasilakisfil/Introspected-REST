@@ -616,6 +616,7 @@ The key feature of HAL when it was released was the browsability/explorability o
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
 However, this feature is rather controversial since in real REST APIs documentation should not even exist.
 
+##### User resource
 ```json
 {
     "_links": {
@@ -639,6 +640,7 @@ However, this feature is rather controversial since in real REST APIs documentat
 }
 ```
 
+##### Users resource (a collection of User resources)
 ```json
 {
    "_links":{
@@ -701,7 +703,7 @@ However, this feature is rather controversial since in real REST APIs documentat
 }
 ```
 
-While the spec has templated links, we see some notable issues. Namely:
+While the spec does have templated links, we see some notable issues. Namely:
  * No actions
  * No info on available attributes
  * No info on data types
