@@ -17,7 +17,7 @@ the evolvability and extensability of our new model.
 ## 1. Definitions
 First some definitions, that we will use through the text:
 
-* `REST`, `RESTfull`: The model that Roy defined in his [thesis](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
+* `REST`, `RESTful`: The model that Roy defined in his [thesis](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
 * `RESTly`: APIs that follows all parts `REST` model, except HATEOAS in which they support mostly links (specs like [JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
 * `RESTless`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
 * `Introspected REST`: APIs that follow the definition of the model we provide in this _manifesto_
@@ -86,7 +86,7 @@ As Roy notes:
 Instead, the client derives the state on demand, using introspection.
 
 Eventually this brings the same advantages as Roy's model while being it's much simpler,
-much more flexible and backwarde compatible with any Restfull API.
+much more flexible and backwarde compatible with any Restful API.
 
 But first let's discuss about Networked Services.
 
@@ -1192,7 +1192,7 @@ more flexible and powerful while keeping the final data simple.
 
 There are 3 kinds of criticizers of REST model.
 1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
-simpler, yet easier to implement and test and deliver a RESTfull approach
+simpler, yet easier to implement and test and deliver a RESTful approach
 2. The ones who understand what REST brings on the table but given that they control the client as well,
 why should they bother with the whole HATOAS thing?
 3. The ones who don't understand REST and just want a plain JSON because it's simple enough
