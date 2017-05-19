@@ -151,7 +151,7 @@ SIP is also a text-based protocol with the same semantics as HTTP and is used in
 Finally, in the network level, the browser (or any other non-browser client) sends the networked request
 in one of the TCP, UDP, etc.
 
-The actual protocol depends on the protocol used by the protocol level.
+The actual protocol depends on the protocol used in the protocol level.
 
 
 ## 4. Roy's `REST` model
@@ -1275,3 +1275,4 @@ Vale kai auta tou Roy pou exei sta presentations tou
 Are you sure you want an architectural style and not an architecture ? (probably yes)
 
 Is bold text a good idea?
+Should we add link to everything?
