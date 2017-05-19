@@ -232,7 +232,7 @@ you expose.
 
 This would mean that the data of the response should follow the Media Type that the client
 requested and unrestands.
-Given that the client negotiated for that Media Type, it should be able to parse and understand any part of the response.
+Given that the client negotiated for that Media Type, **it should be able to parse and understand any part of the response**.
 
 If your Media Type is very week (like `application/json`) and you need functionality that the Media Type does not describe
 then you need to define another Media Type and wait until client(s) incorporate the new Media Type changes.
