@@ -407,9 +407,9 @@ Essentially, HATOEAS should provide any details missing from the Media Type for 
 We feel that the current Media Type specification and use is dated.
 If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle if used correctly.
 Inspired by that, later, we will suggest a new concept,  Microtypes, small composable modules that combined together can form a Media Type.
-
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
-+benefits
+
+Also, instead of mixing up data with HATEOAS in the API responses, we will introduce introspectiveness of our endpoints.
 
 
 ## 6. API Specs Today
