@@ -69,7 +69,7 @@ Let me rephrase that in terms you will sound familiar to you:
 >
 An API that can change the state of the client without needing the latter to change.
 
-Given that, how can we have a simpler model than `REST`, yet have the same functionality of
+Given that, how can we have a simpler model than `REST`, yet derive the same functionality of
 `REST`?
 
 As we will show, `Introspected REST` is an API architectural style that solves that.
