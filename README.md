@@ -883,7 +883,7 @@ only in data.
 By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
-#### 7.1.1 Making an API REST-compliant by downplaying its capabilities
+#### 7.1.1. Making an API REST-compliant by downplaying its capabilities
 Someone could argue that we require all APIs to support features that shouldn't.
 For instance, we could have a weather API with `application/vnd.weather+json` Media Type
 that is only supposed to provide a single attribute with its value:
