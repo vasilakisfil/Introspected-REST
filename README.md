@@ -304,9 +304,11 @@ of human interaction in the client side. As a result, versioning should not take
 > Roy Fielding --- 2013 on interview
 >
 
-### 5.3. Generic Data APIs and Specialized UI APIs
 
 ## 5. REST Applied in a modern API
+### 5.1. Generic Data APIs and Specialized UI APIs
+
+### 5.1. Requirements from a modern REST API
 REST model is built for machine-to-machine communication, of any type.
 However, as this form of communication is getting more and more common,
 clients are requesting and having more and more requirements from a server response.
@@ -319,8 +321,7 @@ provide an ORM to the client over the HTTP (or any other protocol).
 We provide here a list of features (we call them capabilities) that we think should be built in a modern networked API,
 in 2017.
 
-### 5.1. Requirements from a modern REST API
-We feel that a modern API should at least provide the following features.
+While most of these capabilities are related to Data APIs, some of them apply to UI APIs as well.
 
 #### 5.1.1. Sparse fields (collection/resource)
 The client should be able to ask and get specific attributes (i.e. a subset) of the resource representation.
