@@ -240,7 +240,6 @@ then you need to define another Media Typew which will describe the new semantic
 Breaking your Media Type's semantics, or just extending them with new functionality will have the same result for the client:
 not self-descriptive messages that will require out-of-band information, like documentation.
 
-
 ### 4.5. Hypertext as the engine of application state (HATEOAS)
 > induces simple, visible, reusable, and cacheable through data-oriented integration
 > induces evolvable (loose coupling) via late binding of application transitions
