@@ -610,8 +610,11 @@ notable issues. Namely:
 To sum up, it doesn't entirely follow `REST` model while it requires both
 documentation and multi-fold human interaction.
 
-### 6.3. HAL
-* [specifications](https://tools.ietf.org/html/draft-kelly-json-hal-08)
+### 6.3. [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)
+HAL was created by Mike Kelly in 2011 (with final version coming in 2013).
+The key feature of HAL when it was released was the browsability/explorability of any API that adopted.
+Another feature is the idea of curies, links inside the resource that lead to the documentation.
+However, this feature is rather controversial since in real REST APIs documentation should not even exist.
 
 ```json
 {
@@ -703,7 +706,6 @@ While the spec has templated links, we see some notable issues. Namely:
  * No info on available attributes
  * No info on data types
  * No attributes description, requires documentation (however it does provide a link to documentation)
-
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
 
