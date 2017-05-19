@@ -309,7 +309,15 @@ of human interaction in the client side. As a result, versioning should not take
 
 
 ## 5. REST Applied in a modern API
-### 5.1. Generic Data APIs and Specialized UI APIs
+When building a REST API, there could be 2 possibilities
+* we are building a UI-driven API: the resources and their browsability is tightly coupled with the UI of the application
+* we are building a generic data API: the resources are not
+
+UI-driven APIs could be more performant (check words) because they are tailored for a specific application.
+However, they pose difficulties when they need to be reused by another application which does not share the same UI
+As a result, such APIs are very special and rare.
+Thus for the following, we will focus on the generic data APIs. Think about REST interface.
+
 
 ### 5.1. Requirements from a modern REST API
 REST model is built for machine-to-machine communication, of any type.
