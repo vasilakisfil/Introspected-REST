@@ -304,7 +304,7 @@ of human interaction in the client side. As a result, versioning should not take
 > Roy Fielding --- 2013 on interview
 >
 
-### 5.3. Generic Data APIs and Specialized APIs
+### 5.3. Generic Data APIs and Specialized UI APIs
 
 ## 5. REST Applied in a modern API
 REST model is built for machine-to-machine communication, of any type.
