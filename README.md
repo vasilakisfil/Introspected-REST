@@ -246,7 +246,8 @@ not self-descriptive messages that will require out-of-band information, like do
 
 This is one of the most misunderstood parts of Roy's REST model. The idea here is that,
 once the client and server have reached a concensus on the Media Type after the negotiation,
-the server should strictly provide all the available options for the client to select.
+the server's response should strictly provide all the available options for the client
+to manipulate the resource and navigate to other resources.
 
 As Roy notes:
 
@@ -277,6 +278,8 @@ that the response type follows that Media Type and then inside the response we a
 semantics regarding hypermedia. Then we hand off out-of-band information to the client,
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
+
++add stuff about Media Types vs hypermedia
 
 ## 5. API Clients and Applications
 
