@@ -29,7 +29,7 @@ We will use the term APIs and networked APIs interchangeably.
 which took us 10+ years to understand what its capabilities are.
 However, now, almost 20 years later `REST` model shows its age. It's unflexibile,
 difficult to implement, difficult to test, with performance and implementation issues.
-But most importantly, any implementation of `REST` model is _very_ complex.
+But most importantly, **any implementation of `REST` model is _very_ complex**.
 
 Now, one could say that, most APIs are not build with mind to last for decades and maybe
 that's the reason that this model hasn't seen much adoption.
