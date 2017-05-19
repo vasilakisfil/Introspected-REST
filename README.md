@@ -40,7 +40,7 @@ not suitable for short-term APIs?
 We firmly believe that `REST` is much better than any API that does not follow `REST` principles
 (like `RESTly` APIs), even for short-term APIs.
 Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them
-(as we will see GraphQL is not an equivelant alternative).
+([Related Work][##related-work] explains why GraphQL is not an equivelant alternative).
 Being able to evolve your API without breaking the clients is critical.
 
 Imagine the following scenario: you have built an Online Social Network and an iOS app that talks to the API on your backend.
@@ -279,20 +279,23 @@ semantics regarding hypermedia. Then we hand off out-of-band information to the 
 like documentation, and demand to check them before identifying parsing and using the hypermedia
 semantics of our API.
 
-+add stuff about Media Types vs hypermedia
-
 ## 5. API Clients and Applications
 
 ### 5.1. Client and Application responibilities
+Client and Application responsibilities some times are mixed together.
+
+A client is responsible for understanding and interacting with the API.
+
+The application on the other hand should not deal with the API at all but instead use the client to access the API's resources.
+
+Think about
 
 ### 5.2. The Human interaction principle
-+human interaction vs human involvement
-+1-fold/multi-fold alternatives
-
 There are 2 types of human involvement when building an API client:
 * 1-fold: Programming the client only once to parse the Media Type correctly and let the
 client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
-* multi-fold: Programming the client once to parse the Media Type correctly and then
+The only thing that the client requires is the initial URI of the API.
+* multi-fold: Programming the client once to parse the Media Type and the API correctly and then
 every time the API evolves, reprogram the client accordingly. The extend of human involvement
 during that phase is variable depending on the Media Type.
 
@@ -687,17 +690,14 @@ documentation and multi-fold human interaction.
 }
 ```
 
-Goods:
- * Links
-
-Problems with this spec:
+While the spec has templated links, we see some notable issues. Namely:
  * No actions
  * No info on available attributes
  * No info on data types
  * No attributes description, requires documentation (however it does provide a link to documentation)
 
 
-To sum up, it requires documentation and multi-fold human interaction (curries facilitate that).
+To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
 
 ### 6.4. Siren
 ```json
@@ -877,7 +877,31 @@ only in data.
 By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
-### 7.1. A JSON API back in time
+### 7.1 REST-compliant APIs by downplaying the capabilities
+Someone could argue that we require all APIs to support features that shouldn't.
+For instance, we could have a weather API with `application/vnd.weather+json` Media Type
+that is only supposed to provide a single attribute with its value:
+
+```json
+{
+  "temperature": 25
+}
+```
+
+This API _should_ be REST-compliant by not providing any API capabilities, hypermedia or actions.
+The imaginery Media Type `application/vnd.weather+json` is supposed to provide all the necessary information
+because otherwise the client would fail to udnerstand things like
+
+* what are the attributes of the response
+* what is the data type of the temperature value (float, double, integer, bignum etc)
+
+
+We feel that although this could be true, in practice it would never happen.
+Specifically, as we mentioned creating a new Media Type should be avoided.
+But even then, this API is blocked in terms of evolvability. There is no way of introducing change, which essentially breaks REST's axioms.
+
+
+### 7.2. A JSON API back in time
 A JSON-based API built around 2006 would return just data. No hypermedia, no HATOEAS, only data.
 
 In our use case, User resource would look like this:
@@ -1105,10 +1129,13 @@ We will need a microtype for describing each of following:
 + etc
 ## Related Work
 ### GraphQL
+no urls, basically a query language, no microtypes
 
 ### Linked Data and Semantic Web
 
 ### RESTful API Description Languages
+
+### API directories
 
 ### Linksets
 
@@ -1281,3 +1308,5 @@ Are you sure you want an architectural style and not an architecture ? (probably
 
 Is bold text a good idea?
 Should we add link to everything?
+
+The ratio of data/hypermedia of a resource
