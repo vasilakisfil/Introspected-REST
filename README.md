@@ -39,7 +39,7 @@ not suitable for short-term APIs?
 
 We firmly believe that `REST` is much better than any API that does not follow `REST` principles
 (like `RESTly` APIs), even for short-term APIs.
-Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them<sup>1</sup>.
+Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them (as we will see GraphQL is not an equivelant alternative).
 Being able to evolve your API without breaking the clients is critical.
 
 Imagine the following scenario: you have built an Online Social Network and an iOS app that talks to the API on your backend.
