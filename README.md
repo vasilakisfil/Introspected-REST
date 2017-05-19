@@ -61,11 +61,8 @@ Roy notes in his thesis:
 > --- Roy Fielding
 >
 
-Let me rephrase that in terms you will sound familiar to you:
+Let me rephrase that in terms you will sound familiar to you: **If you want to move fast, you should build a change-first API.**
 
->  If you want to move fast, you should build a change-first API.
->
->
 An API that can change the state of the client without needing the latter to change.
 
 Given that, how can we have a simpler model than `REST`, yet have the same functionality of
