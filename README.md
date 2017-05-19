@@ -1,4 +1,4 @@
-# Introspected REST
+# Introspected REST Manifesto
 (Sliding away from Roy Fielding's `REST` model)
 
 There has been a great confusion of what a `REST` API is.
@@ -8,7 +8,7 @@ Or a nicely formatted, a sophisticated CRUD.
 
 In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
 and see the majority of APIs and API specs ([JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) fail to follow this model.
-Then, we will propose a new model that brings into the table the same things,
+Then, we will propose a **new model** that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
 As part of this _manifesto_ we will also present, Microtypes, small modules that compose a Media Type and facilitates
