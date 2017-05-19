@@ -919,7 +919,7 @@ But the reader could apply the same ideas using any message format.
 ### Separating meta-data from the actual data
 #### Plain Data
 
-The main purpose of introspected REST _manifest_ is to separate actual data from resource meta-data, like hypermedia.
+The main purpose of introspected REST _manifesto_ is to **separate actual data from resource meta-data, like hypermedia**.
 In order to achieve that we start with the data first.
 
 When the client requests a resource (using `GET` method), it should get only the data:
