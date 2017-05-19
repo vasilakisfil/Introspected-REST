@@ -11,7 +11,7 @@ and see the majority of APIs and API specs ([JSONAPI](http://jsonapi.org/format)
 Then, we will propose a new model that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
-As part of this _manifesto_ we will also present, Microtypes, small modules that compose a Media Types that facilitates
+As part of this _manifesto_ we will also present, Microtypes, small modules that compose a Media Type and facilitates
 the evolvability and extensability of our new model.
 
 ## 1. Definitions
@@ -1094,7 +1094,9 @@ We will need a microtype for describing each of following:
   * required fields, available fields
 * resource data types
 
-
++ specfy uploads
++ specify http2 server push
++ etc
 ## Related Work
 ### GraphQL
 
@@ -1102,6 +1104,7 @@ We will need a microtype for describing each of following:
 
 ### RESTful API Description Languages
 
+### Linksets
 
 ## Future Work
 It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
