@@ -236,7 +236,8 @@ Given that the client negotiated for that Media Type, **it should be able to par
 
 If your Media Type is very week (like `application/json`) and you need functionality that the Media Type does not describe
 then you need to define another Media Type and wait until client(s) incorporate the new Media Type changes.
-Otherwise you will not have self-descriptive messages unless the clients use an out-of-band information, like documentation.
+In case you incorporate the needed changes in the response without following this process,
+you will not have self-descriptive messages and the clients will have to use an out-of-band information, like documentation.
 
 Or, if you modify the response that breaks the semantics of the Media Type that was agreed upon, the client
 would need an out-of-band information because the response wouldn't be self descriptive.
