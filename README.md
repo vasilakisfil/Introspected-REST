@@ -97,8 +97,8 @@ Developers also forget that JSON is just a specification in the message level, l
 It's not the only one and definitely it's not the best we could use.
 Nevertheless it's simple and simplicity is a virtue.
 
-OSI model is the conceptual model that we use to describe computer networks, with TCP/IP following 5 out of 7 OSI's abstraction layers.
-In our case however, we will make a more API-specific description.
+While OSI model is the conceptual model that we use to describe computer networks,
+with TCP/IP following 5 out of 7 OSI's abstraction layers, in our case, we will make a more API-specific description.
 When we want to request a resource from a networked hypermedia-based API, we _roughly_
 have the following levels:
 
@@ -1273,3 +1273,5 @@ Vale kai auta tou Roy pou exei sta presentations tou
 
 
 Are you sure you want an architectural style and not an architecture ? (probably yes)
+
+Is bold text a good idea?
