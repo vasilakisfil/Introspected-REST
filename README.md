@@ -39,10 +39,10 @@ not suitable for short-term APIs?
 
 We firmly believe that `REST` is much better than any API that does not follow `REST` principles
 (like `RESTly` APIs), even for short-term APIs.
-Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them.
+Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them<sup>1</sup>.
 Being able to evolve your API without breaking the clients is critical.
 
-Imagine the following scenario: you have built an Online Social Network and an iOS app that talks the API on your backend.
+Imagine the following scenario: you have built an Online Social Network and an iOS app that talks to the API on your backend.
 Now imagine that, after a company meeting, your CEO needs you to make tiny yet important change in the signup page: require the user
 to fill in her age, a field in the signup form you didn't have before.
 Essentially, this means, in API terms, add an extra field in the accepted object and require it from the client to be filled in
