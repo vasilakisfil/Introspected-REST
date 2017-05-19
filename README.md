@@ -937,6 +937,9 @@ When the client requests a resource (using `GET` method), it should get only the
 }
 ```
 
+The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
+the data does not contain any hypermedia or meta-data.
++ meta pagination
 
 #### Meta-Data
 In order to describe our data, we will use JSON Schemas.
