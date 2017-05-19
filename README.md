@@ -928,8 +928,8 @@ As simple as that.
 
 Compared with a HATOEAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
 
-Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
-the level of HATEOAS it will follow?
+**Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
+the level of HATEOAS it will follow?**
 
 ## Introspected APIs
 >  Simple things should be simple and complex things should be possible.
