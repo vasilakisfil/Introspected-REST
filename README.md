@@ -372,7 +372,7 @@ existing one (like `application/vnd.api+json+my_custom_data_types`) wouldn't wor
 Not only the existing Media Type specification does not provide any extensibility principles,
 but also, the main reason is that **the client _must_ understand the Media Type before hand**.
 As a result, if we would like to use some _new_ custom types in our (already deployed) API, we would have to publish
-the Media Type before hand and let humans implement code to fully parse API responses that
+the Media Type before hand and let **humans** implement code to fully parse API responses that
 follow this Media Type or API responses that their media type also include this new media type.
 
 
