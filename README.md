@@ -837,9 +837,7 @@ To sum up, it doesn't entirely follow REST while it requires documentation and m
 **How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?**
 
-### 7.1. UI-based REST API
-
-### 7.2. General purpose REST API
+### 7.1. Capabilities of an Ideal `REST` API
 In an ideal REST API, the client should be able to have all the necessary information for both
 the request and response.
 
@@ -885,7 +883,7 @@ only in data.
 By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
-### 7.1 REST-compliant APIs by downplaying the capabilities
+### 7.1.1 Making an API REST-compliant by downplaying the capabilities
 Someone could argue that we require all APIs to support features that shouldn't.
 For instance, we could have a weather API with `application/vnd.weather+json` Media Type
 that is only supposed to provide a single attribute with its value:
