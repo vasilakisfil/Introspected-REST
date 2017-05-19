@@ -432,7 +432,7 @@ For our message format, we will use JSON as it's the most popular but it could b
   * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
   * `microposts_count` an Integer
 
-So given the `REST` model properties we _could_ have the following routes:
+So given those `REST` model properties we _could_ have the following routes:
 * `Users` resource (`/users`):
   * List users (`GET /users`): Gets a collection of `User` resources
   * Create a new user (`/users`): Creates a new `User` with the specified attributes.
