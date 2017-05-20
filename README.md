@@ -293,13 +293,13 @@ The application responsibility on the other hand should not include API specific
 Instead, using the client, it should fetch whatever is needed, within the API's capabilities.
 
 Think about the traditional home telephone devices.
-The phone wire with its current is the API.
-The telephone device is the API client, since it makes it transparent to parse, decode and encode the user's voice
-in the wire, the API.
-Using the telephone device, we can run any application we might want: we can phone anyone and talk for any amount of hours.
-The PSTN, ISDN, (A)DSL etc are all different Media Types for the same API (data).
-For each one, we need a cient (modem) that will understand (encode/decode) the wire signals.
-Using that client we can built any type of application, in the frameworks of the Media Type.
+The phone wire and its signals is the API.
+The device used to enode/decode the wire signals is the API client.
+On top of a device we can run our application.
+The PSTN, ISDN, (A)DSL etc are all different Media Types for the same API (wire signals).
+For each one, we need a cient (device/modem) that will understand (encode/decode) the wire signals of that Media Type.
+Using that client we can built any type of application, in the plaisia of the Media Type.
+The application does not deal with the API's semantics, but instead it uses the Client to perform its tasks.
 
 ### 5.2. The Human interaction principle
 There are 2 types of human involvement when building an API client:
