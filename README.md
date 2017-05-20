@@ -163,7 +163,7 @@ aforementioned levels.
 > --- Roy Fielding
 
 
-When Roy talks about `REST` he mentions 5 crucial properties of a `REST` model:
+When Roy talks about `REST`, he mentions 5 crucial properties of a `REST` model:
 
 ### 4.1. Access methods have the same semantics for all resources
 > induces visible, scalable, available through layered system, cacheable, and shared caches
