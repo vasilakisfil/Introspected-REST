@@ -972,10 +972,10 @@ We will use JSON and JSON Schemas.
 But the reader could apply the same ideas using any message format.
 
 ### Separating meta-data from the actual data
-#### Plain Data
+#### Classes of meta-data
 
+#### Plain Data
 The main purpose of introspected REST _manifesto_ is to **separate actual data from resource meta-data, like hypermedia**.
-In order to achieve that we start with the data first.
 
 When the client requests a resource (using `GET` method), it should get only the data:
 
@@ -994,9 +994,13 @@ When the client requests a resource (using `GET` method), it should get only the
 
 The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
 the data does not contain any hypermedia or meta-data.
-+ meta pagination
 
-#### Meta-Data
+We should note that resource's meta-data that depend on the data ( which depend on the actual request for that time)
+like pagination information, should be still in the same response.
+The way those meta-data are represented is left to the API designer, usually though they are put under a
+`meta` attribute regardless if it's a resource or a collection of resources.
+
+#### Structural meta-data
 In order to describe our data, we will use JSON Schemas.
 It's a vocubulary that enabled to describe and as a result validate JSON data.
 
