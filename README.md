@@ -363,7 +363,8 @@ attributes for different clients, usually depending on the client's permissions 
 The client should be able to ask related associations to the main initial resource, in the same request.
 
 What deffirintiates an association from an attribute is that the former has
-a dedicated identification which can be used in order to be retrieved by itself.
+a dedicated identification. What is more, if the API exposes the association as a dedicated resource,
+the id can be used as identification.
 
 #### 5.1.3. Sorting & pagination (collection only)
 The client should be able to sort based on one or more attributes and paginate the collection
