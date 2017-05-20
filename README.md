@@ -386,7 +386,7 @@ Anything more than that we need to define it in the documentations.
 
 **We feel that these 5 data types that JSON provides are just a joke for modern APIs** and that we should
 have a much larger list of options to select from.
-What is more, we should be able to provide custom types in an easy way, for instance, a field is `String` but
+Additionally, we should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it follows a specific regex etc.
 
 ### 5.2. Media Types vs HATOEAS
