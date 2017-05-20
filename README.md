@@ -62,7 +62,7 @@ Roy notes in his thesis:
 > --- Roy Fielding
 >
 
-Let me rephrase that in terms you will sound familiar to you:
+In the world of startups and solely-money-driven companies, the following will sound more appealing:
 
 >  **If you want to move fast, you should build a change-first API.**
 >
