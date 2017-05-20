@@ -635,7 +635,7 @@ documentation and multi-fold human interaction.
 HAL was created by Mike Kelly in 2011 (with final version coming in 2013).
 The key feature of HAL when it was released was the browsability/explorability of any API that adopted.
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
-However, this feature is rather controversial since in real REST APIs documentation should not even exist.
+However, this feature is rather controversial since these links are targeted for humans and not machines.
 
 ##### User resource
 ```json
