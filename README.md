@@ -322,7 +322,7 @@ As a result, versioning should not take place in the URL but in the Media Type i
 
 
 ## 5. REST applied in a modern API
-When building a REST API, there are 3 approaches:
+When building a REST API, there are 2 approaches:
 * building a UI-driven API: the resources and their browsability is tightly coupled with the UI of the application
 * building a data-driven API: the resources are not
 
