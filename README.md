@@ -632,7 +632,7 @@ To sum up, it doesn't entirely follow `REST` model while it requires both
 documentation and multi-fold human interaction.
 
 ### 7.3. [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)
-HAL was created by Mike Kelly in 2011 (with final version coming in 2013).
+HAL was created by Mike Kelly in 2012.
 The key feature of HAL when it was released was the browsability/explorability of any API that adopted.
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
 However, this feature is rather controversial since the information these links provide are targeted for humans and not machines.
@@ -725,7 +725,7 @@ However, this feature is rather controversial since the information these links 
 ```
 
 While the spec does have templated links, we see some notable issues. Namely:
- * No actions
+ * No actions (they are supported by an unofficial extension)
  * No info on available attributes
  * No info on data types
  * No attributes description, requires documentation (however it does provide a link to documentation)
