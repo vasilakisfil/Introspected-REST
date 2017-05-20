@@ -312,7 +312,7 @@ during that phase is variable depending on the Media Type.
 
 Strictly speaking, an API that follows the `REST` model should be evolvable without the need
 of human interaction in the client side.
-As a result, versioning should not take place in the URL but in the Media Type itself.
+As a result, **versioning should not take place in the URL but in the Media Type itself**.
 
 >Versioning an interface is just a polite way to kill deployed applications
 >
