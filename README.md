@@ -284,39 +284,59 @@ semantics of our API.
 ### 5.1. Client and Application responibilities
 Client and Application responsibilities some times are mixed together.
 
-A client is responsible for understanding and interacting with the API.
+A client is responsible for understanding, interacting with the API and manipulating any API's resources, based on the Media Type's semantics
+and runtime HATEOAS. The client is responsible for providing in the application the list of resources that are available in the API,
+their fields, their capabilities, available actions and any hypermedia available.
+The way and patterns used to providing those features depends on the domain of the client.
 
-The application on the other hand should not deal with the API at all but instead use the client to access the API's resources.
+The application responsibility on the other hand should not include API specific details.
+Instead, using the client, it should fetch whatever is needed, within the API's capabilities.
 
-Think about
+Think about the traditional home telephone devices.
+The phone wire with its current is the API.
+The telephone device is the API client, since it makes it transparent to parse, decode and encode the user's voice
+in the wire, the API.
+Using the telephone device, we can run any application we might want: we can phone anyone and talk for any amount of hours.
+The PSTN, ISDN, (A)DSL etc are all different Media Types for the same API (data).
+For each one, we need a cient (modem) that will understand (encode/decode) the wire signals.
+Using that client we can built any type of application, in the frameworks of the Media Type.
 
 ### 5.2. The Human interaction principle
 There are 2 types of human involvement when building an API client:
-* 1-fold: Programming the client only once to parse the Media Type correctly and let the
+* 1-fold: Programming the client only once to understand the Media Type correctly and let the
 client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
 The only thing that the client requires is the initial URI of the API.
-* multi-fold: Programming the client once to parse the Media Type and the API correctly and then
-every time the API evolves, reprogram the client accordingly. The extend of human involvement
+* multi-fold: Programming the client once to understand the Media Type.
+Then modify the client to parse and understand the API correctly using some offline contract (like available resources, fields, pagination etc) and then
+every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
 during that phase is variable depending on the Media Type.
 
 Strictly speaking, an API that follows the `REST` model should be evolvable without the need
-of human interaction in the client side. As a result, versioning should not take place in the URL but in the Media Type itself.
+of human interaction in the client side.
+As a result, versioning should not take place in the URL but in the Media Type itself.
 
 >Versioning an interface is just a polite way to kill deployed applications
 >
-> Roy Fielding --- 2013 on interview
+> Roy Fielding
 >
 
 
 ## 5. REST Applied in a modern API
-When building a REST API, there could be 2 possibilities
-* we are building a UI-driven API: the resources and their browsability is tightly coupled with the UI of the application
-* we are building a generic data API: the resources are not
+When building a REST API, there are 3 approaches:
+* building a UI-driven API: the resources and their browsability is tightly coupled with the UI of the application
+* building a data-driven API: the resources are not
 
-UI-driven APIs could be more performant (check words) because they are tailored for a specific application.
-However, they pose difficulties when they need to be reused by another application which does not share the same UI
-As a result, such APIs are very special and rare.
-Thus for the following, we will focus on the generic data APIs. Think about REST interface.
+UI-driven APIs could be more efficient, or have crucial advantegeous characteristics for the domain that were built for
+since they are optimized only for that specific case.
+However, they pose difficulties when they need to be reused by any other application which does not share the same UI.
+As a result, such APIs are very special and a bit rare.
+
+On the other hand, the data-driven APIs, are more generic and facilitate any application to request the data optimized
+(in the framework of the API's capabilities) for its use case.
+Being able to specify your application's needs when requesting data from an API is crucial.
+
+For the following, we will mostly focus in the generic data APIs,
+however most of the things mentioned here can also be applied in the UI-driven APIs.
 
 
 ### 5.1. Requirements from a modern REST API
