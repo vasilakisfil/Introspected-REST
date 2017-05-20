@@ -323,8 +323,8 @@ As a result, versioning should not take place in the URL but in the Media Type i
 
 ## 5. REST applied in a modern API
 When building a REST API, there are 2 approaches:
-* building a UI-driven API: the resources and their browsability is tightly coupled with the UI of the application
-* building a data-driven API: the resources are not
+* building a specialized or UI-driven API: the resources and their browsability is tightly coupled with the UI of the application
+* building a generic or data-driven API: the resources are not
 
 UI-driven APIs could be more efficient, or have crucial advantegeous characteristics for the domain that were built for
 since they are optimized only for that specific case.
