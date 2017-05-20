@@ -321,21 +321,22 @@ As a result, **versioning should not take place in the URL but in the Media Type
 
 
 ## 5. REST applied in a modern API
-When building a REST API, there are 2 approaches:
-* building a specialized or UI-driven API: the resources and their browsability is tightly coupled with the UI of the application
-* building a generic or data-driven API: the resources are not
+When engineering a REST API, there are 2 approaches:
+* design a specialized, usually UI-driven, API: the resources and their browsability is tightly coupled with the specific application that was built for
+* design a generic, usually data-driven, API: the resources are more generic and the API's capabilities allow a plethora of transformations.
 
-UI-driven APIs could be more efficient, or have crucial advantegeous characteristics for the domain that were built for
+Specialized APIs could be more efficient, or have crucial advantegeous characteristics for the domain that were built for
 since they are optimized only for that specific case.
 However, they pose difficulties when they need to be reused by any other application which does not share the same UI.
 As a result, such APIs are very special and a bit rare.
 
 On the other hand, the data-driven APIs, are more generic and facilitate any application to request the data optimized
 (in the framework of the API's capabilities) for its use case.
-Being able to specify your application's needs when requesting data from an API is crucial.
+Being able to specify your application's needs when requesting data from an API is crucial,
+especially if your business depends on the adoptability of your API.
 
 For the following, we will mostly focus in the generic data APIs,
-however most of the things mentioned here can also be applied in the UI-driven APIs.
+however most of the things mentioned here can also be applied in a specialized or UI-driven API.
 
 
 ### 5.1. Requirements from a modern REST API
