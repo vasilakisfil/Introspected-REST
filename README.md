@@ -287,7 +287,6 @@ Client and Application responsibilities some times are mixed together.
 A client is responsible for understanding, interacting with the API and manipulating any API's resources, based on the Media Type's semantics
 and runtime HATEOAS. The client is responsible for providing in the application the list of resources that are available in the API,
 their fields, their capabilities, available actions and any hypermedia available.
-The way and patterns used to providing those features depends on the domain of the client.
 
 The application responsibility on the other hand should not include API specific details.
 Instead, using the client, it should fetch whatever is needed, within the API's capabilities.
