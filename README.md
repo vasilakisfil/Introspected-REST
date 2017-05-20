@@ -1120,7 +1120,7 @@ For the Hypermedia part we will use JSON Hyper Schemas
 
 
 
-### Methods of transport
+### Method of transport
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 The reason we choose `OPTIONS` here is because this method has been historically used
 for getting informtation on methods supported on a specific resource.
