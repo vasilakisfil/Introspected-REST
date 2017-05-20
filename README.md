@@ -339,7 +339,7 @@ For the following, we will mostly focus in the generic data APIs,
 however most of the things mentioned here can also be applied in a specialized or UI-driven API.
 
 
-### 5.1. Requirements from a modern REST API
+### 6.1. Requirements from a modern REST API
 REST model is built for machine-to-machine communication, of any type.
 However, as this form of communication is getting more and more common,
 clients are requesting and having more and more requirements from a server response.
@@ -354,31 +354,31 @@ in 2017.
 
 While most of these capabilities are related to Data APIs, some of them apply to UI APIs as well.
 
-#### 5.1.1. Sparse fields (collection/resource)
+#### 6.1.1. Sparse fields (collection/resource)
 The client should be able to ask and get specific attributes (i.e. a subset) of the resource representation.
 Also related, we should note that a representation of a resource could have completely different set of
 attributes for different clients, usually depending on the client's permissions or user role that it represents.
 
-#### 5.1.2. Associations on demand (collection/resource)
+#### 6.1.2. Associations on demand (collection/resource)
 The client should be able to ask related associations to the main initial resource, in the same request.
 
 What deffirintiates an association from an attribute is that the former has
 a dedicated identification. What is more, if the API exposes the association as a dedicated resource,
 the id can be used as identification.
 
-#### 5.1.3. Sorting & pagination (collection only)
+#### 6.1.3. Sorting & pagination (collection only)
 The client should be able to sort based on one or more attributes and paginate the collection
 based on the page, page size and possibly an offset.
 
-#### 5.1.4. Filtering collections (collection only)
+#### 6.1.4. Filtering collections (collection only)
 The client should be able to run any sort of collection filtering, as long as it does not pose
 any security thread or slows down the API performance.
 
-#### 5.1.5. Aggregation queries (collection only)
+#### 6.1.5. Aggregation queries (collection only)
 The client should be able to run any sort of aggregation queries, as long as it does not pose
 any security thread or slows down the API performance.
 
-#### 5.1.6. Data types !
+#### 6.1.6. Data types !
 The client should know the data types of the attributes of the requested representation of a resource.
 Message formats provide some data types but they are pretty basic.
 For instance, JSON defines `String`, `Boolean`, `Number`, `Array`, and `null`.
@@ -389,12 +389,12 @@ have a much larger list of options to select from.
 Additionally, we should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it follows a specific regex etc.
 
-### 5.2. Media Types vs HATOEAS
+### 6.2. Media Types vs HATOEAS
 Now the reader could be wondering: where is the appropriate place to describe those capabilities,
 in our API's Media Type or using HATEOAS ?
 What goes where?
 
-#### 5.2.1. Defining a new Media Type is not easy and should be avoided
+#### 6.2.1. Defining a new Media Type is not easy and should be avoided
 Creating a new Media Type for our API is genrally considered bad practice.
 Create a new Media Type only if you are sure that none of the already published
 Media Types can fit in your API design.
@@ -408,12 +408,12 @@ the Media Type before hand and let **humans** implement code to fully parse API 
 follow this Media Type or API responses that their media type also include this new media type.
 
 
-#### 5.2.2. HATOEAS can get pretty heavy
+#### 6.2.2. HATOEAS can get pretty heavy
 Imagine if you have to describe in a resource, all the available actions along with the available API
 capabilities _in that specific resource_.
 Your API response would just explode in terms of size while making your API super complex.
 
-#### 5.2.3. Balancing between Media Types and HATOEAS
+#### 6.2.3. Balancing between Media Types and HATOEAS
 The idea is that Media Types descibe the generic capabilities while HATOEAS
 describe the resource-specific capabilities.
 
@@ -435,7 +435,7 @@ then it's easy to "configure" it for another API which also follows that Media T
 HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
 Essentially, HATOEAS should provide any details missing from the Media Type for the client to work.
 
-#### 5.2.4. An alternative architecture
+#### 6.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
 If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle if used correctly.
 Inspired by that, later, we will suggest a new concept,  Microtypes, small composable modules that combined together can form a Media Type.
@@ -444,11 +444,11 @@ As a result, clients should be able to even negotiate parts of the Media Type an
 Also, instead of mixing up data with HATEOAS in the API responses, we will introduce introspectiveness of our endpoints.
 
 
-## 6. API Specs Today
+## 7. API Specs Today
 Now that we defined what REST is, according to Roy, and what capabilities modern APIs should provide,
 let's see the specs for REST(y) APIs available as today, April 2017, and what they provide.
 
-### 6.1. Our use case
+### 7.1. Our use case
 In our use case we will follow the aforementioned points of the `REST` model.
 
 Our use case is a minature of yet another Social App.
@@ -526,7 +526,7 @@ We will evaluate the specs for the following:
 we also need to read and understand the documentation to develop our client
 * whether they require multi-fold human interaction while the API evolves
 
-### 6.2. [JSONAPI](http://jsonapi.org)
+### 7.2. [JSONAPI](http://jsonapi.org)
 JSONAPI was originally created by [Yehuda Katz](http://yehudakatz.com/), as part of Ember's ember-data library.
 Since then a lot of people have contributed and has rised as one of the most supported
 API specs as of 2017 in terms of tools and libraries.
@@ -631,7 +631,7 @@ notable issues. Namely:
 To sum up, it doesn't entirely follow `REST` model while it requires both
 documentation and multi-fold human interaction.
 
-### 6.3. [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)
+### 7.3. [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)
 HAL was created by Mike Kelly in 2011 (with final version coming in 2013).
 The key feature of HAL when it was released was the browsability/explorability of any API that adopted.
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
@@ -732,7 +732,7 @@ While the spec does have templated links, we see some notable issues. Namely:
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
 
-### 6.4. Siren
+### 7.4. Siren
 ```json
 {
   "class": [ "user" ],
@@ -836,7 +836,7 @@ To sum up, it doesn't entirely follow REST while it requires documentation and m
 ```
 
 
-### 6.5. JSON-LD
+### 7.5. JSON-LD
 ```json
 {
   "@context": {
@@ -854,15 +854,15 @@ To sum up, it doesn't entirely follow REST while it requires documentation and m
 }
 ```
 
-### 6.5. Hydra
+### 7.5. Hydra
 
 
 
-## 7. Ideal `REST` API
+## 8. Ideal `REST` API
 **How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?**
 
-### 7.1. Capabilities of an Ideal `REST` API
+### 8.1. Capabilities of an Ideal `REST` API
 In an ideal REST API, the client should be able to have all the necessary information for both
 the request and response.
 
@@ -908,7 +908,7 @@ only in data.
 By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
-#### 7.1.1. Making an API REST-compliant by downplaying its capabilities
+#### 8.1.1. Making an API REST-compliant by downplaying its capabilities
 Someone could argue that we require all APIs to support features that shouldn't.
 For instance, we could have a weather API with `application/vnd.weather+json` Media Type
 that is only supposed to provide a single attribute with its value:
@@ -932,7 +932,7 @@ Specifically, as we mentioned creating a new Media Type should be avoided.
 But even then, this API is blocked in terms of evolvability. There is no way of introducing change, which essentially breaks REST's axioms.
 
 
-### 7.2. A JSON API back in time
+### 8.2. A JSON API back in time
 A JSON-based API built around 2006 would return just data. No hypermedia, no HATOEAS, only data.
 
 In our use case, User resource would look like this:
