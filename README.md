@@ -896,30 +896,16 @@ The resources of our use case that are presented here use JSON as a message form
   ]
 }
 ```
-The spec takes a leap towards REST principles by supporting, linkes and actions, there are still some issues that require human-involvement:
- * No info on available attributes
- * No info on data types
- * No attributes description, requires documentation (however it does provide a link to documentation)
+The spec takes a huge leap towards REST principles by supporting, links, actions with fields and data types, there are
+still some issues that require human-involvement:
+ * No custom types for the attributes of actions
+ * No info on available and required attributes
+ * No info on data types on response objects
+ * Limited description for fields and resources
 
-To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
+To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction.
 
-### 7.5. JSON-LD
-```json
-{
-  "@context": {
-    "id": "@id",
-    "foaf": "http://xmlns.com/foaf/0.1/",
-    "firstName": "foaf:firstName",
-    "lastName": "foaf:lastName",
-    "workplaceHomepage": "foaf:workplaceHomepage"
-  },
-  "@type": "foaf:Person",
-  "id": "http://thomashoppe.me",
-  "firstName": "Thomas",
-  "lastName": "Hoppe",
-  "workplaceHomepage": "http://www.n-fuse.de"
-}
-```
+### 7.5. JSON-LD and Linked Data
 
 ### 7.6. Hydra
 
@@ -977,9 +963,9 @@ By outputing a whole bunch of hypermedia-related information to the clients that
 them is a bad practice.
 
 #### 8.1.2. Making an API REST-compliant by downplaying its capabilities
-Someone could argue that we require all APIs to support features that shouldn't.
+One could argue that we require all APIs to support features that shouldn't, like resource manipulation.
 For instance, we could have a weather API with `application/vnd.weather+json` Media Type
-that is only supposed to provide a single attribute with its value:
+that is only supposed to provide a single attribute with its value, as Integer:
 
 ```json
 {
@@ -994,11 +980,14 @@ because otherwise the client would fail to udnerstand things like
 * what are the attributes of the response
 * what is the data type of the temperature value (float, double, integer, bignum etc)
 
+We feel that although this is true, most APIs are not as simple as that.
+Moreover such APIs can't actually be evolved without releasing a new Media Type and breaking the existing API clients.
 
-We feel that although this could be true, in practice it would never happen.
-Specifically, as we mentioned creating a new Media Type should be avoided.
-But even then, this API is blocked in terms of evolvability. There is no way of introducing change, which essentially breaks REST's axioms.
+There is no way of introducing change, which essentially breaks REST's principles.
 
+However we are pragmatic: we understand that such APIs will exist and engineers want to spend as less time as possible to build such APIs.
+Introspected architecture solves that by serving hypermedia information on side and in an incremental way without breaking
+the simplicity.
 
 ### 8.2. A JSON API back in time
 A JSON-based API built around 2006 would return just data. No hypermedia, no HATOEAS, only data.
