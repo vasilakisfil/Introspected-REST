@@ -14,6 +14,49 @@ yet it's much simpler to implement while at the same time being backwards compat
 As part of this _manifesto_ we will also present, Microtypes, small modules that compose a Media Type and facilitates
 the evolvability and extensability of our new model.
 
+* [1. Definitions](#1-definitions)
+* [2. Introduction](#2-introduction)
+* [3. Networked Services and APIs](#3-networked-services-and-apis)
+  * [3.1. Application level](#3-1-application-level)
+  * [3.2. Message level](#3-2-message-level)
+  * [3.3. Protocol level](#3-3-protocol-level)
+  * [3.4. Network level](#3-3-network-level)
+* [4. Roy's `REST` model](#4-roy's-rest-model)
+  * [4.1. Access methods have the same semantics for all resources](#4-access-methods-have-the-same-semantics-for-all-resources)
+  * [4.2. All important resources are identifed by one resource identifer mechanism](#4-all-important-resources-are-identifed-by-one-resource-identifer-mechanism)
+  * [4.3. Resources are manipulated through the exchange of representations](#4-resources-are-manipulated-through-the-exchange-of-representations)
+  * [4.4. Representations are exchanged via self-descriptive messages](#4-representations-are-exchanged-via-self-descriptive-messages)
+  * [4.5. Hypertext as the engine of application state (HATEOAS)](#4-hypertext-as-the-engine-of-application-state-(HATEOAS))
+* [5. API Clients and Applications](#5-api-clients-and-applications)
+  * [5.1. Client and Application responibilities](#5-1-client-and-application-responibilities)
+  * [5.2. The Human interaction principle](#5-2-the-human-interaction-principle)
+* [6. REST applied in a modern API](#6-rest-applied-in-a-modern-api)
+  * [6.1. Requirements from a modern REST API](#6-1-requirements-from-a-modern-rest-api)
+    * [6.1.1. Sparse fields (collection/resource)](#6-1-1-sparse-fields-(collection-resource))
+    * [6.1.2. Associations on demand (collection/resource)](#6-1-2-associations-on-demand-(collection-resource))
+    * [6.1.3. Sorting & pagination (collection only)](#6-1-3-sorting-&-pagination-(collection-only))
+    * [6.1.4. Filtering collections (collection only)](#6-1-4-filtering-collections-(collection-only))
+    * [6.1.5. Aggregation queries (collection only)](#6-1-5-aggregation-queries-(collection only))
+    * [6.1.6. Data types !](#6-1-6-data-types-!)
+  * [6.2. Media Types vs HATOEAS](#6-2-media-types-vs-hatoeas)
+    * [6.2.1. Defining a new Media Type is not easy and should be avoided](#6-2-1-defining-a-new-media-type-is-not-easy-and-should-be-avoided)
+    * [6.2.2. HATOEAS can get pretty heavy](#6-2-2-hatoeas-can-get-pretty-heavy)
+    * [6.2.3. Balancing between Media Types and HATOEAS](#6-2-3-balancing-between-media-types-and-hatoeas)
+    * [6.2.4. An alternative architecture](#6-2-4-an-alternative-architecture)
+* [7. API Specs Today](#7-api-specs-today)
+  * [7.1. Our use case](#7-1-our-use-case)
+  * [7.2. JSONAPI](#7-2-jsonapi)
+  * [7.3. HAL](#7-3-HAL)
+  * [7.4. Siren](#7-4-Siren)
+  * [7.4. JSON-LD](#7-4-json-ld)
+  * [7.5. Hydra](#7-5-hydra)
+* [8. Ideal `REST` API](#8-ideal-`rest`-api)
+  * [8.1. Capabilities of an Ideal `REST` API](#8-1-capabilities-of-an-ideal-rest-api)
+    * [8.1.1. Today's REST is far from ideal](#8-1-1-today's-rest-is-far-from-ideal)
+    * [8.1.2. Making an API REST-compliant by downplaying its capabilities](#8-1-2-making-an-api-rest-compliant-by-downplaying-its-capabilities)
+  * [8.2. A JSON API back in time](#8-2-a-json-api-back-in-time)
+* [9. Introspected APIs](#9-introspected-APIs)
+
 ## 1. Definitions
 First some definitions, that we will use through the text:
 
@@ -388,6 +431,12 @@ Anything more than that we need to define it in the documentations.
 have a much larger list of options to select from.
 Additionally, we should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it follows a specific regex etc.
+
+### 6.1.7 The list doesn't end here
+Although we feel that _today_ these capabilities should exist in any modern API, this list is not complete.
+In fact, there could be capabilities in the future that might not seem necessary today, like joining together one or more resources,
+or other db-inspired operations, so that the client can get the necessary data in the structure needed.
+In any case, these capabilities must be transparent to the client without any documentation or human involvement.
 
 ### 6.2. Media Types vs HATOEAS
 Now the reader could be wondering: where is the appropriate place to describe those capabilities,
@@ -901,6 +950,7 @@ Any changes on this level imply that the API breaks the protocol.
 However, we are pragmatic and we understand that an API designer could want to _add_ (not change)
 a status code or a header in a given request/response and as a result, ideally, this should also be possible to be described.
 
+#### 8.1.1. Today's REST is far from ideal
 Now to the reader, it should be obvious that even if we manage to offload some of the aforementioned information
 to the Media Type, we would still have a _very_ complex, massive, response from the server for the HATEOAS.
 
@@ -919,7 +969,7 @@ only in data.
 By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
-#### 8.1.1. Making an API REST-compliant by downplaying its capabilities
+#### 8.1.2. Making an API REST-compliant by downplaying its capabilities
 Someone could argue that we require all APIs to support features that shouldn't.
 For instance, we could have a weather API with `application/vnd.weather+json` Media Type
 that is only supposed to provide a single attribute with its value:
@@ -967,7 +1017,7 @@ Compared with a HATOEAS-ed response it's simple as hell, obvious, easy to debug 
 **Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
 the level of HATEOAS it will follow?**
 
-## Introspected APIs
+## 9. Introspected APIs
 >  Simple things should be simple and complex things should be possible.
 >
 > --- Alan Kay
