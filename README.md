@@ -914,7 +914,7 @@ To sum up, it doesn't entirely follow REST while it requires documentation and m
 }
 ```
 
-### 7.5. Hydra
+### 7.6. Hydra
 
 
 
