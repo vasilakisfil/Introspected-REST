@@ -58,8 +58,9 @@ the evolvability and extensability of our new model.
 * [9. Introspected APIs](#9-introspected-apis)
 * [10. An Introspected API Prototype in the world of HTTP and JSON](#9-introspected-apis)
 * [11. MicroTypes: Small reusable modules that form a Media Type](#9-introspected-apis)
-* [12. Future work](#9-introspected-apis)
-* [13. Conclusion](#9-introspected-apis)
+* [12. Related work](#9-introspected-apis)
+* [13. Future work](#9-introspected-apis)
+* [14. Conclusion](#9-introspected-apis)
 
 
 ## 1. Definitions
