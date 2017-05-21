@@ -52,7 +52,7 @@ the evolvability and extensability of our new model.
   * [7.6. Hydra](#76-hydra)
 * [8. Ideal `REST` API](#8-ideal-rest-api)
   * [8.1. Capabilities of an Ideal `REST` API](#81-capabilities-of-an-ideal-rest-api)
-    * [8.1.1. Today's REST is far from ideal](#811-today's-rest-is-far-from-ideal)
+    * [8.1.1. Today's REST is far from ideal](#811-todays-rest-is-far-from-ideal)
     * [8.1.2. Making an API REST-compliant by downplaying its capabilities](#812-making-an-api-rest-compliant-by-downplaying-its-capabilities)
   * [8.2. A JSON API back in time](#82-a-json-api-back-in-time)
 * [9. Introspected APIs](#9-introspected-APIs)
