@@ -55,7 +55,7 @@ the evolvability and extensability of our new model.
     * [8.1.1. Today's REST is far from ideal](#811-todays-rest-is-far-from-ideal)
     * [8.1.2. Making an API REST-compliant by downplaying its capabilities](#812-making-an-api-rest-compliant-by-downplaying-its-capabilities)
   * [8.2. A JSON API back in time](#82-a-json-api-back-in-time)
-* [9. Introspected APIs](#9-introspected-APIs)
+* [9. Introspected APIs](#9-introspected-apis)
 
 ## 1. Definitions
 First some definitions, that we will use through the text:
