@@ -38,6 +38,7 @@ the evolvability and extensability of our new model.
     * [6.1.4. Filtering collections (collection only)](#614-filtering-collections-collection-only)
     * [6.1.5. Aggregation queries (collection only)](#615-aggregation-queries-collection-only)
     * [6.1.6. Data types !](#616-data-types-)
+    * [6.1.7. The list doesn't end here](#617-the-list-doesnt-end-here)
   * [6.2. Media Types vs HATOEAS](#62-media-types-vs-hatoeas)
     * [6.2.1. Defining a new Media Type is not easy and should be avoided](#621-defining-a-new-media-type-is-not-easy-and-should-be-avoided)
     * [6.2.2. HATOEAS can get pretty heavy](#622-hatoeas-can-get-pretty-heavy)
@@ -438,7 +439,7 @@ have a much larger list of options to select from.
 Additionally, we should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it follows a specific regex etc.
 
-### 6.1.7 The list doesn't end here
+#### 6.1.7 The list doesn't end here
 Although we feel that _today_ these capabilities should exist in any modern API, this list is not complete.
 In fact, there could be capabilities in the future that might not seem necessary today, like joining together one or more resources,
 or other db-inspired operations, so that the client can get the necessary data in the structure needed.
