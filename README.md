@@ -11,7 +11,7 @@ and see the majority of APIs and API specs ([JSONAPI](http://jsonapi.org/format)
 Then, we will propose a **new model** that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
-As part of this _manifesto_ we will also present, MicroTypes, small modules that compose a Media Type and facilitates
+As part of this _manifesto_ we will also present, MicroTypes, small reusable modules that compose a Media Type and facilitates
 the evolvability and extensability of our new model.
 
 * [1. Definitions](#1-definitions)
@@ -494,7 +494,7 @@ Essentially, HATOEAS should provide any details missing from the Media Type for 
 #### 6.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
 If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle if used correctly.
-Inspired by that, later, we will suggest a new concept,  MicroTypes, small composable modules that combined together can form a Media Type.
+Inspired by that, later, we will suggest a new concept,  MicroTypes, small reusable modules that combined together can form a Media Type.
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
 
 Also, instead of mixing up data with HATEOAS in the API responses, we will introduce introspectiveness of our resources.
