@@ -637,6 +637,8 @@ The key feature of HAL when it was released was the browsability/explorability o
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
 However, this feature is rather controversial since the information these links provide are targeted for humans and not machines.
 
+The resources of our use case that are presented here use JSON as a message format, but HAL is not tighed to that.
+
 ##### User resource
 ```json
 {
@@ -732,7 +734,11 @@ While the spec does have templated links, we see some notable issues. Namely:
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
 
-### 7.4. Siren
+### 7.4. [Siren](https://github.com/kevinswiber/siren)
+Siren was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-addressable resource that has properties and actions associated with it.
+
+The resources of our use case that are presented here use JSON as a message format, but Siren is not tighed to that.
+
 ```json
 {
   "class": [ "user" ],
@@ -834,7 +840,12 @@ To sum up, it doesn't entirely follow REST while it requires documentation and m
   ]
 }
 ```
+The spec takes a leap towards REST principles by supporting, linkes and actions, there are still some issues that require human-involvement:
+ * No info on available attributes
+ * No info on data types
+ * No attributes description, requires documentation (however it does provide a link to documentation)
 
+To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
 
 ### 7.5. JSON-LD
 ```json
