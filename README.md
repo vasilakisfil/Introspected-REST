@@ -11,7 +11,7 @@ and see the majority of APIs and API specs ([JSONAPI](http://jsonapi.org/format)
 Then, we will propose a **new model** that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
-As part of this _manifesto_ we will also present, Microtypes, small modules that compose a Media Type and facilitates
+As part of this _manifesto_ we will also present, MicroTypes, small modules that compose a Media Type and facilitates
 the evolvability and extensability of our new model.
 
 * [1. Definitions](#1-definitions)
@@ -494,7 +494,7 @@ Essentially, HATOEAS should provide any details missing from the Media Type for 
 #### 6.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
 If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle if used correctly.
-Inspired by that, later, we will suggest a new concept,  Microtypes, small composable modules that combined together can form a Media Type.
+Inspired by that, later, we will suggest a new concept,  MicroTypes, small composable modules that combined together can form a Media Type.
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
 
 Also, instead of mixing up data with HATEOAS in the API responses, we will introduce introspectiveness of our resources.
@@ -1216,7 +1216,7 @@ Clients and Server should still do the regular negotiation flow even for those s
 The reasoning is that, in our experience, we have seen that different API specs define the same functionalities in different ways.
 Common foobar should allow us to interchange each of them lorem ipsum.
 
-We will need a microtype for describing each of following:
+We will need a MicroType for describing each of following:
 
 * querying language over url (filters, aggregations, pagination and sorting)
 * requesting specific attributes/associations of a resource and its associations
@@ -1232,7 +1232,7 @@ We will need a microtype for describing each of following:
 + etc
 ## Related Work
 ### GraphQL
-no urls, basically a query language, no microtypes
+no urls, basically a query language, no MicroTypes
 
 ### Linked Data and Semantic Web
 
