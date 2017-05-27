@@ -1225,11 +1225,36 @@ no urls, basically a query language, no MicroTypes
 
 ### Linked Data and Semantic Web
 
+#### JSON-LD and HYDRA
+
 ### RESTful API Description Languages
+Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
+
+As we have already noted, in a REST API documentation, in the sense of offline contracts,
+shouldn't even exist and thus such approach is fundamentaly wrong.
+By giving so much weight on the documentation but at the same time treating it as something different, separated from the code
+leads to inconsistencies beteween the actual API and the API description.
+Those tools have been improved so much lately that now allow you to write the documentation and let them generate
+the basis of your code, depending on your language/framework, which could fix the inconsistencies issues.
+However, unfortunatey such a approach leads to an RPC design instead of a hypermedia-based system.
+
+
+We believe that API designers are limited by marrying these tools.
+The tools themselves have limitations,
+but also, having tools that aim to provide all-in-one to the API designer is against our philosophy: tools that do one thing and do it well.
+
 
 ### API directories
+Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
+We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
+The API's root url should provide everyhing that is needed, or using already published protocols
+like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](http://www.rfc-editor.org/rfc/rfc5785.txt) and can give API information
+for client bootstraping.
 
 ### Linksets
+Linksets is yet another work forwarded by Erik Wilde. The idea is...
+
+We think that linksets is anohter small piece towards an introspected REST APIs.
 
 ## Future Work
 It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
@@ -1402,3 +1427,8 @@ Is bold text a good idea?
 Should we add link to everything?
 
 The ratio of data/hypermedia of a resource
+
+add querying specific elements of an introspection (like links, attributes etc)
+
+
+who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik
