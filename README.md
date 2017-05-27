@@ -905,12 +905,6 @@ still some issues that require human-involvement:
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction.
 
-### 7.5. JSON-LD and Linked Data
-
-### 7.6. Hydra
-
-
-
 ## 8. Ideal `REST` API
 **How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?**
