@@ -1007,13 +1007,283 @@ Compared with a HATOEAS-ed response it's simple as hell, obvious, easy to debug 
 **Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
 the level of HATEOAS it will follow?**
 
-## 9. Introspected APIs
+## 9. Introspected REST
 >  Simple things should be simple and complex things should be possible.
 >
 > --- Alan Kay
 >
 >
-In the following we will describe the architecture of the Introspected APIs through
+
+In the following section we will describe the reasoning and the benefits of the Introspected REST style.
+The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand, without enforcing it.
+
+### The benefits
+#### Less complexity
+As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
+
+#### No enforcements or useless information
+In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
+However, we are pragmatic and we understand that nothing is perfect in this world.
+We would like to embrace both architectural API styles: APIs that are built to last decades, and APIs that are built without
+evolvement in mind.
+Introspected REST model is flexible enough to cover all those use cases.
+
+Specifically, the server might not be able to provide all hypermedia in the early stage.
+In a REST API, adding hypermedia at a later stage would mean that we would need a new Media Type because otherwise it would break the response.
+
+#### Evolvement of hypermedia
+
+#### Performance
+
+#### Backwards compatibility
+
+#### Easier composition
+
+####
+
+Secondly, we want to let clients to be able to retrieve plain data without dealing with metadata.
+Last but not least, we would like to embrace the idea of composition when we are composing the final response.
+
+We should note that these reasons apply to both, the API designed and the API client.
+
+The client that is interested solely in the data, is releaved by getting just the data without any metadata mixed in.
+In the future, if the client needs to get any metadata, it knows where to find them.
+Moreover, this architecture, _should_ make things faster: not only it should allow the API designers to move faster in their development cycle, but
+faster in the sense of request/response cycle. Parsing a bunch of metadata (but also rendering those from the server)
+slows things down. In the case when these data are not needed then some bandwidth is wasted, the UI lags a bit, user waits slightly more, just in case
+a client might need the metadata.
+
+Maintaining a response that mixes up data with metadata is hard and makes things move slow.
+Moreover, the API designer might not be interested to add some metadata (like hypermedia actions) from the very beginning of
+the API release. Furthermore, this solution allows current APIs to inherit hypermedia, on the side, without making any breaking change,
+specifically in the level they need and want.
+We are pragmatic with the fact that not all APIs developed with 50 years ahead in mind and some APIs might be needed for relatively very
+small amount of time.
+We want to embrace these APIs too, with Introspected REST model, by allowing them to integrate any metadata types in the level they need.
+
+When a client requests a resource, given that it already knows how to make the request and how to parse the response,
+it should only await plain data.
+Thus we need to find a way to provide any secondary data, like meta-data, through another channel, on the side.
+
+## 9. Introspected REST APIs: the principles
+>  Simple things should be simple and complex things should be possible.
+>
+> --- Alan Kay
+>
+>
+
+In the following section we will describe the architecture style of the Introspected REST.
+The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATOEAS is derived
+Specifically the state of the client is Introspected, possibly cached.
+The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
+In order to facilitate the separation of different concerns we will also introduce MicroTypes.
+
+### 9.1. Access methods have the same semantics for all resources
+See section 4.1
+
+### 9.2. All important resources are identifed by one resource identifer mechanism
+See section 4.2
+
+### 9.3. Resources are manipulated through the exchange of representations
+See section 4.3
+
+### 9.4. Representations are exchanged via self-descriptive messages
+See section 4.4
+
+### 9.5. Introspection as the engine of application state (IATEOAS)
+
+#### 9.5.1. Composition over monoliths
+
+### Introspection
+### Data and classes of metadata
+In REST, when requesting a resource you get different kind of information mixed in with the actual data.
+Nowadays, API designers also distribute documentation to descrine some information about the API and its resources as well.
+
+If we try to identify all the different kind of data and metadata we would get the following list for a resource:
+###### 1. Media Type's capabilities fill-ins
+These metadata are related to the Media Type used by the API.
+The client provides information for the server to take into account when processing the request.
+For instance, pagination information (page, items per page, offset) or the desired query (ideally an equievelent to SQL's SELECT).
+
+###### 2. Resource schema
+When requesting a response, the client should be able to know what to expect, for instance:
+* the structure schema of the object, like the name of the attributes etc
+* the data types of the object's attributes
+* semantic meaning of each attribute, or of the resource itself
+* possible a description for each resource and attribute, targeted to humans
+
+Those information should be available for both response and request objects.
+
+
+the name of the attributes,
+their data types, any semantic meaning of each attribute (using a linked data spec) and possibly any description of the resource itself or its attributes
+###### 3. hypermedia metadata
+  * links, for linking other resources
+  * actions, for manipulating the resource
+
+
+As we described earlier, the level of Media Type's metadata depends on how strong or weak a Media Type is. If it's strong then the client will
+
+
+#### Plain Data
+The main purpose of introspected REST _manifesto_ is to **separate actual data from resource meta-data, like hypermedia**.
+
+When the client requests a resource (using `GET` method), it should get only the data:
+
+```json
+{
+  "user": {
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
+}
+```
+
+The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
+the data does not contain any hypermedia or meta-data.
+
+We should note that resource's meta-data that depend on the data ( which depend on the actual request for that time)
+like pagination information, should be still in the same response.
+The way those meta-data are represented is left to the API designer, usually though they are put under a
+`meta` attribute regardless if it's a resource or a collection of resources.
+
+
+
+#### Structural meta-data
+In order to describe our data, we will use JSON Schemas.
+It's a vocubulary that enabled to describe and as a result validate JSON data.
+
+For our use case the JSON schema would be the following:
+
+##### User resource
+
+```json
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://example.com/example.json",
+	"properties": {
+		"user": {
+			"properties": {
+				"id": {
+					"maxLength": 255,
+					"type": "string"
+				},
+				"email": {
+					"maxLength": 255,
+					"type": "string",
+					"format": "email"
+				},
+				"name": {
+					"maxLength": 255,
+					"type": "string"
+				},
+				"birth_date": {
+					"type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+				},
+				"created_at": {
+					"maxLength": 255,
+					"type": "string",
+					"formate": "date-time"
+				},
+				"microposts_count": {
+					"type": "integer"
+				}
+			},
+			"required": [
+				"id",
+				"email",
+				"name",
+				"birth_date",
+				"created_at",
+				"microposts_count",
+			],
+			"type": "object"
+		}
+	},
+	"required": [
+		"user"
+	],
+	"type": "object"
+}
+```
+
+##### Users resource
+
+```json
+{
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "id":"http://example.com/example.json",
+  "properties":{
+    "users":{
+      "items":{
+        "additionalProperties":false,
+        "properties":{
+          "id":{
+            "type":"string"
+          },
+          "email":{
+            "type":"string"
+          },
+          "name":{
+            "type":"string"
+          }
+          "birth_date":{
+            "type":"string"
+          },
+          "created_at":{
+            "type":"string"
+          },
+          "microposts_count":{
+            "type":"integer"
+          },
+        },
+        "required":[
+          "name",
+          "created_at",
+          "email",
+          "microposts_count",
+          "birth_date",
+          "id"
+        ],
+        "type":"object"
+      },
+      "type":"array",
+      "uniqueItems":true
+    }
+  },
+  "required":[
+    "users"
+  ],
+  "type":"object"
+}
+```
+Essentially the JSON Schema describes the data types and the structure of the data document.
+
+### Request Response inconsistency
+
+
+
+### Hypermedia
+For the Hypermedia part we will use JSON Hyper Schemas
+
+
+
+### Method of transport
+The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
+The reason we choose `OPTIONS` here is because this method has been historically used
+for getting informtation on methods supported on a specific resource.
+
+### Automating the documentation generation
+documentation generation could have extra stuff, by assigining a param in the url.
+
+
+## 10. Introspected REST APIs: A prototype in the world of HTTP and JSON
+In the following we will describe the architecture of the Introspected REST APIs through
 a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
 architecture style.
@@ -1426,3 +1696,19 @@ add querying specific elements of an introspection (like links, attributes etc)
 
 
 who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik
+
+Say that about custom capabilities like running functions or having an HTTP2 push. Say also that on metadata.
+
+
+The types of metadata depend on the Media Type's capabilities.
+Thus, the following could be considered as metadata but an Introspected REST API doesn't require all of them.
+Actually an Introspected REST doesn't require anything.
+It is up to the needs of the API designer to add the Introspected information.
+There are 3 types of meta-data a resource could have:
+  * For the expected request object:
+    * Media Type's metadata, like pagination, querying language etc
+    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
+  * For the returned response object:
+    * links, for linking other resources
+    * actions, for manipulating the resource
+    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
