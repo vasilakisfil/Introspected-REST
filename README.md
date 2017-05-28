@@ -1080,7 +1080,6 @@ In order to facilitate the separation of different concerns we will also introdu
 #### Data and classes of metadata
 ##### Data and classes of metadata
 ###### Data and classes of metadata
-####### Data and classes of metadata
 In REST, when requesting a resource you get different kind of information mixed in with the actual data.
 Nowadays, API designers also distribute documentation to descrine some information about the API and its resources as well.
 
