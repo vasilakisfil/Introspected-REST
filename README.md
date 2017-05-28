@@ -1017,7 +1017,7 @@ the level of HATEOAS it will follow?**
 In the following section we will describe the reasoning and the benefits of the Introspected REST style.
 The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand, without enforcing it.
 
-### The benefits
+### The need for Introspection REST
 #### Less complexity
 As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
 
@@ -1035,11 +1035,11 @@ In a REST API, adding hypermedia at a later stage would mean that we would need 
 
 #### Performance
 
+#### Caching
+
 #### Backwards compatibility
 
 #### Easier composition
-
-####
 
 Secondly, we want to let clients to be able to retrieve plain data without dealing with metadata.
 Last but not least, we would like to embrace the idea of composition when we are composing the final response.
@@ -1065,34 +1065,15 @@ When a client requests a resource, given that it already knows how to make the r
 it should only await plain data.
 Thus we need to find a way to provide any secondary data, like meta-data, through another channel, on the side.
 
-## 9. Introspected REST APIs: the principles
->  Simple things should be simple and complex things should be possible.
->
-> --- Alan Kay
->
->
-
+### 9.2. Introspection as the engine of application state (IATEOAS)
 In the following section we will describe the architecture style of the Introspected REST.
 The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATOEAS is derived
 Specifically the state of the client is Introspected, possibly cached.
 The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
 In order to facilitate the separation of different concerns we will also introduce MicroTypes.
 
-### 9.1. Access methods have the same semantics for all resources
-See section 4.1
 
-### 9.2. All important resources are identifed by one resource identifer mechanism
-See section 4.2
-
-### 9.3. Resources are manipulated through the exchange of representations
-See section 4.3
-
-### 9.4. Representations are exchanged via self-descriptive messages
-See section 4.4
-
-### 9.5. Introspection as the engine of application state (IATEOAS)
-
-#### 9.5.1. Composition over monoliths
+#### 9.2.1. Composition over monoliths
 
 ### Introspection
 ### Data and classes of metadata
