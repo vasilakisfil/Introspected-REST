@@ -1017,7 +1017,7 @@ the level of HATEOAS it will follow?**
 In the following section we will describe the reasoning and the benefits of the Introspected REST style.
 The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand, without enforcing it.
 
-### The need for Introspection REST
+### Deriving the need for Introspection REST
 #### Less complexity
 As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
 
@@ -1039,7 +1039,7 @@ In a REST API, adding hypermedia at a later stage would mean that we would need 
 
 #### Backwards compatibility
 
-#### Easier composition
+#### Easier *compsition*
 
 Secondly, we want to let clients to be able to retrieve plain data without dealing with metadata.
 Last but not least, we would like to embrace the idea of composition when we are composing the final response.
@@ -1073,13 +1073,19 @@ The main idea is that we separate any metadata from the actual data and deliver 
 In order to facilitate the separation of different concerns we will also introduce MicroTypes.
 
 
-#### 9.2.1. Composition over monoliths
+#### 9.2.1. Composition over monoliths (same with Easier composition?) should be enabled by design
 
-### Introspection
-### Data and classes of metadata
-#### Data and classes of metadata
-##### Data and classes of metadata
-###### Data and classes of metadata
+#### Definition of Introspection
+specific method, querying, caching, composition etc not data (only metadata)
+
+per resource? per endpoint? maybe define what action is ?
+
+##### Method of transport
+The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
+The reason we choose `OPTIONS` here is because this method has been historically used
+for getting informtation on methods supported on a specific resource.
+
+#### Types of metadata
 In REST, when requesting a resource you get different kind of information mixed in with the actual data.
 Nowadays, API designers also distribute documentation to descrine some information about the API and its resources as well.
 
@@ -1109,7 +1115,7 @@ their data types, any semantic meaning of each attribute (using a linked data sp
 As we described earlier, the level of Media Type's metadata depends on how strong or weak a Media Type is. If it's strong then the client will
 
 
-#### Plain Data
+### Plain Data
 The main purpose of introspected REST _manifesto_ is to **separate actual data from resource meta-data, like hypermedia**.
 
 When the client requests a resource (using `GET` method), it should get only the data:
@@ -1136,131 +1142,8 @@ The way those meta-data are represented is left to the API designer, usually tho
 `meta` attribute regardless if it's a resource or a collection of resources.
 
 
-
-#### Structural meta-data
-In order to describe our data, we will use JSON Schemas.
-It's a vocubulary that enabled to describe and as a result validate JSON data.
-
-For our use case the JSON schema would be the following:
-
-##### User resource
-
-```json
-{
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "http://example.com/example.json",
-	"properties": {
-		"user": {
-			"properties": {
-				"id": {
-					"maxLength": 255,
-					"type": "string"
-				},
-				"email": {
-					"maxLength": 255,
-					"type": "string",
-					"format": "email"
-				},
-				"name": {
-					"maxLength": 255,
-					"type": "string"
-				},
-				"birth_date": {
-					"type": "string",
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-				},
-				"created_at": {
-					"maxLength": 255,
-					"type": "string",
-					"formate": "date-time"
-				},
-				"microposts_count": {
-					"type": "integer"
-				}
-			},
-			"required": [
-				"id",
-				"email",
-				"name",
-				"birth_date",
-				"created_at",
-				"microposts_count",
-			],
-			"type": "object"
-		}
-	},
-	"required": [
-		"user"
-	],
-	"type": "object"
-}
-```
-
-##### Users resource
-
-```json
-{
-  "$schema":"http://json-schema.org/draft-04/schema#",
-  "id":"http://example.com/example.json",
-  "properties":{
-    "users":{
-      "items":{
-        "additionalProperties":false,
-        "properties":{
-          "id":{
-            "type":"string"
-          },
-          "email":{
-            "type":"string"
-          },
-          "name":{
-            "type":"string"
-          }
-          "birth_date":{
-            "type":"string"
-          },
-          "created_at":{
-            "type":"string"
-          },
-          "microposts_count":{
-            "type":"integer"
-          },
-        },
-        "required":[
-          "name",
-          "created_at",
-          "email",
-          "microposts_count",
-          "birth_date",
-          "id"
-        ],
-        "type":"object"
-      },
-      "type":"array",
-      "uniqueItems":true
-    }
-  },
-  "required":[
-    "users"
-  ],
-  "type":"object"
-}
-```
-Essentially the JSON Schema describes the data types and the structure of the data document.
-
 ### Request Response inconsistency
 
-
-
-### Hypermedia
-For the Hypermedia part we will use JSON Hyper Schemas
-
-
-
-### Method of transport
-The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
-The reason we choose `OPTIONS` here is because this method has been historically used
-for getting informtation on methods supported on a specific resource.
 
 ### Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
