@@ -983,7 +983,7 @@ release.
 You understand the benefits of having a REST API, so you are looking to add any hypermedia needed for the clients.
 It turns out that, you will have to change a lot of stuff in order to integrate. In fact, we probably can't call it integration,
 it's a completely new re-design.
-If we want to be precise, in a REST API, adding hypermedia at a later stage would mean that we would need a new Media Type because
+If we want to be precise, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
 otherwise it would break the response.
 
 No matter how much we love the REST evolvability, we can't admit that it creates issues.
