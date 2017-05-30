@@ -1390,6 +1390,8 @@ The API's root url should provide everyhing that is needed, or using already pub
 like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](http://www.rfc-editor.org/rfc/rfc5785.txt) and can give API information
 for client bootstraping.
 
+### Overloading Link rel
+
 ### Linksets
 Linksets is yet another work forwarded by Erik Wilde. The idea is...
 
