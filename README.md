@@ -7,7 +7,7 @@ Or a CRUD with some links.
 Or a nicely formatted, a sophisticated CRUD.
 
 In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
-and see the majority of APIs and API specs ([JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) fail to follow this model.
+and see **the majority of APIs and API specs** ([JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
 Then, we will propose a **new model** that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
