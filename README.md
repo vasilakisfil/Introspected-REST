@@ -914,13 +914,11 @@ them is a bad practice.
 
 #### 8.1.2. Making an API REST-compliant by downplaying its capabilities
 One could argue that we require all APIs to support features that shouldn't, like resource manipulation.
-For instance, we could have a weather API with `application/vnd.weather+json` Media Type
+For instance, we could have a weather API with `application/vnd.weather+yaml` Media Type
 that is only supposed to provide a single attribute with its value, as Integer:
 
-```json
-{
-  "temperature": 25
-}
+```yaml
+temperature: 25
 ```
 
 This API _should_ be REST-compliant by not providing any API capabilities, hypermedia or actions.
