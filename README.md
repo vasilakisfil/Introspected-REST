@@ -885,6 +885,7 @@ the request and response.
 We should note that the reason we don't mention anything about the headers that are required, or, the status codes
 is because we feel that these belong to the Protocol level and not in the Application level.
 Any changes on this level imply that the API breaks the protocol.
+
 However, we are pragmatic and we understand that an API designer could want to _add_ (not change)
 a status code or a header in a given request/response and as a result, ideally, this should also be possible to be described.
 
