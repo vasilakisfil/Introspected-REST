@@ -939,6 +939,30 @@ However we are pragmatic: we understand that such APIs will exist and engineers 
 Introspected architecture solves that by serving hypermedia information on side and in an incremental way without breaking
 the simplicity.
 
+### 8.1.3. A JSON API back in time
+A JSON-based API built around 2006 would return just data. No hypermedia, no HATEOAS, only data.
+
+In our use case, User resource would look like this:
+```json
+{
+  "user": {
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
+}
+```
+
+As simple as that.
+
+Compared with a HATEOAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
+
+**Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
+the level and type of HATEOAS it will follow?**
+
 ### 8.2. Deriving the need for another model
 #### 8.2.1. REST is complex
 As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
@@ -990,36 +1014,12 @@ No matter how much we love the REST evolvability, we can't admit that it creates
 
 We would like to see a model that embraces both architectural API styles:
 * APIs that are built to last decades and thus, support full hypermedia from the very first day of their release
-* APIs that are built without evolvement in mind or older APIs that don't have hypermedia (because they weren't cool back that day)
+* APIs that don't have hypermedia (the reason is not our business), yet they want to add hypermedia in an incremental way
 
 #### 8.2.7. REST does not embrace composition
 Although REST does not rejects the idea of composability of different API capabilities using different specs, it doesn't embrace it either.
 As we will see later, the MicroTypes is a solution to the outdated Media Type principle that allows us to mix-in different concempts for diffent
 kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
-
-### 8.3. A JSON API back in time
-A JSON-based API built around 2006 would return just data. No hypermedia, no HATEOAS, only data.
-
-In our use case, User resource would look like this:
-```json
-{
-  "user": {
-    "id":"685",
-    "email":"vasilakisfil@gmail.com",
-    "name":"Filippos Vasilakis",
-    "birth_date": "1988-12-12",
-    "created_at": "2014-01-06T20:46:55Z",
-    "microposts_count":50
-  }
-}
-```
-
-As simple as that.
-
-Compared with a HATEOAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
-
-**Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
-the level and type of HATEOAS it will follow?**
 
 
 ## 9. Introspected REST
