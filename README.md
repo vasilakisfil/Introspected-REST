@@ -1,5 +1,5 @@
 # Introspected REST Manifesto
-(Sliding away from Roy Fielding's `REST` model)
+(Sliding away from Roy's `REST` model)
 
 There has been a great confusion of what a `REST` API is.
 Most people think that `REST` API is just a CRUD over HTTP.
