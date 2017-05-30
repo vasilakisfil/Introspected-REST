@@ -960,7 +960,7 @@ Compared with a HATEOAS-ed response it's simple as hell, obvious, easy to debug 
 **Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
 the level and type of HATEOAS it will follow?**
 
-### 8.2. Deriving the need for another model
+### 8.2. Deriving the need for a new model
 #### 8.2.1. REST is complex
 As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
 Also, the metadata themselves (like hypermedia) must be tailored for the user role the client acts on behalf of.
