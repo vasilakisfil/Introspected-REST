@@ -321,37 +321,6 @@ As a result, **versioning should not take place in the URL but in the Media Type
 > Roy Fielding
 >
 
-## 6. Data, metadata and hypermedia
-Here we will give some definitions over hypermedia and metadata terms that could sound a bit confusing.
-
-### 6.1. Data
-Data is the main variables of a resource, at a given state.
-
-### 6.2. Hypermedia
-Originally the hypermedia term was mostly used for linked data.
-However eventually it also includes information for interaction and resource manipilation.
-
-Hypermedia could be dynamic or static, regardless they are not considered part of the response data.
-
-#### 6.2.1. Links
-Links of related resources are, URIs that point to a specific location, usually following the same Media Type.
-#### 6.2.2. Actions
-Actions are links along with information for manipulating a resource.
-Although CRUD are the most popular actions of a resource, the beauty with REST is that actions can go beyond plain CRUD.
-In fact, you can define any type of action or meta-action of your internal resource, through the representation that you expose.
-As a result, actions of a resource could be quite complex or simple depending on the needs and decisions of the API designer.
-In any case, actions should also describe any relevant information for the client to perform it, unless the Media Type itself describe those details.
-
-### 6.3. Metadata
-If hypermedia is links and actions, then what is metadata ?
-
-Metadata are data that describe the data or the hypermedia.
-These metadata could be static for a resource, an endpoint or dynamic and volatile,
-determined by the parameters of the request and the state of the resource at that given time.
-
-Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
-
-
 ## 6. REST applied in a modern API
 When engineering a REST API, there are 2 approaches:
 * design a specialized, usually UI-driven, API: the resources and their browsability is tightly coupled with the specific application that was built for
@@ -1068,6 +1037,38 @@ However instead of having the constraint of _hypermedia as the engine of applica
 _introspection as the engine of application state_ (IATEOAS).
 
 Part of the model is MicroTypes.
+
+### 9.1. Data, metadata and hypermedia
+Before moving on, we will give concise definitions over hypermedia and metadata. These terms can be overlapping in the REST model, however
+we feel that each one has its own place in Introspected REST that embraces composability.
+
+#### 9.1.1. Data
+Data is the main variables of a resource, at a given state, at a given time.
+
+#### 9.1.2. Hypermedia
+Originally the hypermedia term was mostly used for linked data.
+However eventually it also includes information for interaction and resource manipilation.
+
+Hypermedia could be dynamic or static, regardless they are not considered part of the response data, as we defined them here.
+
+##### 9.1.2.1. Links
+Links of related resources are, URIs that point to a specific location, usually following the same Media Type.
+##### 9.1.2.2. Actions
+Actions are links along with information for manipulating a resource.
+Although CRUD are the most popular actions of a resource, the beauty with REST is that actions can go beyond plain CRUD.
+In fact, you can define any type of action or meta-action of your internal resource, through the representation that you expose.
+As a result, actions of a resource could be quite complex or simple depending on the needs and decisions of the API designer.
+In any case, actions should also describe any relevant information for the client to perform it, unless the Media Type itself describe those details.
+
+#### 9.1.3. Metadata
+If hypermedia is links and actions, then what is metadata ?
+
+Metadata are data that describe the data or the hypermedia.
+These metadata could be static for a resource, an endpoint or dynamic and volatile,
+determined by the parameters of the request and the state of the resource at that given time.
+
+Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
+
 
 ### 9.2. Introspection as the engine of application state (IATEOAS)
 In the following section we will describe the architecture style of the Introspected REST.
