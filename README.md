@@ -1015,8 +1015,10 @@ We would like to see a model that embraces both architectural API styles:
 * APIs that don't have hypermedia (the reason is not our business), yet they want to add hypermedia in an incremental way
 
 #### 8.2.7. REST does not embrace composition
-Although REST does not rejects the idea of composability of different API capabilities using different specs, it doesn't embrace it either.
-As we will see later, the MicroTypes is a solution to the outdated Media Type principle that allows us to mix-in different concempts for diffent
+Although REST does not rejects the idea of composability of different API capabilities using different specs in the same response, it doesn't embrace it either.
+As we noticed earlier Media Types are inflexible by being a monolith trying to describe everything in the same place.
+
+As we will see later, the MicroTypes is a solution to the outdated Media Type concept that allows us to mix-in different concepts for different
 kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
 
 
