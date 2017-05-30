@@ -908,6 +908,7 @@ only in data.
 By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
+
 #### 8.1.2. Making an API REST-compliant by downplaying its capabilities
 One could argue that we require all APIs to support features that shouldn't, like resource manipulation.
 For instance, we could have a weather API with `application/vnd.weather+json` Media Type
@@ -935,62 +936,37 @@ However we are pragmatic: we understand that such APIs will exist and engineers 
 Introspected architecture solves that by serving hypermedia information on side and in an incremental way without breaking
 the simplicity.
 
-### 8.2. A JSON API back in time
-A JSON-based API built around 2006 would return just data. No hypermedia, no HATEOAS, only data.
-
-In our use case, User resource would look like this:
-```json
-{
-  "user": {
-    "id":"685",
-    "email":"vasilakisfil@gmail.com",
-    "name":"Filippos Vasilakis",
-    "birth_date": "1988-12-12",
-    "created_at": "2014-01-06T20:46:55Z",
-    "microposts_count":50
-  }
-}
-```
-
-As simple as that.
-
-Compared with a HATEOAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
-
-**Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
-the level of HATEOAS it will follow?**
-
-
-### Deriving the need for another model
-#### REST is complex
+### 8.2. Deriving the need for another model
+#### 8.2.1. REST is complex
 As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
 Also, the metadata themselves (like hypermedia) must be tailored for the user role the client acts on behalf of.
 For instance, a user with very basic access role might only have access to retrieving resources and not manipulating them.
 As a result, the hypermedia provided on the response object should reflect that by not providing hypermedia that will lead to unauthorized access.
 In fact, such design is quite difficult to implement and test from the server side.
 
-#### REST enforces possibly useless information
+#### 8.2.2. REST enforces possibly useless information
 In REST, even if the hypermedia are rendered by taking into account the user's role, eventually we might send more data that the client wants.
 Exactly because we don't know in advance what the client might need, we must send all the possible hypermedia options to the client, just in case.
 The client however could only be interested in the data, or specific hypermedia but instead gets a fully bloated response by the server.
 
-#### REST sacrifices performance for evolvability
+#### 8.2.3. REST sacrifices performance for evolvability
 Complex or long-lived APIs tend to have many hypermedia data (links and actions) related to associations and related resources.
 As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering,
 the network transmission and the client parsing.
 The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade.
 
-#### REST does not support caching of hypermedia
+#### 8.2.4. REST does not support caching of hypermedia
 In practice, the hypermedia part of a resource rarely changes.
 In REST, by design, the client can't separate the hypermedia part of the resource, even for relatively small amount of time, because
 hypermedia is part of the resource, thus caching the hypermedia can't be separate from caching the response itself.
 
-#### REST doesn't make it easy to evolve hypermedia
+#### 8.2.5. REST doesn't make it easy to evolve hypermedia
 Another issue of REST is that due to the fact that everything is mixed in together, evolving hypermedia separately from the data
 can't happen.
 We understand that this is actually another feature of REST design and not an issue, treating a response object as a whole and not breaking into
 different parts like hypermedia and data, however in practice this poses difficulties for easier evolvement and maintenance.
 
-#### REST is not backwards compatible with any RESTly or RESTless API
+#### 8.2.6. REST is not backwards compatible with any RESTly or RESTless API
 In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
 However, in a pragmatic world where nothing is perfect, clients are built by humans who take decisions based on their time and money.
 
@@ -1013,10 +989,35 @@ We would like to see a model that embraces both architectural API styles:
 * APIs that are built to last decades and thus, support full hypermedia from the very first day of their release
 * APIs that are built without evolvement in mind or older APIs that don't have hypermedia (because they weren't cool back that day)
 
-#### REST does not embrace composition
+#### 8.2.7. REST does not embrace composition
 Although REST does not rejects the idea of composability of different API capabilities using different specs, it doesn't embrace it either.
 As we will see later, the MicroTypes is a solution to the outdated Media Type principle that allows us to mix-in different concempts for diffent
 kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
+
+### 8.3. A JSON API back in time
+A JSON-based API built around 2006 would return just data. No hypermedia, no HATEOAS, only data.
+
+In our use case, User resource would look like this:
+```json
+{
+  "user": {
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
+}
+```
+
+As simple as that.
+
+Compared with a HATEOAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
+
+**Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
+the level and type of HATEOAS it will follow?**
+
 
 ## 9. Introspected REST
 >  Simple things should be simple and complex things should be possible.
