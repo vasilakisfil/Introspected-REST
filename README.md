@@ -882,7 +882,10 @@ the request and response.
   * associations that are required or can be embedded to the initial request
     * recusrively apply the same information for each association available for embedding
 
-We should note that the reason we don't mention anything about the headers that are required, or, the status codes
+Although this list is not exhaustive, an architecture style is timeless anyway,
+we feel that the aforementioned capabilities could appear in a modern REST API.
+
+We should also note that the reason we don't mention anything about the headers that are required, or, the status codes
 is because we feel that these belong to the Protocol level and not in the Application level.
 Any changes on this level imply that the API breaks the protocol.
 
