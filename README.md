@@ -1093,6 +1093,11 @@ The server can describe the meta-data of a resource in the response body of the 
 The reason we choose `OPTIONS` here is because this method has been historically used
 for getting informtation on methods supported on a specific resource.
 
+HAve some properties:
+* ability to be cached
+* separated from data
+* support queries
+
 #### Types of metadata
 In REST, when requesting a resource you get different kind of information mixed in with the actual data.
 Nowadays, API designers also distribute documentation to descrine some information about the API and its resources as well.
