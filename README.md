@@ -968,7 +968,7 @@ For instance, a user with very basic access role might only have access to retri
 As a result, the hypermedia provided on the response object should reflect that by not providing hypermedia that will lead to unauthorized access.
 In fact, such design is quite difficult to implement and test from the server side.
 
-#### REST makes enforcements or useless information
+#### REST enforces possibly useless information
 In REST, even if the hypermedia are rendered by taking into account the user's role, eventually we might send more data that the client wants.
 Exactly because we don't know in advance what the client might need, we must send all the possible hypermedia options to the client, just in case.
 The client however could only be interested in the data, or specific hypermedia but instead gets a fully bloated response by the server.
