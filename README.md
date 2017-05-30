@@ -14,56 +14,6 @@ yet it's much simpler to implement while at the same time being backwards compat
 As part of this _manifesto_ we will also present, MicroTypes, small reusable modules that compose a Media Type and facilitates
 the evolvability and extensability of our new model.
 
-* [1. Definitions](#1-definitions)
-* [2. Introduction](#2-introduction)
-* [3. Networked Services and APIs](#3-networked-services-and-apis)
-  * [3.1. Application level](#31-application-level)
-  * [3.2. Message level](#32-message-level)
-  * [3.3. Protocol level](#33-protocol-level)
-  * [3.4. Network level](#34-network-level)
-* [4. Roy's `REST` model](#4-roys-rest-model)
-  * [4.1. Access methods have the same semantics for all resources](#41-access-methods-have-the-same-semantics-for-all-resources)
-  * [4.2. All important resources are identifed by one resource identifer mechanism](#42-all-important-resources-are-identifed-by-one-resource-identifer-mechanism)
-  * [4.3. Resources are manipulated through the exchange of representations](#43-resources-are-manipulated-through-the-exchange-of-representations)
-  * [4.4. Representations are exchanged via self-descriptive messages](#44-representations-are-exchanged-via-self-descriptive-messages)
-  * [4.5. Hypertext as the engine of application state (HATEOAS)](#45-hypertext-as-the-engine-of-application-state-hateoas)
-* [5. API Clients and Applications](#5-api-clients-and-applications)
-  * [5.1. Client and Application responibilities](#51-client-and-application-responibilities)
-  * [5.2. The Human interaction principle](#52-the-human-interaction-principle)
-* [6. `REST` applied in a modern API](#6-rest-applied-in-a-modern-api)
-  * [6.1. Requirements from a modern `REST` API](#61-requirements-from-a-modern-rest-api)
-    * [6.1.1. Sparse fields (collection/resource)](#611-sparse-fields-collectionresource)
-    * [6.1.2. Associations on demand (collection/resource)](#612-associations-on-demand-collectionresource)
-    * [6.1.3. Sorting & pagination (collection only)](#613-sorting--pagination-collection-only)
-    * [6.1.4. Filtering collections (collection only)](#614-filtering-collections-collection-only)
-    * [6.1.5. Aggregation queries (collection only)](#615-aggregation-queries-collection-only)
-    * [6.1.6. Data types !](#616-data-types-)
-    * [6.1.7. The list doesn't end here](#617-the-list-doesnt-end-here)
-  * [6.2. Media Types vs HATOEAS](#62-media-types-vs-hatoeas)
-    * [6.2.1. Defining a new Media Type is not easy and should be avoided](#621-defining-a-new-media-type-is-not-easy-and-should-be-avoided)
-    * [6.2.2. HATOEAS can get pretty heavy](#622-hatoeas-can-get-pretty-heavy)
-    * [6.2.3. Balancing between Media Types and HATOEAS](#623-balancing-between-media-types-and-hatoeas)
-    * [6.2.4. An alternative architecture](#624-an-alternative-architecture)
-* [7. API Specs Today](#7-api-specs-today)
-  * [7.1. Our use case](#71-our-use-case)
-  * [7.2. JSONAPI](#72-jsonapi)
-  * [7.3. HAL](#73-hal)
-  * [7.4. Siren](#74-siren)
-  * [7.5. JSON-LD](#75-json-ld)
-  * [7.6. Hydra](#76-hydra)
-* [8. Ideal `REST` API](#8-ideal-rest-api)
-  * [8.1. Capabilities of an Ideal `REST` API](#81-capabilities-of-an-ideal-rest-api)
-    * [8.1.1. Today's `REST` is far from ideal](#811-todays-rest-is-far-from-ideal)
-    * [8.1.2. Making an API `REST`-compliant by downplaying its capabilities](#812-making-an-api-rest-compliant-by-downplaying-its-capabilities)
-  * [8.2. A JSON API back in time](#82-a-json-api-back-in-time)
-* [9. Introspected APIs](#9-introspected-apis)
-* [10. An Introspected API Prototype in the world of HTTP and JSON](#9-introspected-apis)
-* [11. MicroTypes: Small reusable modules that form a Media Type](#9-introspected-apis)
-* [12. Related work](#9-introspected-apis)
-* [13. Future work](#9-introspected-apis)
-* [14. Conclusion](#9-introspected-apis)
-
-
 ## 1. Definitions
 First some definitions, that we will use through the text:
 
@@ -445,7 +395,7 @@ In fact, there could be capabilities in the future that might not seem necessary
 or other db-inspired operations, so that the client can get the necessary data in the structure needed.
 In any case, these capabilities must be transparent to the client without any documentation or human involvement.
 
-### 6.2. Media Types vs HATOEAS
+### 6.2. Media Types vs HATEOAS
 Now the reader could be wondering: where is the appropriate place to describe those capabilities,
 in our API's Media Type or using HATEOAS ?
 What goes where?
@@ -464,13 +414,13 @@ the Media Type before hand and let **humans** implement code to fully parse API 
 follow this Media Type or API responses that their media type also include this new media type.
 
 
-#### 6.2.2. HATOEAS can get pretty heavy
+#### 6.2.2. HATEOAS can get pretty heavy
 Imagine if you have to describe in a resource, all the available actions along with the available API
 capabilities _in that specific resource_.
 Your API response would just explode in terms of size while making your API super complex.
 
-#### 6.2.3. Balancing between Media Types and HATOEAS
-The idea is that Media Types descibe the generic capabilities while HATOEAS
+#### 6.2.3. Balancing between Media Types and HATEOAS
+The idea is that Media Types descibe the generic capabilities while HATEOAS
 describe the resource-specific capabilities.
 
 However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
@@ -489,7 +439,7 @@ Specifically, especially when having a restrictive Media Type, if we create a cl
 then it's easy to "configure" it for another API which also follows that Media Type.
 
 HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
-Essentially, HATOEAS should provide any details missing from the Media Type for the client to work.
+Essentially, HATEOAS should provide any details missing from the Media Type for the client to work.
 
 #### 6.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
@@ -984,7 +934,7 @@ Introspected architecture solves that by serving hypermedia information on side 
 the simplicity.
 
 ### 8.2. A JSON API back in time
-A JSON-based API built around 2006 would return just data. No hypermedia, no HATOEAS, only data.
+A JSON-based API built around 2006 would return just data. No hypermedia, no HATEOAS, only data.
 
 In our use case, User resource would look like this:
 ```json
@@ -1002,7 +952,7 @@ In our use case, User resource would look like this:
 
 As simple as that.
 
-Compared with a HATOEAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
+Compared with a HATEOAS-ed response it's simple as hell, obvious, easy to debug and understand by a human (and a client).
 
 **Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
 the level of HATEOAS it will follow?**
@@ -1014,14 +964,25 @@ the level of HATEOAS it will follow?**
 >
 >
 
-In the following section we will describe the reasoning and the benefits of the Introspected REST style.
-The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand, without enforcing it.
+In the following section we will describe our new model for Networked APIs, Introspected REST.
+The model itself steps on initial Roy's REST model but with the difference that instead of providing resource meta-data at
+runtime, it provides them on the side, only if asked.
+Hence, the 3 out of 4 constraints of the uniform interface that Roy defined still exist in this model:
+identification of resources; manipulation of resources through representations and self-descriptive messages.
+However instead of having the constraint of hypermedia as the engine of application state HATEOAS), we have
+introspection as the engine of application state (IATEOAS).
 
 ### Deriving the need for Introspection REST
 #### Less complexity
 As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
+Also, the metadata themselves (like hypermedia) must be tailored for the user role the client acts on behalf of.
+For instance, a user with very basic access role could only have access to retrieving resources and not manipulating them.
+As a result, the hypermedia provided on the response object should reflect that which is quite difficult to implement and test from the server side.
+
+Instead, we would like to give to the client 
 
 #### No enforcements or useless information
+In current APIs, even if the 
 In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
 However, we are pragmatic and we understand that nothing is perfect in this world.
 We would like to embrace both architectural API styles: APIs that are built to last decades, and APIs that are built without
@@ -1031,15 +992,19 @@ Introspected REST model is flexible enough to cover all those use cases.
 Specifically, the server might not be able to provide all hypermedia in the early stage.
 In a REST API, adding hypermedia at a later stage would mean that we would need a new Media Type because otherwise it would break the response.
 
-#### Evolvement of hypermedia
-
-#### Performance
+#### Perfomance
+By providing only plain data and metadata on the side on demand, the performance should increase as well.
+In our experience, complex or long-lived APIs tend to have many hypermedia data (links and actions) related to associations and related resources.
+As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering, the network transmission and the client parsing.
+The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade.
 
 #### Caching
 
+#### Evolvement of hypermedia
+
 #### Backwards compatibility
 
-#### Easier *compsition*
+#### Composition
 
 Secondly, we want to let clients to be able to retrieve plain data without dealing with metadata.
 Last but not least, we would like to embrace the idea of composition when we are composing the final response.
@@ -1067,7 +1032,7 @@ Thus we need to find a way to provide any secondary data, like meta-data, throug
 
 ### 9.2. Introspection as the engine of application state (IATEOAS)
 In the following section we will describe the architecture style of the Introspected REST.
-The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATOEAS is derived
+The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATEOAS is derived
 Specifically the state of the client is Introspected, possibly cached.
 The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
 In order to facilitate the separation of different concerns we will also introduce MicroTypes.
@@ -1404,12 +1369,12 @@ No you don't need GraphQL
 
 We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelement
 and backwards compatible.
-The key thing here is backwards compatibility, because it allows you to incrementally add REST HATOAS incrementally.
+The key thing here is backwards compatibility, because it allows you to incrementally add REST HATEOAS incrementally.
 
 In this Manifesto we will try to kill Roy's model.
 It gave us great insights but let's be pragmatic: it will never work out.
 
-We need to **be brave enough and move on**: Roy's HATOEAS-based REST model can be declared as deprecated.
+We need to **be brave enough and move on**: Roy's HATEOAS-based REST model can be declared as deprecated.
 
 Introspected REST is an alternative backwards compatible API. No breaking changes are needed.
 
@@ -1434,7 +1399,7 @@ There are 3 kinds of criticizers of REST model.
 1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
 simpler, yet easier to implement and test and deliver a RESTful approach
 2. The ones who understand what REST brings on the table but given that they control the client as well,
-why should they bother with the whole HATOAS thing?
+why should they bother with the whole HATEOAS thing?
 3. The ones who don't understand REST and just want a plain JSON because it's simple enough
 
 
@@ -1579,3 +1544,7 @@ There are 3 types of meta-data a resource could have:
     * links, for linking other resources
     * actions, for manipulating the resource
     * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
+    *
+
+
+Maybe explain somewhere the hypermedia/metadata definitions. Links vs actions?
