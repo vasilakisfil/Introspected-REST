@@ -1063,6 +1063,9 @@ In any case, actions should also describe any relevant information for the clien
 #### 9.1.3. Metadata
 If hypermedia is links and actions, then what is metadata ?
 
+##### 9.1.3.1 Resource metadata
+
+##### 9.1.3.2 Action-specific metadata
 Metadata are data that describe the data or the hypermedia.
 These metadata could be static for a resource, an endpoint or dynamic and volatile,
 determined by the parameters of the request and the state of the resource at that given time.
