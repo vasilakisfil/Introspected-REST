@@ -959,6 +959,65 @@ Compared with a HATEOAS-ed response it's simple as hell, obvious, easy to debug 
 **Is it possible to build an API that is simple as that, be Hypermedia driven and give the client the option to decide
 the level of HATEOAS it will follow?**
 
+
+### Deriving the need for another model
+#### REST is complex
+As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
+Also, the metadata themselves (like hypermedia) must be tailored for the user role the client acts on behalf of.
+For instance, a user with very basic access role might only have access to retrieving resources and not manipulating them.
+As a result, the hypermedia provided on the response object should reflect that by not providing hypermedia that will lead to unauthorized access.
+In fact, such design is quite difficult to implement and test from the server side.
+
+#### REST makes enforcements or useless information
+In REST, even if the hypermedia are rendered by taking into account the user's role, eventually we might send more data that the client wants.
+Exactly because we don't know in advance what the client might need, we must send all the possible hypermedia options to the client, just in case.
+The client however could only be interested in the data, or specific hypermedia but instead gets a fully bloated response by the server.
+
+#### REST sacrifices performance for evolvability
+Complex or long-lived APIs tend to have many hypermedia data (links and actions) related to associations and related resources.
+As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering,
+the network transmission and the client parsing.
+The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade.
+
+##### REST does not support caching of hypermedia
+In practice, the hypermedia part of a resource rarely changes.
+In REST, by design, the client can't rest they hypermedia part of the resource, even for relatively small amount of time, because
+hypermedia is part of the resource, thus caching the hypermedia can't be separate from caching the response itself.
+
+#### REST doesn't make it easy to evolve hypermedia
+Another issue of REST is that due to the fact that everything is mixed in together, evolving hypermedia separately from the data
+can't happen.
+We understand that this is actually another feature of REST design and not an issue, treating a response object as a whole and not breaking into
+different parts like hypermedia and data, however in practice this poses difficulties for easier evolvement and maintenance.
+
+#### REST is not backwards compatible with any RESTly or RESTless API
+In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
+However, in a pragmatic world where nothing is perfect, clients are built by humans who take decisions based on their time and money.
+
+We have seen APIs that don't have any hypermedia yet they are very popular.
+As we said previously, we firmly believe that a REST api is better than any RESTly or RESTless API, yet we understand that API designers
+are pushed all the time to deliver, or just don't care for their use case.
+
+The problem is that REST doesn't allow you to integrate it in a later stage.
+Say that you already have a simple RESTless API, as a part of a prorotype product in your shining startup, and now you want to make a public
+release.
+You understand the benefits of having a REST API, so you are looking to add any hypermedia needed for the clients.
+It turns out that, you will have to change a lot of stuff in order to integrate. In fact, we probably can't call it integration,
+it's a completely new re-design.
+If we want to be precise, in a REST API, adding hypermedia at a later stage would mean that we would need a new Media Type because
+otherwise it would break the response.
+
+No matter how much we love the REST evolvability, we can't admit that it creates issues.
+
+We would like to see a model that embraces both architectural API styles:
+* APIs that are built to last decades and thus, support full hypermedia from the very first day of their release
+* APIs that are built without evolvement in mind or older APIs that don't have hypermedia (because they weren't cool back that day)
+
+#### REST does not embrace composition
+Although REST does not rejects the idea of composability of different API capabilities using different specs, it doesn't embrace it either.
+As we will see later, the MicroTypes is a solution to the outdated Media Type principle that allows us to mix-in different concempts for diffent
+kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
+
 ## 9. Introspected REST
 >  Simple things should be simple and complex things should be possible.
 >
@@ -974,63 +1033,7 @@ _identification of resources_; _manipulation of resources through representation
 However instead of having the constraint of _hypermedia as the engine of application state_ (HATEOAS), we have
 _introspection as the engine of application state_ (IATEOAS).
 
-### Deriving the need for Introspection REST
-#### Less complexity
-As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
-Also, the metadata themselves (like hypermedia) must be tailored for the user role the client acts on behalf of.
-For instance, a user with very basic access role could only have access to retrieving resources and not manipulating them.
-As a result, the hypermedia provided on the response object should reflect that which is quite difficult to implement and test from the server side.
-
-Instead, we would like to give to the client 
-
-#### No enforcements or useless information
-In current APIs, even if the 
-In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
-However, we are pragmatic and we understand that nothing is perfect in this world.
-We would like to embrace both architectural API styles: APIs that are built to last decades, and APIs that are built without
-evolvement in mind.
-Introspected REST model is flexible enough to cover all those use cases.
-
-Specifically, the server might not be able to provide all hypermedia in the early stage.
-In a REST API, adding hypermedia at a later stage would mean that we would need a new Media Type because otherwise it would break the response.
-
-#### Perfomance
-By providing only plain data and metadata on the side on demand, the performance should increase as well.
-In our experience, complex or long-lived APIs tend to have many hypermedia data (links and actions) related to associations and related resources.
-As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering, the network transmission and the client parsing.
-The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade.
-
-#### Caching
-
-#### Evolvement of hypermedia
-
-#### Backwards compatibility
-
-#### Composition
-
-Secondly, we want to let clients to be able to retrieve plain data without dealing with metadata.
-Last but not least, we would like to embrace the idea of composition when we are composing the final response.
-
-We should note that these reasons apply to both, the API designed and the API client.
-
-The client that is interested solely in the data, is releaved by getting just the data without any metadata mixed in.
-In the future, if the client needs to get any metadata, it knows where to find them.
-Moreover, this architecture, _should_ make things faster: not only it should allow the API designers to move faster in their development cycle, but
-faster in the sense of request/response cycle. Parsing a bunch of metadata (but also rendering those from the server)
-slows things down. In the case when these data are not needed then some bandwidth is wasted, the UI lags a bit, user waits slightly more, just in case
-a client might need the metadata.
-
-Maintaining a response that mixes up data with metadata is hard and makes things move slow.
-Moreover, the API designer might not be interested to add some metadata (like hypermedia actions) from the very beginning of
-the API release. Furthermore, this solution allows current APIs to inherit hypermedia, on the side, without making any breaking change,
-specifically in the level they need and want.
-We are pragmatic with the fact that not all APIs developed with 50 years ahead in mind and some APIs might be needed for relatively very
-small amount of time.
-We want to embrace these APIs too, with Introspected REST model, by allowing them to integrate any metadata types in the level they need.
-
-When a client requests a resource, given that it already knows how to make the request and how to parse the response,
-it should only await plain data.
-Thus we need to find a way to provide any secondary data, like meta-data, through another channel, on the side.
+Part of the model is MicroTypes.
 
 ### 9.2. Introspection as the engine of application state (IATEOAS)
 In the following section we will describe the architecture style of the Introspected REST.
@@ -1550,3 +1553,37 @@ There are 3 types of meta-data a resource could have:
 
 
 Maybe explain somewhere the hypermedia/metadata definitions. Links vs actions?
+
+
+In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
+However, in a pragmatic where nothing is perfect in this world, clients are built by humans
+We would like to embrace both architectural API styles: APIs that are built to last decades, and APIs that are built without
+evolvement in mind.
+Introspected REST model is flexible enough to cover all those use cases.
+
+Resource, object, response definitions!!!
+
+
+Secondly, we want to let clients to be able to retrieve plain data without dealing with metadata.
+Last but not least, we would like to embrace the idea of composition when we are composing the final response.
+
+We should note that these reasons apply to both, the API designed and the API client.
+
+The client that is interested solely in the data, is releaved by getting just the data without any metadata mixed in.
+In the future, if the client needs to get any metadata, it knows where to find them.
+Moreover, this architecture, _should_ make things faster: not only it should allow the API designers to move faster in their development cycle, but
+faster in the sense of request/response cycle. Parsing a bunch of metadata (but also rendering those from the server)
+slows things down. In the case when these data are not needed then some bandwidth is wasted, the UI lags a bit, user waits slightly more, just in case
+a client might need the metadata.
+
+Maintaining a response that mixes up data with metadata is hard and makes things move slow.
+Moreover, the API designer might not be interested to add some metadata (like hypermedia actions) from the very beginning of
+the API release. Furthermore, this solution allows current APIs to inherit hypermedia, on the side, without making any breaking change,
+specifically in the level they need and want.
+We are pragmatic with the fact that not all APIs developed with 50 years ahead in mind and some APIs might be needed for relatively very
+small amount of time.
+We want to embrace these APIs too, with Introspected REST model, by allowing them to integrate any metadata types in the level they need.
+
+When a client requests a resource, given that it already knows how to make the request and how to parse the response,
+it should only await plain data.
+Thus we need to find a way to provide any secondary data, like meta-data, through another channel, on the side.
