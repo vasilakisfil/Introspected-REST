@@ -967,7 +967,7 @@ hypermedia is part of the resource, thus caching the hypermedia can't be separat
 Another issue of REST is that due to the fact that everything is mixed in together, evolving hypermedia separately from the data
 can't happen.
 We understand that this is actually another feature of REST design and not an issue, treating a response object as a whole and not breaking into
-different parts like hypermedia and data, however in practice this poses difficulties for easier evolvement and maintenance.
+different parts like hypermedia and data, however in practice this poses difficulties for easier evolvement and maintenance of the API.
 
 #### 8.2.6. REST is not backwards compatible with any RESTly or RESTless API
 In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
