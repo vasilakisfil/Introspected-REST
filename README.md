@@ -922,7 +922,7 @@ temperature: 25
 ```
 
 This API _should_ be REST-compliant by not providing any API capabilities, hypermedia or actions.
-The imaginery Media Type `application/vnd.weather+json` is supposed to provide all the necessary information
+The imaginery Media Type `application/vnd.weather+yaml` is supposed to provide all the necessary information
 because otherwise the client would fail to udnerstand things like
 
 * what are the attributes of the response
