@@ -192,6 +192,8 @@ it would be impossible to derive REST:
 > --- Roy Fielding
 >
 
+Subsequently, the next 4 constraints, the core of REST, is a result of the effort to obtain a _uniform interface_ between different components.
+
 ### 4.2. All important resources are identifed by one resource identifer mechanism
 > induces simple, visible, reusable, stateless communication
 
@@ -964,13 +966,13 @@ the level of HATEOAS it will follow?**
 >
 >
 
-In the following section we will describe our new model for Networked APIs, Introspected REST.
+In the following section we will describe our new model for Networked APIs that goes beyond REST, Introspected REST.
 The model itself steps on initial Roy's REST model but with the difference that instead of providing resource meta-data at
-runtime, it provides them on the side, only if asked.
-Hence, the 3 out of 4 constraints of the uniform interface that Roy defined still exist in this model:
-identification of resources; manipulation of resources through representations and self-descriptive messages.
-However instead of having the constraint of hypermedia as the engine of application state HATEOAS), we have
-introspection as the engine of application state (IATEOAS).
+runtime, it provides them on the side, only if requested.
+Hence, by keeping the _uniform interface_ the remaining 3 out of 4 constraints of the REST constraints that Roy defined still exist in this model:
+_identification of resources_; _manipulation of resources through representations_ and _self-descriptive messages_.
+However instead of having the constraint of _hypermedia as the engine of application state_ (HATEOAS), we have
+_introspection as the engine of application state_ (IATEOAS).
 
 ### Deriving the need for Introspection REST
 #### Less complexity
