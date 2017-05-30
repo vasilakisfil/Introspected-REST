@@ -971,7 +971,7 @@ different parts like hypermedia and data, however in practice this poses difficu
 
 #### 8.2.6. REST is not backwards compatible with any RESTly or RESTless API
 In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
-However, in a pragmatic world where nothing is perfect, clients are built by humans who take decisions based on their time and money.
+However, we are in a pragmatic world where nothing is perfect and clients are built by humans who take decisions based on their time and money.
 
 We have seen APIs that don't have any hypermedia yet they are very popular.
 As we said previously, we firmly believe that a REST api is better than any RESTly or RESTless API, yet we understand that API designers
