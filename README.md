@@ -883,7 +883,7 @@ the request and response.
     * recusrively apply the same information for each association available for embedding
 
 Although this list is not exhaustive, an architecture style is timeless anyway,
-we feel that the aforementioned capabilities could appear in a modern REST API.
+we feel that the aforementioned capabilities ought to appear in an idealized modern REST API.
 
 We should also note that the reason we don't mention anything about the headers that are required, or, the status codes
 is because we feel that these belong to the Protocol level and not in the Application level.
