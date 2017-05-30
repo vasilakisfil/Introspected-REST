@@ -321,6 +321,16 @@ As a result, **versioning should not take place in the URL but in the Media Type
 > Roy Fielding
 >
 
+## 6. Data, hypermedia and metadata
+### Data
+
+### Hypermedia
+#### Links
+#### Actions
+
+### Metadata
+#### Resource metadata
+#### Object metadata
 
 ## 6. REST applied in a modern API
 When engineering a REST API, there are 2 approaches:
