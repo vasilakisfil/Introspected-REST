@@ -937,7 +937,7 @@ However we are pragmatic: we understand that such APIs will exist and engineers 
 Introspected architecture solves that by serving hypermedia information on side and in an incremental way without breaking
 the simplicity.
 
-### 8.1.3. A JSON API back in time
+#### 8.1.3. A JSON API back in time
 A JSON-based API built around 2006 would return just data. No hypermedia, no HATEOAS, only data.
 
 In our use case, User resource would look like this:
