@@ -1077,7 +1077,7 @@ all the different types of Hypermedia, according to our model's perception.
 
 ##### 9.1.2.1. Links
 The most basic class of hypermedia, basically URIs or IRIs that can be used to provide linking between releated resources to the primary resource.
-The properties, like placement, of links strictly follow the semantics of the Media Type agreed.
+The properties of a link, like placement inside the response, strictly follow the semantics of the Media Type agreed.
 
 ##### 9.1.2.2. Actions
 Actions are links along with information for manipulating a resource.
