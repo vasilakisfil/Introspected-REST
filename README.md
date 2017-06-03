@@ -994,7 +994,7 @@ and the client receiving and parsing.
 The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade.
 
 #### 8.2.4. REST does not support caching of hypermedia
-In practice, the hypermedia part of a resource rarely changes.
+In practice, the hypermedia part of a resource rarely changes, compared to the resource's data.
 In REST, by design, the client can't cache the hypermedia part of the resource, even for relatively small amount of time, because
 hypermedia is part of the resource, thus caching the hypermedia can't be separate from caching the response itself.
 
