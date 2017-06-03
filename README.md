@@ -1006,10 +1006,10 @@ different parts like hypermedia and data, however, in practice, this poses diffi
 
 #### 8.2.6. REST's power is limited by HTTP and related protocols (SIP, CoAP etc)
 Although REST is not dependent on any protocol or spec, the truth is that it has dominated in HTTP.
-As we described earlier in section 4.4.4, in protocols like HTTP, content negotiation between client and server is achieved using Media Types,
+As we [described earlier](#31-application-level), in protocols like HTTP, content negotiation between client and server is achieved using Media Types,
 which is the the only mechanism to define the semantics of a response.
 Given that composite Media Types never had real compositability, and the fact that they cannot be parsed by clients, there is a trade off between what should go to the Media Type and what to the actual response through
-hypermedia, as described by Section 4.4.5.
+hypermedia, as described in section [6.2.3.](#623-balancing-between-media-types-and-hateoas).
 This limits the design flexibility and evolvability.
 As a result Media Types become big monoliths that are unflexible and limit the evolvability of the API.
 
