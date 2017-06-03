@@ -1,4 +1,6 @@
-# Introspected REST Manifesto
+#
+
+explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!Introspected REST Manifesto
 (Sliding away from Roy's `REST` model)
 
 There has been a great confusion of what a `REST` API is.
@@ -1045,44 +1047,64 @@ kind of metadata of a resource, yet have all of them on demand and separated by 
 >
 >
 
-In the following section we will describe our new model for Networked APIs that goes beyond REST, Introspected REST.
-The model itself steps on initial Roy's REST model but with the difference that instead of providing resource meta-data at
+In the following section we will describe our new architectural style based on a model for Networked APIs that goes beyond `REST`.
+The model itself steps on initial Roy's `REST` model but with the difference that instead of providing resource meta-data at
 runtime, it provides them on the side, only if requested.
-Hence, by keeping the _uniform interface_ the remaining 3 out of 4 constraints of the REST constraints that Roy defined still exist in this model:
+Hence, by keeping the _uniform interface_ the derived 3 out of 4 REST constraints that Roy defined still exist in this model:
 _identification of resources_; _manipulation of resources through representations_ and _self-descriptive messages_.
 However instead of having the constraint of _hypermedia as the engine of application state_ (HATEOAS), we have
 _introspection as the engine of application state_ (IATEOAS).
 
-Part of the model is MicroTypes.
+Composition of different specs is a vital part of our model and for that we will use a new concept,
+MicroTypes, small reusable modules that a final Media Type can be composed of.
+Hence, before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes.
+These terms can be overlapping in the REST model, however we feel that each one has its own place in Introspected REST that embraces composability.
 
 ### 9.1. Data, metadata and hypermedia
-Before moving on, we will give concise definitions over hypermedia and metadata. These terms can be overlapping in the REST model, however
-we feel that each one has its own place in Introspected REST that embraces composability.
-
 #### 9.1.1. Data
 Data is the main variables of a resource, at a given state, at a given time.
+Data is very volatile compared to other parts of a response.
 
 #### 9.1.2. Hypermedia
 Originally the hypermedia term was mostly used for linked data.
 However eventually it also includes information for interaction and resource manipilation.
-
 Hypermedia could be dynamic or static, regardless they are not considered part of the response data, as we defined them here.
 
+Hypermedia is a very broad term and needs to be broken down in different parts.
+Although there isn't any clear definition or concencus in the literature and the community, we will try to provide definitions and descriptions for
+all the different types of Hypermedia, according to our model's perception.
+
 ##### 9.1.2.1. Links
-Links of related resources are, URIs that point to a specific location, usually following the same Media Type.
+The most basic class of hypermedia, basically URIs or IRIs that can be used to provide linking between releated resources to the primary resource.
+The properties, like placement, of links strictly follow the semantics of the Media Type agreed.
+
 ##### 9.1.2.2. Actions
 Actions are links along with information for manipulating a resource.
 Although CRUD are the most popular actions of a resource, the beauty with REST is that actions can go beyond plain CRUD.
 In fact, you can define any type of action or meta-action of your internal resource, through the representation that you expose.
-As a result, actions of a resource could be quite complex or simple depending on the needs and decisions of the API designer.
+As a result, actions of a resource could be quite complex or simplistic depending on the needs and decisions of the API designer.
 In any case, actions should also describe any relevant information for the client to perform it, unless the Media Type itself describe those details.
+
+##### 9.1.2.3. Forms
+Another way of describing the manipulation options of a resource is the notion of forms.
+The difference between actions and forms is that the latter are mostly targeted for the UI.
+For instance, they could provide all the necessary information to be semantically equivelent to an HTML form,
+or could provide UI-related information like positioning, suggested colors, etc.
+
 
 #### 9.1.3. Metadata
 If hypermedia is links and actions, then what is metadata ?
+Metadata are information about the resource that is not related for its manipulation, yet it's crucial for the client
+to understand API's responses and access the API's capabilities.
 
-##### 9.1.3.1 Resource metadata
+Metadata could be API-specific, resource-specific, action-specific or even object-specific.
+However there is a distinction between different types of metadata.
 
-##### 9.1.3.2 Action-specific metadata
+##### 9.1.3.1 Request's metadata
+These metadata could be static for a resource, an endpoint or dynamic and volatile,
+determined by the parameters of the request and the state of the resource at that given time.
+
+##### 9.1.3.2 Media Type fill-ins
 Metadata are data that describe the data or the hypermedia.
 These metadata could be static for a resource, an endpoint or dynamic and volatile,
 determined by the parameters of the request and the state of the resource at that given time.
@@ -1090,15 +1112,49 @@ determined by the parameters of the request and the state of the resource at tha
 Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
 
 
-### 9.2. Introspection as the engine of application state (IATEOAS)
+### 9.2. MicroTypes: modules composing a Media Type
+> Imagine how poor the Web would have been if we had limited HTML to what was
+> needed by an FTP client. That's what most JSON APIs are today.
+>
+> --- Roy Fielding
+>
+
+Currently media types act as a big monolith that clients need to understand beforehand through human involvement.
+We believe that Media Types should be broken in smaller
+media types, microtypes, each describing very carefully a specific functionality of a modern API.
+
+Clients and Server should still do the regular negotiation flow even for those sub-media-types.
+
+The reasoning is that, in our experience, we have seen that different API specs define the same functionalities in different ways.
+Common foobar should allow us to interchange each of them lorem ipsum.
+
+We will need a MicroType for describing each of following:
+
+* querying language over url (filters, aggregations, pagination and sorting)
+* requesting specific attributes/associations of a resource and its associations
+* linking other resources or associations
+  * figure out when links should be placed on the introspection and when in Links header defined by RFC5988
+* semantic data of a response
+* actions supported by the resource
+  * required fields, available fields
+* resource data types
+
++ specfy uploads
++ specify http2 server push
++ etc
+
+#### 9.2.1. MicroTypes in HTTP
+The Content-Type header is limited up to 128 characters so we might need another header for that.
+Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
+
+### 9.3. Introspection as the engine of application state (IATEOAS)
 In the following section we will describe the architecture style of the Introspected REST.
 The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATEOAS is derived
 Specifically the state of the client is Introspected, possibly cached.
 The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
-In order to facilitate the separation of different concerns we will also introduce MicroTypes.
 
 
-#### 9.2.1. Composition over monoliths (same with Easier composition?) should be enabled by design
+#### 9.3.1. Composition over monoliths (same with Easier composition?) should be enabled by design
 
 #### Definition of Introspection
 specific method, querying, caching, composition etc not data (only metadata)
@@ -1348,38 +1404,6 @@ documentation generation could have extra stuff, by assigining a param in the ur
 
 
 
-### MicroTypes: modules composing a Media Type
-> Imagine how poor the Web would have been if we had limited HTML to what was
-> needed by an FTP client. That's what most JSON APIs are today.
->
-> --- Roy Fielding
->
-
-Currently media types serve as a big monolith. Instead we believe that Media Types should be broken in smaller
-media types, each describing very carefully a specific functionality of a modern API.
-
-The Content-Type header is limited up to 128 characters so we might need another header for that.
-Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
-
-Clients and Server should still do the regular negotiation flow even for those sub-media-types.
-
-The reasoning is that, in our experience, we have seen that different API specs define the same functionalities in different ways.
-Common foobar should allow us to interchange each of them lorem ipsum.
-
-We will need a MicroType for describing each of following:
-
-* querying language over url (filters, aggregations, pagination and sorting)
-* requesting specific attributes/associations of a resource and its associations
-* linking other resources or associations
-  * figure out when links should be placed on the introspection and when in Links header defined by RFC5988
-* semantic data of a response
-* actions supported by the resource
-  * required fields, available fields
-* resource data types
-
-+ specfy uploads
-+ specify http2 server push
-+ etc
 ## Related Work
 ### GraphQL
 no urls, basically a query language, no MicroTypes
@@ -1667,3 +1691,13 @@ The product resource contains information about the product itself, as well as r
 However, information about payment options is not provided by the product resource itself, and is provided via a linkset instead.
 This means any client requesting payment options will request payment links from a separate server.
 This not only decouples product resources from payment management; it also allows the payment options to be more easily customized based on the specifics of the client, meaning that the complete "product and payment options" view is a combination of the product resource (and associated hypermedia controls), and payment links provided by the specialized payment options service.
+
+Twitter!
+Building high performant web services is hard, but to justify the deprecation of Roy's REST model is multiple times harder.
+Obviously the reason is that he had done pretty good damn job (almost perfect if you take into account when it was published).
+
+caching headers for data and metadata!
+
+explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!
+
+say about atom+json example!! A totally new Media Type that we need to manually understand..
