@@ -962,8 +962,8 @@ the level and type of HATEOAS it will follow?**
 
 ### 8.2. Deriving the need for a new model
 #### 8.2.1. REST is complex
-As we descrined earlier, mixing data with metadata (like hypermedia) leads to increased complexity, for both the server and the client developer.
-Also, the metadata themselves (like hypermedia) must be tailored for the user role the client acts on behalf of.
+As we descrined earlier, mixing data with hypermedia leads to increased complexity, for both the server and the client developer.
+Also, the hypermedia must be tailored for the user role the client acts on behalf of.
 For instance, a user with very basic access role might only have access to retrieving resources and not manipulating them.
 As a result, the hypermedia provided on the response object should reflect that by not providing hypermedia that will lead to unauthorized access.
 In fact, such design is quite difficult to implement and test from the server side.
@@ -971,55 +971,60 @@ In fact, such design is quite difficult to implement and test from the server si
 #### 8.2.2. REST enforces possibly useless information
 In REST, even if the hypermedia are rendered by taking into account the user's role, eventually we might send more data that the client wants.
 **Exactly because we don't know in advance what the client might need, we must send all the possible hypermedia options to the client, just in case**.
-The client however could only be interested in the data, or specific hypermedia but instead gets a fully bloated response by the server.
+The client however could only be interested in the data, or specific hypermedia types, like only links, but instead gets a fully bloated response by the server.
 
 #### 8.2.3. REST sacrifices performance for evolvability
-Complex or long-lived APIs tend to have many hypermedia data (links and actions) related to associations and related resources.
-As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering,
-the network transmission and the client parsing.
+Complex or long-lived APIs tend to have many hypermedia data (links, actions, custom metadata) related to the resource itself, its associations and related resources.
+As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering
+and the client receiving and parsing.
 The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade.
 
 #### 8.2.4. REST does not support caching of hypermedia
 In practice, the hypermedia part of a resource rarely changes.
-In REST, by design, the client can't separate the hypermedia part of the resource, even for relatively small amount of time, because
+In REST, by design, the client can't cache the hypermedia part of the resource, even for relatively small amount of time, because
 hypermedia is part of the resource, thus caching the hypermedia can't be separate from caching the response itself.
 
 #### 8.2.5. REST doesn't make it easy to evolve hypermedia
 Another issue of REST is that due to the fact that everything is mixed in together, evolving hypermedia separately from the data
 can't happen.
 We understand that this is actually another feature of REST design and not an issue, treating a response object as a whole and not breaking into
-different parts like hypermedia and data, however in practice this poses difficulties for easier evolvement and maintenance of the API.
+different parts like hypermedia and data, however, in practice, this poses difficulties for easier evolvement and maintenance of the API.
 
-#### 8.2.6. REST is not backwards compatible with any RESTly or RESTless API
+#### 8.2.6. REST's power is limited by HTTP and related protocols (SIP, CoAP etc)
+Although REST is not dependent on any protocol or spec, the truth is that it has dominated in HTTP.
+As we described earlier in section 4.4.4, in protocols like HTTP, content negotiation between client and server is achieved using Media Types,
+which is the the only mechanism to define the semantics of a response.
+Given that composite Media Types never had real compositability, and the fact that they cannot be parsed by clients, there is a trade off between what should go to the Media Type and what to the actual response through
+hypermedia, as described by Section 4.4.5.
+This limits the design flexibility and evolvability.
+As a result Media Types become big monoliths that are unflexible and limit the evolvability of the API.
+
+##### 8.2.6.1. No backwards compatible with any RESTly or RESTless API
 In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
 However, we are in a pragmatic world where nothing is perfect and clients are built by humans who take decisions based on their time and money.
 
-We have seen APIs that don't have any hypermedia yet they are very popular.
-As we said previously, we firmly believe that a REST api is better than any RESTly or RESTless API, yet we understand that API designers
-are pushed all the time to deliver, or just don't care for their use case.
+Although we firmly believe that a REST api is better than any RESTly or RESTless API, we understand that there could be cases where API designers
+_had_ to initially skip hypermedia part.
 
-The problem is that REST doesn't allow you to integrate it in a later stage.
-Say that you already have a simple RESTless API, as a part of a prorotype product in your shining startup, and now you want to make a public
-release.
-You understand the benefits of having a REST API, so you are looking to add any hypermedia needed for the clients.
-It turns out that, you will have to change a lot of stuff in order to integrate. In fact, we probably can't call it integration,
-it's a completely new re-design.
-If we want to be precise, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
+The problem is that when REST is applied to HTTP, it doesn't allow you to easily integrate hypermedia at a later point.
+The reason is that, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
 otherwise it would break the current semantics.
-
-No matter how much we love the REST evolvability, we can't admit that it creates issues.
 
 We would like to see a model that embraces both architectural API styles:
 * APIs that are built to last decades and thus, support full hypermedia from the very first day of their release
-* APIs that don't have hypermedia (the reason is not our business), yet they want to add hypermedia in an incremental way
+* APIs that don't have hypermedia (the reason is not our business), yet they want to add hypermedia, later, in an incremental way without:
+  * breaking existing clients
+  * limiting API's flexibility
 
-#### 8.2.7. REST does not embrace composition
-Although REST does not rejects the idea of composability of different API capabilities using different specs in the same response, it doesn't embrace it either.
-As we noticed earlier Media Types are inflexible by being a monolith trying to describe everything in the same place.
+##### 8.2.7.2 REST does not embrace composition
+Although REST does not rejects the idea of composability of different API capabilities using different specs in the same response, or composite Media Types, it doesn't embrace it either.
+The issue becomes apparent when HTTP uses Media Types as the only mechanism to define the semantics of a response, by trying to describe everything in once place.
+Given that composite Media Types never had real compositability, and the fact that Media Types cannot be parsed by clients, there is a trade off between what should go to the Media Type and what to the actual response through
+hypermedia, as described by Section 4.4.4.
+This limits the design flexibility and evolvability.
 
 As we will see later, the MicroTypes is a solution to the outdated Media Type concept that allows us to mix-in different concepts for different
 kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
-
 
 ## 9. Introspected REST
 >  Simple things should be simple and complex things should be possible.
@@ -1632,3 +1637,14 @@ We want to embrace these APIs too, with Introspected REST model, by allowing the
 When a client requests a resource, given that it already knows how to make the request and how to parse the response,
 it should only await plain data.
 Thus we need to find a way to provide any secondary data, like meta-data, through another channel, on the side.
+
+
+The problem is that REST doesn't allow you to integrate it at a later stage.
+Say that you already have a simple RESTless API, as a part of a prorotype product in your shining startup, and now you want to make a public
+release.
+You understand the benefits of having a REST API, so you are looking to add any hypermedia needed for the clients.
+It turns out that, you will have to change a lot of stuff in order to integrate. In fact, we probably can't call it integration,
+it's a completely new re-design.
+If we want to be precise, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
+otherwise it would break the current semantics.
+Moreover, the response would change every time
