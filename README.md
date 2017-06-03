@@ -538,7 +538,7 @@ JSONAPI was originally created by [Yehuda Katz](http://yehudakatz.com/), as part
 Since then a lot of people have contributed and has rised as one of the most supported
 API specs as of 2017 in terms of tools and libraries.
 
-##### User resource
+#### 7.2.1. User resource
 ```json
 {
   "data":{
@@ -567,7 +567,7 @@ API specs as of 2017 in terms of tools and libraries.
 }
 ```
 
-##### Users resource (a collection of User resources)
+#### 7.2.2. Users resource (a collection of User resources)
 
 ```json
 {
