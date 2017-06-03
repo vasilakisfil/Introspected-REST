@@ -969,7 +969,7 @@ the level and type of HATEOAS it will follow?**
 ### 8.2. Deriving the need for a new model
 #### 8.2.1. REST is complex
 As we descrined earlier, mixing data with hypermedia leads to increased complexity, for both the server and the client developer.
-For instance compare the response of a [non-hypermedia-ed API](#813-a-json-api-back-in-time) and the same resource represented by
+Just compare the response of a [non-hypermedia-ed API](#813-a-json-api-back-in-time) and the same resource represented by
 [Siren](#74-siren), a hypermedia-ed API that doesn't even being REST-compatible by missing numerous information as described
 in its [reflections](#743-reflections).
 
