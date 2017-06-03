@@ -1700,5 +1700,6 @@ Obviously the reason is that he had done pretty good damn job (almost perfect if
 caching headers for data and metadata!
 
 explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!
+Also say that hypermedia ~= HATOEAS
 
 say about atom+json example!! A totally new Media Type that we need to manually understand..
