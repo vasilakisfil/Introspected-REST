@@ -971,7 +971,7 @@ the level and type of HATEOAS it will follow?**
 As we descrined earlier, mixing data with hypermedia leads to increased complexity, for both the server and the client developer.
 For instance compare the response of a [non-hypermedia-ed API](#813-a-json-api-back-in-time) and the same resource represented by
 [Siren](#74-siren), a hypermedia-ed API that doesn't even being REST-compatible by missing numerous information as described
-in its reflections.
+in its [reflections](#743-reflections).
 
 Moreover, the hypermedia must be tailored for the user role the client acts on behalf of.
 For instance, a user with very basic access role might only have access to retrieving resources and not manipulating them.
