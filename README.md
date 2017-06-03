@@ -1004,7 +1004,7 @@ In a perfect world, APIs are built to be alive for many decades and clients are 
 However, we are in a pragmatic world where nothing is perfect and clients are built by humans who take decisions based on their time and money.
 
 Although we firmly believe that a REST api is better than any RESTly or RESTless API, we understand that there could be cases where API designers
-_had_ to initially skip hypermedia part.
+_have_ to initially skip hypermedia part.
 
 The problem is that when REST is applied to HTTP, it doesn't allow you to easily integrate hypermedia at a later point.
 The reason is that, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
@@ -1017,11 +1017,9 @@ We would like to see a model that embraces both architectural API styles:
   * limiting API's flexibility
 
 ##### 8.2.7.2 REST does not embrace composition
-Although REST does not rejects the idea of composability of different API capabilities using different specs in the same response, or composite Media Types, it doesn't embrace it either.
-The issue becomes apparent when HTTP uses Media Types as the only mechanism to define the semantics of a response, by trying to describe everything in once place.
-Given that composite Media Types never had real compositability, and the fact that Media Types cannot be parsed by clients, there is a trade off between what should go to the Media Type and what to the actual response through
-hypermedia, as described by Section 4.4.4.
-This limits the design flexibility and evolvability.
+Although REST does not rejects the idea of composability of different API capabilities using different specs in the same response, or composite Media Types,
+it doesn't embrace it either.
+The issue becomes apparent when used in protocols like HTTP where Media Types act as big monoliths trying to describe everything in one place.
 
 As we will see later, the MicroTypes is a solution to the outdated Media Type concept that allows us to mix-in different concepts for different
 kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
