@@ -993,7 +993,8 @@ The client however could only be interested in the data, or specific hypermedia 
 Complex or long-lived APIs tend to have many hypermedia data (links, actions, custom metadata) related to the resource itself, its associations and related resources.
 As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering
 and the client receiving and parsing.
-The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade.
+The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade,
+or on constrained devices and environments, like IoT.
 
 #### 8.2.4. REST does not support caching of hypermedia
 In practice, the hypermedia part of a resource rarely changes, compared to the resource's data.
