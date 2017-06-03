@@ -1026,9 +1026,8 @@ otherwise it would break the current semantics.
 
 We would like to see a model that embraces both architectural API styles:
 * APIs that are built to last decades and thus, support full hypermedia from the very first day of their release
-* APIs that don't have hypermedia (the reason is not our business), yet they want to add hypermedia, later, in an incremental way without:
-  * breaking existing clients
-  * limiting API's flexibility
+* APIs that don't have hypermedia (the reason is not our business), yet they want to add hypermedia, later, in an incremental way without
+breaking existing clients or limiting API's flexibility
 
 ##### 8.2.7.2 REST does not embrace composition
 Although REST does not rejects the idea of composability of different API capabilities using different specs in the same response, or composite Media Types,
