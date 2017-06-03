@@ -627,6 +627,8 @@ API specs as of 2017 in terms of tools and libraries.
 }
 ```
 
+#### 7.2.3. Reflections
+
 While the spec makes a great effort describing the structure of the document, we see some
 notable issues. Namely:
  * Limited links (no URI templates, treats the client as totally stupid)
@@ -646,7 +648,7 @@ However, this feature is rather controversial since the information these links 
 
 The resources of our use case that are presented here use JSON as a message format, but HAL is not tighed to that.
 
-##### User resource
+#### 7.3.1. User resource
 ```json
 {
     "_links": {
@@ -670,7 +672,7 @@ The resources of our use case that are presented here use JSON as a message form
 }
 ```
 
-##### Users resource (a collection of User resources)
+#### 7.3.2. Users resource (a collection of User resources)
 ```json
 {
    "_links":{
@@ -732,6 +734,8 @@ The resources of our use case that are presented here use JSON as a message form
    }
 }
 ```
+
+#### 7.3.3. Reflections
 
 While the spec does have templated links, we see some notable issues. Namely:
  * No actions (they are supported by an unofficial extension)
@@ -847,6 +851,8 @@ The resources of our use case that are presented here use JSON as a message form
   ]
 }
 ```
+
+#### 7.4.3. Reflections
 The spec takes a huge leap towards REST principles by supporting, links, actions with fields and data types, there are
 still some issues that require human-involvement:
  * No custom types for the attributes of actions
@@ -963,7 +969,11 @@ the level and type of HATEOAS it will follow?**
 ### 8.2. Deriving the need for a new model
 #### 8.2.1. REST is complex
 As we descrined earlier, mixing data with hypermedia leads to increased complexity, for both the server and the client developer.
-Also, the hypermedia must be tailored for the user role the client acts on behalf of.
+For instance compare the response of a [non-hypermedia-ed API](#813-a-json-api-back-in-time) and the same resource represented by
+[Siren](#74-siren), a hypermedia-ed API that doesn't even being REST-compatible by missing numerous information as described
+in its reflections.
+
+Moreover, the hypermedia must be tailored for the user role the client acts on behalf of.
 For instance, a user with very basic access role might only have access to retrieving resources and not manipulating them.
 As a result, the hypermedia provided on the response object should reflect that by not providing hypermedia that will lead to unauthorized access.
 In fact, such design is quite difficult to implement and test from the server side.
@@ -1646,3 +1656,10 @@ it's a completely new re-design.
 If we want to be precise, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
 otherwise it would break the current semantics.
 Moreover, the response would change every time
+
+#### 8.2.3. REST does not make it easy to integrate different APIs together
+Consider a product resource.
+The product resource contains information about the product itself, as well as related information and services such as similar products.
+However, information about payment options is not provided by the product resource itself, and is provided via a linkset instead.
+This means any client requesting payment options will request payment links from a separate server.
+This not only decouples product resources from payment management; it also allows the payment options to be more easily customized based on the specifics of the client, meaning that the complete "product and payment options" view is a combination of the product resource (and associated hypermedia controls), and payment links provided by the specialized payment options service.
