@@ -485,6 +485,7 @@ _`Users` and `User` are 2 distinct resources which are often, mistankingly, miss
 
 As we mentioned, `User` resource has also some associations (or relations/relationships if you prefer).
 
+#### 7.1.1. User resource
 In plain JSON the User resource would look like:
 ```json
 {
@@ -499,7 +500,8 @@ In plain JSON the User resource would look like:
 }
 ```
 
-while a collection of `User` resources, the `Users` resource, would look like:
+#### 7.1.2. Users resource (a collection of User resources)
+A collection of `User` resources, the `Users` resource, would look like:
 
 ```json
 {
@@ -750,6 +752,7 @@ Siren was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-
 
 The resources of our use case that are presented here use JSON as a message format, but Siren is not tighed to that.
 
+#### 7.4.1. User resource
 ```json
 {
   "class": [ "user" ],
@@ -793,6 +796,7 @@ The resources of our use case that are presented here use JSON as a message form
 }
 ```
 
+#### 7.4.2. Users resource (a collection of User resources)
 ```json
 {
   "class":["users"],
