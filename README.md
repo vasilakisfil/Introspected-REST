@@ -1032,7 +1032,8 @@ breaking existing clients or limiting API's flexibility
 ##### 8.2.7.2 REST does not embrace composition
 Although REST does not rejects the idea of composability of different API capabilities using different specs in the same response, or composite Media Types,
 it doesn't embrace it either.
-The issue becomes apparent when used in protocols like HTTP where Media Types act as big monoliths trying to describe everything in one place.
+The symptom of non-composability is clearly visible in protocols like HTTP where Media Types
+act as big monoliths trying to describe everything in one place.
 
 As we will see later, the MicroTypes is a solution to the outdated Media Type concept that allows us to mix-in different concepts for different
 kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
