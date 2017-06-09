@@ -107,7 +107,7 @@ In the application level, the client starts content negotiation (or content sele
 for only one Media Type.
 
 When we say Media Type, we mean Internet media types that were originally defined in [RFC2046](https://tools.ietf.org/html/rfc2046)
-but have since used in a variety of protocols (HTTP, SIP, CoAP, etc ) and formats (HTML, Atom, MathML).
+but have since used in a variety of protocols (HTTP, SIP, CoAP, etc ).
 A Media Type provides information about the structure of the content and the message format used in the data it describes.
 
 In the HTTP this is achieved by using the `Accept` header while server responds with `Content-Type` header.
