@@ -106,8 +106,8 @@ have the following levels:
 In the application level, the client starts content negotiation (or content selection), usually asking
 for only one Media Type.
 
-When we say Media Type, we mean Internet media types that were originally defined in [RFC2046]
-but have since come to be used in a variety of protocols (HTTP, SIP, CoAP, etc ) and formats (HTML, Atom, MathML).
+When we say Media Type, we mean Internet media types that were originally defined in [RFC2046](https://tools.ietf.org/html/rfc2046)
+but have since used in a variety of protocols (HTTP, SIP, CoAP, etc ) and formats (HTML, Atom, MathML).
 
 Media Types, roughly, provide information about the structure of the content and the message format used in the data they describe.
 
