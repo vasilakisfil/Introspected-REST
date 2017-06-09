@@ -355,7 +355,10 @@ Nowadays we have been using networked APIs so much that now we essentially have 
 provide an ORM to the client over the HTTP (or any other protocol).
 
 We provide here a list of features (we call them capabilities) that we think should be built in a modern networked API,
-in 2017.
+in 2017. However, this list is not "akrivhs" and in fact we can't know how such list would look like in 10 years from now.
+Surely, it won't include a rocket launch into space, however our point here is to show the complexity of REST model.
+While such list would seem nonsense back in the 00s, today seems more like common thing to have.
+And as we move forward, apps will get more complicated and this list will expand even more.
 
 While most of these capabilities are related to Data APIs, some of them apply to UI APIs as well.
 
