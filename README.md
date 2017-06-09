@@ -108,12 +108,7 @@ for only one Media Type.
 
 When we say Media Type, we mean Internet media types that were originally defined in [RFC2046](https://tools.ietf.org/html/rfc2046)
 but have since used in a variety of protocols (HTTP, SIP, CoAP, etc ) and formats (HTML, Atom, MathML).
-
-Media Types, roughly, provide information about the structure of the content and the message format used in the data they describe.
-
-#### 3.1.1. Media Types in HTTP
-When we talk about Media Type(s), we don't necessarily mean HTTP's Media Type, however they have been used mostly in HTTP that
-we feel that a special section just for HTTP is appropriate.
+A Media Type provides information about the structure of the content and the message format used in the data it describes.
 
 In the HTTP this is achieved by using the `Accept` header while server responds with `Content-Type` header.
 
@@ -130,8 +125,8 @@ Media Types can be a bit more complex as well: `application/vnd.api+json`, the m
 In theory, [JSONAPI](http://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
 or even YAML, however in practice we tend to forget that and we treat all Media Types as single and not composite.
 
-However, it should also be noted that the Media Types and the content negotiation in general, are
-not restricted to HTTP only.
+However, it should also be noted that the **Media Types and the content negotiation in general, are
+not restricted to HTTP only**.
 Although HTTP is one of the most popular application network protocols today, the same logics could be applied
 in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
 
