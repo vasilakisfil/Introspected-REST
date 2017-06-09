@@ -394,10 +394,11 @@ have a much larger list of options to select from.
 Additionally, we should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it follows a specific regex etc.
 
-#### 6.1.7 The list doesn't end here
+#### 6.1.7 The list does not end here
 Although we feel that _today_ these capabilities should exist in any modern API, **this list is not exlusive**.
-In fact, there could be capabilities in the future that might not seem necessary today, like joining together one or more resources,
-or other db-inspired operations, so that the client can get the necessary data in the structure needed.
+In fact, there could be capabilities in the future that might not seem necessary today, but help the client can get the necessary data in the structure needed.
+For example, joining together one or more resources, other db-inspired operations applied on resources,
+internationalization and localization of the data and other capabilities that we haven't thought yet.
 In any case, **these capabilities must be transparent to the client without any documentation or human involvement**.
 
 
@@ -1065,6 +1066,8 @@ MicroTypes, small reusable modules that a final Media Type can be composed of.
 Hence, before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes.
 These terms can overlap in the REST model, however we feel that each one has its own place in Introspected REST that embraces composability.
 
+### 9.1. Resources, endpoints, actions and methods
+
 ### 9.1. Data, metadata and hypermedia
 #### 9.1.1. Data
 Data is the main variables of a resource, at a given state, at a given time.
@@ -1100,11 +1103,29 @@ or could provide UI-related information like positioning, suggested colors, etc.
 
 #### 9.1.3. Metadata
 If hypermedia is links and actions, then what is metadata ?
-Metadata are information about the resource that is not related for its manipulation, yet it's crucial for the client
-to understand API's responses and access the API's capabilities.
 
-Metadata could be API-specific, resource-specific, action-specific or even object-specific.
-However there is a distinction between different types of metadata.
+Metadata are information about the resource that is not related with the data, including hypermedia.
+In essence, metadata is a superset of hypermedia and it's crucial for the client
+to understand API's responses and access the API's capabilities and manipulate the resources.
+
+Metadata could be **API-specific, resource-specific, action-specific or even object-specific**.
+
+However, there are multiple types of metadata for each one.
+Runtime is only supported by object specific.
+## Runtime Metadata
+Runtime metadata are depending on the response and object which resulted by the incoming request.
+
+Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
+
+## Structural Metadata
+
+## Hypermedia Metadata
+
+## Informational metadata
+runtime metadata
+human-targeted metadata
+other metadata like data types?
+
 
 ##### 9.1.3.1 Request's metadata
 These metadata could be static for a resource, an endpoint or dynamic and volatile,
@@ -1115,7 +1136,6 @@ Metadata are data that describe the data or the hypermedia.
 These metadata could be static for a resource, an endpoint or dynamic and volatile,
 determined by the parameters of the request and the state of the resource at that given time.
 
-Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
 
 
 ### 9.2. MicroTypes: modules composing a Media Type
