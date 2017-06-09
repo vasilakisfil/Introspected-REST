@@ -106,6 +106,15 @@ have the following levels:
 In the application level, the client starts content negotiation (or content selection), usually asking
 for only one Media Type.
 
+When we say Media Type, we mean Internet media types that were originally defined in [RFC2046]
+but have since come to be used in a variety of protocols (HTTP, SIP, CoAP, etc ) and formats (HTML, Atom, MathML).
+
+Media Types, roughly, provide information about the structure of the content and the message format used in the data they describe.
+
+#### 3.1.1. Media Types in HTTP
+When we talk about Media Type(s), we don't necessarily mean HTTP's Media Type, however they have been used mostly in HTTP that
+we feel that a special section just for HTTP is appropriate.
+
 In the HTTP this is achieved by using the `Accept` header while server responds with `Content-Type` header.
 
 `application/json` is a Media Type that denotes that the data format of the requested
