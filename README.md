@@ -1455,6 +1455,8 @@ We would like to give some guidelines towards that direction.
 
 
 ## Conclusion
+We are not giving a solution here. We are giving food for thought.
+
 We see that people fail to understand the full extend of Roy's initial `REST` model and what is happening is that
 some elements of that REST are applied, some other not and eventually we have a model that has the downsides of both worlds.
 
