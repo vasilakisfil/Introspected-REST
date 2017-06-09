@@ -984,6 +984,7 @@ Imagine how bloated the response would look like, if we would added all the capa
 
 Moreover, the hypermedia must be tailored for the user role the client acts on behalf of.
 For instance, a user with very basic access role might only have access to retrieving resources and not manipulating them.
+Or such role could only have access to specific capabilities of the API.
 As a result, the hypermedia provided on the response object should reflect that by not providing hypermedia that will lead to unauthorized access.
 In fact, such design is quite difficult to implement and test from the server side.
 
