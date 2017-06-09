@@ -980,6 +980,7 @@ As we descrined earlier, mixing data with hypermedia leads to increased complexi
 Just compare the size of our [resource's data](#711-user-resource) and the size of our resource when represented by
 [Siren](#741-user-resource), a hypermedia-ed API that doesn't even being REST-compatible by missing numerous information as described
 in its [reflections](#743-reflections).
+Imagine how bloated the response would look like, if we would added all the capabilities described in [section 6.1.](#61-requirements-from-a-modern-rest-api).
 
 Moreover, the hypermedia must be tailored for the user role the client acts on behalf of.
 For instance, a user with very basic access role might only have access to retrieving resources and not manipulating them.
