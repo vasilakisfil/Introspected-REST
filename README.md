@@ -1,4 +1,4 @@
-#Introspected REST
+# Introspected REST
 (Sliding away from Roy's `REST` model)
 
 There has been a great confusion of what a `REST` API is.
