@@ -1448,7 +1448,7 @@ for client bootstraping.
 There is a tendency to overload Link rel for links unrelated to application format etc.
 We feel that this is a bad practice and definitely not the right location to add the Microtypes.
 Link rel should be used for very few specific things.
-For instance Media type and links. Not overloading.
+For instance Media type and links. Not overloading. Dereference only.
 
 ### Linksets
 Linksets is yet another work forwarded by Erik Wilde. The idea is...
