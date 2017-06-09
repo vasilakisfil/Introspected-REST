@@ -1247,6 +1247,8 @@ a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
 architecture style.
 
+This is by no means a Media Type, but just an example of the potential of Introspected REST.
+The actual MicroTypes and Media Types should be created by the community.
 
 We will use JSON and JSON Schemas.
 But the reader could apply the same ideas using any message format.
