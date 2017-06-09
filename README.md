@@ -298,7 +298,7 @@ The phone wire and its signals is the API.
 The device used to enode/decode the wire signals is the API client.
 On top of a device we can run our application.
 The PSTN, ISDN, (A)DSL etc are all different Media Types for the same API (wire signals).
-For each one, we need a cient (device/modem) that will understand (encode/decode) the wire signals of that Media Type.
+For each one, we need a client (device/modem) that will understand (encode/decode) the wire signals of that Media Type.
 Using that client we can built any type of application, in the plaisia of the Media Type.
 The application does not deal with the API's semantics, but instead it uses the Client to perform its tasks.
 
