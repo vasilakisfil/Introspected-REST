@@ -1,6 +1,4 @@
-#
-
-explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!Introspected REST Manifesto
+#Introspected REST Manifesto
 (Sliding away from Roy's `REST` model)
 
 There has been a great confusion of what a `REST` API is.
@@ -1703,3 +1701,4 @@ explain that when we talk about Media Type, we don't neceserily mean HTTP's medi
 Also say that hypermedia ~= HATOEAS
 
 say about atom+json example!! A totally new Media Type that we need to manually understand..
+explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!
