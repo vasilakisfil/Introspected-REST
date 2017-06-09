@@ -1445,6 +1445,9 @@ like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](
 for client bootstraping.
 
 ### Overloading Link rel
+There is a tendency to overload Link rel for links unrelated to application format etc.
+We feel that this is a bad practice and definitely not the right location to add the Microtypes.
+Link rel should be used for very few specific things.
 
 ### Linksets
 Linksets is yet another work forwarded by Erik Wilde. The idea is...
