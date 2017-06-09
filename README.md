@@ -314,7 +314,7 @@ The only thing that the client requires is the initial URI of the API.
 * multi-fold: Programming the client once to understand the Media Type.
 Then modify the client to parse and understand the API correctly using some offline contract (like available resources, fields, pagination etc) and then
 every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
-during that phase is variable depending on the Media Type.
+during that phase is variable depending on the weakness of the Media Type.
 
 Strictly speaking, an API that follows the `REST` model should be evolvable without the need
 of human interaction in the client side.
