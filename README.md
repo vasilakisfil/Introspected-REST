@@ -355,10 +355,8 @@ Nowadays we have been using networked APIs so much that now we essentially have 
 provide an ORM to the client over the HTTP (or any other protocol).
 
 We provide here a list of features (we call them capabilities) that we think should be built in a modern networked API,
-in 2017. However, this list is not "akrivhs" and in fact we can't know how such list would look like in 10 years from now.
-Surely, it won't include a rocket launch into space, however our point here is to show the complexity of REST model.
-While such list would seem nonsense back in the 00s, today seems more like common thing to have.
-And as we move forward, apps will get more complicated and this list will expand even more.
+in 2017. However, this list is not exclusive and in fact we can't know how such list would look like in 10 years from now.
+Surely, it won't include a rocket launch into space, however our point here is to show the need for a new model.
 
 While most of these capabilities are related to Data APIs, some of them apply to UI APIs as well.
 
@@ -398,10 +396,11 @@ Additionally, we should be able to provide custom types in an easy way, for inst
 has maximum length of 255 characters, it follows a specific regex etc.
 
 #### 6.1.7 The list doesn't end here
-Although we feel that _today_ these capabilities should exist in any modern API, this list is not complete.
+Although we feel that _today_ these capabilities should exist in any modern API, **this list is not exlusive**.
 In fact, there could be capabilities in the future that might not seem necessary today, like joining together one or more resources,
 or other db-inspired operations, so that the client can get the necessary data in the structure needed.
-In any case, these capabilities must be transparent to the client without any documentation or human involvement.
+In any case, **these capabilities must be transparent to the client without any documentation or human involvement**.
+
 
 ### 6.2. Media Types vs HATEOAS
 Now the reader could be wondering: where is the appropriate place to describe those capabilities,
