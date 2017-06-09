@@ -291,7 +291,7 @@ and runtime HATEOAS. The client is responsible for providing in the application 
 their fields, their capabilities, available actions and any hypermedia available.
 
 The application responsibility on the other hand should not include API specific details.
-Instead, using the client, it should fetch whatever is needed, within the API's capabilities.
+Instead, using the client, it should fetch whatever is needed by the application domain, within the API's capabilities.
 
 Think about the traditional home telephone devices.
 The phone wire and its signals is the API.
