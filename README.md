@@ -1073,7 +1073,7 @@ Data is very volatile compared to other parts of a response.
 #### 9.1.2. Hypermedia
 Originally the hypermedia term was mostly used for linked data, in the sense of hyperlinks.
 In `REST`,eventually it also includes information for interaction and resource manipilation.
-Hypermedia can be dynamic or static but in any case regardless they are not considered part of the response data.
+Hypermedia can be dynamic or static but regardless they are not considered part of the response data.
 
 Hypermedia is a very broad term and needs to be broken down in different parts.
 Although there isn't any clear definition or concencus in the literature and the community, we will try to provide definitions and descriptions for
