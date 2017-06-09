@@ -340,7 +340,7 @@ On the other hand, the data-driven APIs, are more generic and facilitate any app
 Being able to specify your application's needs when requesting data from an API is crucial,
 especially if your business depends on the adoptability of your API.
 
-For the following, we will mostly focus in the generic data APIs,
+For the following subsections, we will mostly focus in the generic data APIs,
 however most of the things mentioned here can also be applied in a specialized or UI-driven API.
 
 
