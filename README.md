@@ -1066,7 +1066,6 @@ MicroTypes, small reusable modules that a final Media Type can be composed of.
 Hence, before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes.
 These terms can overlap in the REST model, however we feel that each one has its own place in Introspected REST that embraces composability.
 
-### 9.1. Resources, endpoints, actions and methods
 
 ### 9.1. Data, metadata and hypermedia
 #### 9.1.1. Data
@@ -1109,32 +1108,11 @@ In essence, metadata is a superset of hypermedia and it's crucial for the client
 to understand API's responses and access the API's capabilities and manipulate the resources.
 
 Metadata could be **API-specific, resource-specific, action-specific or even object-specific**.
+There could also be different kinds of metadata like runtime (pagination information), structural (data types of an object),
+hypermedia (links, actions, forms), informational (targeted for humans).
+Last but not least, metadata are not restricted to a response but a request could also have metadata.
 
-However, there are multiple types of metadata for each one.
-Runtime is only supported by object specific.
-## Runtime Metadata
-Runtime metadata are depending on the response and object which resulted by the incoming request.
-
-Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
-
-## Structural Metadata
-
-## Hypermedia Metadata
-
-## Informational metadata
-runtime metadata
-human-targeted metadata
-other metadata like data types?
-
-
-##### 9.1.3.1 Request's metadata
-These metadata could be static for a resource, an endpoint or dynamic and volatile,
-determined by the parameters of the request and the state of the resource at that given time.
-
-##### 9.1.3.2 Media Type fill-ins
-Metadata are data that describe the data or the hypermedia.
-These metadata could be static for a resource, an endpoint or dynamic and volatile,
-determined by the parameters of the request and the state of the resource at that given time.
+Usually metadata are not volatile, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
 
 
@@ -1739,3 +1717,56 @@ Also say that hypermedia ~= HATOEAS
 
 say about atom+json example!! A totally new Media Type that we need to manually understand..
 explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!
+
+
+### 9.1. Collections, Resources, endpoints, actions and methods
+There is a small confusion of different terms used around API literature.
+We would like to give a small description and definition of each one.
+
+#### Collection
+A collection is a set, an array, of resources.
+The resources should be of the same type but rarely a collection could also contain
+resources of different types, or polymorphic resources.
+
+#### Resource
+A resource is an entity that exposes a set of different actions that can be performed on it.
+Usually actions are a (sub)set of CRUD but it can go way beyond that and depends on the API designer decisions.
+
+#### 9.1.1. Methods
+In the RPC world, a method is a remote method called by another remote object.
+In HTTP and related protocols, when we talk about a method, we mean the actual protocol method used, for instance `REGISTER` in SIP,
+or `DELETE` in HTTP.
+
+Details about the method as well as the available methods are described by the protocol itself.
+
+#### 9.1.2. Actions and endpoints
+Actions or endpoints mean the same thing: it's the combination of a specific protocol method in a specific url.
+For instance, `GET /api/users` is an action, or, an endpoint.
+
+The difference between action or endpoint, is that an endpoint could also be outside
+
+##### Runtime Metadata
+Runtime metadata are depending on the response and object which resulted by the incoming request.
+
+Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
+
+##### Structural Metadata
+Structural metadata are related to the structure of the data, either the response object or the request object.
+
+##### Hypermedia Metadata
+
+
+## Informational metadata
+runtime metadata
+human-targeted metadata
+other metadata like data types?
+
+
+##### 9.1.3.1 Request's metadata
+These metadata could be static for a resource, an endpoint or dynamic and volatile,
+determined by the parameters of the request and the state of the resource at that given time.
+
+##### 9.1.3.2 Media Type fill-ins
+Metadata are data that describe the data or the hypermedia.
+These metadata could be static for a resource, an endpoint or dynamic and volatile,
+determined by the parameters of the request and the state of the resource at that given time.
