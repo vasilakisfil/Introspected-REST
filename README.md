@@ -308,10 +308,10 @@ The application does not deal with the API's semantics, but instead it uses the 
 
 ### 5.2. The Human interaction principle
 There are 2 types of human involvement when building an API client:
-* 1-fold: Programming the client only once to understand the Media Type correctly and let the
+* **1-fold**: Programming the client only once to understand the Media Type correctly and let the
 client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
 The only thing that the client requires is the initial URI of the API.
-* multi-fold: Programming the client once to understand the Media Type.
+* **multi-fold**: Programming the client once to understand the Media Type.
 Then modify the client to parse and understand the API correctly using some offline contract (like available resources, fields, pagination etc) and then
 every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
 during that phase is variable depending on the weakness of the Media Type.
