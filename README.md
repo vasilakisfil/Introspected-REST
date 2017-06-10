@@ -1158,12 +1158,33 @@ Specifically the state of the client is Introspected, possibly cached.
 The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
 
 
-#### 9.3.1. Composition over monoliths (same with Easier composition?) should be enabled by design
-
 #### Definition of Introspection
-specific method, querying, caching, composition etc not data (only metadata)
+The idea of introspection is to be able to examine properties of a system at runtime.
+In the case of Introspected REST, introspection defines a process for a client to be able to introspect
+the API's, resource's, action's or even object's metadata at runtime.
 
-per resource? per endpoint? maybe define what action is ?
+We believe that REST fits perfectly for the implementation of that process.
+However we would like to point out some key properties of the introspection.
+
+##### Composition over monolithic architecture
+Introspected REST encourages the use of different MicroTypes to form a Media Type instead of trying to define everything in the same spec.
+
+This would allow us to break the metadata in different
+
+##### Plain data separated from metadata
+The process for requesting metadata of an API should be different from requesting data, denoting the sense of introspection.
+As a result, introspection responses should not include any data but only metadata while when requesting data,
+responses should not include any metadata, apart from runtime metadata.
+
+##### Querying MicroTypes
+The process should allow to query different MicroTypes.
+
+##### Caching
+The process should make it possible to allow the client to cache the metadata using the protocol's tools.
+For instance, in HTTP, the server should denote the max age of the metadata.
+
+Moreover, the process should make it possible to cache all metadata for each MicroType at once.
+This would speed up the client.
 
 ##### Method of transport
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
@@ -1175,67 +1196,10 @@ HAve some properties:
 * separated from data
 * support queries
 
-#### Types of metadata
-In REST, when requesting a resource you get different kind of information mixed in with the actual data.
-Nowadays, API designers also distribute documentation to descrine some information about the API and its resources as well.
-
-If we try to identify all the different kind of data and metadata we would get the following list for a resource:
-###### 1. Media Type's capabilities fill-ins
-These metadata are related to the Media Type used by the API.
-The client provides information for the server to take into account when processing the request.
-For instance, pagination information (page, items per page, offset) or the desired query (ideally an equievelent to SQL's SELECT).
-
-###### 2. Resource schema
-When requesting a response, the client should be able to know what to expect, for instance:
-* the structure schema of the object, like the name of the attributes etc
-* the data types of the object's attributes
-* semantic meaning of each attribute, or of the resource itself
-* possible a description for each resource and attribute, targeted to humans
-
-Those information should be available for both response and request objects.
+#### Request Response inconsistency
 
 
-the name of the attributes,
-their data types, any semantic meaning of each attribute (using a linked data spec) and possibly any description of the resource itself or its attributes
-###### 3. hypermedia metadata
-  * links, for linking other resources
-  * actions, for manipulating the resource
-
-
-As we described earlier, the level of Media Type's metadata depends on how strong or weak a Media Type is. If it's strong then the client will
-
-
-### Plain Data
-The main purpose of introspected REST _manifesto_ is to **separate actual data from resource meta-data, like hypermedia**.
-
-When the client requests a resource (using `GET` method), it should get only the data:
-
-```json
-{
-  "user": {
-    "id":"685",
-    "email":"vasilakisfil@gmail.com",
-    "name":"Filippos Vasilakis",
-    "birth_date": "1988-12-12",
-    "created_at": "2014-01-06T20:46:55Z",
-    "microposts_count":50
-  }
-}
-```
-
-The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
-the data does not contain any hypermedia or meta-data.
-
-We should note that resource's meta-data that depend on the data ( which depend on the actual request for that time)
-like pagination information, should be still in the same response.
-The way those meta-data are represented is left to the API designer, usually though they are put under a
-`meta` attribute regardless if it's a resource or a collection of resources.
-
-
-### Request Response inconsistency
-
-
-### Automating the documentation generation
+#### Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
 
 
@@ -1770,3 +1734,33 @@ determined by the parameters of the request and the state of the resource at tha
 Metadata are data that describe the data or the hypermedia.
 These metadata could be static for a resource, an endpoint or dynamic and volatile,
 determined by the parameters of the request and the state of the resource at that given time.
+
+
+#### Types of metadata
+In REST, when requesting a resource you get different kind of information mixed in with the actual data.
+Nowadays, API designers also distribute documentation to descrine some information about the API and its resources as well.
+
+If we try to identify all the different kind of data and metadata we would get the following list for a resource:
+###### 1. Media Type's capabilities fill-ins
+These metadata are related to the Media Type used by the API.
+The client provides information for the server to take into account when processing the request.
+For instance, pagination information (page, items per page, offset) or the desired query (ideally an equievelent to SQL's SELECT).
+
+###### 2. Resource schema
+When requesting a response, the client should be able to know what to expect, for instance:
+* the structure schema of the object, like the name of the attributes etc
+* the data types of the object's attributes
+* semantic meaning of each attribute, or of the resource itself
+* possible a description for each resource and attribute, targeted to humans
+
+Those information should be available for both response and request objects.
+
+
+the name of the attributes,
+their data types, any semantic meaning of each attribute (using a linked data spec) and possibly any description of the resource itself or its attributes
+###### 3. hypermedia metadata
+  * links, for linking other resources
+  * actions, for manipulating the resource
+
+
+As we described earlier, the level of Media Type's metadata depends on how strong or weak a Media Type is. If it's strong then the client will
