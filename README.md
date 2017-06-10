@@ -105,15 +105,12 @@ have the following levels:
 ### 3.1. Application level
 In the application level, the client starts content negotiation (or content selection), usually asking
 for only one Media Type.
-A Media Type provides information about the structure of the content and the message format used in the data it describes.
-Media Types were originally defined in [RFC 2046](https://tools.ietf.org/html/rfc2046) and have been extensively used in HTTP, however,
-**Media Types and the content negotiation in general, are not restricted only to HTTP**.
-Although HTTP is one of the most popular application network protocols today, the Media Types and content negotiation can be found
-in other (mostly text-based) protocols as well like SIP, CoAP, QUIC etc.
+A Media Type provides information about the structure of the content and the message format used in the data it describes,
+as described by [RFC 2046](https://tools.ietf.org/html/rfc2046).
 
-In the HTTP the content negotiation is achieved by a client using the `Accept` header which denotes the Media Types that it can understand, in a
-preference order.
-Then the server responds with a Media Type proposed by the client in `Content-Type` header.
+In the HTTP the content negotiation is achieved by a client using the Accept header which denotes the Media Types that it
+can understand, in a preference order.
+Then the server responds with a Media Type proposed by the client in Content-Type header.
 
 `application/json` is a Media Type that denotes that the data format of the requested
 representation is in JSON data format.
@@ -128,6 +125,10 @@ Media Types can be a bit more complex as well: `application/vnd.api+json`, the m
 In theory, [JSONAPI](http://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
 or even YAML, however in practice we tend to forget that and we treat all Media Types as single and not composite.
 
+However, it should also be noted that the **Media Types and the content negotiation in general, are
+not restricted to HTTP only**.
+Although HTTP is one of the most popular application network protocols today, the same logics could be applied
+in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
 
 To sum up, the application level semantics are defined by the Media Type requested and should not be tightly coupled to the semantics of the
 message level (like JSON) or the underlying protocol level (like HTTP).
