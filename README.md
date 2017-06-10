@@ -1203,7 +1203,7 @@ HAve some properties:
 documentation generation could have extra stuff, by assigining a param in the url.
 
 
-## 10. Introspected REST APIs: A prototype in the world of HTTP and JSON
+## 10. An Introspected REST API prototype in the world of HTTP and JSON
 In the following we will describe the architecture of the Introspected REST APIs through
 a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
