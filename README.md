@@ -105,7 +105,6 @@ have the following levels:
 ### 3.1. Application level
 In the application level, the client starts content negotiation (or content selection), usually asking
 for only one Media Type.
-
 Media Types were originally defined in [RFC 2046](https://tools.ietf.org/html/rfc2046)
 but have since used in a variety of protocols.
 A Media Type provides information about the structure of the content and the message format used in the data it describes.
