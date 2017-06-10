@@ -1161,27 +1161,27 @@ usually a REST interface even for the metadata is a wise choise.
 
 However, we would like to point out some key properties that should appear to any introspection process:
 
-#### Composition over monolithic architecture
+#### 9.3.1. Composition over monolithic architecture
 The process should prefer the use of different MicroTypes to form a Media Type instead of trying to define everything in the same Meda Type.
 This will make easier the rest key points, specifically distinction between metadata related to each MicroType which would
 lead to separate caching and querying.
 
-#### Plain data separated from metadata
+#### 9.3.2. Plain data separated from metadata
 The process for requesting metadata of an API should be different from requesting data, denoting the sense of introspection.
 As a result, introspection responses should not include any data but only metadata while when requesting data,
 responses should not include any metadata, apart from runtime metadata.
 
-##### Querying MicroTypes
+##### 9.3.3. Querying MicroTypes
 The process should allow to query different MicroTypes.
 If a REST interface is used, each  MicroType should represent a distinct resource.
 
-##### Caching
+##### 9.3.4. Caching
 The process should make it possible to allow the client to cache the metadata for each MicroType used, using the underlying protocol's headers.
 For instance, in HTTP, the server could denote the max age of the metadata of a specific MicroType using
 
 Moreover, the process should make it possible to cache all metadata for all MicroTypes using only one request.
 
-#### Request Response inconsistency
+#### 9.3.5. Request Response inconsistency
 Although usually a resource's structure is identical when receiving it or manipulating through a request,
 that is not always the case.
 
@@ -1189,7 +1189,7 @@ Moreover, a request has unique properties, like URL params that need to be defin
 As a result, if there is any inconsistency, it should be denoted at once.
 
 
-#### Automatic documentation generation
+#### 9.3.6. Automatic documentation generation
 The process should make it easy to provide online documentation targeted for humans and not machines.
 The way the documentation is requested and its format should be distincly defined by a MicroType.
 
