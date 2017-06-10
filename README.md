@@ -1152,55 +1152,46 @@ The Content-Type header is limited up to 128 characters so we might need another
 Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
 
 ### 9.3. Introspection as the engine of application state (IATEOAS)
-In the following section we will describe the architecture style of the Introspected REST.
-The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATEOAS is derived
-Specifically the state of the client is Introspected, possibly cached.
-The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
-
-
-#### Definition of Introspection
 The idea of introspection is to be able to examine properties of a system at runtime.
 In the case of Introspected REST, introspection defines a process for a client to be able to introspect
 the API's, resource's, action's or even object's metadata at runtime.
 
-We believe that REST fits perfectly for the implementation of that process.
-However we would like to point out some key properties of the introspection.
+The implementation of the process is up to the API designer although
+usually a REST interface even for the metadata is a wise choise.
 
-##### Composition over monolithic architecture
-Introspected REST encourages the use of different MicroTypes to form a Media Type instead of trying to define everything in the same spec.
+However, we would like to point out some key properties that should appear to any introspection process:
 
-This would allow us to break the metadata in different
+#### Composition over monolithic architecture
+The process should prefer the use of different MicroTypes to form a Media Type instead of trying to define everything in the same Meda Type.
+This will make easier the rest key points, specifically distinction between metadata related to each MicroType which would
+lead to separate caching and querying.
 
-##### Plain data separated from metadata
+#### Plain data separated from metadata
 The process for requesting metadata of an API should be different from requesting data, denoting the sense of introspection.
 As a result, introspection responses should not include any data but only metadata while when requesting data,
 responses should not include any metadata, apart from runtime metadata.
 
 ##### Querying MicroTypes
 The process should allow to query different MicroTypes.
+If a REST interface is used, each  MicroType should represent a distinct resource.
 
 ##### Caching
-The process should make it possible to allow the client to cache the metadata using the protocol's tools.
-For instance, in HTTP, the server should denote the max age of the metadata.
+The process should make it possible to allow the client to cache the metadata for each MicroType used, using the underlying protocol's headers.
+For instance, in HTTP, the server could denote the max age of the metadata of a specific MicroType using
 
-Moreover, the process should make it possible to cache all metadata for each MicroType at once.
-This would speed up the client.
-
-##### Method of transport
-The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
-The reason we choose `OPTIONS` here is because this method has been historically used
-for getting informtation on methods supported on a specific resource.
-
-HAve some properties:
-* ability to be cached
-* separated from data
-* support queries
+Moreover, the process should make it possible to cache all metadata for all MicroTypes using only one request.
 
 #### Request Response inconsistency
+Although usually a resource's structure is identical when receiving it or manipulating through a request,
+that is not always the case.
+
+Moreover, a request has unique properties, like URL params that need to be defined by a specific MicroType.
+As a result, if there is any inconsistency, it should be denoted at once.
 
 
-#### Automating the documentation generation
-documentation generation could have extra stuff, by assigining a param in the url.
+#### Automatic documentation generation
+The process should make it easy to provide online documentation targeted for humans and not machines.
+The way the documentation is requested and its format should be distincly defined by a MicroType.
 
 
 ## 10. An Introspected REST API prototype in the world of HTTP and JSON
@@ -1216,8 +1207,6 @@ We will use JSON and JSON Schemas.
 But the reader could apply the same ideas using any message format.
 
 ### Separating meta-data from the actual data
-#### Classes of meta-data
-
 #### Plain Data
 The main purpose of introspected REST _manifesto_ is to **separate actual data from resource meta-data, like hypermedia**.
 
@@ -1244,7 +1233,8 @@ like pagination information, should be still in the same response.
 The way those meta-data are represented is left to the API designer, usually though they are put under a
 `meta` attribute regardless if it's a resource or a collection of resources.
 
-#### Structural meta-data
+#### Metadata
+##### Structural meta-data
 In order to describe our data, we will use JSON Schemas.
 It's a vocubulary that enabled to describe and as a result validate JSON data.
 
@@ -1764,3 +1754,10 @@ their data types, any semantic meaning of each attribute (using a linked data sp
 
 
 As we described earlier, the level of Media Type's metadata depends on how strong or weak a Media Type is. If it's strong then the client will
+In the following section we will describe the architecture style of the Introspected REST.
+The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATEOAS is derived
+Specifically the state of the client is Introspected, possibly cached.
+The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
+
+
+#### Definition of Introspection
