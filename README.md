@@ -1125,7 +1125,7 @@ Usually metadata are not volatile, except runtime metadata that depend on the re
 
 Currently media types act as a big monolith that clients need to understand beforehand through human involvement.
 We believe that Media Types should be broken in smaller
-media types, microtypes, each describing very carefully a specific functionality of a modern API.
+reusable media types, MicroTypes, each describing very carefully a specific functionality of a modern API.
 
 Clients and Server should still do the regular negotiation flow even for those sub-media-types.
 
@@ -1417,6 +1417,9 @@ We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
 
 Our solution is by far **not** complete but we have set the basis for the community to experiment and come up with MicroType specs.
+
+We call the community to start experiment in this model and come up with patterns.
+In any case we feel that to reach a sustainable API with the evolvability span of REST model, Introspected REST model is necessary.
 
 Another reason is to have a real REST alternative with arguments and remove the develper roy shadow and fear to deprecate Roy's REST.
 
