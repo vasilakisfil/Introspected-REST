@@ -1198,7 +1198,7 @@ The reader though should not confuse the proposed implementation details with th
 architecture style.
 
 This is by no means a Media Type, but just an example of the potential of Introspected REST.
-The actual MicroTypes and Media Types should be created by the community.
+The actual MicroTypes and Media Types wil be created by the community.
 
 We will use JSON and JSON Schemas.
 But the reader could apply the same ideas using any message format.
@@ -1221,6 +1221,8 @@ When the client requests a resource (using `GET` method), it should get only the
   }
 }
 ```
+
+add users response with runtime metadata
 
 The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
 the data does not contain any hypermedia or meta-data.
@@ -1413,6 +1415,10 @@ We would like to give some guidelines towards that direction.
 ## Conclusion
 We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
+
+Our solution is by far **not** complete but we have set the basis for the community to experiment and come up with MicroType specs.
+
+Another reason is to have a real REST alternative with arguments and remove the develper roy shadow and fear to deprecate Roy's REST.
 
 
 We see that people fail to understand the full extend of Roy's initial `REST` model and what is happening is that
