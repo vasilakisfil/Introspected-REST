@@ -1367,6 +1367,11 @@ documentation generation could have extra stuff, by assigining a param in the ur
 ### GraphQL
 no urls, basically a query language, no MicroTypes
 
+The reason we have it in related work is because it's related to REST but not REST.
+
+We are happy that people are trying new things and we support such initiatives.
+However it has some issues.
+
 ### Linked Data and Semantic Web
 
 #### JSON-LD and HYDRA
