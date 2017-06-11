@@ -1147,8 +1147,9 @@ We will need a MicroType for describing each of following:
 + specify http2 server push
 + etc
 
-Although MicroTypes is not a necessary requirement for Introspected REST, it helps by separating metadata in
-distinct classes that can then be identified and requested by the client.
+It should be noted that MicroTypes is not a strict requirement for Introspected REST and in fact an equivelant concept
+can be used.
+However, without such concept, it's possible that Introspected REST's power to be restricted and not used to the full extent.
 
 We will use the term MicroType's metadata to denote a response containing the metadata of a MicroType's semantics.
 
