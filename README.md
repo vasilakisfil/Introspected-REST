@@ -1147,6 +1147,11 @@ We will need a MicroType for describing each of following:
 + specify http2 server push
 + etc
 
+Although MicroTypes is not a necessary requirement for Introspected REST, it helps by separating metadata in
+distinct classes that can then be identified and requested by the client.
+
+We will use the term MicroType's metadata to denote a response containing the metadata of a MicroType's semantics.
+
 #### 9.2.1. MicroTypes in HTTP
 The Content-Type header is limited up to 128 characters so we might need another header for that.
 Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
@@ -1156,36 +1161,34 @@ The idea of introspection is to be able to examine properties of a system at run
 In the case of Introspected REST, introspection defines a process for a client to be able to introspect
 the API's, resource's, action's or even object's metadata at runtime.
 
-The implementation of the process is up to the API designer although
-usually a REST interface even for the metadata is a wise choise.
+The implementation of the process is up to the API designer although usually a REST interface even for each metadata type (MicroType) is a wise choise.
 
 In any case, we would like to point out some key properties that should appear on any introspection process:
 
 #### 9.3.1. Composition over monolithic architecture
-The process should embrace the use of different MicroTypes to form a Media Type instead of trying to define everything in the same Meda Type.
-This will make easier for the rest key points described here.
+The process should embrace the use of distinct MicroTypes to form a Media Type instead of trying to define everything in the same Meda Type.
+Sucn an architecture will lead to a system whose each metadata type is self-contained and detached from the rest metadata types.
 
 #### 9.3.2. Plain data separated from metadata
 The process of introspection should be distinctly different from requesting data.
 To that extend, introspection responses should not include any data but only metadata and data
 responses should not include any metadata, except possibly runtime metadata.
 
-##### 9.3.3. Querying MicroTypes
-++
-The process should allow to query different MicroTypes.
-If a REST interface is used, each  MicroType should represent a distinct resource.
+#### 9.3.3. Identifiable metadata of each Microtype
+When MicroTypes concept is used a number of powerful features are unlocked.
+Given that metadata are already separated from plain data, by being able to identify and retrieve metadata
+of a specific MicroType there are various advantages because each MicroType becomes independent and self-sufficient.
 
-##### 9.3.4. Caching
-Given that metadata are separated from plain data, caching should be possible for metadata only using the underlying protocol's mechanisms.
-For instance, in HTTP, the server could denote the max age of the metadata of a specific MicroType using `Cache-Control` header.
+For instance, caching will be possible using the underlying protocol's mechanisms, for each metadata type separately.
+Another example is the detached evolvability of each MicroType's metadata, given that the MicroType's semantics allow such thing.
 
-Moreover given that MicroTypes should be used, it should be possible to enable different caching
-for each Microtype using querying.
+#### 9.3.4. Automatic documentation generation
+Possibly the API should provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
+It should be noted that this information shouldn't be needed for a client to parse and understand the API responses,
+and even for humans such information should weight very little compared to the rest metadata.
 
-
-#### 9.3.6. Automatic documentation generation
-The process should make it easy to provide online documentation targeted for humans and not machines.
-The way the documentation is requested and its format should be distincly defined by a MicroType.
+In the same way, the API should automate the generation of the documentation using all metadata for a resource.
+The way the documentation is requested and its format should be distincly defined by a MicroType or the parent Media Type.
 
 
 ## 10. An Introspected REST API prototype in the world of HTTP and JSON
