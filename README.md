@@ -1167,7 +1167,8 @@ In any case, we would like to point out some key properties that should appear o
 
 #### 9.3.1. Composition over monolithic architecture
 The process should embrace the use of distinct MicroTypes to form a Media Type instead of trying to define everything in the same Meda Type.
-Sucn an architecture will lead to a system whose each metadata type is self-contained and detached from the rest metadata types.
+Sucn an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
+of the rest MicroTypes.
 
 #### 9.3.2. Plain data separated from metadata
 The process of introspection should be distinctly different from requesting data.
