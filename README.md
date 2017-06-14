@@ -1091,13 +1091,12 @@ Actions are links along with information for manipulating a resource.
 Although CRUD are the most popular actions of a resource, the beauty with REST, and consequently Introspected REST, is that actions can go beyond plain CRUD.
 In fact, you can define any type of action or meta-action of your internal resource, through the representation that you expose.
 As a result, actions of a resource could be quite complex or simplistic depending on the needs and decisions of the API designer.
-In any case, actions should also describe any relevant information for the client to perform it, unless the Media Type itself describe those details.
+Actions should also describe any relevant information for the client to perform it, unless the Media Type itself describe those details.
 
 ##### 9.1.2.3. Forms
 Another way of describing the manipulation options of a resource is the notion of forms.
 The difference between actions and forms is that the latter are mostly targeted for the UI.
-For instance, they could provide all the necessary information to be semantically equivelent to an HTML form,
-or could provide UI-related information like positioning, suggested colors, etc.
+API forms should provide all the necessary information to be semantically equivelent to an HTML form.
 
 
 #### 9.1.3. Metadata
@@ -1108,9 +1107,8 @@ In essence, metadata is a superset of hypermedia and it's crucial for the client
 to understand API's responses and access the API's capabilities and manipulate the resources.
 
 Metadata could be **API-specific, resource-specific, action-specific or even object-specific**.
-There could also be different kinds of metadata like runtime (pagination information), structural (data types of an object),
-hypermedia (links, actions, forms), informational (targeted for humans).
-Last but not least, metadata are not restricted to a response but a request could also have metadata.
+There could also be different kinds of metadata: runtime (i.e. pagination information), structural (i.e. data types of a resource object),
+hypermedia (i.e. links, actions, forms), informational, targeted to humans (i.e. general information, descriptions).
 
 Usually metadata are not volatile, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
@@ -1161,12 +1159,13 @@ Content-Type could describe the overall Media Type while Foo header could descri
 The idea of introspection is to be able to examine properties of a system at runtime.
 In the case of Introspected REST, introspection defines a process for a client to be able to introspect
 the API's, resource's, action's or even object's metadata at runtime.
+Through those metadata, server provides all the available states, manipulation actions as well as the available transitions.
 The implementation of the process is up to the API designer although usually a REST interface even for each MicroType's metadata is a wise choise.
 In any case, we would like to point out some key properties that should appear on any introspection process:
 
 #### 9.3.1. Composition over monolithic architecture
-The process should embrace the use of distinct MicroTypes to form a Media Type instead of trying to define everything in the same Meda Type.
-Sucn an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
+The process should embrace the use of distinct MicroTypes to form a Media Type instead of using a one Media Type.
+Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
 
 #### 9.3.2. Plain data separated from metadata
@@ -1183,8 +1182,8 @@ For instance, caching will be possible using the underlying protocol's mechanism
 Another example is the detached evolvability of each MicroType's metadata, given that the MicroType's semantics allow such thing.
 
 #### 9.3.4. Automatic documentation generation
-Possibly the API should provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
-It should be noted that this information shouldn't be needed for a client to parse and understand the API responses,
+Possibly the API will provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
+It should be noted that this information must not be needed for a client to parse and understand the API responses,
 and even for humans such information should weight very little compared to the rest metadata.
 
 In the same way, the API should automate the generation of the documentation using all metadata for a resource.
@@ -1197,17 +1196,30 @@ a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
 architecture style.
 
-This is by no means a Media Type, but just an example of the potential of Introspected REST.
+**This is by no means a complete Media Type**, but just an example of the potential of Introspected REST.
 The actual MicroTypes and Media Types wil be created by the community.
 
-We will use JSON and JSON Schemas.
-But the reader could apply the same ideas using any message format.
+For our solution, we will use JSON, JSON Schemas and JSON-LD, each representing a different MicroType.
+But the reader could apply the same ideas using any message format and spec.
 
-### Separating meta-data from the actual data
-#### Plain Data
-The main purpose of introspected REST _manifesto_ is to **separate actual data from resource meta-data, like hypermedia**.
+Our use case will be the same as the one in [section 7.1](#71-our-use-case), a minature of yet another Social App.
 
-When the client requests a resource (using `GET` method), it should get only the data:
+The identification of the resources will be kept the same, namely:
+* `Users` resource (`/users`):
+  * List users (`GET /users`): Gets a collection of `User` resources
+  * Create a new user (`/users`): Creates a new `User` with the specified attributes.
+
+* `User` resource (`/users/{id}`):
+  * Get a user (`GET /users/{id}`): Gets the attributes of the specified `User`
+  * Update a user `PATCH /users/{id}`: Updates a `User` with the specified attributes
+  * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
+
+
+### Isolating the actual data from metadata
+Our first job is to first offload the final response object with metadata, like hypermedia.
+Instead we will provide to the user only the data and possibly any runtime metadata.
+
+When the client manipulates a `User` resource, the response should contain only the data:
 
 ```json
 {
@@ -1222,22 +1234,62 @@ When the client requests a resource (using `GET` method), it should get only the
 }
 ```
 
-add users response with runtime metadata
+Similarly, a `Users` resource will be a collection of `User` resources:
+```json
+{
+  "users": [{
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }, {
+    "id":"9124",
+    "email": "robert.clarsson@gmail.com",
+    "name": "Robert Clarsson",
+    "birth_date": "1940-11-10",
+    "created-at": "2016-10-06T16:01:24Z",
+    "microposts-count": 17,
+  }]
+}
+```
+
+Given that the response should also contain pagination information,
+we will add this runtime metadata under a `meta` attribute:
+```json
+{
+  "users": [{
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count": 50
+  }, {
+    "id":"9124",
+    "email": "robert.clarsson@gmail.com",
+    "name": "Robert Clarsson",
+    "birth_date": "1940-11-10",
+    "created-at": "2016-10-06T16:01:24Z",
+    "microposts-count": 17,
+  }],
+  "meta": {
+    "page": 1,
+    "per_page": 2,
+    "offset": 0
+  }
+}
+```
 
 The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
-the data does not contain any hypermedia or meta-data.
+the data does not contain any metadata, apart from runtime metadata.
 
-We should note that resource's meta-data that depend on the data ( which depend on the actual request for that time)
-like pagination information, should be still in the same response.
-The way those meta-data are represented is left to the API designer, usually though they are put under a
-`meta` attribute regardless if it's a resource or a collection of resources.
-
-#### Metadata
-##### Structural meta-data
-In order to describe our data, we will use JSON Schemas.
-It's a vocubulary that enabled to describe and as a result validate JSON data.
-
-For our use case the JSON schema would be the following:
+### Composing different metadata together
+#### Structural metadata
+One of the top interesting things for a client to know is the expected structure of the request/response ressource object
+along with its data types.
+For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data
 
 ##### User resource
 
@@ -1342,15 +1394,17 @@ For our use case the JSON schema would be the following:
   "type":"object"
 }
 ```
-Essentially the JSON Schema describes the data types and the structure of the data document.
 
-### Request Response inconsistency
+##### Request Response inconsistency
+Although here we have the same object semantics for request and response object,
+in theory we could have different.
 
-
-
-### Hypermedia
+#### Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas
 
+#### Linked-data metadata
+
+#### Query metadata
 
 
 ### Method of transport
