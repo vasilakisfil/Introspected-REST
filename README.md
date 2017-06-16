@@ -1111,7 +1111,7 @@ Metadata could be **API-specific, resource-specific, action-specific or even obj
 There could also be different kinds of metadata: runtime (i.e. pagination information), structural (i.e. data types of a resource object),
 hypermedia (i.e. links, actions, forms), informational, targeted to humans (i.e. general information, descriptions), etc.
 
-Usually metadata are not volatile, except runtime metadata that depend on the request and the resource at the given time and state respectively.
+Usually metadata is much less volatile than data, if not static, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
 
 
