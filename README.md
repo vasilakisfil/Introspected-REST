@@ -1113,6 +1113,9 @@ hypermedia (i.e. links, actions, forms), informational, targeted to humans (i.e.
 
 Usually metadata is much less volatile than data, if not static, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
+##### 9.1.3.1. Capabilities
+The term capabilities is used to describe what is possible an API to do.
+
 
 
 ### 9.2. MicroTypes: modules composing a Media Type
@@ -1164,7 +1167,7 @@ Through those metadata, server provides all the available states, manipulation a
 The implementation of the process is up to the API designer although usually a REST interface even for each MicroType's metadata is a wise choise.
 In any case, we would like to point out some key properties that should appear on any introspection process.
 
-#### 9.3.1. Composition over monolithic architecture
+#### 9.3.1. Composition of MicroTypes over monolithic Media Type
 The process should **embrace the use of distinct MicroTypes** to form a Media Type instead of using a single Media Type.
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
@@ -1182,7 +1185,12 @@ of a specific MicroType there are various advantages because each MicroType beco
 For instance, caching will be possible using the underlying protocol's mechanisms, for each metadata type separately.
 Another example is the detached evolvability of each MicroType's metadata, given that the MicroType's semantics allow such thing.
 
-#### 9.3.4. Automatic documentation generation
+#### 9.3.4. API-wide capabilties discovery
+Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of performance.
+An Introspected REST API _should_ provide an API-wide capabilities discovery that shows all the metadata from all MicroTypes for all resources,
+and their states that the client can access.
+
+#### 9.3.5. Automatic documentation generation
 Possibly the API will provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
 It should be noted that this information must not be needed for a client to parse and understand the API responses,
 and even for humans such information should weight very little compared to the rest metadata.
@@ -1297,52 +1305,52 @@ Basically we will just output the JSON schema of our response, nothing more soph
 
 ```json
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "http://example.com/example.json",
-	"properties": {
-		"user": {
-			"properties": {
-				"id": {
-					"maxLength": 255,
-					"type": "string"
-				},
-				"email": {
-					"maxLength": 255,
-					"type": "string",
-					"format": "email"
-				},
-				"name": {
-					"maxLength": 255,
-					"type": "string"
-				},
-				"birth_date": {
-					"type": "string",
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-				},
-				"created_at": {
-					"maxLength": 255,
-					"type": "string",
-					"formate": "date-time"
-				},
-				"microposts_count": {
-					"type": "integer"
-				}
-			},
-			"required": [
-				"id",
-				"email",
-				"name",
-				"birth_date",
-				"created_at",
-				"microposts_count",
-			],
-			"type": "object"
-		}
-	},
-	"required": [
-		"user"
-	],
-	"type": "object"
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "id":"http://example.com/example.json",
+  "properties":{
+    "user":{
+      "properties":{
+        "id":{
+          "maxLength":255,
+          "type":"string"
+        },
+        "email":{
+          "maxLength":255,
+          "type":"string",
+          "format":"email"
+        },
+        "name":{
+          "maxLength":255,
+          "type":"string"
+        },
+        "birth_date":{
+          "type":"string",
+          "pattern":"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "created_at":{
+          "maxLength":255,
+          "type":"string",
+          "formate":"date-time"
+        },
+        "microposts_count":{
+          "type":"integer"
+        }
+      },
+      "required":[
+        "id",
+        "email",
+        "name",
+        "birth_date",
+        "created_at",
+        "microposts_count"
+      ],
+      "type":"object"
+    }
+  },
+  "required":[
+    "user"
+  ],
+  "type":"object"
 }
 ```
 
@@ -1433,7 +1441,7 @@ for getting informtation on methods supported on a specific resource.
 > An OPTIONS request with an asterisk ("\*") as the request-target
 > (Section 5.3 of [RFC7230]) applies to the server in general rather
 > than to a specific resource.  Since a server's communication options
-> typically depend on the resource, the "*" request is only useful as a
+> typically depend on the resource, the "\*" request is only useful as a
 > "ping" or "no-op" type of method; it does nothing beyond allowing the
 > client to test the capabilities of the server.  For example, this can
 > be used to test a proxy for HTTP/1.1 conformance (or lack thereof).
