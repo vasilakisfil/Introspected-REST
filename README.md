@@ -1288,9 +1288,10 @@ the data does not contain any metadata, apart from runtime metadata.
 
 ### Composing different metadata together
 #### Structural metadata
-One of the top interesting things for a client to know is the expected structure of the request/response ressource object
-along with its data types.
-For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data
+One of the most important things for a client to know is the expected structure of the request/response ressource object
+along with information on the data types.
+For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
+Basically we will just output the JSON schema of our response, nothing more sophisticated.
 
 ##### User resource
 
@@ -1399,6 +1400,8 @@ For that we will use JSON Schemas, a powerful spec that enables you to describe 
 ##### Request Response inconsistency
 Although here we have the same object semantics for request and response object,
 in theory we could have different.
+If that's the case, we should denote each object in the response parented under
+distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 
 #### Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas
@@ -1407,11 +1410,24 @@ For the Hypermedia part we will use JSON Hyper Schemas
 
 #### Query metadata
 
+#### Errors metadata
+
+#### Descriptions metadata
 
 ### Method of transport
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 The reason we choose `OPTIONS` here is because this method has been historically used
 for getting informtation on methods supported on a specific resource.
+
+> The OPTIONS method requests information about the communication
+> options available for the target resource, at either the origin
+> server or an intervening intermediary.  This method allows a client
+> to determine the options and/or requirements associated with a
+> resource, or the capabilities of a server, without implying a
+> resource action.
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
 
 ### Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
