@@ -1430,7 +1430,7 @@ for getting informtation on methods supported on a specific resource.
 >
 
 #### API capabilities discovery
-> An OPTIONS request with an asterisk ("*") as the request-target
+> An OPTIONS request with an asterisk ("\*") as the request-target
 > (Section 5.3 of [RFC7230]) applies to the server in general rather
 > than to a specific resource.  Since a server's communication options
 > typically depend on the resource, the "*" request is only useful as a
