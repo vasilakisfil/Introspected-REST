@@ -1063,8 +1063,9 @@ _introspection as the engine of application state_ (IATEOAS).
 
 Composition of different specs is a vital part of our model and for that we will use a new concept,
 MicroTypes, small reusable modules that a final Media Type can be composed of.
-Hence, before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes.
-These terms can overlap in the REST model, however we feel that each one has its own place in Introspected REST that embraces composability.
+Hence, before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes,
+according to Introspected REST model.
+These terms can overlap in the REST, however we feel that each one has its own place in our model that embraces composability.
 
 
 ### 9.1. Data, metadata and hypermedia
