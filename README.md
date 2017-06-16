@@ -1162,15 +1162,15 @@ In the case of Introspected REST, introspection defines a process for a client t
 the API's, resource's, action's or even object's metadata at runtime.
 Through those metadata, server provides all the available states, manipulation actions as well as the available transitions.
 The implementation of the process is up to the API designer although usually a REST interface even for each MicroType's metadata is a wise choise.
-In any case, we would like to point out some key properties that should appear on any introspection process:
+In any case, we would like to point out some key properties that should appear on any introspection process.
 
 #### 9.3.1. Composition over monolithic architecture
-The process should embrace the use of distinct MicroTypes to form a Media Type instead of using a one Media Type.
+The process should embrace the use of distinct MicroTypes to form a Media Type instead of using a single Media Type.
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
 
 #### 9.3.2. Plain data separated from metadata
-The process of introspection should be distinctly different from requesting data.
+The process of introspection **should be distinctly different** from requesting data.
 To that extend, introspection responses should not include any data but only metadata and data
 responses should not include any metadata, except possibly runtime metadata.
 
