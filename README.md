@@ -1373,7 +1373,7 @@ Basically we will just output the JSON schema of our response, nothing more soph
           },
           "name":{
             "type":"string"
-          }
+          },
           "birth_date":{
             "type":"string"
           },
