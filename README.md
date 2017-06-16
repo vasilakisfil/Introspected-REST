@@ -1200,7 +1200,7 @@ architecture style.
 **This is by no means a complete Media Type**, but just an example of the potential of Introspected REST.
 The actual MicroTypes and Media Types wil be created by the community.
 
-For our solution, we will use JSON, JSON Schemas and JSON-LD, each representing a different MicroType.
+For our solution, we will use JSON, JSON Schemas, JSON super schemas, JSON-LD, and [`problem+json`](https://tools.ietf.org/html/rfc7807) a each representing a different MicroType.
 But the reader could apply the same ideas using any message format and spec.
 
 Our use case will be the same as the one in [section 7.1](#71-our-use-case), a minature of yet another Social App.
