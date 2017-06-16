@@ -1230,7 +1230,7 @@ Given that Introspected REST differs only in HATEOAS part of REST, the identific
   * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
 
 
-### Isolating the actual data from metadata
+### 10.1. Isolating the actual data from metadata
 Our first job is to first offload the final response object with metadata, like hypermedia.
 Instead we will provide to the user only the data and possibly any runtime metadata.
 
@@ -1300,14 +1300,14 @@ we will add this runtime metadata under a `meta` attribute:
 The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
 the data does not contain any metadata, apart from runtime metadata.
 
-### Composing different metadata together
-#### Structural metadata
+### 10.2. Composing different metadata together
+#### 10.2.1. Structural metadata
 One of the most important things for a client to know is the expected structure of the request/response ressource object
 along with information on the data types.
 For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
 Basically we will just output the JSON schema of our response, nothing more sophisticated.
 
-##### User resource
+##### 10.2.1.1. User resource
 
 ```json
 {
@@ -1360,7 +1360,7 @@ Basically we will just output the JSON schema of our response, nothing more soph
 }
 ```
 
-##### Users resource
+##### 10.2.1.2. Users resource
 
 ```json
 {
@@ -1411,24 +1411,24 @@ Basically we will just output the JSON schema of our response, nothing more soph
 }
 ```
 
-##### Request Response inconsistency
+##### 10.2.1.3. Request Response inconsistency
 Although here we have the same object semantics for request and response object,
 in theory we could have different.
 If that's the case, we should denote each object in the response parented under
 distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 
-#### Hypermedia metadata
+#### 10.2.2. Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas
++ Query metadata + pagination + templated urls
 
-#### Linked-data metadata
+#### 10.2.3. Linked-data metadata
+We will use JSON-LD.
 
-#### Query metadata
+#### 10.2.5. Errors metadata
 
-#### Errors metadata
+#### 10.2.6. Descriptions metadata
 
-#### Descriptions metadata
-
-### Method of transport
+### 10.3. Method of transport
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 The reason we choose `OPTIONS` here is because this method has been historically used
 for getting informtation on methods supported on a specific resource.
@@ -1443,7 +1443,7 @@ for getting informtation on methods supported on a specific resource.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-#### API capabilities discovery
+#### 10.3.1. API capabilities discovery
 > An OPTIONS request with an asterisk ("\*") as the request-target
 > (Section 5.3 of [RFC7230]) applies to the server in general rather
 > than to a specific resource.  Since a server's communication options
@@ -1455,13 +1455,13 @@ for getting informtation on methods supported on a specific resource.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-### Automating the documentation generation
+### 10.4. Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
 
 
 
-## Related Work
-### GraphQL
+## 11. Related Work
+### 11.1. GraphQL
 no urls, basically a query language, no MicroTypes
 
 The reason we have it in related work is because it's related to REST but not REST.
@@ -1469,11 +1469,11 @@ The reason we have it in related work is because it's related to REST but not RE
 We are happy that people are trying new things and we support such initiatives.
 However it has some issues.
 
-### Linked Data and Semantic Web
+### 11.2. Linked Data and Semantic Web
 
-#### JSON-LD and HYDRA
+#### 11.2.1. JSON-LD and HYDRA
 
-### RESTful API Description Languages
+### 11.3. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
@@ -1490,14 +1490,14 @@ The tools themselves have limitations,
 but also, having tools that aim to provide all-in-one to the API designer is against our philosophy: tools that do one thing and do it well.
 
 
-### API directories
+### 11.4. API directories
 Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
 We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
 The API's root url should provide everyhing that is needed, or using already published protocols
 like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](http://www.rfc-editor.org/rfc/rfc5785.txt) and can give API information
 for client bootstraping.
 
-### Overloading Link rel
+### 11.5. Overloading Link rel
 There is a tendency to overload Link rel for links unrelated to application format etc.
 We feel that this is a bad practice and definitely not the right location to add the Microtypes.
 Link rel should be used for very few specific things.
