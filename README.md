@@ -1172,6 +1172,12 @@ The process should **embrace the use of distinct MicroTypes** to form a Media Ty
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
 
+The API designer should first investigate and embrace the use of MicroTypes, RFCs and specs that are already defined, instead of
+creating her own custom, unpublished, spec.
+The reason for this note is that creating a new spec is difficult and usually such specs are used only for domain-specific APIs that
+were created for and live as long as this API is used, usually a couple of years.
+Instead by trying to adopt published, battle-tested, RFC-community-reviewd specs assures the API designer that it will used foobar.
+
 #### 9.3.2. Plain data separated from metadata
 The process of introspection **should be distinctly different** from requesting data.
 To that extend, introspection responses should not include any data but only metadata and data
