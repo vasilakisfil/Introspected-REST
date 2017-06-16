@@ -1429,6 +1429,18 @@ for getting informtation on methods supported on a specific resource.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
+#### API capabilities discovery
+> An OPTIONS request with an asterisk ("*") as the request-target
+> (Section 5.3 of [RFC7230]) applies to the server in general rather
+> than to a specific resource.  Since a server's communication options
+> typically depend on the resource, the "*" request is only useful as a
+> "ping" or "no-op" type of method; it does nothing beyond allowing the
+> client to test the capabilities of the server.  For example, this can
+> be used to test a proxy for HTTP/1.1 conformance (or lack thereof).
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
 ### Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
 
