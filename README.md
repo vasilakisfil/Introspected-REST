@@ -1109,7 +1109,7 @@ to understand API's responses and access the API's capabilities and manipulate t
 
 Metadata could be **API-specific, resource-specific, action-specific or even object-specific**.
 There could also be different kinds of metadata: runtime (i.e. pagination information), structural (i.e. data types of a resource object),
-hypermedia (i.e. links, actions, forms), informational, targeted to humans (i.e. general information, descriptions).
+hypermedia (i.e. links, actions, forms), informational, targeted to humans (i.e. general information, descriptions), etc.
 
 Usually metadata are not volatile, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
