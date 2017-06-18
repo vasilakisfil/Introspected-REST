@@ -1012,6 +1012,7 @@ can't happen.
 We understand that this is actually another feature of REST design and not an issue, treating a response object as a whole and not breaking into
 different parts like hypermedia and data, however, in practice, this poses difficulties for easier evolvement and maintenance of the API.
 
+
 #### 8.2.6. REST's power is limited by HTTP and related protocols (SIP, CoAP etc)
 Although REST is not dependent on any protocol or spec, the truth is that it has dominated in HTTP.
 As we [described earlier](#31-application-level), in protocols like HTTP, content negotiation between client and server is achieved using Media Types,
@@ -1175,7 +1176,7 @@ The process should **embrace the use of distinct MicroTypes** to form a Media Ty
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
 
-##### 9.3.1.1. No wheel re-invention
+##### 9.3.1.1. Published, peer-reviewed specs first
 The API designer should **first** investigate and embrace the use of MicroTypes, RFCs and specs that are already defined, instead of
 creating her own custom, unpublished spec.
 The reason for this suggestion is that creating a new spec is difficult and usually such specs are used only for domain-specific APIs that
@@ -1195,7 +1196,7 @@ of a specific MicroType there are various advantages because each MicroType beco
 For instance, **caching** will be possible using the underlying protocol's mechanisms, for each metadata type separately.
 Another example is the detached **evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
 
-#### 9.3.4. API-wide capabilties discovery
+#### 9.3.4. Discovery of API resources and capabilities
 Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of **performance**.
 An Introspected REST API _should_ provide an API-wide capabilities discovery that lists all the metadata from all MicroTypes for all resources,
 and their states that the client can access, wherever this is possible.
@@ -1516,6 +1517,8 @@ to the root url.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
+However, we feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
+
 ### 10.4. Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
 
@@ -1533,6 +1536,8 @@ However it has some issues.
 ### 11.2. Linked Data and Semantic Web
 
 #### 11.2.1. JSON-LD and HYDRA
+Using linked data in our APIs is just great.
+HYDRA is in the right direction to introspectable APIs.
 
 ### 11.3. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
@@ -1568,11 +1573,6 @@ For instance Media type and links. Not overloading. Dereference only.
 Linksets is yet another work forwarded by Erik Wilde. The idea is...
 
 We think that linksets is anohter small piece towards an introspected REST APIs.
-
-## Future Work
-It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
-
-We would like to give some guidelines towards that direction.
 
 
 ## Conclusion
@@ -1940,3 +1940,9 @@ that is not always the case.
 
 Moreover, a request has unique properties, like URL params that need to be defined by a specific MicroType.
 As a result, if there is any inconsistency, it should be denoted at once.
+
+## Future Work
+It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
+
+We would like to give some guidelines towards that direction.
+
