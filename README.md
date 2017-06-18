@@ -1055,15 +1055,15 @@ kind of metadata of a resource, yet have all of them on demand and separated by 
 
 In the following section we will describe our new architectural style based on a model for Networked APIs that goes beyond `REST`.
 The model itself steps on initial Roy's `REST` model but with the difference that instead of providing resource hypermedia at
-runtime, it provides them on the side, only if requested.
+runtime, **it provides them on the side, only if requested**.
 Hence, by keeping the _uniform interface_ the derived 3 out of 4 REST constraints that Roy defined still exist in this model:
 _identification of resources_; _manipulation of resources through representations_ and _self-descriptive messages_.
 However instead of having the constraint of _hypermedia as the engine of application state_ (HATEOAS), we have
-_introspection as the engine of application state_ (IATEOAS).
+**_introspection as the engine of application state_ (IATEOAS)**.
 
 Composition of different specs is a vital part of our model and for that we will use a new concept,
 MicroTypes, small reusable modules that a final Media Type can be composed of.
-Hence, before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes,
+Before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes,
 according to Introspected REST model.
 These terms can overlap in the REST, however we feel that each one has its own place in our model that embraces composability.
 
@@ -1075,7 +1075,7 @@ Data is very volatile compared to other parts of a response.
 
 #### 9.1.2. Hypermedia
 Originally the hypermedia term was mostly used for linked data, in the sense of hyperlinks.
-In `REST`, eventually it also includes information for interaction and resource manipilation.
+In `REST`, eventually, it also includes information for interaction and resource manipilation.
 Hypermedia can be dynamic or static but regardless **they are not considered part of the response data, because they define
 ways to interact with the data**.
 
@@ -1097,7 +1097,7 @@ Actions should also describe any relevant information for the client to perform 
 ##### 9.1.2.3. Forms
 Another way of describing the manipulation options of a resource is the notion of forms.
 The difference between actions and forms is that the latter are mostly targeted for the UI.
-API forms should provide all the necessary information to be semantically equivelent to an HTML form.
+API forms should provide all the necessary information to be semantically **equivelent to an HTML form**, for the client to render.
 
 
 #### 9.1.3. Metadata
@@ -1109,7 +1109,7 @@ to understand API's responses and access the API's capabilities and manipulate t
 
 Metadata could be **API-specific, resource-specific, action-specific or even object-specific**.
 There could also be different kinds of metadata: runtime (i.e. pagination information), structural (i.e. data types of a resource object),
-hypermedia (i.e. links, actions, forms), informational, targeted to humans (i.e. general information, descriptions), etc.
+hypermedia (i.e. links, actions, forms), informational targeted to humans (i.e. general information, descriptions), etc.
 
 Usually metadata is much less volatile than data, if not static, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
@@ -1149,6 +1149,9 @@ We will need a MicroType for describing each of following:
 + specify http2 server push
 + etc
 
++ microtype is a very broad term, it's used conceptually
++ shims of published specs/rfcs wrapper in a MicroType
+
 It should be noted that MicroTypes is not a strict requirement for Introspected REST and in fact an equivelant concept
 can be used.
 However, without such concept, it's possible that Introspected REST's power to be restricted and not used to the full extent.
@@ -1172,11 +1175,13 @@ The process should **embrace the use of distinct MicroTypes** to form a Media Ty
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
 
-The API designer should first investigate and embrace the use of MicroTypes, RFCs and specs that are already defined, instead of
-creating her own custom, unpublished, spec.
-The reason for this note is that creating a new spec is difficult and usually such specs are used only for domain-specific APIs that
+##### 9.3.1.1. No wheel re-invention
+The API designer should **first** investigate and embrace the use of MicroTypes, RFCs and specs that are already defined, instead of
+creating her own custom, unpublished spec.
+The reason for this suggestion is that creating a new spec is difficult and usually such specs are used only for domain-specific APIs that
 were created for and live as long as this API is used, usually a couple of years.
-Instead by trying to adopt published, battle-tested, RFC-community-reviewd specs assures the API designer that it will used foobar.
+Instead, by trying to adapt published, battle-tested, RFC-community-reviewed specs assures the API designer in terms of compatibility,
+adoptability, clearence and possibly implementation.
 
 #### 9.3.2. Plain data separated from metadata
 The process of introspection **should be distinctly different** from requesting data.
@@ -1184,24 +1189,23 @@ To that extend, introspection responses should not include any data but only met
 responses should not include any metadata, except possibly runtime metadata.
 
 #### 9.3.3. Identifiable metadata of each Microtype
-When MicroTypes concept is used a number of powerful features are unlocked.
 Given that metadata are already separated from plain data, by being able to identify and retrieve metadata
 of a specific MicroType there are various advantages because each MicroType becomes independent and self-sufficient.
 
-For instance, caching will be possible using the underlying protocol's mechanisms, for each metadata type separately.
-Another example is the detached evolvability of each MicroType's metadata, given that the MicroType's semantics allow such thing.
+For instance, **caching** will be possible using the underlying protocol's mechanisms, for each metadata type separately.
+Another example is the detached **evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
 
 #### 9.3.4. API-wide capabilties discovery
-Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of performance.
-An Introspected REST API _should_ provide an API-wide capabilities discovery that shows all the metadata from all MicroTypes for all resources,
-and their states that the client can access.
+Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of **performance**.
+An Introspected REST API _should_ provide an API-wide capabilities discovery that lists all the metadata from all MicroTypes for all resources,
+and their states that the client can access, wherever this is possible.
 
 #### 9.3.5. Automatic documentation generation
 Possibly the API will provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
 It should be noted that this information must not be needed for a client to parse and understand the API responses,
 and even for humans such information should weight very little compared to the rest metadata.
 
-In the same way, the API should automate the generation of the documentation using all metadata for a resource.
+In the same way, the API should **automate the generation of the documentation using all metadata from all MicroTypes for every resource**.
 The way the documentation is requested and its format should be distincly defined by a MicroType or the parent Media Type.
 
 
@@ -1232,7 +1236,7 @@ Given that Introspected REST differs only in HATEOAS part of REST, the identific
 
 ### 10.1. Isolating the actual data from metadata
 Our first job is to first offload the final response object with metadata, like hypermedia.
-Instead we will provide to the user only the data and possibly any runtime metadata.
+Instead, we will provide to the user only the data and possibly any runtime metadata.
 
 When the client manipulates a `User` resource, the response should contain only the data:
 
@@ -1297,15 +1301,15 @@ we will add this runtime metadata under a `meta` attribute:
 }
 ```
 
-The actual format of the data could vary regarding the root element or possible the place of the primary id, but essentially
-the data does not contain any metadata, apart from runtime metadata.
+The actual format of the data could vary regarding the root element or possibly the place of the primary id.
+Such details will be described by the Media Type.
+What is important here is that the data does not contain any metadata, apart from runtime metadata.
 
 ### 10.2. Composing different metadata together
 #### 10.2.1. Structural metadata
 One of the most important things for a client to know is the expected structure of the request/response ressource object
 along with information on the data types.
 For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
-Basically we will just output the JSON schema of our response, nothing more sophisticated.
 
 ##### 10.2.1.1. User resource
 
@@ -1317,7 +1321,7 @@ Basically we will just output the JSON schema of our response, nothing more soph
     "user":{
       "properties":{
         "id":{
-          "maxLength":255,
+          "maxLength":64,
           "type":"string"
         },
         "email":{
@@ -1327,7 +1331,7 @@ Basically we will just output the JSON schema of our response, nothing more soph
         },
         "name":{
           "maxLength":255,
-          "type":"string"
+          "type":["null", "string"]
         },
         "birth_date":{
           "type":"string",
@@ -1372,31 +1376,38 @@ Basically we will just output the JSON schema of our response, nothing more soph
         "additionalProperties":false,
         "properties":{
           "id":{
+          "maxLength":64,
             "type":"string"
           },
           "email":{
-            "type":"string"
+            "maxLength":255,
+            "type":"string",
+            "format":"email"
           },
           "name":{
-            "type":"string"
+            "maxLength":255,
+            "type":["null", "string"]
           },
           "birth_date":{
-            "type":"string"
+            "type":"string",
+            "pattern":"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           },
           "created_at":{
-            "type":"string"
+            "maxLength":255,
+            "type":"string",
+            "formate":"date-time"
           },
           "microposts_count":{
             "type":"integer"
-          },
+          }
         },
         "required":[
-          "name",
-          "created_at",
+          "id",
           "email",
-          "microposts_count",
+          "name",
           "birth_date",
-          "id"
+          "created_at",
+          "microposts_count"
         ],
         "type":"object"
       },
@@ -1412,8 +1423,7 @@ Basically we will just output the JSON schema of our response, nothing more soph
 ```
 
 ##### 10.2.1.3. Request Response inconsistency
-Although here we have the same object semantics for request and response object,
-in theory we could have different.
+Although here we have the same object semantics for request and response object, in theory these could be different.
 If that's the case, we should denote each object in the response parented under
 distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 
@@ -1427,6 +1437,51 @@ We will use JSON-LD.
 #### 10.2.5. Errors metadata
 
 #### 10.2.6. Descriptions metadata
+For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
+Note that **this information must not be required to parse the API but to use the API data on our application domain**.
+For instance, understanding that when updating the `email` attribute an email is triggered to inform the user for the change,
+is not part of the API client responsibility but it's vital for the application developer to understand **how** to use the
+API.
+
+
+```json
+{
+  "user": {
+    "id": {
+      "title": "The identifier of the resource.",
+      "description": [
+        "This identifier should not be exposed to the user, to avoid any confusions."
+      ]
+    },
+    "email": {
+      "title": "The primary email of the user's account",
+      "description": [
+        "The email is used for any transactional email.",
+        "Also, the same email is used when user authenticates to the system.",
+        "Please note that whenever you update the email, user receives an automated email describing the change"
+      ]
+    },
+    "name": {
+      "title": "The user's full name (first and last name concataned)",
+      "description": [
+        "This field could be empty or null.",
+        "If so, the application should show the email instead for the user's name."
+      ]
+    },
+    "birth_date": {
+      "title": "The date of birth of the user",
+      "description": []
+    },
+    "microposts_count": {
+      "title": "The number of published microposts the user has.",
+      "description": [
+        "Please note that due to caching this number could have a small delay to reflect the actual number.",
+        "The application should either inform the user about that or "
+      ]
+    }
+  }
+}
+```
 
 ### 10.3. Method of transport
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
@@ -1523,7 +1578,9 @@ Our solution is by far **not** complete but we have set the basis for the commun
 We call the community to start experiment in this model and come up with patterns.
 In any case we feel that to reach a sustainable API with the evolvability span of REST model, Introspected REST model is necessary.
 
-Another reason is to have a real REST alternative with arguments and remove the develper roy shadow and fear to deprecate Roy's REST.
+Another reason is to have a real REST alternative with arguments and remove the develper roy shadow and fear to deprecate Roy's REST.a
+
+We are sure that without such design/architecture we can't have complex yet self-described APIs.
 
 
 We see that people fail to understand the full extend of Roy's initial `REST` model and what is happening is that
