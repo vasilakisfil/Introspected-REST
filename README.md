@@ -1438,10 +1438,10 @@ We will use JSON-LD.
 
 #### 10.2.6. Descriptions metadata
 For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
-Note that **this information must not be required to parse the API but to use the API data on our application domain**.
+Note that **this information must not be required to parse and understand the API but to use the API data on our application domain**.
 For instance, understanding that when updating the `email` attribute an email is triggered to inform the user for the change,
 is not part of the API client responsibility but it's vital for the application developer to understand **how** to use the
-API.
+API and what to expect from it.
 
 
 ```json
@@ -1475,8 +1475,8 @@ API.
     "microposts_count": {
       "title": "The number of published microposts the user has.",
       "description": [
-        "Please note that due to caching this number could have a small delay to reflect the actual number.",
-        "The application should either inform the user about that or "
+        "Please note that due to caching this number could have a small delay to reflect the actual number",
+        "The application should either inform the user about that or make sure it manually updates the microposts counter after publishing/deleting a micropost after publishing/deleting a micropost."
       ]
     }
   }
@@ -1485,8 +1485,11 @@ API.
 
 ### 10.3. Method of transport
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
-The reason we choose `OPTIONS` here is because this method has been historically used
-for getting informtation on methods supported on a specific resource.
+The reason we choose `OPTIONS` here is because **this method has been historically used
+for getting informtation on methods supported on a specific resource**.
+
+Specifically **the (HTTP) RFC mentions that this method should be used to determine the capabilities of the server, for that particular resource** so
+we feel **HTTP OPTIONS is a perfect match for API introspection**.
 
 > The OPTIONS method requests information about the communication
 > options available for the target resource, at either the origin
@@ -1499,6 +1502,9 @@ for getting informtation on methods supported on a specific resource.
 >
 
 #### 10.3.1. API capabilities discovery
+The same RFC mentions that there isn't any practical use of sending an OPTIONS request
+to the root url.
+
 > An OPTIONS request with an asterisk ("\*") as the request-target
 > (Section 5.3 of [RFC7230]) applies to the server in general rather
 > than to a specific resource.  Since a server's communication options
