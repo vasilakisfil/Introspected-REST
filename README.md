@@ -1115,7 +1115,8 @@ hypermedia (i.e. links, actions, forms), informational targeted to humans (i.e. 
 Usually metadata is much less volatile than data, if not static, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
 ##### 9.1.3.1. Capabilities
-The term capabilities is used to describe what is possible an API to do.
+The term capabilities is used to describe what is possible an API to do using metadata.
+This term us mostly used by
 
 
 
