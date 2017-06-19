@@ -1447,6 +1447,35 @@ For the Hypermedia part we will use JSON Hyper Schemas
 We will use JSON-LD.
 
 #### 10.2.5. Errors metadata
+For the errors metadata, we will use the [`problem+json`](https://tools.ietf.org/html/rfc7807) Media Type.
+For example, when updating a User object, the application developer might wrongly send an invalid `birth_date`.
+
+
+```json
+{
+  "title": "The birthdate has an invalid format.",
+  "details": "The birthdate must be in the format of 1985-04-12T23:20:50.52Z.",
+  "status": 422,
+}
+```
+
+If you inspect the spec you will notice that **the spec limits us by omitting specifying a way to associate an error message with a specific resource attribute**.
+As a result, we can only specify the falsy attribute in the title or details attribute of the error object, which are human-targeted,
+and thus informing only the end user and not the client.
+We could add extension members, as the spec suggests, to customize the error object in our needs but the final response object wouldn't be
+self-descriptive, right?
+
+
+The good thing though is that normally such errors should be caught by running the schema validations from the JSON Schema MicroType.
+The error object could be used for more advanced errors, like the following:
+
+```json
+{
+  "title": "Transaction failed",
+  "details": "The remaining amount of virtual coins in your account is not enough for this purchase",
+  "status": 403,
+}
+```
 
 #### 10.2.6. Descriptions metadata
 For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
