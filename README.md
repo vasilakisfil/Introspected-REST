@@ -1320,6 +1320,8 @@ One of the most important things for a client to know is the expected structure 
 along with information on the data types.
 For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
 
+It is very probable that there _is_ an implementation for that MicroType for the client's environment.
+
 ##### 10.2.1.1. User resource
 
 ```json
@@ -1435,6 +1437,8 @@ For that we will use JSON Schemas, a powerful spec that enables you to describe 
 Although here we have the same object semantics for request and response object, in theory these could be different.
 If that's the case, we should denote each object in the response parented under
 distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
+
+Regardless, **a cool side effect of knowing the structure of the request object is that the client can use that information to first validate the object before sending it over the wire to the server**.
 
 #### 10.2.2. Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas
