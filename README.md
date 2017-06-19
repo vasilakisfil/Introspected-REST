@@ -1312,7 +1312,7 @@ we will add this runtime metadata under a `meta` attribute:
 
 The actual format of the data could vary regarding the root element or possibly the place of the primary id.
 Such details will be described by the Media Type.
-What is important here is that the data does not contain any metadata, apart from runtime metadata.
+What is important here is that the **data does not contain any metadata**, apart from runtime metadata.
 
 ### 10.2. Composing different metadata together
 #### 10.2.1. Structural metadata
