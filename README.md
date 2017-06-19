@@ -1455,7 +1455,7 @@ For example, when updating a User object, the application developer might wrongl
 {
   "title": "The birthdate has an invalid format.",
   "details": "The birthdate must be in the format of 1985-04-12T23:20:50.52Z.",
-  "status": 422,
+  "status": 422
 }
 ```
 
@@ -1473,7 +1473,7 @@ The error object could be used for more advanced errors, like the following:
 {
   "title": "Transaction failed",
   "details": "The remaining amount of virtual coins in your account is not enough for this purchase",
-  "status": 403,
+  "status": 403
 }
 ```
 
