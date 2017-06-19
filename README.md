@@ -1195,7 +1195,7 @@ Given that metadata are already separated from plain data, by being able to iden
 of a specific MicroType there are various advantages because each MicroType becomes independent and self-sufficient.
 
 For instance, **caching** will be possible using the underlying protocol's mechanisms, for each metadata type separately.
-Another example is the detached **evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
+Another example is the **detached evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
 
 #### 9.3.4. Discovery of API resources and capabilities
 Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of **performance**.
