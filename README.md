@@ -1316,7 +1316,7 @@ What is important here is that the **data does not contain any metadata**, apart
 
 ### 10.2. Composing different MicroTypes together
 #### 10.2.1. Structural metadata
-One of the most important things for a client to know is the expected structure of the request/response ressource object
+One of the most important things for a client to know is the expected structure of the request/response resource object
 along with information on the data types.
 For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
 
