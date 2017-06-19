@@ -1314,7 +1314,7 @@ The actual format of the data could vary regarding the root element or possibly 
 Such details will be described by the Media Type.
 What is important here is that the **data does not contain any metadata**, apart from runtime metadata.
 
-### 10.2. Composing different metadata together
+### 10.2. Composing different MicroTypes together
 #### 10.2.1. Structural metadata
 One of the most important things for a client to know is the expected structure of the request/response ressource object
 along with information on the data types.
