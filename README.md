@@ -1202,6 +1202,8 @@ Given that for each resource, the client needs to perform an introspection reque
 An Introspected REST API _should_ provide an API-wide capabilities discovery that lists all the metadata from all MicroTypes for all resources,
 and their states that the client can access, wherever this is possible.
 
+The location of this detailed list should be in the conceptual _root_ resource/URL of the API.
+
 #### 9.3.5. Automatic documentation generation
 Possibly the API will provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
 It should be noted that this information must not be needed for a client to parse and understand the API responses,
