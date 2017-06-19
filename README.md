@@ -1624,6 +1624,9 @@ We think that linksets is anohter small piece towards an introspected REST APIs.
 We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
 
+This document is not for REST only. Given the recent advancements of REST-RFC-not compliant changes by the community,
+we need to see what's evolvable and what's not.
+
 Our solution is by far **not** complete but we have set the basis for the community to experiment and come up with MicroType specs.
 
 We call the community to start experiment in this model and come up with patterns.
