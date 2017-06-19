@@ -1182,8 +1182,8 @@ The API designer should **first** investigate and embrace the use of MicroTypes,
 creating her own custom, unpublished spec.
 The reason for this suggestion is that creating a new spec is difficult and usually such specs are used only for domain-specific APIs that
 were created for and live as long as this API is used, usually a couple of years.
-Instead, by trying to adapt published, battle-tested, RFC-community-reviewed specs assures the API designer in terms of compatibility,
-adoptability, clearence and possibly implementation.
+Instead, by trying to adapt published, battle-tested, RFC-community-reviewed specs assures the API designer in terms of **compatibility,
+adoptability, clarity** and possibly implementation.
 
 #### 9.3.2. Plain data separated from metadata
 The process of introspection **should be distinctly different** from requesting data.
