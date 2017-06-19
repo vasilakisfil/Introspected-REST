@@ -1559,6 +1559,8 @@ to the root url.
 
 However, we feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
 
+### Signaling and negotiating MicroTypes
+
 ### 10.4. Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
 
