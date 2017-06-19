@@ -1206,7 +1206,7 @@ The location of this detailed list should be in the conceptual _root_ resource/U
 
 #### 9.3.5. Automatic documentation generation
 Possibly the API will provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
-It should be noted that this information must not be needed for a client to parse and understand the API responses,
+It should be noted that **this information must not be needed for a client to parse and understand the API responses**,
 and even for humans such information should weight very little compared to the rest metadata.
 
 In the same way, the API should **automate the generation of the documentation using all metadata from all MicroTypes for every resource**.
