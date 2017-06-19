@@ -1560,6 +1560,9 @@ to the root url.
 However, we feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
 
 ### Signaling and negotiating MicroTypes
+2 issues
+1. Root/home endpoint has multiple MicroTypes
+2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
 
 ### 10.4. Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
