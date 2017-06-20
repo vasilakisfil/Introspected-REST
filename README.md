@@ -2063,3 +2063,5 @@ It is obvious that after this Manifesto freezes people will start researching mo
 
 We would like to give some guidelines towards that direction.
 
+
+Roy's model is weird: it was rarely fully employed to have 100% evolvability and when it was all it's drawbacks appeared: complexity and performance issues.
