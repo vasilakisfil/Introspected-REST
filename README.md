@@ -1584,6 +1584,85 @@ However it has some issues.
 Using linked data in our APIs is just great.
 HYDRA is in the right direction to introspectable APIs.
 
+
+#### 11.5. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
+There is a tendency to overload Link rel for links unrelated to application format etc.
+We feel that this is a bad practice and definitely not the right location to add the Microtypes.
+Link rel should be used for very few specific things.
+For instance Media type and links. Not overloading. Dereference only.
+##### 11.5.1. [The Profile Media Type Parameter](http://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
+
+##### 11.5.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
+Erik Wilde suggested a profiling mechanism of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
+
+>  A profile is defined not to alter the
+>   semantics of the resource representation itself, but to allow clients
+>   to learn about additional semantics (constraints, conventions,
+>   extensions) that are associated with the resource representation, in
+>   addition to those defined by the media type and possibly other
+>   mechanisms.
+>
+> --- [RFC 6906](https://www.ietf.org/rfc/rfc6906.txt)
+>
+
+Essentially, the profile parameter, given that the client understands it, would define **additional** semantics of
+the response's representation that are not defined through the Media Type used.
+The information for the additional semantics would be found in all responses regardless the client but only
+the "smarter" clients would be able to parse, understand and use this information whereas the rest would just ignore it.
+
+This link relation type is similar to our work of MicroTypes but unfortunately fails to advocate towards reusable profiles.
+
+>  While this specification
+>   associates profiles with resource representations, creators and users
+>   of profiles MAY define and manage them in a way that allows them to
+>   be used across media types; thus, they could be associated with a
+>   resource, independent of their representations (i.e., using the same
+>   profile URI for different media types).  However, such a design is
+>   outside of the scope of this specification, and clients SHOULD treat
+>   profiles as being associated with a resource representation.
+>
+> --- [RFC 6906](https://www.ietf.org/rfc/rfc6906.txt)
+>
+
+By having  profiles attached to specific Media Types results in much less adoptability and flexibility and fails to signal the
+actual practicability of such architecture.
+However, if profiles take the conceptual form of independent MicroTypes, then the clients can negotiate for those and eventually choose
+the one that fits best.
+Although the negotiation part is skipped from the RFC, we feel that such works are towards the right direction that will allow us
+to build.
+
+##### 11.5.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
+As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
+by the response representation and message format.
+In order to mitigate such issues, Linksets proposal tries to offload HTTP Link links from a resource or url, when having them in there is
+costly or even not possible for the server.
+
+>  Resources on the Web often convey typed Web Links [RFC5988] as a part
+>   of resource representations, for example, using the <link> element
+>   for HTML representations, or the "Link" header field in HTTP response
+>   headers for representations of any media type.  In some cases,
+>   however, providing links by value is impractical or impossible.  In
+>   these cases, an approach to provide links by reference (instead of by
+>   value) can solve the problem.  This specification defines the
+>   "linkset" relation type that allows to link resources to sets of
+>   links, thereby making it possible to represent links by reference,
+>   and not by value.
+>
+> --- [Linkset Internet-Draft](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
+>
+
+For instance, imagine that a resource needs to link a set of links that are managed by not the host owning the resource, but
+by a 3rd party origin.
+Another case scenario is when the Link header is overloaded by holding a large number of links that are needed to be inlcluded along with
+the resource and would result in HTTP error ("413 Request Entity Too Large" and "414 Request-URI Too Long").
+
+By providing a dereferancable link that points to the 3rd party link set, there could be advantages in numerous cases,
+like different caching policies between the 2 origins and decoupling in general.
+
+
+We think that linksets is anohter small piece towards a introspectiveness and hence we support such initiatives.
+However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
+
 ### 11.3. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
@@ -1608,16 +1687,6 @@ The API's root url should provide everyhing that is needed, or using already pub
 like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](http://www.rfc-editor.org/rfc/rfc5785.txt) and can give API information
 for client bootstraping.
 
-### 11.5. Overloading Link rel
-There is a tendency to overload Link rel for links unrelated to application format etc.
-We feel that this is a bad practice and definitely not the right location to add the Microtypes.
-Link rel should be used for very few specific things.
-For instance Media type and links. Not overloading. Dereference only.
-
-### Linksets
-Linksets is yet another work forwarded by Erik Wilde. The idea is...
-
-We think that linksets is anohter small piece towards an introspected REST APIs.
 
 
 ## Conclusion
