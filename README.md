@@ -331,9 +331,6 @@ As a result, **versioning should not take place in the URL but in the Media Type
 
 >Versioning an interface is just a polite way to kill deployed applications
 >
-> Roy Fielding
->
-
 >The reason to make a real REST API is to get evolvability … a "v1" is a middle finger to your API customers, indicating RPC/HTTP (not REST)
 >
 > Roy Fielding
