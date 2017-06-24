@@ -1674,6 +1674,7 @@ to the root url.
 However, we feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
 
 ### Signaling and negotiating MicroTypes
+Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
 2 issues
 1. Root/home endpoint has multiple MicroTypes
 2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
