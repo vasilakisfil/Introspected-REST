@@ -1053,8 +1053,12 @@ Although REST does not rejects the idea of composability of different API capabi
 it doesn't embrace it either.
 The symptom of non-composability is clearly visible in protocols like HTTP where Media Types
 act as big monoliths trying to describe everything in one place.
+Erik Wilde tried to overcome that issue by creating the [RFC 6906](https://www.ietf.org/rfc/rfc6906.txt)(The 'profile' Link Relation Type) but as we will see later
+this specifications lags behind over true composability and proper negotiation of the different type of profiles.
 
-As we will see later, the MicroTypes is a solution to the outdated Media Type concept that allows us to mix-in different concepts for different
+
+Netherless, in Introspected REST, the MicroTypes is a conceptual solution that is based on that RFC in order to improve
+the outdated Media Type concept and allow us to mix-in different concepts for different
 kind of metadata of a resource, yet have all of them on demand and separated by the actual data.
 
 ## 9. Introspected REST
