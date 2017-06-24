@@ -86,7 +86,7 @@ As Roy notes:
 Instead, the client derives the state on demand, using introspection.
 
 Eventually this brings the same advantages as Roy's model while being it's much simpler,
-much more flexible and backwarde compatible with any Restful API.
+much more flexible and backwards compatible with any Restful API.
 
 But first let's discuss about Networked Services.
 
