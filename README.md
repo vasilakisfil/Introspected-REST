@@ -159,15 +159,21 @@ The actual protocol depends on the protocol used in the protocol level.
 
 
 ## 4. Roy's `REST` model
-Roy's `REST` model is an arhictectural style which is not tight to any spec, protocol or format of the
+Roy came up with the REST model in order to solve issues that were arising by the unique propertied of networked services
+during the infancy of Internet.
+After you deploy an application in a networked machine that is supposed to be accessed by other networked services,
+you need to think about its evolvability.
+You cannot expect services on the other end that talk with your application to be humanly updated but instead
+solve that problem using machine-to-machine communication.
+
+`REST` model that solves such issues is an arhictectural style which is not tight to any spec, protocol or format of the
 aforementioned levels.
 
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
 >
 > --- Roy Fielding
 
-
-When Roy talks about `REST`, he mentions 5 crucial properties of a `REST` model:
+When Roy talks about `REST`, he mentions 5 crucial properties of `REST` model:
 
 ### 4.1. Access methods have the same semantics for all resources
 > induces visible, scalable, available through layered system, cacheable, and shared caches
