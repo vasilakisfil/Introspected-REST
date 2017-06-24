@@ -542,7 +542,7 @@ A collection of `User` resources, the `Users` resource, would look like:
 
 
 Now that we defined the scope of our little API, let's see how this would be implemented
-in the specs for REST(y) APIs currently available. We feel that most current APIs
+in the specs for REST(y) APIs currently available. We feel that most currently deployed APIs
 have a lot of similarities with the following specs, namely the structure and the HATEOAS part (regarding
 linking), and as a result by comparing those specs with our model would be sufficient.
 
