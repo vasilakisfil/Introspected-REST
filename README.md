@@ -665,7 +665,7 @@ The key feature of HAL when it was released was the browsability/explorability o
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
 However, this feature is rather controversial since the information these links provide are targeted for humans and not machines.
 
-The resources of our use case that are presented here use JSON as a message format, but HAL is not tighed to that.
+The resources of our use case that are presented here use JSON as a message format, but HAL is not tight to that.
 
 #### 7.3.1. User resource
 ```json
