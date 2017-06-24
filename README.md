@@ -162,9 +162,11 @@ The actual protocol depends on the protocol used in the protocol level.
 Roy came up with the REST model in order to solve issues that were arising by the unique propertied of networked services
 during the infancy of Internet.
 When you develop an application that will be deployed in a networked environment and is expected to be accessed by other networked services,
-you need to think about its evolvability.
-You cannot expect services on the other end that talk with your application to be humanly updated but instead
-solve that problem using machine-to-machine communication.
+you need to think about its evolvability:
+if you need to add, remove or change functionality of that application
+you cannot expect services on the other end that talk with your application to be updated by humans.
+Such problems that arise from the peculiarities of networks, like discovery and evolvability must be solved using
+machine-to-machine communication.
 
 `REST` model that solves such issues is an arhictectural style which is not tight to any spec, protocol or format of the
 aforementioned levels.
