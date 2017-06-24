@@ -1781,6 +1781,8 @@ like different caching policies between the 2 origins and decoupling in general.
 We think that linksets is anohter small piece towards a introspectiveness and hence we support such initiatives.
 However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
 
+### JSON home
+
 ### 11.4. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
