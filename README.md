@@ -368,8 +368,6 @@ provide an ORM to the client over the HTTP (or any other protocol).
 We provide here a list of features (we call them capabilities) that we think should be built in a modern networked API,
 in 2017.
 
-While most of these capabilities are related to Data APIs, some of them apply to UI APIs as well.
-
 #### 6.1.1. Sparse fields (collection/resource)
 The client should be able to ask and get specific attributes (i.e. a subset) of the resource representation.
 Also related, we should note that a representation of a resource could have completely different set of
