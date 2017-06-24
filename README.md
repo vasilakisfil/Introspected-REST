@@ -1036,7 +1036,7 @@ As a result Media Types become big monoliths that are unflexible and limit the e
 In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
 However, we are in a pragmatic world where nothing is perfect and clients are built by humans who take decisions based on their time and money.
 
-Although we firmly believe that a REST api is better than any RESTly or RESTless API, we understand that there could be cases where API designers
+Although we firmly believe that a REST API is better than any RESTly or RESTless API, we understand that there could be cases where API designers
 _have_ to initially skip hypermedia part.
 
 The problem is that when REST is applied to HTTP, it doesn't allow you to easily integrate hypermedia at a later point.
