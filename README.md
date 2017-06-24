@@ -760,7 +760,7 @@ While the spec does have templated links, we see some notable issues. Namely:
  * No actions (they are supported by an unofficial extension)
  * No info on available attributes
  * No info on data types
- * No attributes description, requires documentation (however it does provide a link to documentation)
+ * No attributes description, requires documentation (however it does provide a link to documentation, through curies)
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
 
