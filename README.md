@@ -1055,7 +1055,7 @@ The symptom of non-composability is clearly visible in protocols like HTTP where
 act as big monoliths trying to describe everything in one place.
 [RFC 6906 (The 'profile' Link Relation Type)](https://www.ietf.org/rfc/rfc6906.txt) was created to overcome such issues
 but as we will see later this specifications lags behind over true composability and
-proper negotiation of the different profiles types from the client perspective.
+proper negotiation of the different profile types from the client perspective.
 
 In Introspected REST, the MicroTypes is a conceptual solution to the outdated Media Type concept
 and allows us to mix-in different concepts for different kind of metadata of a resource,
