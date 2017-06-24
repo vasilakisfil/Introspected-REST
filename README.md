@@ -1602,7 +1602,7 @@ Link rel should be used for very few specific things.
 For instance Media type and links. Not overloading. Dereference only.
 #### 11.3.1. [The Profile Media Type Parameter](http://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
 
-##### 11.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
+#### 11.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
 Erik Wilde suggested a profiling mechanism of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
 
 >  A profile is defined not to alter the
@@ -1643,7 +1643,7 @@ to build.
 
 +no negotiation
 
-##### 11.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
+#### 11.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
 As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
 by the response representation and message format.
 In order to mitigate such issues, Linksets proposal tries to offload HTTP Link links from a resource or url, when having them in there is
