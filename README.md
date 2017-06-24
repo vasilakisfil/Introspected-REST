@@ -1595,14 +1595,14 @@ Using linked data in our APIs is just great.
 HYDRA is in the right direction to introspectable APIs.
 
 
-#### 11.5. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
+### 11.3. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
 There is a tendency to overload Link rel for links unrelated to application format etc.
 We feel that this is a bad practice and definitely not the right location to add the Microtypes.
 Link rel should be used for very few specific things.
 For instance Media type and links. Not overloading. Dereference only.
-##### 11.5.1. [The Profile Media Type Parameter](http://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
+#### 11.3.1. [The Profile Media Type Parameter](http://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
 
-##### 11.5.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
+##### 11.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
 Erik Wilde suggested a profiling mechanism of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
 
 >  A profile is defined not to alter the
@@ -1643,7 +1643,7 @@ to build.
 
 +no negotiation
 
-##### 11.5.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
+##### 11.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
 As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
 by the response representation and message format.
 In order to mitigate such issues, Linksets proposal tries to offload HTTP Link links from a resource or url, when having them in there is
@@ -1675,7 +1675,7 @@ like different caching policies between the 2 origins and decoupling in general.
 We think that linksets is anohter small piece towards a introspectiveness and hence we support such initiatives.
 However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
 
-### 11.3. RESTful API Description Languages
+### 11.4. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
@@ -1692,7 +1692,7 @@ The tools themselves have limitations,
 but also, having tools that aim to provide all-in-one to the API designer is against our philosophy: tools that do one thing and do it well.
 
 
-### 11.4. API directories
+### 11.5. API directories
 Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
 We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
 The API's root url should provide everyhing that is needed, or using already published protocols
