@@ -11,7 +11,7 @@ and see **the majority of APIs and API specs** ([JSONAPI](http://jsonapi.org/for
 Then, we will propose a **new model** that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
-As part of this _manifesto_ we will also present, MicroTypes, small reusable modules that compose a Media Type and facilitates
+As part of this _manifesto_ we will also present the concept of MicroTypes, small reusable modules that compose a Media Type and facilitates
 the evolvability and extensability of our new model.
 
 ## 1. Definitions
