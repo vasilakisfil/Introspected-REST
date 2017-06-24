@@ -66,7 +66,7 @@ In the world of startups and money-driven companies, the following will sound mo
 
 >  **If you want to move fast, you should build a change-first API.**
 >
->
+
 An API that can change the state of the client without needing the latter to change.
 
 Given that, **how can we have a simpler model than `REST`, yet derive the same, if not more, functionality of
@@ -2095,3 +2095,7 @@ The term capabilities is used to describe what is possible an API to do using me
 This term us mostly used by
 
 
+>  The best software architecture “knows” what changes often and makes that easy.
+>
+> --- Paul Clements
+>
