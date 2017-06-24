@@ -1105,7 +1105,8 @@ The properties of a link, like placement inside the response, strictly follow th
 
 ##### 9.1.2.2. Actions
 Actions are links along with information for manipulating a resource.
-Although CRUD are the most popular actions of a resource, the beauty with REST, and consequently Introspected REST, is that actions can go beyond plain CRUD.
+Although CRUD are the most popular actions of a resource, the beauty with REST, and consequently with Introspected REST,
+is that actions can go beyond plain CRUD.
 In fact, you can define any type of action or meta-action of your internal resource, through the representation that you expose.
 As a result, actions of a resource could be quite complex or simplistic depending on the needs and decisions of the API designer.
 Actions should also describe any relevant information for the client to perform it, unless the Media Type itself describe those details.
