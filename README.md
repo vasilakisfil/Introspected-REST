@@ -496,7 +496,9 @@ So given those `REST` model properties we _could_ have the following routes:
   * Update a user `PATCH /users/{id}`: Updates a `User` with the specified attributes
   * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
 
-_`Users` and `User` are 2 distinct resources which are often, mistankingly, missthought as a single, one, resource_
+_`Users` and `User` are 2 distinct resources which are often, mistankingly, missthought as a single, one, resource.
+The fact that `Users` is an "array", a collection, of `User` objects is because it suits our needs but it's not necessary
+to be like that._
 
 As we mentioned, `User` resource has also some associations (or relations/relationships if you prefer).
 
@@ -2078,3 +2080,5 @@ Roy's model is weird: it was rarely fully employed to have 100% evolvability and
 Final review:
 1. check paragraphs
 2. check code terms (RESTxx)
+
++ say about profiles on HATEOAS VS Media Types
