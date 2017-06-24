@@ -497,7 +497,7 @@ So given those `REST` model properties we _could_ have the following routes:
   * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
 
 _`Users` and `User` are 2 distinct resources which are often, mistankingly, missthought as a single, one, resource.
-The fact that `Users` is an "array", a collection, of `User` objects is because it suits our needs but it's not necessary
+Also, the fact that `Users` is a collection of `User` objects is because it suits our needs but it's not necessary
 to be like that._
 
 As we mentioned, `User` resource has also some associations (or relations/relationships if you prefer).
