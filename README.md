@@ -2107,3 +2107,4 @@ not only about hypermedia but also other metadata (like data types etc)
 * It embraces composability of different MicroTypes
   * enhances negotiation
 * Fixes broken API negotiation (problem+json)
+* Say that ALPS and related stuff can still be applied, in a different way!
