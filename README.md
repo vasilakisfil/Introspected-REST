@@ -1188,7 +1188,6 @@ The process should **embrace the use of distinct MicroTypes** to form a Media Ty
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
 
-##### 9.3.1.1. Published, peer-reviewed specs first
 The API designer should **first** investigate and embrace the use of MicroTypes, RFCs and specs that are already defined, instead of
 creating her own custom, unpublished spec.
 The reason for this suggestion is that creating a new spec is difficult and usually such specs are used only for domain-specific APIs that
