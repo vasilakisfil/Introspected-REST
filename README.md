@@ -2102,7 +2102,8 @@ This term us mostly used by
 ### What Introspected REST does in bullets
 * It simplifies REST
   * Separates Data from Metadata
-  * Gives more to metadata by providing information (vocabularly) to the clinet
+* Gives more to metadata by providing information (vocabularly) to the clinet
 not only about hypermedia but also other metadata (like data types etc)
-  * It embraces composability
+* It embraces composability of different MicroTypes
+  * enhances negotiation
 * Fixes broken API negotiation (problem+json)
