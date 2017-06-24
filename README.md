@@ -1183,7 +1183,7 @@ Through those metadata, server provides all the available states, manipulation a
 The implementation of the process is up to the API designer although usually a REST interface even for each MicroType's metadata is a wise choise.
 In any case, we would like to point out some key properties that should appear on any introspection process.
 
-#### 9.3.1. Composition of MicroTypes over monolithic Media Type
+#### 9.3.1. Composability over monoliths
 The process should **embrace the use of distinct MicroTypes** to form a Media Type instead of using a single Media Type.
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
