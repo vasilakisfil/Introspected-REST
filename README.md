@@ -1001,7 +1001,7 @@ In fact, such design is quite difficult to implement and test from the server si
 
 #### 8.2.2. REST enforces possibly useless information
 In REST, even if the hypermedia are rendered by taking into account the user's role, eventually we might send more data that the client wants.
-**Exactly because we don't know in advance what the client might need, we must send all the possible hypermedia options to the client, just in case**.
+**Exactly because we don't know in advance what the client might need, we must send all the possible hypermedia information to the client, just in case**.
 The client however could only be interested in the data, or specific hypermedia types, like only links, but instead gets a fully bloated response by the server.
 
 #### 8.2.3. REST sacrifices performance for evolvability
