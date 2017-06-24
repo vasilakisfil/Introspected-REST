@@ -334,6 +334,11 @@ As a result, **versioning should not take place in the URL but in the Media Type
 > Roy Fielding
 >
 
+>The reason to make a real REST API is to get evolvability … a "v1" is a middle finger to your API customers, indicating RPC/HTTP (not REST)
+>
+> Roy Fielding
+>
+
 ## 6. REST applied in a modern API
 When engineering a REST API, there are 2 approaches:
 * design a specialized, usually UI-driven, API: the resources and their browsability is tightly coupled with the specific application that was built for
