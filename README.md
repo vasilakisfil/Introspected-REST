@@ -958,8 +958,8 @@ Moreover such APIs can't actually be evolved without releasing a new Media Type 
 **There is no way of introducing change, which essentially breaks REST's principles.**
 
 However we are pragmatic: we understand that such APIs will exist and engineers want to spend as less time as possible to build such APIs.
-Introspected architecture solves that by serving hypermedia information on side and in an incremental way without breaking
-the simplicity.
+Introspected REST, an architecture that we will describe later, solves that by serving hypermedia
+information on side and in an incremental way without breaking the simplicity.
 
 #### 8.1.3. A JSON API back in time
 A JSON-based API built around 2006 would return just data. No hypermedia, no HATEOAS, only data.
