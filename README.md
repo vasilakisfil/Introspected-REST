@@ -403,7 +403,7 @@ have a much larger list of options to select from.
 Additionally, we should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it follows a specific regex etc.
 
-#### 6.1.7 The list does not end here
+#### 6.1.7 Plot twist: The list does not end here
 Although we feel that _today_ these capabilities should exist in any modern API, **this list is not exclusive**.
 In fact, there could be capabilities in the future that might not seem necessary today, but help the client can get the necessary data in the structure needed.
 For example, joining together one or more resources, other db-inspired operations applied on resources,
