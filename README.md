@@ -2065,3 +2065,7 @@ We would like to give some guidelines towards that direction.
 
 
 Roy's model is weird: it was rarely fully employed to have 100% evolvability and when it was all it's drawbacks appeared: complexity and performance issues.
+
+Final review:
+1. check paragraphs
+2. check code terms (RESTxx)
