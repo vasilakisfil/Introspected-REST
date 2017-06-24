@@ -2216,3 +2216,4 @@ not only about hypermedia but also other metadata (like data types etc)
   * enhances negotiation
 * Fixes broken API negotiation (problem+json)
 * Say that ALPS and related stuff can still be applied, in a different way!
+* Say that MicroTypes is not for Hypermedia only but is **needed** for other micro-definitions as well!
