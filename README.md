@@ -321,7 +321,7 @@ There are 2 types of human involvement when building an API client:
 client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
 The only thing that the client requires is the initial URI of the API.
 * **multi-fold**: Programming the client once to understand the Media Type.
-Then modify the client to parse and understand the API correctly using some offline contract (like available resources, fields, pagination etc) and then
+Then modify the client to parse and understand the API correctly using some offline contract (i.e. documentation for available resources, fields, pagination etc) and then
 every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
 during that phase is variable depending on the weakness of the Media Type.
 
