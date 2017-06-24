@@ -925,7 +925,7 @@ In our experience, such responses are very hard to implement correctly, test, be
 a human will sit down and write the initial code and debugging the code by the eye is important.
 Simplicity is crucial.
 
-Another thing: some clients might not be interested in hypermedia and evolvability at all. Only the data.
+Moreover, some clients might not be interested in hypermedia and evolvability at all but only the data.
 However such APIs force the clients to deal with it.
 
 Ideally we would like to give the option to the client to decide the extend of the hypermedia that it
