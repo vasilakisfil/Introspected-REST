@@ -1130,11 +1130,6 @@ hypermedia (i.e. links, actions, forms), informational targeted to humans (i.e. 
 
 Usually metadata is much less volatile than data, if not static, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
-##### 9.1.3.1. Capabilities
-The term capabilities is used to describe what is possible an API to do using metadata.
-This term us mostly used by
-
-
 
 ### 9.2. MicroTypes: modules composing a Media Type
 > Imagine how poor the Web would have been if we had limited HTML to what was
@@ -2093,3 +2088,10 @@ Final review:
 
 Although implementation of MicroTypes in HTTP is based in the 'profile' Link Relation Type,
 it's actual purpose is to offer true composability and evolvability.
+
+
+##### 9.1.3.1. Capabilities
+The term capabilities is used to describe what is possible an API to do using metadata.
+This term us mostly used by
+
+
