@@ -1641,6 +1641,8 @@ the one that fits best.
 Although the negotiation part is skipped from the RFC, we feel that such works are towards the right direction that will allow us
 to build.
 
++no negotiation
+
 ##### 11.5.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
 As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
 by the response representation and message format.
