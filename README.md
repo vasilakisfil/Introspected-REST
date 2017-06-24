@@ -892,8 +892,7 @@ In an ideal REST API, the client should be able to have all the necessary inform
 the request and response.
 
 * About each resource returned from the API to the client:
-  * default attributes and available attributes of the resource, based on the user's permissions
-    * default attributes is a subset of the available attributes
+  * default attributes and available (superset of default) attributes of the resource, based on the user's permissions
   * data types for each attribute in the resource or any embedded association
   * Sorting/pagination, filtering and aggregation queries availability
   * data type of each attribute
