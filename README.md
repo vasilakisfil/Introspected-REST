@@ -762,7 +762,7 @@ While the spec does have templated links, we see some notable issues. Namely:
  * No info on data types
  * No attributes description, requires documentation (however it does provide a link to documentation, through curies)
 
-To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curries facilitate that).
+To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curies facilitate that).
 
 ### 7.4. [Siren](https://github.com/kevinswiber/siren)
 Siren was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-addressable resource that has properties and actions associated with it.
