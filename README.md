@@ -1700,6 +1700,9 @@ Using linked data in our APIs is just great.
 HYDRA is in the right direction to introspectable APIs.
 
 #### 11.2.2. ALPS
+This should not go here but instead in the conclusion saying that everything is **still** fetchable and possible
+using introspection + microtypes
+
 
 ### 11.3. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
 There is a tendency to overload Link rel for links unrelated to application format etc.
