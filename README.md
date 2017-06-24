@@ -238,15 +238,16 @@ you expose.
 > induces visible, scalable, available through layered system, cacheable, and shared caches
 > induces evolvable via extensible communication
 
+
+This would mean that the data of the response should follow the Media Type that the client
+requested and unrestands.
+Given that the client negotiated for that Media Type, **it should be able to parse and understand any part of the response**.
+
 > Interaction is stateless between requests, standard methods and Media Types are used to
 > indicate semantics and exchange information, and responses explicitly indicate cacheability.
 >
 > --- Roy Fielding
 >
-
-This would mean that the data of the response should follow the Media Type that the client
-requested and unrestands.
-Given that the client negotiated for that Media Type, **it should be able to parse and understand any part of the response**.
 
 If your Media Type is very weak (like `application/json`) and you need functionality that the Media Type does not describe
 then you need to define another Media Type which will describe the new semantics and wait until client(s) incorporate the new Media Type changes.
