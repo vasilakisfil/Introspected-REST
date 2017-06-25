@@ -1678,6 +1678,7 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 2 issues
 1. Root/home endpoint has multiple MicroTypes
 2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
+3. Order of MicroTypes (JSON-LD vs JsonSchema)
 
 ### 10.4. Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
