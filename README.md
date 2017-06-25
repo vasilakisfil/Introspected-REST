@@ -1242,6 +1242,9 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 > --- Roy Fielding
 >
 
+
+Say about shims
+
 Currently media types act as a big monolith that clients need to understand beforehand through human involvement.
 We believe that Media Types should be broken in smaller
 reusable media types, MicroTypes, each describing very carefully a specific functionality of a modern API.
