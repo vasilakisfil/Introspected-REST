@@ -1563,11 +1563,11 @@ It should be noted that JSON-LD spec was developed with the goal to require as l
 to transform their existing JSON to JSON-LD but also to not require breaking changes to your
 existing API, which makes it backwards compatible with any current deployed API.
 
-**Here, we will serve it to the client through the introspectived process, which could be
+Here, we will serve it to the client through the introspectived process, which could be
 confusing to the client, specifically could potentially break the JSON-LD spec unless
-we create Media Type shim for it.
+we create Media Type **shim** for it that specifies the missing points.
 If this is not desirable or even possible, then we can also abuse the case
-of runtime metadata, that the IATEOAS allows and add them inside the response ;).**
+of runtime metadata, that the IATEOAS allows and add them inside the response ;)
 
 
 ##### 10.2.3.1. User resource
