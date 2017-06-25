@@ -1566,8 +1566,8 @@ existing API, which makes it backwards compatible with any current deployed API.
 Here, we will serve it to the client through the introspectived process, which could be
 confusing to the client, specifically could potentially break the JSON-LD spec unless
 we create Media Type **shim** for it that specifies the missing points.
-If this is not desirable or even possible, then **we can also abuse the case
-of runtime metadata, that the IATEOAS allows and add them inside the response.**
+If this is not desirable or even possible, then **we can also consider them as
+runtime metadata and add them inside the response, something that the IATEOAS allows.**
 
 
 ##### 10.2.3.1. User resource
