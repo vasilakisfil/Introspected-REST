@@ -1558,7 +1558,48 @@ For the Hypermedia part we will use JSON Hyper Schemas
 + Query metadata + pagination + templated urls
 
 #### 10.2.3. Linked-data metadata
-We will use JSON-LD.
+For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
+It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
+to transform their existing JSON to JSON-LD but also to not require breaking changes to your
+existing API, which makes it backwards compatible with any current deployed API.
+
+**Here, we will serve it to the client through the introspectived process, which could be
+confusing to the client, specifically could potentially break the JSON-LD spec unless
+we create Media Type shim for it.
+If this is not desirable or even possible, then we can also abuse the case
+of runtime metadata, that the IATEOAS allows and add them inside the response ;).**
+
+
+##### 10.2.3.1. User resource
+```json
+{
+  "@context": {
+    "@vocab": "http://schema.org/",
+    "@type": "Person",
+    "birth_date": "birthDate",
+    "created_at": "dateCreated",
+    "microposts_count": null
+  }
+}
+```
+
+##### 10.2.3.2. Users resource
+
+```json
+{
+  "@context": {
+    "@vocab": "http://schema.org/",
+    "birth_date": "birthDate",
+    "created_at": "dateCreated",
+    "microposts_count": null
+  }
+  "@graph": [
+    {
+      "@type": "Person"
+    }
+  ]
+}
+```
 
 #### 10.2.5. Errors metadata
 For the errors metadata, we will use the [`problem+json`](https://tools.ietf.org/html/rfc7807) Media Type.
@@ -1682,6 +1723,9 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 
 ### 10.4. Automating the documentation generation
 documentation generation could have extra stuff, by assigining a param in the url.
+
+
+### 10.5 Limitations
 
 
 
