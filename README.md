@@ -1592,7 +1592,7 @@ runtime metadata and add them inside the response, something that the IATEOAS al
     "birth_date": "birthDate",
     "created_at": "dateCreated",
     "microposts_count": null
-  }
+  },
   "@graph": [
     {
       "@type": "Person"
