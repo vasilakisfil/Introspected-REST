@@ -1445,7 +1445,7 @@ A cool side effect is that the client can use that information to first validate
 ```json
 {
   "$schema":"http://json-schema.org/draft-04/schema#",
-  "id":"http://example.com/example.json",
+  "id":"http://example.com/user.json",
   "properties":{
     "user":{
       "properties":{
@@ -1494,54 +1494,16 @@ A cool side effect is that the client can use that information to first validate
 ```
 
 ##### 10.2.1.2. Users resource
+Note that the Users resource is just a collection of User object and as a result
+it references the User schema.
 
 ```json
 {
   "$schema":"http://json-schema.org/draft-04/schema#",
-  "id":"http://example.com/example.json",
+  "id":"http://example.com/users.json",
   "properties":{
     "users":{
-      "items":{
-        "additionalProperties":false,
-        "properties":{
-          "id":{
-          "maxLength":64,
-            "type":"string"
-          },
-          "email":{
-            "maxLength":255,
-            "type":"string",
-            "format":"email"
-          },
-          "name":{
-            "maxLength":255,
-            "type":["null", "string"]
-          },
-          "birth_date":{
-            "type":"string",
-            "pattern":"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-          },
-          "created_at":{
-            "maxLength":255,
-            "type":"string",
-            "formate":"date-time"
-          },
-          "microposts_count":{
-            "type":"integer"
-          }
-        },
-        "required":[
-          "id",
-          "email",
-          "name",
-          "birth_date",
-          "created_at",
-          "microposts_count"
-        ],
-        "type":"object"
-      },
-      "type":"array",
-      "uniqueItems":true
+      "$href": "http://example.com/user.json"
     }
   },
   "required":[
@@ -1559,6 +1521,72 @@ distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 #### 10.2.2. Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas
 + Query metadata + pagination + templated urls
+
+
+##### 10.2.2.1. User resource
+```json
+{
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "id":"http://example.com/users.json",
+  "properties":{
+    "$href": "http://example.com/user.json"
+  },
+  "required":[
+    "users"
+  ],
+  "type":"object",
+  "links": [
+    {
+      "rel": "self",
+      "href": "/users?page={authorId}&per_page={per_page}&offset={offset}"
+      "hrefSchema": {
+        "properties": {
+          "page": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          "per_page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        }
+      }
+    },
+    {
+      "rel": "microposts",
+      "href": "/microposts?user={id}&page={authorId}&per_page={per_page}&offset={offset}"
+      "hrefSchema": {
+        "properties": {
+          "page": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          "per_page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        }
+      }
+    }
+  ]
+}
+```
 
 #### 10.2.3. Linked-data metadata
 For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
