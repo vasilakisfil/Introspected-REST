@@ -1752,6 +1752,8 @@ We also feel that this is also a perfect case for hosting our API's discovery fo
 We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
 `/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
 
+++ SAY ABOUT QUERIES, IDENTIFICATION OF MICROTYPES AND FULL RESPONSE
+
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
 2 issues
@@ -1897,6 +1899,13 @@ for client bootstraping.
 ## Conclusion
 We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
+
+### The future is full of posibilities
+**How do we negotiate to the client that a resource is available through HTTP/2 Stream Server Push without documentation ?**
+That requirement would be very impractical using a REST interface because everything would have to be in the same response.
+The profile RFC does not do a correct negotiation and it's problematic
+With Introspected REST, we can solve such problems by providing such information only to the clients that are really interested,
+in an easy, composable way.
 
 This document is not for REST only. Given the recent advancements of REST-RFC-not compliant changes by the community,
 we need to see what's evolvable and what's not. (maybe take it to a blog post)
