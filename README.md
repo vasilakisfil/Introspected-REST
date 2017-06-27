@@ -1750,7 +1750,7 @@ to the root url.
 
 We also feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
 We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
-`/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934discovery-of-api-resources-and-capabilities).
+`/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
 
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
