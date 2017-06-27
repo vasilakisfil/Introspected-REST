@@ -1753,6 +1753,7 @@ We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and
 `/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
 
 ++ SAY ABOUT QUERIES, IDENTIFICATION OF MICROTYPES AND FULL RESPONSE
+Maybe below ?
 
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
