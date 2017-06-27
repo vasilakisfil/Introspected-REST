@@ -1217,8 +1217,8 @@ Actions should also describe any relevant information for the client to perform 
 
 ##### 9.1.2.3. Forms
 Another way of describing the manipulation options of a resource is the notion of forms.
-The difference between actions and forms is that the latter are mostly targeted for the UI.
-API forms should provide all the necessary information to be semantically **equivelent to an HTML form**, for the client to render.
+The difference between actions and forms is that the latter are strictly semantically **equivelent to an HTML form**,
+for the client to render.
 
 
 #### 9.1.3. Metadata
@@ -1316,7 +1316,7 @@ Another example is the **detached evolvability** of each MicroType's metadata, i
 
 #### 9.3.4. Discovery of API resources and capabilities
 Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of **performance**.
-An Introspected REST API _should_ provide an API-wide capabilities discovery that lists all the metadata from all MicroTypes for all resources,
+An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all the metadata from all MicroTypes for all resources,
 and their states that the client can access, wherever this is possible.
 
 The location of this detailed list should be in the conceptual _root_ resource/URL of the API.
@@ -1361,7 +1361,7 @@ Given that Introspected REST differs only in HATEOAS part of REST, the identific
 
 
 ### 10.1. Isolating the actual data from metadata
-Our first job is to first offload the final response object with metadata, like hypermedia.
+Our top priority is to offload the final response object from the metadata, like hypermedia.
 Instead, we will provide to the user only the data and possibly any runtime metadata.
 
 When the client manipulates a `User` resource, the response should contain only the data:
@@ -1437,8 +1437,10 @@ One of the most important things for a client to know is the expected structure 
 along with information on the data types.
 For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
 
-It is very probable that there _is_ an implementation for that MicroType for the client's environment.
-A cool side effect is that the client can use that information to first validate the object before sending it over the wire to the server.
+Given that this specification has been published as an Internet-Draft and its popularity it is very probable that there _is_
+an implementation for that MicroType for the client's environment.
+Also, a cool side effect of having the structure definition of the resource as a MicroType available through resource's introspection,
+is that the client can use this information to first validate the object before sending it over the wire to the server.
 
 ##### 10.2.1.1. User resource
 
@@ -1728,6 +1730,9 @@ we feel HTTP OPTIONS is a perfect match for API introspection.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
+As the RFC notes, the OPTIONS request should not imply any specific resource action and
+as a result should return all the available capabilities for that resource, for all actions.
+
 #### 10.3.1. API capabilities discovery
 The same RFC mentions that there isn't any practical use of sending an OPTIONS request
 to the root url.
@@ -1743,7 +1748,9 @@ to the root url.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-However, we feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
+We also feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
+We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
+`/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934discovery-of-api-resources-and-capabilities).
 
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
@@ -1753,12 +1760,11 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 3. Order of MicroTypes (JSON-LD vs JsonSchema)
 
 ### 10.4. Automating the documentation generation
-documentation generation could have extra stuff, by assigining a param in the url.
-
-
-### 10.5 Limitations
-
-
+The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
+by returning a regular web page, targeted to humans and not machines.
+The technical details is out of the scope of this implementation example but we
+can't stress enough that the generated documentation should only use information from MicroTypes available for the machines,
+programmatically wrapped in a human-friendly format.
 
 ## 11. Related Work
 ### 11.1. GraphQL
