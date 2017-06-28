@@ -507,12 +507,14 @@ have a much larger list of options to select from.
 Additionally, we should be able to provide custom types in an easy way, for instance, a field is `String` but
 has maximum length of 255 characters, it follows a specific regex etc.
 
-#### 6.1.7 Plot twist: the list does not end here
+#### 6.1.7 Plot twist: this list is endless
 Although we feel that _today_ these capabilities should exist in any modern API, **this list is not exclusive**.
 In fact, there could be capabilities in the future that might not seem necessary today, but help the client can get the necessary data in the structure needed.
 For example, joining together one or more resources, other db-inspired operations applied on resources,
-internationalization and localization of the data and other capabilities that we haven't thought yet.
-In any case, **these capabilities must be transparent to the client without any documentation or human involvement**.
+internationalization and localization of the data, HTTP/2 Server Push on some requests, Generic Event Delivery Using HTTP Push on other
+resources on specific states and other capabilities that we haven't even imagined yet.
+In any case, **these capabilities must be transparent and self-descriptive to the client without any documentation or human involvement, other
+than programming the client to support the Media Type(s) and pointing it to the initial API URI.**.
 
 
 ### 6.2. Media Types vs HATEOAS
