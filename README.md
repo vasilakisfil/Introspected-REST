@@ -7,7 +7,7 @@ Or a CRUD with some links.
 Or a nicely formatted, a sophisticated CRUD.
 
 In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
-and see **the majority of APIs and API specs** ([JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
+and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
 Then, we will propose a **new model** that brings into the table the same things,
 yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
 
@@ -121,8 +121,8 @@ the evolvability and extensability of our new model.
 ## 1. Definitions
 First some definitions, that we will use through the text:
 
-* `REST`, `RESTful`: The model that Roy defined in his [thesis](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
-* `RESTly`: APIs that follows all parts `REST` model, except HATEOAS in which they support mostly links (specs like [JSONAPI](http://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
+* `REST`, `RESTful`: The model that Roy defined in his [thesis](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
+* `RESTly`: APIs that follows all parts `REST` model, except HATEOAS in which they support mostly links (specs like [JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
 * `RESTless`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
 * `Introspected REST`: APIs that follow the definition of the model we provide in this _manifesto_
 
@@ -221,12 +221,12 @@ representation is in JSON data format.
 Specifically the type of this Media Type is `application` while the subtype is `json`.
 **JSON itself is not a Media Type but a message format**.
 
-Media Types can be a bit more complex as well: `application/vnd.api+json`, the media type of [JSONAPI](http://jsonapi.org/format) spec, (roughly) means that
+Media Types can be a bit more complex as well: `application/vnd.api+json`, the media type of [JSONAPI](https://jsonapi.org/format) spec, (roughly) means that
 * the main type is `application`
 * the subtype is `vnd.api` which _roughly_ denotes the Media Type name
 * the underlying structure follows JSON semantics
 
-In theory, [JSONAPI](http://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
+In theory, [JSONAPI](https://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
 or even YAML, however in practice we tend to forget that and we treat all Media Types as single and not composite.
 
 However, it should also be noted that the **Media Types and the content negotiation in general, are
@@ -656,8 +656,8 @@ We will evaluate the specs for the following:
 we also need to read and understand the documentation to develop our client
 * whether they require multi-fold human interaction while the API evolves
 
-### 7.2. [JSONAPI](http://jsonapi.org)
-JSONAPI was originally created by [Yehuda Katz](http://yehudakatz.com/), as part of Ember's ember-data library.
+### 7.2. [JSONAPI](https://jsonapi.org)
+JSONAPI was originally created by [Yehuda Katz](https://yehudakatz.com/), as part of Ember's ember-data library.
 Since then a lot of people have contributed and has rised as one of the most supported
 API specs as of 2017 in terms of tools and libraries.
 
@@ -805,7 +805,7 @@ The resources of our use case that are presented here use JSON as a message form
       "curries":[
          {
             "name":"ea",
-            "href":"http://example.com/docs/rels/{rel}",
+            "href":"https://example.com/docs/rels/{rel}",
             "templated":true
          }
       ]
@@ -1446,10 +1446,11 @@ is that the client can use this information to first validate the object before 
 
 ```json
 {
-  "$schema":"http://json-schema.org/draft-04/schema#",
-  "id":"http://example.com/user.json",
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/user.json",
   "properties":{
     "user":{
+      "type":"object",
       "properties":{
         "id":{
           "maxLength":64,
@@ -1484,8 +1485,7 @@ is that the client can use this information to first validate the object before 
         "birth_date",
         "created_at",
         "microposts_count"
-      ],
-      "type":"object"
+      ]
     }
   },
   "required":[
@@ -1495,21 +1495,51 @@ is that the client can use this information to first validate the object before 
 }
 ```
 
+Note how we denote the schema version (few microtypes do that)
+Node the id.
+
 ##### 10.2.1.2. Users resource
 Note that the Users resource is just a collection of User object and as a result
 it references the User schema.
 
 ```json
 {
-  "$schema":"http://json-schema.org/draft-04/schema#",
-  "id":"http://example.com/users.json",
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/users.json",
   "properties":{
     "users":{
-      "$href": "http://example.com/user.json"
+      "type": "array",
+      "$href": "https://example.com/user.json#/properties/user"
+    }
+    "meta": {
+      "type":"object",
+      "page": {
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "$ref": "#/definitions/extra"
+      },
+      "per_page": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 100,
+        "default": 50
+      },
+      "offset": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      },
+      "required":[
+        "page",
+        "per_page",
+        "offset"
+      ],
     }
   },
   "required":[
-    "users"
+    "users",
+    "meta"
   ],
   "type":"object"
 }
@@ -1521,69 +1551,75 @@ If that's the case, we should denote each object in the response parented under
 distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 
 #### 10.2.2. Hypermedia metadata
-For the Hypermedia part we will use JSON Hyper Schemas
-+ Query metadata + pagination + templated urls
+For the Hypermedia part we will use JSON Hyper Schemas.
+Again note the draft version.
 
 
 ##### 10.2.2.1. User resource
 ```json
 {
-  "$schema":"http://json-schema.org/draft-04/schema#",
-  "id":"http://example.com/users.json",
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/user-links.json",
   "properties":{
-    "$href": "http://example.com/user.json"
+    "$href": "https://example.com/user.json#/properties"
   },
-  "required":[
-    "users"
-  ],
-  "type":"object",
   "links": [
     {
-      "rel": "self",
-      "href": "/users?page={authorId}&per_page={per_page}&offset={offset}"
+      "rel": "microposts",
+      "href": "/microposts?user={userId}&page={page}&per_page={per_page}&offset={offset}"
       "hrefSchema": {
-        "properties": {
-          "page": {
-            "type": "integer",
-            "default": 0,
-            "minimum": 0
+        "allOf": [
+          {
+            "$ref": "https://example.com/users.json#/properties/meta"
           },
-          "per_page": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100,
-            "default": 50
+          {
+            "$ref": "https://example.com/users.json#/properties/user/id"
           },
-          "offset": {
-            "type": "integer",
-            "minimum": 0,
-            "default": 0
-          }
-        }
+        ]
       }
     },
     {
-      "rel": "microposts",
-      "href": "/microposts?user={id}&page={authorId}&per_page={per_page}&offset={offset}"
+      "rel": "update-user",
+      "href": "/users"
+      "method": "PATCH",
+      "targetSchema": {
+        "$ref": "https://example.com/user.json"
+      }
+    },
+    {
+      "rel": "delete-user",
+      "href": "/users"
+      "method": "DELETE",
+      "targetSchema": {
+        "$ref": "https://example.com/user.json"
+      }
+    }
+  ]
+}
+```
+
+##### 10.2.2.2. Users resource
+```json
+{
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/users-links.json",
+  "properties":{
+    "$href": "https://example.com/users.json#/properties"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "/users?page={page}&per_page={per_page}&offset={offset}"
       "hrefSchema": {
-        "properties": {
-          "page": {
-            "type": "integer",
-            "default": 0,
-            "minimum": 0
-          },
-          "per_page": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100,
-            "default": 50
-          },
-          "offset": {
-            "type": "integer",
-            "minimum": 0,
-            "default": 0
-          }
-        }
+        "$ref": "https://example.com/users.json#/properties/meta"
+      }
+    },
+    {
+      "rel": "create-user",
+      "href": "/users"
+      "method": "POST",
+      "targetSchema": {
+        "$ref": "https://example.com/user.json"
       }
     }
   ]
@@ -1607,7 +1643,7 @@ runtime metadata and add them inside the response, something that the IATEOAS al
 ```json
 {
   "@context": {
-    "@vocab": "http://schema.org/",
+    "@vocab": "https://schema.org/",
     "@type": "Person",
     "birth_date": "birthDate",
     "created_at": "dateCreated",
@@ -1621,7 +1657,7 @@ runtime metadata and add them inside the response, something that the IATEOAS al
 ```json
 {
   "@context": {
-    "@vocab": "http://schema.org/",
+    "@vocab": "https://schema.org/",
     "birth_date": "birthDate",
     "created_at": "dateCreated",
     "microposts_count": null
@@ -1794,7 +1830,7 @@ There is a tendency to overload Link rel for links unrelated to application form
 We feel that this is a bad practice and definitely not the right location to add the Microtypes.
 Link rel should be used for very few specific things.
 For instance Media type and links. Not overloading. Dereference only.
-#### 11.3.1. [The Profile Media Type Parameter](http://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
+#### 11.3.1. [The Profile Media Type Parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
 
 #### 11.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
 Erik Wilde suggested a profiling mechanism of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
@@ -1892,7 +1928,7 @@ but also, having tools that aim to provide all-in-one to the API designer is aga
 Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
 We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
 The API's root url should provide everyhing that is needed, or using already published protocols
-like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](http://www.rfc-editor.org/rfc/rfc5785.txt) and can give API information
+like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](https://www.rfc-editor.org/rfc/rfc5785.txt) and can give API information
 for client bootstraping.
 
 
