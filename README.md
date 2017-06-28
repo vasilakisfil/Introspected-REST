@@ -513,8 +513,8 @@ In fact, there could be capabilities in the future that might not seem necessary
 For example, joining together one or more resources, other db-inspired operations applied on resources,
 internationalization and localization of the data, HTTP/2 Server Push on some requests, Generic Event Delivery Using HTTP Push on other
 resources on specific states and other capabilities that we haven't even imagined yet.
-In any case, **these capabilities must be transparent and self-descriptive to the client without any documentation or human involvement, other
-than programming the client to support the Media Type(s) and pointing it to the initial API URI.**.
+In any case, **these capabilities must be transparent and self-descriptive to the client without any documentation or human involvement**, other
+than programming the client to support the Media Type(s) and pointing it to the initial API URI.
 
 
 ### 6.2. Media Types vs HATEOAS
