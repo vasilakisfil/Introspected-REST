@@ -1546,6 +1546,7 @@ it references the User schema.
 ```
 
 ##### 10.2.1.3. Request Response inconsistency
+Maybe move below ?
 Although here we have the same object semantics for request and response object, in theory these could be different.
 If that's the case, we should denote each object in the response parented under
 distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
@@ -1553,6 +1554,8 @@ distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 #### 10.2.2. Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas.
 Again note the draft version.
+
+Say that the previous section is a placeholder as well for this section.
 
 
 ##### 10.2.2.1. User resource
@@ -1627,6 +1630,8 @@ Again note the draft version.
 ```
 
 #### 10.2.3. Linked-data metadata
+Maybe move as a last one ? Explain the difficulties of MicroTypes that are tight to runtime information.
+
 For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
 It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
 to transform their existing JSON to JSON-LD but also to not require breaking changes to your
