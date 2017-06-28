@@ -1002,9 +1002,9 @@ the request and response.
   * data types for each attribute in the resource or any embedded association
   * Sorting/pagination, filtering and aggregation queries availability
   * data type of each attribute
-  * Ideally some description targeted for humans
   * default embedded associations and available associations to embed
     * recusrively apply the same information for each association available for embedding
+  * any other capability (HTTP/2 Server Push, event delivery etc)
 * About each resource sent to the API from the client
   * available actions on the resource
   * attributes, per action, the client can modify, based on the user's permissions
