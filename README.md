@@ -426,8 +426,8 @@ every time the API evolves (like adding a resource or a field), reprogram the cl
 during that phase is variable depending on the weakness of the Media Type.
 
 An API that follows the `REST` model should be evolvable without the need
-of human factor in the client side, given that the client understands the Media Type.
-As a result, **versioning should not take place in the URL but in the Media Type itself**.
+of human involvement in the client side, given that the client understands the Media Type.
+A side effect of such evolvability is that **versioning should not take place in the URL but in the Media Type itself**.
 
 >Versioning an interface is just a polite way to kill deployed applications
 >
