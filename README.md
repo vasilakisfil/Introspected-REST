@@ -173,7 +173,6 @@ An API that can change the state of the client without needing the latter to cha
 
 Given that, **how can we have a simpler model than `REST`, yet derive the same, if not more, functionality of
 `REST`?**
-
 As we will show, `Introspected REST` is an API architectural style that solves that.
 An architectural style is not an implementation and it's not a spec either.
 As Roy notes:
