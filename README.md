@@ -329,7 +329,7 @@ Roy explains that very well in his thesis:
 > induces simple, visible, reusable, cacheable, and evolvable (information hiding)
 
 The respresentation that you expose from your public API could be totally different from
-your implementation internally (usually in your db).
+your implementation internally or how the data are stored in your database.
 It could also be the same.
 Nevertheless the client expects and is expected to manipulate any resource using the representation
 you expose.
