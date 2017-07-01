@@ -166,7 +166,7 @@ Roy notes in his thesis:
 
 In the world of startups and money-driven companies, the following will sound more appealing:
 
->  **If you want to move fast, you should build a change-first API.**
+>  If you want to move fast, you should build a change-first API.
 >
 
 An API that can change the state of the client without needing the latter to change.
