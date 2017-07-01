@@ -43,7 +43,7 @@ the evolvability and extensability of our new model.
   + [6.2. Media Types vs HATEOAS](#62-media-types-vs-hateoas)
     - [6.2.1. Defining a new Media Type is not easy and should be avoided](#621-defining-a-new-media-type-is-not-easy-and-should-be-avoided)
     - [6.2.2. HATEOAS can get pretty heavy](#622-hateoas-can-get-pretty-heavy)
-    - [6.2.3. Balancing between Media Types and HATEOAS **check for profiles**](#623-balancing-between-media-types-and-hateoas)
+    - [6.2.3. Balancing between Media Types and HATEOAS](#623-balancing-between-media-types-and-hateoas)
     - [6.2.4. An alternative architecture](#624-an-alternative-architecture)
 * [7. API Specs Today](#7-api-specs-today)
   + [7.1. Our use case](#71-our-use-case)
