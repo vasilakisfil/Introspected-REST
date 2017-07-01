@@ -224,6 +224,7 @@ Media Types can be a bit more complex as well: `application/vnd.api+json`, the m
 
 In theory, [JSONAPI](https://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
 or even YAML, however in practice we tend to forget that and we treat all Media Types as single and not composite.
+
 However, it should also be noted that the **Media Types and the content negotiation in general, are
 not restricted to HTTP only**.
 Although HTTP is one of the most popular application network protocols today, the same logics could be applied
