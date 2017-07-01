@@ -427,7 +427,7 @@ during that phase is variable depending on the weakness of the Media Type.
 
 An API that follows the `REST` model should be evolvable without the need
 of human involvement in the client side, given that the client understands the Media Type.
-A side effect of such evolvability is that **versioning should not take place in the URL but in the Media Type itself**.
+A side effect of such evolvability and 1-fold clients is that the **versioning should not take place in the URL but in the Media Type itself**.
 
 >Versioning an interface is just a polite way to kill deployed applications
 >
@@ -458,9 +458,9 @@ however most of the things mentioned here can also be applied in a specialized o
 ### 6.1. Requirements from a modern REST API
 REST model is built for machine-to-machine communication, of any type.
 However, as this form of communication is getting more and more common,
-clients are requesting and having more and more requirements from a server response.
+clients are expecting more options (capabilities) from the server for their responses.
 It's not enough to just request and get the resource but you should be able to specify
-to the server what transformations you need.
+to the server what transformations shoult apply, according to your needs.
 
 Nowadays we have been using networked APIs so much that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
@@ -554,14 +554,14 @@ The level of restriction becomes more obvious when describing more complex capab
 
 On the other hand, if everyone follows that Media Type then it's easier to program our clients.
 Specifically, especially when having a restrictive Media Type, if we create a client that parses responses using that Media Type
-then it's easy to "configure" it for another API which also follows that Media Type.
+then it's easy to "configure" it for another API which also follows the same Media Type.
 
 HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
-Essentially, HATEOAS should provide any details missing from the Media Type for the client to work.
+Essentially, HATEOAS should **complement** the Media Type by providing the Media Type's hypermedia in **runtime** for the client to work properly.
 
 #### 6.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
-If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle if used correctly.
+If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle, if used correctly.
 Inspired by that, later, we will suggest a new concept,  MicroTypes, small reusable modules that combined together can form a Media Type.
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
 
@@ -570,11 +570,10 @@ Also, instead of mixing up data with HATEOAS in the API responses, we will intro
 
 ## 7. API Specs Today
 Now that we defined what REST is, according to Roy, and what capabilities modern APIs should provide,
-let's see the specs for REST(y) APIs available as today, April 2017, and what they provide.
+let's see the specs for REST(y) APIs available as today, April 2017, what they provide and how
+closely follow the REST model.
 
 ### 7.1. Our use case
-In our use case we will follow the aforementioned points of the `REST` model.
-
 Our use case is a minature of yet another Social App.
 Specifically, in our API domain, we have a `User` resource which has other, associated resources, like `Micropost`, `Like`, etc
 
@@ -599,10 +598,11 @@ So given those `REST` model properties we _could_ have the following routes:
   * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
 
 _`Users` and `User` are 2 distinct resources which are often, mistankingly, missthought as a single, one, resource.
-Also, the fact that `Users` is a collection of `User` objects is because it suits our needs but it's not necessary
+Also, the fact that `Users` is a collection of `User` objects is because it suits our needs but it doesn't have necessarily
 to be like that._
 
-As we mentioned, `User` resource has also some associations (or relations/relationships if you prefer).
+As we mentioned, `User` resource has also some associations (or relations/relationships if you prefer),
+like `Microposts`.
 
 #### 7.1.1. User resource
 In plain JSON the User resource would look like:
@@ -752,7 +752,7 @@ API specs as of 2017 in terms of tools and libraries.
 
 While the spec makes a great effort describing the structure of the document, we see some
 notable issues. Namely:
- * Limited links (no URI templates, treats the client as totally stupid)
+ * Limited links (no URI templates, treats the client as completely stupid)
  * No actions
  * No info on available attributes
  * No info on data types
@@ -1021,7 +1021,8 @@ a status code or a header in a given request/response and as a result, ideally, 
 
 #### 8.1.1. Today's REST is far from ideal
 Now to the reader, it should be obvious that even if we manage to offload some of the aforementioned information
-to the Media Type, we would still have a _very_ complex, massive, response from the server for the HATEOAS.
+to the Media Type, we would still have a _very_ complex, massive, response from the server that mostly includes HATEOAS
+and not actual data.
 
 In our experience, such responses are very hard to implement correctly, test, be performant and even debug. After all,
 a human will sit down and write the initial code and debugging the code by the eye is important.
@@ -1089,7 +1090,7 @@ the level and type of HATEOAS it will follow?**
 
 ### 8.2. Deriving the need for a new model
 #### 8.2.1. REST is complex
-As we descrined earlier, mixing data with hypermedia leads to increased complexity, for both the server and the client developer.
+As we described earlier, mixing data with hypermedia leads to increased complexity, for both the server and the client.
 Just compare the size of our [resource's data](#711-user-resource) and the size of our resource when represented by
 [Siren](#741-user-resource), a hypermedia-ed API that doesn't even being REST-compatible by missing numerous information as described
 in its [reflections](#743-reflections).
@@ -1114,13 +1115,13 @@ The performance issues become more apparent on lossy networks like mobile client
 or on constrained devices and environments, like IoT.
 
 #### 8.2.4. REST does not support caching of hypermedia
-In practice, the hypermedia part of a resource rarely changes, compared to the resource's data.
+In practice, **the hypermedia part of a resource rarely changes**, compared to the resource's data.
 In REST, by design, the client can't cache the hypermedia part of the resource, even for relatively small amount of time, because
 hypermedia is part of the resource, thus caching the hypermedia can't be separate from caching the response itself.
 
 #### 8.2.5. REST doesn't make it easy to evolve hypermedia
-Another issue of REST is that due to the fact that everything is mixed in together, evolving hypermedia separately from the data
-can't happen.
+Another issue of REST is that due to the fact that everything is mixed in together, **evolving hypermedia separately from the data
+can't happen**.
 We understand that this is actually another feature of REST design and not an issue, treating a response object as a whole and not breaking into
 different parts like hypermedia and data, however, in practice, this poses difficulties for easier evolvement and maintenance of the API.
 
@@ -1139,11 +1140,11 @@ In a perfect world, APIs are built to be alive for many decades and clients are 
 However, we are in a pragmatic world where nothing is perfect and clients are built by humans who take decisions based on their time and money.
 
 Although we firmly believe that a REST API is better than any RESTly or RESTless API, we understand that there could be cases where API designers
-_have_ to initially skip hypermedia part.
+_have to_ initially skip hypermedia part.
 
 The problem is that when REST is applied to HTTP, it doesn't allow you to easily integrate hypermedia at a later point.
-The reason is that, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
-otherwise it would break the current semantics.
+The reason is that, in a RESTless API, **adding hypermedia at a later stage would mean that we would need a new Media Type because
+otherwise it would break the current semantics**.
 
 We would like to see a model that embraces both architectural API styles:
 * APIs that are built to last decades and thus, support full hypermedia from the very first day of their release
@@ -1295,8 +1296,8 @@ of the rest MicroTypes.
 
 The API designer should **first** investigate and embrace the use of MicroTypes, RFCs and specs that are already defined, instead of
 creating her own custom, unpublished spec.
-The reason for this suggestion is that creating a new spec is difficult and usually such specs are used only for domain-specific APIs that
-were created for and live as long as this API is used, usually a couple of years.
+The reason for this suggestion is that creating a new spec is difficult and usually such custom specs are used only for domain-specific APIs that
+were created for and live as long as this API is used.
 Instead, by trying to adapt published, battle-tested, RFC-community-reviewed specs assures the API designer in terms of **compatibility,
 adoptability, clarity** and possibly implementation, for both ends of the communication.
 
@@ -2354,3 +2355,6 @@ not only about hypermedia but also other metadata (like data types etc)
 
 
 Say in intro that Media Types have reached their limits. For AI/evolvable apis we need more than that.
+
+human factor ===> human involvement factor (important)
+perception or perspection ?
