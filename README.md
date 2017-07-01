@@ -185,7 +185,6 @@ As Roy notes:
 
 `Introspected REST` is based on Roy's initial model but removes the need for runtime HATEOAS.
 Instead, the client derives the state on demand, using introspection.
-
 Eventually this brings the same advantages as Roy's model while being it's much simpler,
 much more flexible and backwards compatible with any RESTful API.
 
