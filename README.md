@@ -284,7 +284,7 @@ Failure to provide consistency on access would imply that you don't provide a ge
 you have resource-specific or even object-specific interfaces.
 
 Actually a common interface is one of the most crucial parts of REST: without a common uniform interface
-it would be impossible to derive REST:
+it would be impossible to derive REST.
 
 > The central feature that distinguishes the REST architectural style from other
 > network-based styles is its emphasis on a uniform interface between components.
