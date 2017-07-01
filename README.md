@@ -415,7 +415,7 @@ For each one, we need a client (device/modem) that will understand (encode/decod
 Using that client we can built any type of application, in the feasible space of the Media Type.
 The application does not deal with the API's semantics, but instead it uses the Client to perform its tasks.
 
-### 5.2. The Human interaction principle
+### 5.2. The Human factor principle
 There are 2 types of human involvement when building an API client:
 * **1-fold**: Programming the client only once to understand the Media Type correctly and let the
 client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
@@ -425,8 +425,8 @@ Then modify the client to parse and understand the API correctly using some offl
 every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
 during that phase is variable depending on the weakness of the Media Type.
 
-Strictly speaking, an API that follows the `REST` model should be evolvable without the need
-of human interaction in the client side, given that the client understands the Media Type.
+An API that follows the `REST` model should be evolvable without the need
+of human factor in the client side, given that the client understands the Media Type.
 As a result, **versioning should not take place in the URL but in the Media Type itself**.
 
 >Versioning an interface is just a polite way to kill deployed applications
@@ -652,7 +652,7 @@ We will evaluate the specs for the following:
 * whether they follow Roy's `REST` model
 * whether their messages are **not** self descriptive, meaning that other than supporting the API's Media Type in our client
 we also need to read and understand the documentation to develop our client
-* whether they require multi-fold human interaction while the API evolves
+* whether they require multi-fold human factor while the API evolves
 
 ### 7.2. [JSONAPI](https://jsonapi.org)
 JSONAPI was originally created by [Yehuda Katz](https://yehudakatz.com/), as part of Ember's ember-data library.
@@ -759,7 +759,7 @@ notable issues. Namely:
  * No attributes description
 
 To sum up, it doesn't entirely follow `REST` model while it requires both
-documentation and multi-fold human interaction.
+documentation and multi-fold human factor.
 
 ### 7.3. [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)
 HAL was created by Mike Kelly in 2012.
@@ -864,7 +864,7 @@ While the spec does have templated links, we see some notable issues. Namely:
  * No info on data types
  * No attributes description, requires documentation (however it does provide a link to documentation, through curies)
 
-To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction (curies facilitate that).
+To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human factor (curies facilitate that).
 
 ### 7.4. [Siren](https://github.com/kevinswiber/siren)
 Siren was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-addressable resource that has properties and actions associated with it.
@@ -983,7 +983,7 @@ still some issues that require human-involvement:
  * No info on data types on response objects
  * Limited description for fields and resources
 
-To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human interaction.
+To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human factor.
 
 ## 8. Ideal `REST` API
 **How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
@@ -2062,7 +2062,7 @@ neither the client developer nor the server developer has access to the other ma
 This means that if the client needs a specific resource, it must not have an offline contract
 on how to retrieve this resource because that would mean
 * changes on the server's side is difficult.
-* automated API clients are not possible without human interaction.
+* automated API clients are not possible without human factor.
 
 Instead, the server would help (drive if you will) the client exactly where is needed to.
 
@@ -2351,3 +2351,6 @@ not only about hypermedia but also other metadata (like data types etc)
 * Fixes broken API negotiation (problem+json)
 * Say that ALPS and related stuff can still be applied, in a different way!
 * Say that MicroTypes is not for Hypermedia only but is **needed** for other micro-definitions as well!
+
+
+Say in intro that Media Types have reached their limits. For AI/evolvable apis we need more than that.
