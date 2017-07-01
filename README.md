@@ -1280,6 +1280,7 @@ We will use the term MicroType's metadata to denote a response containing the me
 #### 9.2.1. MicroTypes in HTTP
 The Content-Type header is limited up to 128 characters so we might need another header for that.
 Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
+The communaity will choose the headers and implementation.
 
 ### 9.3. Introspection as the engine of application state (IATEOAS)
 The idea of introspection is to be able to examine properties of a system at runtime.
@@ -2358,3 +2359,28 @@ Say in intro that Media Types have reached their limits. For AI/evolvable apis w
 
 human factor ===> human involvement factor (important)
 perception or perspection ?
+
+Say that imagine returning a 404 or a 500 in a different Media Type that the server never requested.
+Make comparison with html
+
+Change 2048, it's too old, use https://tools.ietf.org/html/rfc6838
+
+4.1.  Functionality Requirement
+
+   Media types MUST function as actual media formats.  Registration of
+   things that are better thought of as a transfer encoding, as a
+   charset, or as a collection of separate entities of another type, is
+   not allowed.  For example, although applications exist to decode the
+   base64 transfer encoding [RFC2045], base64 cannot be registered as a
+   media type.
+
+   This requirement applies regardless of the registration tree
+   involved.
+
+Media types that make use of a named structured syntax SHOULD use the
+   appropriate registered "+suffix" for that structured syntax when they
+   are registered.  By the same token, media types MUST NOT be given
+   names incorporating suffixes for structured syntaxes they do not
+   actually employ. "+suffix" constructs for as-yet unregistered
+   structured syntaxes SHOULD NOT be used, given the possibility of
+   conflicts with future suffix definitions.
