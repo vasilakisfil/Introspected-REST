@@ -1667,7 +1667,7 @@ API and what to expect from it.
 }
 ```
 
-#### 10.2.5. The case of a non-compatible spec for introspection: Linked Data metadata
+#### 10.2.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD
 For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
 It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
 to transform their existing JSON to JSON-LD but also to not require breaking changes to your
