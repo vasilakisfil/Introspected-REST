@@ -1380,28 +1380,7 @@ When the client manipulates a `User` resource, the response should contain only 
 ```
 
 Similarly, a `Users` resource will be a collection of `User` resources:
-```json
-{
-  "users": [{
-    "id":"685",
-    "email":"vasilakisfil@gmail.com",
-    "name":"Filippos Vasilakis",
-    "birth_date": "1988-12-12",
-    "created_at": "2014-01-06T20:46:55Z",
-    "microposts_count":50
-  }, {
-    "id":"9124",
-    "email": "robert.clarsson@gmail.com",
-    "name": "Robert Clarsson",
-    "birth_date": "1940-11-10",
-    "created-at": "2016-10-06T16:01:24Z",
-    "microposts-count": 17,
-  }]
-}
-```
 
-Given that the response should also contain pagination information,
-we will add this runtime metadata under a `meta` attribute:
 ```json
 {
   "users": [{
@@ -1426,6 +1405,8 @@ we will add this runtime metadata under a `meta` attribute:
   }
 }
 ```
+Given that the response should also contain pagination information,
+we add this runtime metadata under a `meta` attribute.
 
 The actual format of the data could vary regarding the root element or possibly the place of the primary id.
 Such details will be described by the Media Type.
