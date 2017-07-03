@@ -2365,6 +2365,10 @@ Make comparison with html
 
 Change 2048, it's too old, use https://tools.ietf.org/html/rfc6838
 
+Say about imaturity of rfcs/specs related to introspection (example: JSON schema v4 vs v5/v6)
+
+Add a note on unfinished RFCs
+
 4.1.  Functionality Requirement
 
    Media types MUST function as actual media formats.  Registration of
@@ -2384,3 +2388,44 @@ Media types that make use of a named structured syntax SHOULD use the
    actually employ. "+suffix" constructs for as-yet unregistered
    structured syntaxes SHOULD NOT be used, given the possibility of
    conflicts with future suffix definitions.
+
+
+In some cases, a new media type may not "fit" under any currently
+   defined top-level type names.  Such cases are expected to be quite
+   rare.  However, if such a case does arise, a new type name can be
+   defined to accommodate it.  Definition of a new top-level type name
+   MUST be done via a Standards Track RFC; no other mechanism can be
+   used to define additional type names.
+
+Parameter names have the syntax as media type names and values:
+
+       parameter-name = restricted-name
+
+   Note that this syntax is somewhat more restrictive than what is
+   allowed by the ABNF in [RFC2045] and amended by [RFC2231].
+
+   Parameter names are case-insensitive and no meaning is attached to
+   the order in which they appear.  It is an error for a specific
+   parameter to be specified more than once.
+
+
+4.11.  Fragment Identifier Requirements
+
+   Media type registrations can specify how applications should
+   interpret fragment identifiers (specified in Section 3.5 of
+   [RFC3986]) associated with the media type.
+
+
+
+
+
+Freed, et al.             Best Current Practice                [Page 18]
+ 
+RFC 6838                 Media Type Registration            January 2013
+
+
+   Media types are encouraged to adopt fragment identifier schemes that
+   are used with semantically similar media types.  In particular, media
+   types that use a named structured syntax with a registered "+suffix"
+   MUST follow whatever fragment identifier rules are given in the
+   structured syntax suffix registration.
