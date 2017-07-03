@@ -1551,7 +1551,7 @@ duplication of our metadata.
   "links": [
     {
       "rel": "microposts",
-      "href": "/microposts?user={userId}&page={page}&per_page={per_page}&offset={offset}"
+      "href": "/microposts?user={userId}&page={page}&per_page={per_page}&offset={offset}",
       "hrefSchema": {
         "allOf": [
           {
@@ -1565,7 +1565,7 @@ duplication of our metadata.
     },
     {
       "rel": "update-user",
-      "href": "/users"
+      "href": "/users",
       "method": "PATCH",
       "targetSchema": {
         "$ref": "https://example.com/user.json"
@@ -1573,7 +1573,7 @@ duplication of our metadata.
     },
     {
       "rel": "delete-user",
-      "href": "/users"
+      "href": "/users",
       "method": "DELETE",
       "targetSchema": {
         "$ref": "https://example.com/user.json"
@@ -1594,14 +1594,14 @@ duplication of our metadata.
   "links": [
     {
       "rel": "self",
-      "href": "/users?page={page}&per_page={per_page}&offset={offset}"
+      "href": "/users?page={page}&per_page={per_page}&offset={offset}",
       "hrefSchema": {
         "$ref": "https://example.com/users.json#/properties/meta"
       }
     },
     {
       "rel": "create-user",
-      "href": "/users"
+      "href": "/users",
       "method": "POST",
       "targetSchema": {
         "$ref": "https://example.com/user.json"
