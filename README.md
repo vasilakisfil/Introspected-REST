@@ -1413,6 +1413,10 @@ Such details will be described by the Media Type.
 What is important here is that the **data does not contain any metadata**, apart from runtime metadata.
 
 ### 10.2. Composing different metadata MicroTypes together
+We will describe our APIs capabilities by mixing together different MicroTypes targeted each one for a specific capability
+of our API, following the Single Responsibility Principle.
+The client will be able to retrieve the information of each metadata MicroType by introspecting the resource.
+
 #### 10.2.1. Structural metadata
 One of the most important things for a client to know is the expected structure of the request/response resource object
 along with information on the data types.
