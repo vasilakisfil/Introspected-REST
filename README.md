@@ -1491,7 +1491,7 @@ it references the User schema.
     "users":{
       "type": "array",
       "$href": "https://example.com/user.json#/properties/user"
-    }
+    },
     "meta": {
       "type":"object",
       "page": {
