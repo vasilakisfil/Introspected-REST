@@ -1615,37 +1615,6 @@ Notice how we define the pagination, by referencing parts of the user's `meta` o
 We don't treat the client as stupid but smart enough to understand what it has to do for its part.
 
 
-#### 10.2.3. Errors metadata
-+++
-For the errors metadata, we will use the [`problem+json`](https://tools.ietf.org/html/rfc7807) Media Type.
-For example, when updating a User object, the application developer might wrongly send an invalid `birth_date`.
-
-
-```json
-{
-  "title": "The birthdate has an invalid format.",
-  "details": "The birthdate must be in the format of 1985-04-12T23:20:50.52Z.",
-  "status": 422
-}
-```
-
-If you inspect the spec you will notice that **the spec limits us by omitting specifying a way to associate an error message with a specific resource attribute**.
-As a result, we can only specify the falsy attribute in the title or details attribute of the error object, which are human-targeted,
-and thus informing only the end user and not the client.
-We could add extension members, as the spec suggests, to customize the error object in our needs but the final response object wouldn't be
-self-descriptive, right?
-
-
-The good thing though is that normally such errors should be caught by running the schema validations from the JSON Schema MicroType.
-The error object could be used for more advanced errors, like the following:
-
-```json
-{
-  "title": "Transaction failed",
-  "details": "The remaining amount of virtual coins in your account is not enough for this purchase",
-  "status": 403
-}
-```
 
 #### 10.2.4. Descriptions metadata
 For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
@@ -1745,7 +1714,7 @@ However, we feel that such dicision should be taken only if nothing else is poss
 given that in Introspected REST data and metadata should be distinctively separated.
 
 
-### 10.3. Method of transport
+### 10.3. Method of introspection
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 The reason we choose `OPTIONS` here is because **this method has been historically used
 for getting informtation on methods supported on a specific resource**.
@@ -1788,6 +1757,39 @@ We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and
 ++ SAY ABOUT QUERIES, IDENTIFICATION OF MICROTYPES AND FULL RESPONSE
 Maybe below ?
 
+
+#### 10.4. Errors MicroType
++++
+For the errors metadata, we will use the [`problem+json`](https://tools.ietf.org/html/rfc7807) Media Type.
+For example, when updating a User object, the application developer might wrongly send an invalid `birth_date`.
+
+
+```json
+{
+  "title": "The birthdate has an invalid format.",
+  "details": "The birthdate must be in the format of 1985-04-12T23:20:50.52Z.",
+  "status": 422
+}
+```
+
+If you inspect the spec you will notice that **the spec limits us by omitting specifying a way to associate an error message with a specific resource attribute**.
+As a result, we can only specify the falsy attribute in the title or details attribute of the error object, which are human-targeted,
+and thus informing only the end user and not the client.
+We could add extension members, as the spec suggests, to customize the error object in our needs but the final response object wouldn't be
+self-descriptive, right?
+
+
+The good thing though is that normally such errors should be caught by running the schema validations from the JSON Schema MicroType.
+The error object could be used for more advanced errors, like the following:
+
+```json
+{
+  "title": "Transaction failed",
+  "details": "The remaining amount of virtual coins in your account is not enough for this purchase",
+  "status": 403
+}
+```
+
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
 2 issues
@@ -1795,7 +1797,7 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
 3. Order of MicroTypes (JSON-LD vs JsonSchema)
 
-### 10.4. Automating the documentation generation
+### 10.5. Automating the documentation generation
 The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
 by returning a regular web page, targeted to humans and not machines.
 The technical details is out of the scope of this implementation example but we
