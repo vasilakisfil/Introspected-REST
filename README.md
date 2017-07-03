@@ -1762,10 +1762,15 @@ We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and
 Maybe below ?
 
 
-#### 10.4. Errors MicroType
-+++
-For the errors metadata, we will use the [`problem+json`](https://tools.ietf.org/html/rfc7807) Media Type.
-For example, when updating a User object, the application developer might wrongly send an invalid `birth_date`.
+#### 10.4. The Errors MicroType
+When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
+the response will have a different structure than the resource that the client requested.
+
+Usually the semantics of an error respond are defined in the API's Media Type but we will use the newly-publiehd [`RFC 7807 Problem Details for HTTP APIs`](https://tools.ietf.org/html/rfc7807),
+which defines the `problem+json` Media Type for JSON HTTP APIs.
+To give an example how the response will seem when following this RFC,
+imagine that when updating a User object, the application developer might wrongly send an invalid `birth_date`.
+Then the application should respond with the following structure:
 
 
 ```json
@@ -1783,7 +1788,7 @@ We could add extension members, as the spec suggests, to customize the error obj
 self-descriptive, right?
 
 
-The good thing though is that normally such errors should be caught by running the schema validations from the JSON Schema MicroType.
+The good thing though is that normally such errors should be caught by running the schema validations from the JSON Schema MicroType on the client side.
 The error object could be used for more advanced errors, like the following:
 
 ```json
@@ -1793,6 +1798,13 @@ The error object could be used for more advanced errors, like the following:
   "status": 403
 }
 ```
+
+But why declaring this as a MicroType one could ask?
+Given that such error information is crucial for the user to understand why her action is not advancing,
+we feel that the client should be able to **negotiate** the errors MicroType, that is, the information and structure of the
+returned errors object.
+
+This RFC has also the issue of returning a different Media Type than the one that the client asked, something that 
 
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
@@ -1822,10 +1834,6 @@ However it has some issues.
 #### 11.2.1. JSON-LD and HYDRA
 Using linked data in our APIs is just great.
 HYDRA is in the right direction to introspectable APIs.
-
-#### 11.2.2. ALPS
-This should not go here but instead in the conclusion saying that everything is **still** fetchable and possible
-using introspection + microtypes
 
 
 ### 11.3. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
@@ -1909,6 +1917,8 @@ We think that linksets is anohter small piece towards a introspectiveness and he
 However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
 
 ### JSON home
+
+### HTTP Hints
 
 ### 11.4. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
@@ -2427,3 +2437,9 @@ RFC 6838                 Media Type Registration            January 2013
    types that use a named structured syntax with a registered "+suffix"
    MUST follow whatever fragment identifier rules are given in the
    structured syntax suffix registration.
+
+
+#### 11.2.2. ALPS
+This should not go here but instead in the conclusion saying that everything is **still** fetchable and possible
+using introspection + microtypes
+
