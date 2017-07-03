@@ -1799,12 +1799,13 @@ The error object could be used for more advanced errors, like the following:
 }
 ```
 
+Another inherent issue that this RFC has is that of returning a different Media Type than the one that the client asked.
+
 But why declaring this as a MicroType one could ask?
 Given that such error information is crucial for the user to understand why her action is not advancing,
 we feel that the client should be able to **negotiate** the errors MicroType, that is, the information and structure of the
 returned errors object.
 
-This RFC has also the issue of returning a different Media Type than the one that the client asked, something that 
 
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
