@@ -1527,17 +1527,18 @@ it references the User schema.
 ```
 
 ##### 10.2.1.3. Request Response inconsistency
-Maybe move below ?
 Although here we have the same object semantics for request and response object, in theory these could be different.
 If that's the case, we should denote each object in the response parented under
 distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 
 #### 10.2.2. Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas.
-Again note the draft version.
+Specifically we will use the draft V4 of JSON Hyper Schemas as the rest drafts (V5, V6) are targeted to hypermedia APIs that
+are HTML-equivelents. For instance, there is no way you can define a `method` attribute, restricting you to `GET` and `POST`
+depending whether there is a body to send or not.
 
-Say that the previous section is a placeholder as well for this section.
-
+Resource schemas defined in the previous section are referenced by the following Hyper Schemas, in order to avoid
+duplication of our metadata.
 
 ##### 10.2.2.1. User resource
 ```json
@@ -1610,53 +1611,12 @@ Say that the previous section is a placeholder as well for this section.
 }
 ```
 
-#### 10.2.3. Linked-data metadata
-Maybe move as a last one ? Explain the difficulties of MicroTypes that are tight to runtime information.
-
-For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
-It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
-to transform their existing JSON to JSON-LD but also to not require breaking changes to your
-existing API, which makes it backwards compatible with any current deployed API.
-
-Here, we will serve it to the client through the introspectived process, which could be
-confusing to the client, specifically could potentially break the JSON-LD spec unless
-we create Media Type **shim** for it that specifies the missing points.
-If this is not desirable or even possible, then **we can also consider them as
-runtime metadata and add them inside the response, something that the IATEOAS allows.**
+Notice how we define the pagination, by referencing parts of the user's `meta` object.
+We don't treat the client as stupid but smart enough to understand what it has to do for its part.
 
 
-##### 10.2.3.1. User resource
-```json
-{
-  "@context": {
-    "@vocab": "https://schema.org/",
-    "@type": "Person",
-    "birth_date": "birthDate",
-    "created_at": "dateCreated",
-    "microposts_count": null
-  }
-}
-```
-
-##### 10.2.3.2. Users resource
-
-```json
-{
-  "@context": {
-    "@vocab": "https://schema.org/",
-    "birth_date": "birthDate",
-    "created_at": "dateCreated",
-    "microposts_count": null
-  },
-  "@graph": [
-    {
-      "@type": "Person"
-    }
-  ]
-}
-```
-
-#### 10.2.5. Errors metadata
+#### 10.2.3. Errors metadata
++++
 For the errors metadata, we will use the [`problem+json`](https://tools.ietf.org/html/rfc7807) Media Type.
 For example, when updating a User object, the application developer might wrongly send an invalid `birth_date`.
 
@@ -1687,7 +1647,7 @@ The error object could be used for more advanced errors, like the following:
 }
 ```
 
-#### 10.2.6. Descriptions metadata
+#### 10.2.4. Descriptions metadata
 For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
 Note that **this information must not be required to parse and understand the API but to use the API data on our application domain**.
 For instance, understanding that when updating the `email` attribute an email is triggered to inform the user for the change,
@@ -1733,6 +1693,58 @@ API and what to expect from it.
   }
 }
 ```
+
+#### 10.2.5. The case of a non-compatible spec for introspection: Linked Data metadata
+For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
+It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
+to transform their existing JSON to JSON-LD but also to not require breaking changes to your
+existing API, which makes it backwards compatible with any current deployed API.
+This conflicts with our design of introspection because having contexts without the data would break the spec.
+As a result we have 2 options
+
+#### 10.2.5.1. Shim MicroType
+Our first option is to create a wrapper **shim** MicroType that defines how the spec should work
+for the clients to parse and understand the data, with the least possible changes.
+
+
+##### 10.2.3.1. User resource
+```json
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "@type": "Person",
+    "birth_date": "birthDate",
+    "created_at": "dateCreated",
+    "microposts_count": null
+  }
+}
+```
+
+##### 10.2.3.2. Users resource
+
+```json
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "birth_date": "birthDate",
+    "created_at": "dateCreated",
+    "microposts_count": null
+  },
+  "@graph": [
+    {
+      "@type": "Person"
+    }
+  ]
+}
+```
+
+
+#### 10.2.5.2. Considering it as runtime metadata
+Our second option is to exploit the IATEOAS principles regarding runtime metadata
+and append them inside the response by considering object-specific runtime metadata.
+However, we feel that such dicision should be taken only if nothing else is possible,
+given that in Introspected REST data and metadata should be distinctively separated.
+
 
 ### 10.3. Method of transport
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
