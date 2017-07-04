@@ -1819,6 +1819,12 @@ be interested in as much possible information available in order to show it to t
 
 The word `MicroType` is used with it's conceptual meaning, that is, it's a real Media Type but
 it can be negotiated between the client/server communication, without affecting the API's Media Type.
+For instance, the client might show preference to another problems Media Type before falling back to `problem+json`, as
+seen in the following Accept header example:
+
+```
+application/vnd.api+json, application/problem-extensive+json;, application/problem+json; q=0.8
+```
 
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
