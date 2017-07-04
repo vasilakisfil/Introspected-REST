@@ -1617,7 +1617,6 @@ Notice how we define the pagination, by referencing parts of the user's `meta` o
 We don't treat the clients as stupid but smart enough to understand what they need to do on their part to get what they want.
 
 
-
 #### 10.2.4. Descriptions metadata
 For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
 Note that **this information must not be required to parse and understand the API but to use the API data on our application domain**.
