@@ -1806,6 +1806,7 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 1. Root/home endpoint has multiple MicroTypes
 2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
 3. Order of MicroTypes (JSON-LD vs JsonSchema)
+4. Identification of MicroTypes
 
 ### 10.5. Automating the documentation generation
 The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
