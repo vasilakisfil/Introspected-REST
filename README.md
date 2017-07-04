@@ -1671,12 +1671,12 @@ existing API, which makes it backwards compatible with any current deployed API.
 This conflicts with our design of introspection because having contexts without the data would break the spec.
 As a result we have 2 options
 
-#### 10.2.5.1. Extending spec by creating a Shim MicroType
+##### 10.2.5.1. Extending spec by creating a Shim MicroType
 Our first option is to create a wrapper **shim** MicroType that defines how the spec should work
 for the clients to parse and understand the data, with the least possible changes.
 
 
-##### 10.2.3.1. User resource
+###### 10.2.3.1. User resource
 ```json
 {
   "@context": {
@@ -1689,7 +1689,7 @@ for the clients to parse and understand the data, with the least possible change
 }
 ```
 
-##### 10.2.3.2. Users resource
+###### 10.2.3.2. Users resource
 
 ```json
 {
@@ -1707,7 +1707,7 @@ for the clients to parse and understand the data, with the least possible change
 }
 ```
 
-#### 10.2.5.2. Considering it as runtime metadata
+##### 10.2.5.2. Considering it as runtime metadata
 Our second option is to exploit the IATEOAS principles regarding runtime metadata
 and append them inside the response by considering object-specific runtime metadata.
 However, we feel that such dicision should be taken only if nothing else is possible,
