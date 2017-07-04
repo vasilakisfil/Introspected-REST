@@ -2515,3 +2515,11 @@ RFC 7231             HTTP/1.1 Semantics and Content            June 2014
    behind the curtain.
 
 https://www.mnot.net/blog/2012/10/29/NO_OPTIONS --- important !!
+
+say that this is hard work as REST is mentioned in HTTP RFCs !!!
+
+Some people call such APIs AI-driven APIs, or autonomous APIs but it's all about **evolvability**.
+If you can design an architecture style that is **evolvable** yest simple enough and applies/does not break
+to our current Internet's protocols (like HTTP) then none can accuse you of using it.
+At the moment we have only REST though.
+
