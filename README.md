@@ -1806,12 +1806,19 @@ suggests using `application/problem+json` for Media Type.
 >
 However in order for this to work the client needs to negotiate it and accept this Media Type.
 In HTTP that would be achieved using the `Accept` header, which could look like that:
+```
+application/vnd.api+json, application/problem+json
+```
 
-But why declaring this as a MicroType one could ask?
+But why declaring this Media Type as a MicroType?
 Given that such error information is crucial for the user to understand why her action is not advancing,
 we feel that the client should be able to **negotiate** the errors MicroType, that is, the information and structure of the
 returned errors object.
+Some clients might need the most basic error information, might use only the HTTP status code, other clients might
+be interested in as much possible information available in order to show it to the user.
 
+The word `MicroType` is used with it's conceptual meaning, that is, it's a real Media Type but
+it can be negotiated between the client/server communication, without affecting the API's Media Type.
 
 ### Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
