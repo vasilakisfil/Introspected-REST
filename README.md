@@ -1621,8 +1621,7 @@ We don't treat the clients as stupid but smart enough to understand what they ne
 For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
 Note that **this information must not be required to parse and understand the API but to use the API data on our application domain**.
 For instance, understanding that when updating the `email` attribute an email is triggered to inform the user for the change,
-is not part of the API client responsibility but it's vital for the application developer to understand **how** to use the
-API and what to expect from it.
+is not part of the API client responsibility but it's vital for the application developer to to know what to expect from it.
 
 
 ```json
