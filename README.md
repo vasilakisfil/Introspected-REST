@@ -1249,6 +1249,7 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 > --- Roy Fielding
 >
 
+Why have been talking about MicroTypes but what exatly are microtypes ?
 
 Say about shims
 
