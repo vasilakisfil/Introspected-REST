@@ -1755,10 +1755,6 @@ We also feel that this is also a perfect case for hosting our API's discovery fo
 We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
 `/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
 
-++ SAY ABOUT QUERIES, IDENTIFICATION OF MICROTYPES AND FULL RESPONSE
-Maybe below ?
-
-
 #### 10.4. The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
