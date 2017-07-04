@@ -1337,7 +1337,7 @@ The reader though should not confuse the proposed implementation details with th
 architecture style.
 
 **This is by no means a complete Media Type**, but just an example of the potential of Introspected REST.
-The actual MicroTypes and Media Types wil be created by the community.
+The actual MicroTypes and Media Types will be created by the community.
 
 For our solution, we will use [JSON](https://tools.ietf.org/html/rfc7159),
 [JSON Schemas](https://tools.ietf.org/html/draft-wright-json-schema-validation),
@@ -1479,9 +1479,6 @@ is that the client can use this information to first validate the object before 
   "type":"object"
 }
 ```
-
-Note how we denote the schema version (few microtypes do that)
-Node the id.
 
 ##### 10.2.1.2. Users resource
 Note that the Users resource is just a collection of User object and as a result
