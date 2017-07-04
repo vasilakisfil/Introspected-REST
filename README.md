@@ -1669,7 +1669,7 @@ It should be noted that JSON-LD spec was developed with the goal to require as l
 to transform their existing JSON to JSON-LD but also to not require breaking changes to your
 existing API, which makes it backwards compatible with any current deployed API.
 This conflicts with our design of introspection because having contexts without the data would break the spec.
-As a result we have 2 options
+As a result we have the following 2 options.
 
 ##### 10.2.5.1. Extending spec by creating a Shim MicroType
 Our first option is to create a wrapper **shim** MicroType that defines how the spec should work
