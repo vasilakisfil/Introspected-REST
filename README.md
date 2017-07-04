@@ -1839,7 +1839,7 @@ application/vnd.api+json, application/problem-extensive+json, application/proble
 ### 10.5. Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
 2 issues
-1. Root/home endpoint has multiple MicroTypes
+1. Root/home endpoint has multiple MicroTypes (for metadata mostly)
 2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
 3. Order of MicroTypes (JSON-LD vs JsonSchema)
 4. Identification of MicroTypes
