@@ -1854,6 +1854,7 @@ programmatically wrapped in a human-friendly format.
 ## 11. Related Work
 ### 11.1. GraphQL
 no urls, basically a query language, no MicroTypes
+It's Apple for APIs (cost + compatibility)
 
 The reason we have it in related work is because it's related to REST but not REST.
 
