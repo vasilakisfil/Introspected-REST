@@ -30,7 +30,7 @@ the evolvability and extensability of our new model.
   + [4.5. Hypertext as the engine of application state (HATEOAS)](#45-hypertext-as-the-engine-of-application-state-hateoas)
 * [5. API Clients and Applications](#5-api-clients-and-applications)
   + [5.1. Client and Application responibilities](#51-client-and-application-responibilities)
-  + [5.2. The Human interaction principle](#52-the-human-interaction-principle)
+  + [5.2. The Human factor principle](#52-the-human-factor-principle)
 * [6. REST applied in a modern API](#6-rest-applied-in-a-modern-api)
   + [6.1. Requirements from a modern REST API](#61-requirements-from-a-modern-rest-api)
     - [6.1.1. Sparse fields (collection/resource)](#611-sparse-fields-collectionresource)
@@ -39,7 +39,7 @@ the evolvability and extensability of our new model.
     - [6.1.4. Filtering collections (collection only)](#614-filtering-collections-collection-only)
     - [6.1.5. Aggregation queries (collection only)](#615-aggregation-queries-collection-only)
     - [6.1.6. Data types !](#616-data-types-)
-    - [6.1.7 Plot twist: the list does not end here](#617-plot-twist-the-list-does-not-end-here)
+    - [6.1.7 Plot twist: this list is endless](#617-plot-twist-this-list-is-endless)
   + [6.2. Media Types vs HATEOAS](#62-media-types-vs-hateoas)
     - [6.2.1. Defining a new Media Type is not easy and should be avoided](#621-defining-a-new-media-type-is-not-easy-and-should-be-avoided)
     - [6.2.2. HATEOAS can get pretty heavy](#622-hateoas-can-get-pretty-heavy)
@@ -49,7 +49,7 @@ the evolvability and extensability of our new model.
   + [7.1. Our use case](#71-our-use-case)
     - [7.1.1. User resource](#711-user-resource)
     - [7.1.2. Users resource (a collection of User resources)](#712-users-resource-a-collection-of-user-resources)
-  + [7.2. JSONAPI](#72-jsonapihttpjsonapiorg)
+  + [7.2. JSONAPI](#72-jsonapihttpsjsonapiorg)
     - [7.2.1. User resource](#721-user-resource)
     - [7.2.2. Users resource (a collection of User resources)](#722-users-resource-a-collection-of-user-resources)
     - [7.2.3. Reflections](#723-reflections)
@@ -83,40 +83,48 @@ the evolvability and extensability of our new model.
       * [9.1.2.2. Actions](#9122-actions)
       * [9.1.2.3. Forms](#9123-forms)
     - [9.1.3. Metadata](#913-metadata)
-  + [9.2. **MicroTypes: modules composing a Media Type**](#92-microtypes-modules-composing-a-media-type)
-    - [9.2.1. **MicroTypes in HTTP**](#921-microtypes-in-http)
+  + [9.2. MicroTypes: modules composing a Media Type](#92-microtypes-modules-composing-a-media-type)
+    - [9.2.1. MicroTypes in HTTP](#921-microtypes-in-http)
   + [9.3. Introspection as the engine of application state (IATEOAS)](#93-introspection-as-the-engine-of-application-state-iateoas)
     - [9.3.1. Composability over monoliths](#931-composability-over-monoliths)
     - [9.3.2. Plain data separated from metadata](#932-plain-data-separated-from-metadata)
     - [9.3.3. Identifiable metadata of each Microtype](#933-identifiable-metadata-of-each-microtype)
-    - [9.3.4. Discovery of API resources and capabilities **(make it better)**](#934-discovery-of-api-resources-and-capabilities)
+    - [9.3.4. Discovery of API resources and capabilities](#934-discovery-of-api-resources-and-capabilities)
     - [9.3.5. Automatic documentation generation](#935-automatic-documentation-generation)
 * [10. An Introspected REST API prototype in the world of HTTP and JSON](#10-an-introspected-rest-api-prototype-in-the-world-of-http-and-json)
   + [10.1. Isolating the actual data from metadata](#101-isolating-the-actual-data-from-metadata)
-  + [10.2. Composing different MicroTypes together](#102-composing-different-microtypes-together)
+  + [10.2. Composing different metadata MicroTypes together](#102-composing-different-metadata-microtypes-together)
     - [10.2.1. Structural metadata](#1021-structural-metadata)
       * [10.2.1.1. User resource](#10211-user-resource)
       * [10.2.1.2. Users resource](#10212-users-resource)
       * [10.2.1.3. Request Response inconsistency](#10213-request-response-inconsistency)
-    - [10.2.2. **Hypermedia metadata**](#1022-hypermedia-metadata)
-    - [10.2.3. **Linked-data metadata**](#1023-linked-data-metadata)
-    - [10.2.5. Errors metadata](#1025-errors-metadata)
-    - [10.2.6. Descriptions metadata](#1026-descriptions-metadata)
-  + [10.3. Method of transport](#103-method-of-transport)
-    - [10.3.1. API capabilities discovery **(star or no star)**](#1031-api-capabilities-discovery)
-  + [10.4. **Signaling and negotiating MicroTypes**](#signaling-and-negotiating-microtypes)
-  + [10.5. Automating the documentation generation](#104-automating-the-documentation-generation)
+    - [10.2.2. Hypermedia metadata](#1022-hypermedia-metadata)
+      * [10.2.2.1. User resource](#10221-user-resource)
+      * [10.2.2.2. Users resource](#10222-users-resource)
+    - [10.2.4. Descriptions metadata](#1024-descriptions-metadata)
+    - [10.2.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD](#1025-the-case-of-a-non-compatible-spec-for-introspection-linked-data-metadata-using-json-ld)
+      * [10.2.5.1. Extending spec by creating a Shim MicroType](#10251-extending-spec-by-creating-a-shim-microtype)
+        + [10.2.3.1. User resource](#10231-user-resource)
+        + [10.2.3.2. Users resource](#10232-users-resource)
+      * [10.2.5.2. Considering it as runtime metadata](#10252-considering-it-as-runtime-metadata)
+  + [10.3. Method of introspection](#103-method-of-introspection)
+    - [10.3.1. API capabilities discovery](#1031-api-capabilities-discovery)
+  + [10.4. The Errors MicroType](#104-the-errors-microtype)
+  + [10.5. Signaling and negotiating MicroTypes](#105-signaling-and-negotiating-microtypes)
+  + [10.6. Automating the documentation generation](#106-automating-the-documentation-generation)
 * [11. Related Work](#11-related-work)
-  + [11.1. **GraphQL**](#111-graphql)
-  + [11.2. **Linked Data and Semantic Web**](#112-linked-data-and-semantic-web)
-    - [11.2.1. **JSON-LD and HYDRA**](#1121-json-ld-and-hydra)
+  + [11.1. GraphQL](#111-graphql)
+  + [11.2. Linked Data and Semantic Web](#112-linked-data-and-semantic-web)
+    - [11.2.1. JSON-LD and HYDRA](#1121-json-ld-and-hydra)
   + [11.3. Web Linking and link relation types](#113-web-linkinghttpstoolsietforghtmlrfc5988-and-link-relation-types)
-    - [11.3.1. **The Profile Media Type Parameter (expired draft) (needed?)**](#1131-the-profile-media-type-parameterhttpbuzzwordorguk2009draft-inkster-profile-parameter-00html-expired-draft)
-    - [11.3.2. The 'profile' Link Relation Type](#1132-the-profile-link-relation-typehttpstoolsietforghtmlrfc6906)
-    - [11.3.3. **Linksets (draft) (make it better)**](#1133-linksetshttpstoolsietforghtmldraft-wilde-linkset-link-rel-02-draft)
+    - [11.3.1. The Profile Media Type Parameter (expired draft)](#1131-the-profile-media-type-parameter-expired-draft)
+    - [11.3.2. The 'profile' Link Relation Type](#1132-the-profile-link-relation-type)
+    - [11.3.3. Linksets](#1133-linksets)
+  + [JSON home](#json-home)
+  + [HTTP Hints](#http-hints)
   + [11.4. RESTful API Description Languages](#114-restful-api-description-languages)
   + [11.5. API directories](#115-api-directories)
-* [12. **Conclusion**](#conclusion)
+* [12. Conclusion](#conclusion)
 
 ## 1. Definitions
 First some definitions, that we will use through the text:
@@ -1757,7 +1765,7 @@ We also feel that this is also a perfect case for hosting our API's discovery fo
 We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
 `/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
 
-#### 10.4. The Errors MicroType
+### 10.4. The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
 
@@ -1826,7 +1834,7 @@ seen in the following Accept header example:
 application/vnd.api+json, application/problem-extensive+json, application/problem+json; q=0.8
 ```
 
-### Signaling and negotiating MicroTypes
+### 10.5. Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
 2 issues
 1. Root/home endpoint has multiple MicroTypes
@@ -1834,7 +1842,7 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 3. Order of MicroTypes (JSON-LD vs JsonSchema)
 4. Identification of MicroTypes
 
-### 10.5. Automating the documentation generation
+### 10.6. Automating the documentation generation
 The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
 by returning a regular web page, targeted to humans and not machines.
 The technical details is out of the scope of this implementation example but we
