@@ -1614,7 +1614,7 @@ duplication of our metadata.
 ```
 
 Notice how we define the pagination, by referencing parts of the user's `meta` object.
-We don't treat the client as stupid but smart enough to understand what it has to do for its part.
+We don't treat the clients as stupid but smart enough to understand what they need to do on their part to get what they want.
 
 
 
