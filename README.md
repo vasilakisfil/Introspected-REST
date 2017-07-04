@@ -1823,7 +1823,7 @@ For instance, the client might show preference to another problems Media Type be
 seen in the following Accept header example:
 
 ```
-application/vnd.api+json, application/problem-extensive+json;, application/problem+json; q=0.8
+application/vnd.api+json, application/problem-extensive+json, application/problem+json; q=0.8
 ```
 
 ### Signaling and negotiating MicroTypes
