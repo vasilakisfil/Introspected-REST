@@ -1674,7 +1674,8 @@ As a result we have the following 2 options.
 ##### 10.2.5.1. Extending spec by creating a Shim MicroType
 Our first option is to create a wrapper **shim** MicroType that defines how the spec should work
 for the clients to parse and understand the data, with the least possible changes.
-
+A naive shim, that we show here, would output the context information in the introspected process.
+Then the client should match this information in combination with the runtime data.
 
 ###### 10.2.3.1. User resource
 ```json
