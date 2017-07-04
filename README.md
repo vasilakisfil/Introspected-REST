@@ -83,8 +83,8 @@ the evolvability and extensability of our new model.
       * [9.1.2.2. Actions](#9122-actions)
       * [9.1.2.3. Forms](#9123-forms)
     - [9.1.3. Metadata](#913-metadata)
-  + [9.2. MicroTypes: modules composing a Media Type](#92-microtypes-modules-composing-a-media-type)
-    - [9.2.1. MicroTypes in HTTP](#921-microtypes-in-http)
+  + [9.2. **MicroTypes: modules composing a Media Type**](#92-microtypes-modules-composing-a-media-type)
+    - [9.2.1. **MicroTypes in HTTP**](#921-microtypes-in-http)
   + [9.3. Introspection as the engine of application state (IATEOAS)](#93-introspection-as-the-engine-of-application-state-iateoas)
     - [9.3.1. Composability over monoliths](#931-composability-over-monoliths)
     - [9.3.2. Plain data separated from metadata](#932-plain-data-separated-from-metadata)
@@ -110,9 +110,9 @@ the evolvability and extensability of our new model.
   + [10.3. Method of introspection](#103-method-of-introspection)
     - [10.3.1. API capabilities discovery](#1031-api-capabilities-discovery)
   + [10.4. The Errors MicroType](#104-the-errors-microtype)
-  + [10.5. Signaling and negotiating MicroTypes](#105-signaling-and-negotiating-microtypes)
+  + [10.5. **Signaling and negotiating MicroTypes**](#105-signaling-and-negotiating-microtypes)
   + [10.6. Automating the documentation generation](#106-automating-the-documentation-generation)
-* [11. Related Work](#11-related-work)
+* [11. **Related Work**](#11-related-work)
   + [11.1. GraphQL](#111-graphql)
   + [11.2. Linked Data and Semantic Web](#112-linked-data-and-semantic-web)
     - [11.2.1. JSON-LD and HYDRA](#1121-json-ld-and-hydra)
@@ -124,7 +124,7 @@ the evolvability and extensability of our new model.
   + [HTTP Hints](#http-hints)
   + [11.4. RESTful API Description Languages](#114-restful-api-description-languages)
   + [11.5. API directories](#115-api-directories)
-* [12. Conclusion](#conclusion)
+* [12. **Conclusion**](#conclusion)
 
 ## 1. Definitions
 First some definitions, that we will use through the text:
@@ -2521,5 +2521,9 @@ say that this is hard work as REST is mentioned in HTTP RFCs !!!
 Some people call such APIs AI-driven APIs, or autonomous APIs but it's all about **evolvability**.
 If you can design an architecture style that is **evolvable** yest simple enough and applies/does not break
 to our current Internet's protocols (like HTTP) then none can accuse you of using it.
-At the moment we have only REST though.
+RPC-based, hypermedia-based, whatever-driven, if it's evolvable and convinces us of using it (like it's very simple)
+then none can accuse you about your API architecture.
+Apparently people want want (from our experience with REST) first simplicity and then evolvability.
+When we say evolvability, we mean without touching/breaking the clients.
+At the moment we have only REST though which is evolvable but not simple. IT's complex.
 
