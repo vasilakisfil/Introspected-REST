@@ -1759,7 +1759,7 @@ We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
 
-Usually the semantics of an error respond are defined in the API's Media Type but we will use the newly-publiehd [`RFC 7807 Problem Details for HTTP APIs`](https://tools.ietf.org/html/rfc7807),
+Usually the semantics of an error respond are defined in the API's Media Type but we will use the newly-published [`RFC 7807 Problem Details for HTTP APIs`](https://tools.ietf.org/html/rfc7807),
 which defines the `problem+json` Media Type for JSON HTTP APIs.
 To give an example how the response will seem when following this RFC,
 imagine that when updating a User object, the application developer might wrongly send an invalid `birth_date`.
