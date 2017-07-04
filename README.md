@@ -1866,6 +1866,9 @@ However it has some issues.
 Using linked data in our APIs is just great.
 HYDRA is in the right direction to introspectable APIs.
 
+Hydra doesn't always require you to serve metadata on the side.
+In a custom context you might have to serve them runtime.
+
 
 ### 11.3. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
 There is a tendency to overload Link rel for links unrelated to application format etc.
