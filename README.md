@@ -1360,6 +1360,8 @@ Given that Introspected REST differs only in HATEOAS part of REST, the identific
   * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
 
 
+Let's assume that our parent Media Type is `application/vnd.api+json`.
+
 ### 10.1. Isolating the actual data from metadata
 Our top priority is to offload the final response object from the metadata, like hypermedia.
 Instead, we will provide to the user only the data and possibly any runtime metadata.
@@ -1792,7 +1794,18 @@ The error object could be used for more advanced errors, like the following:
 }
 ```
 
-Another inherent issue that this RFC has is that of returning a different Media Type than the one that the client asked.
+Another thing that we should take care is the fact that this RFC requires returning a different Media Type than the one used by the API.
+In theory the API's Media Type explain how the errors work using the same semantics as defined in `problem+json` RFC but the RFC
+suggests using `application/problem+json` for Media Type.
+
+> The data model for problem details is a JSON [RFC7159] object; when
+> formatted as a JSON document, it uses the "application/problem+json"
+> media type.
+>
+> --- [RFC 7807](https://tools.ietf.org/html/rfc7807)
+>
+However in order for this to work the client needs to negotiate it and accept this Media Type.
+In HTTP that would be achieved using the `Accept` header, which could look like that:
 
 But why declaring this as a MicroType one could ask?
 Given that such error information is crucial for the user to understand why her action is not advancing,
@@ -2438,3 +2451,46 @@ RFC 6838                 Media Type Registration            January 2013
 This should not go here but instead in the conclusion saying that everything is **still** fetchable and possible
 using introspection + microtypes
 
+3.4.  Content Negotiation
+
+   When responses convey payload information, whether indicating a
+   success or an error, the origin server often has different ways of
+   representing that information; for example, in different formats,
+   languages, or encodings.  Likewise, different users or user agents
+   might have differing capabilities, characteristics, or preferences
+   that could influence which representation, among those available,
+   would be best to deliver.  For this reason, HTTP provides mechanisms
+   for content negotiation.
+
+   This specification defines two patterns of content negotiation that
+   can be made visible within the protocol: "proactive", where the
+   server selects the representation based upon the user agent's stated
+   preferences, and "reactive" negotiation, where the server provides a
+   list of representations for the user agent to choose from.  Other
+   patterns of content negotiation include "conditional content", where
+   the representation consists of multiple parts that are selectively
+   rendered based on user agent parameters, "active content", where the
+   representation contains a script that makes additional (more
+   specific) requests based on the user agent characteristics, and
+   "Transparent Content Negotiation" ([RFC2295]), where content
+
+
+
+Fielding & Reschke           Standards Track                   [Page 18]
+ 
+RFC 7231             HTTP/1.1 Semantics and Content            June 2014
+
+
+   selection is performed by an intermediary.  These patterns are not
+   mutually exclusive, and each has trade-offs in applicability and
+   practicality.
+
+   Note that, in all cases, HTTP is not aware of the resource semantics.
+   The consistency with which an origin server responds to requests,
+   over time and over the varying dimensions of content negotiation, and
+   thus the "sameness" of a resource's observed representations over
+   time, is determined entirely by whatever entity or algorithm selects
+   or generates those responses.  HTTP pays no attention to the man
+   behind the curtain.
+
+https://www.mnot.net/blog/2012/10/29/NO_OPTIONS --- important !!
