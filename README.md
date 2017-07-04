@@ -1872,9 +1872,10 @@ There is a tendency to overload Link rel for links unrelated to application form
 We feel that this is a bad practice and definitely not the right location to add the Microtypes.
 Link rel should be used for very few specific things.
 For instance Media type and links. Not overloading. Dereference only.
-#### 11.3.1. [The Profile Media Type Parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
 
 #### 11.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
++say about the [The Profile Media Type Parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
+
 Erik Wilde suggested a profiling mechanism of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
 
 >  A profile is defined not to alter the
