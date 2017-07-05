@@ -1286,6 +1286,21 @@ However, without such concept, it's possible that Introspected REST's power to b
 
 We will use the term MicroType's metadata to denote a response containing the metadata of a MicroType's semantics.
 
+
+The types of metadata depend on the Media Type's capabilities.
+Thus, the following could be considered as metadata but an Introspected REST API doesn't require all of them.
+Actually an Introspected REST doesn't require anything.
+It is up to the needs of the API designer to add the Introspected information.
+There are 3 types of meta-data a resource could have:
+  * For the expected request object:
+    * Media Type's metadata, like pagination, querying language etc
+    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
+  * For the returned response object:
+    * links, for linking other resources
+    * actions, for manipulating the resource
+    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
+    *
+
 #### 9.2.1. MicroTypes in HTTP
 The Content-Type header is limited up to 128 characters so we might need another header for that.
 Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
@@ -1995,9 +2010,6 @@ The profile RFC does not do a correct negotiation and it's problematic
 With Introspected REST, we can solve such problems by providing such information only to the clients that are really interested,
 in an easy, composable way.
 
-This document is not for REST only. Given the recent advancements of REST-RFC-not compliant changes by the community,
-we need to see what's evolvable and what's not. (maybe take it to a blog post)
-
 Our solution is by far **not** complete but we have set the basis for the community to experiment and come up with MicroType specs.
 
 We call the community to start experiment in this model and come up with patterns.
@@ -2007,148 +2019,9 @@ Another reason is to have a real REST alternative with arguments and remove the 
 
 We are sure that without such design/architecture we can't have complex yet self-described APIs.
 
-
-We see that people fail to understand the full extend of Roy's initial `REST` model and what is happening is that
-some elements of that REST are applied, some other not and eventually we have a model that has the downsides of both worlds.
-
-In this _manifest_ we showed that we need to separate actual data from resource metadata and hypermedia. Documentation
-should be generated.
-
-No you don't need GraphQL
-
 We want to embrace even the simplest APIs and allow them to provide the elements of REST that need, yet being easy to impelement
 and backwards compatible.
 The key thing here is backwards compatibility, because it allows you to incrementally add REST HATEOAS incrementally.
-
-In this Manifesto we will try to kill Roy's model.
-It gave us great insights but let's be pragmatic: it will never work out.
-
-We need to **be brave enough and move on**: Roy's HATEOAS-based REST model can be declared as deprecated.
-
-Introspected REST is an alternative backwards compatible API. No breaking changes are needed.
-
-##############################################################
-If you want to build the next Introspected-REST spec, you can follow the following reasoning.
-Note that this reasoning is message-agnostic, meaning that we use here JSON just because we know it better
-but your spec could use anything, yaml, xml etc.
-
-* Start with some SANE defaults and the axion: The simpler your API (and the lesser it deviates from defaults), the simpler the introspection-meta-data should be
-* Reach a concencus on a Introspection spec using already defined specs like JSON-Schemas.
-* Reach a concencus on a querying language over url (filter + aggregation + pagination)
-* Reach a concencus on an URL-API for attribute/association inclusion
-* Reach a concencus on linking
-* Reach a concencus on denoting linked/semantic data
-* Reach a concencus on document structure (root element, meta attributes which should appear in the simple response as well etc)
-Each of those could be a separate Media Type
-
-So we keep 80% of the REST constraints and while we understand the benefits of other 20% we switch it with an on-demand alternative that makes the final thing
-more flexible and powerful while keeping the final data simple.
-
-There are 3 kinds of criticizers of REST model.
-1. The ones who understand what REST is and feel that due to its complexity, they prefer loosing some features and deliver something
-simpler, yet easier to implement and test and deliver a RESTful approach
-2. The ones who understand what REST brings on the table but given that they control the client as well,
-why should they bother with the whole HATEOAS thing?
-3. The ones who don't understand REST and just want a plain JSON because it's simple enough
-
-
-Introspected REST model is flexible enough to cover all those user cases.
-It's not a model that is black or white: your API is either Introspected-REST-compliant or it isn't, like REST.
-
-
-
-It should be noted this model is not something we conceived in a lab. Some [people]()
-have already tried to implement something similar, probably without really knowing
-what they were doing.
-
-You see, the shadow of Roy Fielding is above any API developer:
-we are afraid to deprecate Roy's REST model and as a result what we are doing is that
-we take some elements of Roy's model, apply them, and name our API or spec as RESTSful.
-Eventually however, the final result is even worse. It doesn't have Roy's key elements for
-a Markov-chain-like client (we still have offline contracts) yet we have added complexity
-to our API for little result.
-
-
-Probably Roy won't like that. He will either:
-* declare that Introspected REST is a stupid manifesto that has nothing to do with his REST or
-* he will declare the Introspected REST is just yet another REST as he defined it and we never
-read his dissertation to actually see that we are defining yet another REST style.
-
-In either case, given that very few has really implemented a Roy-compliant REST API means
-that Roy himself failed to explain his model correctly.
-
-
-
-Are we sliding a lot from Roy's initial model? No, we modernize it a little bit.
-
-
-##### Roadmap to json-specific defined Introspected REST specs
-
-#### Why this document
-This document describes an architectural style.
-It does not describe a specific spec and that's the reason it does not follow the IETF draft standards.
-
-It's a manigesto if you wish.
-
-_Anyone can contribute in this manifesto. Just open a pull request._
-
-
-The way the introspection is made is up to the API designer, or better, up to the spec. Here we use HTTP OPTIONS as we feel that it's an approriate way.
-
-
-
-
-
-Roy has done great work on initial HTTP spec and REST definition.
-Unfortunately, very few people have truly understood the unique characteristics of networked
-APIs which inspired Roy to define the REST.
-
-The idioms of Networked Services are very peculiar.
-When we have a client talking over the wire to a server,
-neither the client developer nor the server developer has access to the other machine.
-
-This means that if the client needs a specific resource, it must not have an offline contract
-on how to retrieve this resource because that would mean
-* changes on the server's side is difficult.
-* automated API clients are not possible without human factor.
-
-Instead, the server would help (drive if you will) the client exactly where is needed to.
-
-That's the main reason why Roy is against the version on the URL: because it means that
-you take as de-facto that there will be breaking changes at some point.
-Instead, a truly REST API should be able to apply changes on the resources without breaking any client
-because the client.
-
-
-* The simpler the API, the simpler the API description.
-
-
-
-Good question.
-Let's let Roy answer it.
-
-We should describe them somehow though in our API without relying in offline contracts (like documentation)
-
-
-#### 5.3. An alternative architectural style maybe?
-Most of those Media Types specifications would not be needed if the APIs were built
-with introspection in mind.
-
-Imagine that we have a Media Type that allows us to describe new media types, called `generic_media_type`.
-Then the clients would only need to understand and parse this `generic_media_type` and derive the other
-Media Types.
-Of course, this scenario is more difficult than it sounds and the goal of this _manifesto_ is not
-to provide a generic Media Type.
-Nevertheless, API introspection, as we will see, can provide us with information on API's
-capabilities along with hypermedia in a much flexible and cleaner way, _without having data and hypermedia (representation metadata) tangled together in 
-the representation_.
-
-
-
-JSON-LD + Collection+JSON ? https://sookocheff.com/post/api/on-choosing-a-hypermedia-format/
-
-
-WRITE ABOUT VERSIONING IN THE URL
 
 
 RFC5988: A means of indicating the relationships between resources on the Web,
@@ -2162,86 +2035,19 @@ RFC5988: A means of indicating the relationships between resources on the Web,
 Oh wait..we just figured out that having the links in there might not be the ideal.
 
 
-Vale kai auta tou Roy pou exei sta presentations tou
+Final review:
+1. check paragraphs
+2. check code terms (RESTxx)
+3. check links
+4. check bolds
 
-
-
-Are you sure you want an architectural style and not an architecture ? (probably yes)
-
-Is bold text a good idea?
-Should we add link to everything?
+who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik
 
 The ratio of data/hypermedia of a resource
 
 add querying specific elements of an introspection (like links, attributes etc)
 
-
-who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik
-
 Say that about custom capabilities like running functions or having an HTTP2 push. Say also that on metadata.
-
-
-The types of metadata depend on the Media Type's capabilities.
-Thus, the following could be considered as metadata but an Introspected REST API doesn't require all of them.
-Actually an Introspected REST doesn't require anything.
-It is up to the needs of the API designer to add the Introspected information.
-There are 3 types of meta-data a resource could have:
-  * For the expected request object:
-    * Media Type's metadata, like pagination, querying language etc
-    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
-  * For the returned response object:
-    * links, for linking other resources
-    * actions, for manipulating the resource
-    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
-    *
-
-
-Maybe explain somewhere the hypermedia/metadata definitions. Links vs actions?
-
-
-In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
-However, in a pragmatic where nothing is perfect in this world, clients are built by humans
-We would like to embrace both architectural API styles: APIs that are built to last decades, and APIs that are built without
-evolvement in mind.
-Introspected REST model is flexible enough to cover all those use cases.
-
-Resource, object, response definitions!!!
-
-
-Secondly, we want to let clients to be able to retrieve plain data without dealing with metadata.
-Last but not least, we would like to embrace the idea of composition when we are composing the final response.
-
-We should note that these reasons apply to both, the API designed and the API client.
-
-The client that is interested solely in the data, is releaved by getting just the data without any metadata mixed in.
-In the future, if the client needs to get any metadata, it knows where to find them.
-Moreover, this architecture, _should_ make things faster: not only it should allow the API designers to move faster in their development cycle, but
-faster in the sense of request/response cycle. Parsing a bunch of metadata (but also rendering those from the server)
-slows things down. In the case when these data are not needed then some bandwidth is wasted, the UI lags a bit, user waits slightly more, just in case
-a client might need the metadata.
-
-Maintaining a response that mixes up data with metadata is hard and makes things move slow.
-Moreover, the API designer might not be interested to add some metadata (like hypermedia actions) from the very beginning of
-the API release. Furthermore, this solution allows current APIs to inherit hypermedia, on the side, without making any breaking change,
-specifically in the level they need and want.
-We are pragmatic with the fact that not all APIs developed with 50 years ahead in mind and some APIs might be needed for relatively very
-small amount of time.
-We want to embrace these APIs too, with Introspected REST model, by allowing them to integrate any metadata types in the level they need.
-
-When a client requests a resource, given that it already knows how to make the request and how to parse the response,
-it should only await plain data.
-Thus we need to find a way to provide any secondary data, like meta-data, through another channel, on the side.
-
-
-The problem is that REST doesn't allow you to integrate it at a later stage.
-Say that you already have a simple RESTless API, as a part of a prorotype product in your shining startup, and now you want to make a public
-release.
-You understand the benefits of having a REST API, so you are looking to add any hypermedia needed for the clients.
-It turns out that, you will have to change a lot of stuff in order to integrate. In fact, we probably can't call it integration,
-it's a completely new re-design.
-If we want to be precise, in a RESTless API, adding hypermedia at a later stage would mean that we would need a new Media Type because
-otherwise it would break the current semantics.
-Moreover, the response would change every time
 
 #### 8.2.3. REST does not make it easy to integrate different APIs together
 Consider a product resource.
@@ -2250,139 +2056,7 @@ However, information about payment options is not provided by the product resour
 This means any client requesting payment options will request payment links from a separate server.
 This not only decouples product resources from payment management; it also allows the payment options to be more easily customized based on the specifics of the client, meaning that the complete "product and payment options" view is a combination of the product resource (and associated hypermedia controls), and payment links provided by the specialized payment options service.
 
-Twitter!
-Building high performant web services is hard, but to justify the deprecation of Roy's REST model is multiple times harder.
-Obviously the reason is that he had done pretty good damn job (almost perfect if you take into account when it was published).
-
-caching headers for data and metadata!
-
-explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!
-Also say that hypermedia ~= HATOEAS
-
 say about atom+json example!! A totally new Media Type that we need to manually understand..
-explain that when we talk about Media Type, we don't neceserily mean HTTP's media type!
-
-
-### 9.1. Collections, Resources, endpoints, actions and methods
-There is a small confusion of different terms used around API literature.
-We would like to give a small description and definition of each one.
-
-#### Collection
-A collection is a set, an array, of resources.
-The resources should be of the same type but rarely a collection could also contain
-resources of different types, or polymorphic resources.
-
-#### Resource
-A resource is an entity that exposes a set of different actions that can be performed on it.
-Usually actions are a (sub)set of CRUD but it can go way beyond that and depends on the API designer decisions.
-
-#### 9.1.1. Methods
-In the RPC world, a method is a remote method called by another remote object.
-In HTTP and related protocols, when we talk about a method, we mean the actual protocol method used, for instance `REGISTER` in SIP,
-or `DELETE` in HTTP.
-
-Details about the method as well as the available methods are described by the protocol itself.
-
-#### 9.1.2. Actions and endpoints
-Actions or endpoints mean the same thing: it's the combination of a specific protocol method in a specific url.
-For instance, `GET /api/users` is an action, or, an endpoint.
-
-The difference between action or endpoint, is that an endpoint could also be outside
-
-##### Runtime Metadata
-Runtime metadata are depending on the response and object which resulted by the incoming request.
-
-Inappropriately, object-specific, dynamic metadata are also considered part of the object's data, like pagination information.
-
-##### Structural Metadata
-Structural metadata are related to the structure of the data, either the response object or the request object.
-
-##### Hypermedia Metadata
-
-
-## Informational metadata
-runtime metadata
-human-targeted metadata
-other metadata like data types?
-
-
-##### 9.1.3.1 Request's metadata
-These metadata could be static for a resource, an endpoint or dynamic and volatile,
-determined by the parameters of the request and the state of the resource at that given time.
-
-##### 9.1.3.2 Media Type fill-ins
-Metadata are data that describe the data or the hypermedia.
-These metadata could be static for a resource, an endpoint or dynamic and volatile,
-determined by the parameters of the request and the state of the resource at that given time.
-
-
-#### Types of metadata
-In REST, when requesting a resource you get different kind of information mixed in with the actual data.
-Nowadays, API designers also distribute documentation to descrine some information about the API and its resources as well.
-
-If we try to identify all the different kind of data and metadata we would get the following list for a resource:
-###### 1. Media Type's capabilities fill-ins
-These metadata are related to the Media Type used by the API.
-The client provides information for the server to take into account when processing the request.
-For instance, pagination information (page, items per page, offset) or the desired query (ideally an equievelent to SQL's SELECT).
-
-###### 2. Resource schema
-When requesting a response, the client should be able to know what to expect, for instance:
-* the structure schema of the object, like the name of the attributes etc
-* the data types of the object's attributes
-* semantic meaning of each attribute, or of the resource itself
-* possible a description for each resource and attribute, targeted to humans
-
-Those information should be available for both response and request objects.
-
-
-the name of the attributes,
-their data types, any semantic meaning of each attribute (using a linked data spec) and possibly any description of the resource itself or its attributes
-###### 3. hypermedia metadata
-  * links, for linking other resources
-  * actions, for manipulating the resource
-
-
-As we described earlier, the level of Media Type's metadata depends on how strong or weak a Media Type is. If it's strong then the client will
-In the following section we will describe the architecture style of the Introspected REST.
-The main principles of Introspected REST build upon Roy's initial REST model but deviates in the way HATEOAS is derived
-Specifically the state of the client is Introspected, possibly cached.
-The main idea is that we separate any metadata from the actual data and deliver the metadata on the side, on demand.
-
-
-#### Definition of Introspection
-
-
-#### 9.3.5. Request Response inconsistency
-Although usually a resource's structure is identical when receiving it or manipulating through a request,
-that is not always the case.
-
-Moreover, a request has unique properties, like URL params that need to be defined by a specific MicroType.
-As a result, if there is any inconsistency, it should be denoted at once.
-
-## Future Work
-It is obvious that after this Manifesto freezes people will start researching more on the introspected-based.
-
-We would like to give some guidelines towards that direction.
-
-
-Roy's model is weird: it was rarely fully employed to have 100% evolvability and when it was all it's drawbacks appeared: complexity and performance issues.
-
-Final review:
-1. check paragraphs
-2. check code terms (RESTxx)
-
-+ say about profiles on HATEOAS VS Media Types
-+
-
-Although implementation of MicroTypes in HTTP is based in the 'profile' Link Relation Type,
-it's actual purpose is to offer true composability and evolvability.
-
-
-##### 9.1.3.1. Capabilities
-The term capabilities is used to describe what is possible an API to do using metadata.
-This term us mostly used by
-
 
 >  The best software architecture “knows” what changes often and makes that easy.
 >
@@ -2403,136 +2077,10 @@ not only about hypermedia but also other metadata (like data types etc)
 
 Say in intro that Media Types have reached their limits. For AI/evolvable apis we need more than that.
 
-human factor ===> human involvement factor (important)
-perception or perspection ?
-
-Say that imagine returning a 404 or a 500 in a different Media Type that the server never requested.
-Make comparison with html
-
-Change 2048, it's too old, use https://tools.ietf.org/html/rfc6838
-
 Say about imaturity of rfcs/specs related to introspection (example: JSON schema v4 vs v5/v6)
 
 Add a note on unfinished RFCs
 
-4.1.  Functionality Requirement
-
-   Media types MUST function as actual media formats.  Registration of
-   things that are better thought of as a transfer encoding, as a
-   charset, or as a collection of separate entities of another type, is
-   not allowed.  For example, although applications exist to decode the
-   base64 transfer encoding [RFC2045], base64 cannot be registered as a
-   media type.
-
-   This requirement applies regardless of the registration tree
-   involved.
-
-Media types that make use of a named structured syntax SHOULD use the
-   appropriate registered "+suffix" for that structured syntax when they
-   are registered.  By the same token, media types MUST NOT be given
-   names incorporating suffixes for structured syntaxes they do not
-   actually employ. "+suffix" constructs for as-yet unregistered
-   structured syntaxes SHOULD NOT be used, given the possibility of
-   conflicts with future suffix definitions.
-
-
-In some cases, a new media type may not "fit" under any currently
-   defined top-level type names.  Such cases are expected to be quite
-   rare.  However, if such a case does arise, a new type name can be
-   defined to accommodate it.  Definition of a new top-level type name
-   MUST be done via a Standards Track RFC; no other mechanism can be
-   used to define additional type names.
-
-Parameter names have the syntax as media type names and values:
-
-       parameter-name = restricted-name
-
-   Note that this syntax is somewhat more restrictive than what is
-   allowed by the ABNF in [RFC2045] and amended by [RFC2231].
-
-   Parameter names are case-insensitive and no meaning is attached to
-   the order in which they appear.  It is an error for a specific
-   parameter to be specified more than once.
-
-
-4.11.  Fragment Identifier Requirements
-
-   Media type registrations can specify how applications should
-   interpret fragment identifiers (specified in Section 3.5 of
-   [RFC3986]) associated with the media type.
-
-
-
-
-
-Freed, et al.             Best Current Practice                [Page 18]
- 
-RFC 6838                 Media Type Registration            January 2013
-
-
-   Media types are encouraged to adopt fragment identifier schemes that
-   are used with semantically similar media types.  In particular, media
-   types that use a named structured syntax with a registered "+suffix"
-   MUST follow whatever fragment identifier rules are given in the
-   structured syntax suffix registration.
-
-
-#### 11.2.2. ALPS
-This should not go here but instead in the conclusion saying that everything is **still** fetchable and possible
-using introspection + microtypes
-
-3.4.  Content Negotiation
-
-   When responses convey payload information, whether indicating a
-   success or an error, the origin server often has different ways of
-   representing that information; for example, in different formats,
-   languages, or encodings.  Likewise, different users or user agents
-   might have differing capabilities, characteristics, or preferences
-   that could influence which representation, among those available,
-   would be best to deliver.  For this reason, HTTP provides mechanisms
-   for content negotiation.
-
-   This specification defines two patterns of content negotiation that
-   can be made visible within the protocol: "proactive", where the
-   server selects the representation based upon the user agent's stated
-   preferences, and "reactive" negotiation, where the server provides a
-   list of representations for the user agent to choose from.  Other
-   patterns of content negotiation include "conditional content", where
-   the representation consists of multiple parts that are selectively
-   rendered based on user agent parameters, "active content", where the
-   representation contains a script that makes additional (more
-   specific) requests based on the user agent characteristics, and
-   "Transparent Content Negotiation" ([RFC2295]), where content
-
-
-
-Fielding & Reschke           Standards Track                   [Page 18]
- 
-RFC 7231             HTTP/1.1 Semantics and Content            June 2014
-
-
-   selection is performed by an intermediary.  These patterns are not
-   mutually exclusive, and each has trade-offs in applicability and
-   practicality.
-
-   Note that, in all cases, HTTP is not aware of the resource semantics.
-   The consistency with which an origin server responds to requests,
-   over time and over the varying dimensions of content negotiation, and
-   thus the "sameness" of a resource's observed representations over
-   time, is determined entirely by whatever entity or algorithm selects
-   or generates those responses.  HTTP pays no attention to the man
-   behind the curtain.
-
 https://www.mnot.net/blog/2012/10/29/NO_OPTIONS --- important !!
 
 say that this is hard work as REST is mentioned in HTTP RFCs !!!
-
-Some people call such APIs AI-driven APIs, or autonomous APIs but it's all about **evolvability**.
-If you can design an architecture style that is **evolvable** yest simple enough and applies/does not break
-to our current Internet's protocols (like HTTP) then none can accuse you of using it.
-RPC-based, hypermedia-based, whatever-driven, if it's evolvable and convinces us of using it (like it's very simple)
-then none can accuse you about your API architecture.
-Apparently people want want (from our experience with REST) first simplicity and then evolvability.
-When we say evolvability, we mean without touching/breaking the clients.
-At the moment we have only REST though which is evolvable but not simple. IT's complex.
-
