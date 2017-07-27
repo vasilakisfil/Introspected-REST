@@ -1346,7 +1346,47 @@ In the same way, the API should **automate the generation of the documentation u
 The way the documentation is requested and its format should be distincly defined by a MicroType or the parent Media Type.
 
 ## 10. Introspected REST applied to HTTP
-### 10.1 Method of transfer
+### 10.1 Method of introspection
+#### 10.1.1 The established OPTIONS method
+The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
+The reason we choose `OPTIONS` here is because **this method has been historically used
+for getting informtation on methods supported on a specific resource**.
+
+Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231), which is a part of the HTTP RFC series, mentions that this method should be used to determine the capabilities of the server, for that particular resource so
+we feel HTTP OPTIONS is a perfect match for API introspection.
+
+> The OPTIONS method requests information about the communication
+> options available for the target resource, at either the origin
+> server or an intervening intermediary.  This method allows a client
+> to determine the options and/or requirements associated with a
+> resource, or the capabilities of a server, without implying a
+> resource action.
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
+As the RFC notes, the OPTIONS request should not imply any specific resource action and
+as a result should return all the available capabilities for that resource, for all actions.
+
+##### 10.1.1.1. API capabilities discovery
+The same RFC mentions that there isn't any practical use of sending an OPTIONS request
+to the root url.
+
+> An OPTIONS request with an asterisk ("\*") as the request-target
+> (Section 5.3 of [RFC7230]) applies to the server in general rather
+> than to a specific resource.  Since a server's communication options
+> typically depend on the resource, the "\*" request is only useful as a
+> "ping" or "no-op" type of method; it does nothing beyond allowing the
+> client to test the capabilities of the server.  For example, this can
+> be used to test a proxy for HTTP/1.1 conformance (or lack thereof).
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
+We also feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
+We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
+`/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
+
 ### 10.2 MicroTypes in HTTP
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
 The Content-Type header is limited up to 128 characters so we might need another header for that.
@@ -1354,7 +1394,7 @@ Content-Type could describe the overall Media Type while Foo header could descri
 The communaity will choose the headers and implementation.
 
 
-## 10. An Introspected REST API prototype in the world of HTTP and JSON
+## 11. An Introspected REST API prototype in the world of HTTP and JSON
 In the following we will describe the architecture of the Introspected REST APIs through
 a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
@@ -1386,7 +1426,7 @@ Given that Introspected REST differs only in HATEOAS part of REST, the identific
 
 Let's assume that our parent Media Type is `application/vnd.api+json`.
 
-### 10.1. Isolating the actual data from metadata
+### 11.1. Isolating the actual data from metadata
 Our top priority is to offload the final response object from the metadata, like hypermedia.
 Instead, we will provide to the user only the data and possibly any runtime metadata.
 
@@ -1438,12 +1478,12 @@ The actual format of the data could vary regarding the root element or possibly 
 Such details will be described by the Media Type.
 What is important here is that the **data does not contain any metadata**, apart from runtime metadata.
 
-### 10.2. Composing different metadata MicroTypes together
+### 11.2. Composing different metadata MicroTypes together
 We will describe our APIs capabilities by mixing together different MicroTypes targeted each one for a specific capability
 of our API, following the Single Responsibility Principle.
 The client will be able to retrieve the information of each metadata MicroType by introspecting the resource.
 
-#### 10.2.1. Structural metadata
+#### 11.2.1. Structural metadata
 One of the most important things for a client to know is the expected structure of the request/response resource object
 along with information on the data types.
 For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
@@ -1453,7 +1493,7 @@ an implementation for that MicroType for the client's environment.
 Also, a cool side effect of having the structure definition of the resource as a MicroType available through resource's introspection,
 is that the client can use this information to first validate the object before sending it over the wire to the server.
 
-##### 10.2.1.1. User resource
+##### 11.2.1.1. User resource
 
 ```json
 {
@@ -1506,7 +1546,7 @@ is that the client can use this information to first validate the object before 
 }
 ```
 
-##### 10.2.1.2. Users resource
+##### 11.2.1.2. Users resource
 Note that the Users resource is just a collection of User object and as a result
 it references the User schema.
 
@@ -1553,12 +1593,12 @@ it references the User schema.
 }
 ```
 
-##### 10.2.1.3. Request Response inconsistency
+##### 11.2.1.3. Request Response inconsistency
 Although here we have the same object semantics for request and response object, in theory these could be different.
 If that's the case, we should denote each object in the response parented under
 distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 
-#### 10.2.2. Hypermedia metadata
+#### 11.2.2. Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas.
 Specifically we will use the draft [V4](https://tools.ietf.org/html/draft-luff-json-hyper-schema-00) of JSON Hyper Schemas as the
 next drafts ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
@@ -1568,7 +1608,7 @@ depending whether there is a body to send or not.
 Resource schemas defined in the previous section are referenced by the following Hyper Schemas, in order to avoid
 duplication of our metadata.
 
-##### 10.2.2.1. User resource
+##### 11.2.2.1. User resource
 ```json
 {
   "$schema":"https://json-schema.org/draft-04/schema#",
@@ -1611,7 +1651,7 @@ duplication of our metadata.
 }
 ```
 
-##### 10.2.2.2. Users resource
+##### 11.2.2.2. Users resource
 ```json
 {
   "$schema":"https://json-schema.org/draft-04/schema#",
@@ -1643,7 +1683,7 @@ Notice how we define the pagination, by referencing parts of the user's `meta` o
 We don't treat the clients as stupid but smart enough to understand what they need to do on their part to get what they want.
 
 
-#### 10.2.4. Descriptions metadata
+#### 11.2.4. Descriptions metadata
 For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
 Note that **this information must not be required to parse and understand the API but to use the API data on our application domain**.
 For instance, understanding that when updating the `email` attribute an email is triggered to inform the user for the change,
@@ -1691,7 +1731,7 @@ is not part of the API client responsibility but it's vital for the application 
 
 This metadata will be used for the documentation generation, as we will se in section [10.6](#106-automating-the-documentation-generation).
 
-#### 10.2.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD
+#### 11.2.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD
 For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
 It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
 to transform their existing JSON to JSON-LD but also to not require breaking changes to your
@@ -1699,13 +1739,13 @@ existing API, which makes it backwards compatible with any current deployed API.
 This conflicts with our design of introspection because having contexts without the data would break the spec.
 As a result we have the following 2 options.
 
-##### 10.2.5.1. Extending spec by creating a Shim MicroType
+##### 11.2.5.1. Extending spec by creating a Shim MicroType
 Our first option is to create a wrapper **shim** MicroType that defines how the spec should work
 for the clients to parse and understand the data, with the least possible changes.
 A naive shim, that we show here, would output the context information in the introspected process.
 Then the client should match this information in combination with the runtime data.
 
-###### 10.2.3.1. User resource
+###### 11.2.3.1. User resource
 ```json
 {
   "@context": {
@@ -1718,7 +1758,7 @@ Then the client should match this information in combination with the runtime da
 }
 ```
 
-###### 10.2.3.2. Users resource
+###### 11.2.3.2. Users resource
 
 ```json
 {
@@ -1736,54 +1776,14 @@ Then the client should match this information in combination with the runtime da
 }
 ```
 
-##### 10.2.5.2. Considering it as runtime metadata
+##### 11.2.5.2. Considering it as runtime metadata
 Our second option is to exploit the IATEOAS principles regarding runtime metadata
 and append them inside the response by considering them as object-specific runtime metadata.
 However, we feel that such dicision should be taken only if nothing else is possible,
 given that in Introspected REST data and metadata should be distinctively separated.
 
 
-### 10.3. Method of introspection
-The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
-The reason we choose `OPTIONS` here is because **this method has been historically used
-for getting informtation on methods supported on a specific resource**.
-
-Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231), which is a part of the HTTP RFC series, mentions that this method should be used to determine the capabilities of the server, for that particular resource so
-we feel HTTP OPTIONS is a perfect match for API introspection.
-
-> The OPTIONS method requests information about the communication
-> options available for the target resource, at either the origin
-> server or an intervening intermediary.  This method allows a client
-> to determine the options and/or requirements associated with a
-> resource, or the capabilities of a server, without implying a
-> resource action.
->
-> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
->
-
-As the RFC notes, the OPTIONS request should not imply any specific resource action and
-as a result should return all the available capabilities for that resource, for all actions.
-
-#### 10.3.1. API capabilities discovery
-The same RFC mentions that there isn't any practical use of sending an OPTIONS request
-to the root url.
-
-> An OPTIONS request with an asterisk ("\*") as the request-target
-> (Section 5.3 of [RFC7230]) applies to the server in general rather
-> than to a specific resource.  Since a server's communication options
-> typically depend on the resource, the "\*" request is only useful as a
-> "ping" or "no-op" type of method; it does nothing beyond allowing the
-> client to test the capabilities of the server.  For example, this can
-> be used to test a proxy for HTTP/1.1 conformance (or lack thereof).
->
-> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
->
-
-We also feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
-We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
-`/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
-
-### 10.4. The Errors MicroType
+### 11.4. The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
 
@@ -1852,7 +1852,7 @@ seen in the following Accept header example:
 application/vnd.api+json, application/problem-extensive+json, application/problem+json; q=0.8
 ```
 
-### 10.5. Signaling and negotiating MicroTypes
+### 11.5. Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
 2 issues
 1. Root/home endpoint has multiple MicroTypes (for metadata mostly) (use the Media Type token as JSON attribute)
@@ -1860,15 +1860,15 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 3. Order of MicroTypes (JSON-LD vs JsonSchema)
 4. Identification of MicroTypes
 
-### 10.6. Automating the documentation generation
+### 11.6. Automating the documentation generation
 The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
 by returning a regular web page, targeted to humans and not machines.
 The technical details is out of the scope of this implementation example but we
 can't stress enough that the generated documentation should only use information from MicroTypes available for the machines,
 programmatically wrapped in a human-friendly format.
 
-## 11. Related Work
-### 11.1. GraphQL
+## 12. Related Work
+### 12.1. GraphQL
 no urls, basically a query language, no MicroTypes
 
 It's Apple for APIs (cost + compatibility)
@@ -1878,9 +1878,9 @@ The reason we have it in related work is because it's related to REST but not RE
 We are happy that people are trying new things and we support such initiatives.
 However it has some issues.
 
-### 11.2. Linked Data and Semantic Web
+### 12.2. Linked Data and Semantic Web
 
-#### 11.2.1. JSON-LD and HYDRA
+#### 12.2.1. JSON-LD and HYDRA
 Using linked data in our APIs is just great.
 HYDRA is in the right direction to introspectable APIs.
 
@@ -1888,13 +1888,13 @@ Hydra doesn't always require you to serve metadata on the side.
 In a custom context you might have to serve them runtime.
 
 
-### 11.3. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
+### 12.3. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
 There is a tendency to overload Link rel for links unrelated to application format etc.
 We feel that this is a bad practice and definitely not the right location to add the Microtypes.
 Link rel should be used for very few specific things.
 For instance Media type and links. Not overloading. Dereference only.
 
-#### 11.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
+#### 12.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
 +say about the [The Profile Media Type Parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
 
 Erik Wilde suggested a profiling mechanism of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
@@ -1937,7 +1937,7 @@ to build.
 
 +no negotiation
 
-#### 11.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
+#### 12.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
 say that Link rel is so overused that Linksets was needed...
 As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
 by the response representation and message format.
@@ -1974,7 +1974,7 @@ However we feel that overloading the Link relation type as we discuss in the nex
 
 ### HTTP Hints
 
-### 11.4. RESTful API Description Languages
+### 12.4. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
@@ -1991,7 +1991,7 @@ The tools themselves have limitations,
 but also, having tools that aim to provide all-in-one to the API designer is against our philosophy: tools that do one thing and do it well.
 
 
-### 11.5. API directories
+### 12.5. API directories
 Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
 We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
 The API's root url should provide everyhing that is needed, or using already published protocols
