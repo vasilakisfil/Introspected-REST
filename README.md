@@ -1348,6 +1348,7 @@ The way the documentation is requested and its format should be distincly define
 ## 10. Introspected REST applied to HTTP
 ### 10.1 Method of introspection
 #### 10.1.1 The established OPTIONS method
+##### 10.1.1.1. Resource capabilities discovery
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, **OPTIONS method has been historically used
 for getting informtation on methods supported on a specific resource**.
@@ -1368,7 +1369,7 @@ we feel HTTP OPTIONS is a perfect match for API introspection.
 As the RFC notes, the OPTIONS request should not imply any specific resource action and
 as a result should return all the available capabilities for that resource, for all actions.
 
-##### 10.1.1.1. API capabilities discovery
+##### 10.1.1.2. API capabilities discovery
 The same RFC mentions that there isn't any practical use of sending an OPTIONS request
 to the root url.
 
@@ -1396,6 +1397,14 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
 The Content-Type header is limited up to 128 characters so we might need another header for that.
 Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
 The communaity will choose the headers and implementation.
+
+#### 10.2.1. Signaling and negotiating MicroTypes
+Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
+2 issues
+1. Root/home endpoint has multiple MicroTypes (for metadata mostly) (use the Media Type token as JSON attribute)
+2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
+3. Order of MicroTypes (JSON-LD vs JsonSchema)
+4. Identification of MicroTypes
 
 
 ## 11. An Introspected REST API prototype in the world of HTTP and JSON
@@ -1856,13 +1865,6 @@ seen in the following Accept header example:
 application/vnd.api+json, application/problem-extensive+json, application/problem+json; q=0.8
 ```
 
-### 11.5. Signaling and negotiating MicroTypes
-Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
-2 issues
-1. Root/home endpoint has multiple MicroTypes (for metadata mostly) (use the Media Type token as JSON attribute)
-2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
-3. Order of MicroTypes (JSON-LD vs JsonSchema)
-4. Identification of MicroTypes
 
 ### 11.6. Automating the documentation generation
 The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
