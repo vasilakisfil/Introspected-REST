@@ -1301,7 +1301,10 @@ There are 3 types of meta-data a resource could have:
     * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
     *
 
+Maybe self-dependent and moduled-to-be-included MicroType categories ?
+
 #### 9.2.1. MicroTypes in HTTP
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
 The Content-Type header is limited up to 128 characters so we might need another header for that.
 Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
 The communaity will choose the headers and implementation.
@@ -1938,6 +1941,7 @@ to build.
 +no negotiation
 
 #### 11.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
+say that Link rel is so overused that Linksets was needed...
 As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
 by the response representation and message format.
 In order to mitigate such issues, Linksets proposal tries to offload HTTP Link links from a resource or url, when having them in there is
