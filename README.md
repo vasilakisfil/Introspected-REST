@@ -1251,65 +1251,52 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 > --- Roy Fielding
 >
 
-Why have been talking about MicroTypes but what exatly are microtypes ?
-
-Say about shims
+Why have been talking so much about the concept of MicroTypes but what exatly are ?
 
 Currently media types act as a big monolith that clients need to understand beforehand through human involvement.
 We believe that Media Types should be broken in smaller
 reusable media types, MicroTypes, each describing very carefully a specific functionality of a modern API.
+The reasoning is that, in our experience, we have seen that different APIs and API specs define the same functionalities in different ways.
+Client and server should still do the regular negotiation flow even for those sub-media-types, and thus
+parametrizing the communication in their needs, down to the semantics level.
 
-Clients and Server should still do the regular negotiation flow even for those sub-media-types.
+In HTTP, semantics for pagination, querying over url (applying filters, aggregations, pagination/sorting on a resource),
+resource/assotiation inclusion in the same response, semantic/linked data, hypermedia actions (required fields, available fields),
+data types and resource scehmas but even more advaned like HTTP/2 server push for specific resources/states etc,
+each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
+At the same time they should be generic enough or follow some specific semantics so that it's possible to be included in any Introspected API.
+The parent Media Type doesn't need to know in advance all the MicroTypes that it will use (in contrast to what rfc defines)
+because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 
-The reasoning is that, in our experience, we have seen that different API specs define the same functionalities in different ways.
-Common foobar should allow us to interchange each of them lorem ipsum.
+#### 9.2.1. MicroType shims
+According to [RFC 6831](https://tools.ietf.org/html/rfc6838), section [4.1](https://tools.ietf.org/html/rfc6838#section-4.1):
 
-We will need a MicroType for describing each of following:
+>   Media types MUST function as actual media formats.  Registration of
+>  things that are better thought of as a transfer encoding, as a
+>  charset, or as a collection of separate entities of another type, is
+>  not allowed.  For example, although applications exist to decode the
+>  base64 transfer encoding [RFC2045], base64 cannot be registered as a
+>  media type.
+>
+>  This requirement applies regardless of the registration tree
+>  involved.
+>
+>  [RFC 6831](https://tools.ietf.org/html/rfc6838), section [4.1](https://tools.ietf.org/html/rfc6838#section-4.1)
+>
 
-* querying language over url (filters, aggregations, pagination and sorting)
-* requesting specific attributes/associations of a resource and its associations
-* linking other resources or associations
-  * figure out when links should be placed on the introspection and when in Links header defined by RFC5988
-* semantic data of a response
-* actions supported by the resource
-  * required fields, available fields
-* resource data types
+This paragraph lines up with our thinking: in the context of MicroTypes, the parent Media Type acts as the base media format.
+The details however, are defined by small components that define functionalities of different parts of the API.
 
-+ specfy uploads
-+ specify http2 server push
-+ etc
+However what happens when we want to wrap an existing spec (like base64) as a MicroType? We definitely can't link
+to the Base64 RFC because it lacks the context of the underlying protocol (like HTTP) and Media Type with which it will be
+used.
+As a result, we need to wrap this in a "shim": link and add references to the initial spec but also define the additional
+semantics for the context that will be used.
+Such semantics should be the minimal possible, with respect to the initial specification without altering its core semantics
+but enough for usage in its new context.
 
-+ microtype is a very broad term, it's used conceptually
-+ shims of published specs/rfcs wrapper in a MicroType
-
-It should be noted that MicroTypes is not a strict requirement for Introspected REST and in fact an equivelant concept
-can be used.
-However, without such concept, it's possible that Introspected REST's power to be restricted and not used to the full extent.
-
-We will use the term MicroType's metadata to denote a response containing the metadata of a MicroType's semantics.
-
-
-The types of metadata depend on the Media Type's capabilities.
-Thus, the following could be considered as metadata but an Introspected REST API doesn't require all of them.
-Actually an Introspected REST doesn't require anything.
-It is up to the needs of the API designer to add the Introspected information.
-There are 3 types of meta-data a resource could have:
-  * For the expected request object:
-    * Media Type's metadata, like pagination, querying language etc
-    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
-  * For the returned response object:
-    * links, for linking other resources
-    * actions, for manipulating the resource
-    * structural information of the object, data types of the object's attributes and description for each resource and attribute, targeted to humans (SDT&D)
-    *
 
 Maybe self-dependent and moduled-to-be-included MicroType categories ?
-
-#### 9.2.1. MicroTypes in HTTP
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
-The Content-Type header is limited up to 128 characters so we might need another header for that.
-Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
-The communaity will choose the headers and implementation.
 
 ### 9.3. Introspection as the engine of application state (IATEOAS)
 The idea of introspection is to be able to examine properties of a system at runtime.
@@ -1324,7 +1311,7 @@ The process should **embrace the use of distinct MicroTypes** to form a Media Ty
 Such an architecture will lead to a system whose each MicroType's metadata is independent, self-contained and detached from the metadata
 of the rest MicroTypes.
 
-The API designer should **first** investigate and embrace the use of MicroTypes, RFCs and specs that are already defined, instead of
+The API designer should **first** investigate and embrace the use of MicroTypes, RFCs and specs that are already defined and published, instead of
 creating her own custom, unpublished spec.
 The reason for this suggestion is that creating a new spec is difficult and usually such custom specs are used only for domain-specific APIs that
 were created for and live as long as this API is used.
@@ -1357,6 +1344,14 @@ and even for humans such information should weight very little compared to the r
 
 In the same way, the API should **automate the generation of the documentation using all metadata from all MicroTypes for every resource**.
 The way the documentation is requested and its format should be distincly defined by a MicroType or the parent Media Type.
+
+## 10. Introspected REST applied to HTTP
+### 10.1 Method of transfer
+### 10.2 MicroTypes in HTTP
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
+The Content-Type header is limited up to 128 characters so we might need another header for that.
+Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
+The communaity will choose the headers and implementation.
 
 
 ## 10. An Introspected REST API prototype in the world of HTTP and JSON
