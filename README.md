@@ -1349,7 +1349,7 @@ The way the documentation is requested and its format should be distincly define
 ### 10.1 Method of introspection
 #### 10.1.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
-The reason we choose `OPTIONS` here is because **this method has been historically used
+In fact, **OPTIONS method has been historically used
 for getting informtation on methods supported on a specific resource**.
 
 Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231), which is a part of the HTTP RFC series, mentions that this method should be used to determine the capabilities of the server, for that particular resource so
@@ -1383,9 +1383,13 @@ to the root url.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-We also feel that this is also a perfect case for hosting our API's discovery for available resources capabilities.
-We coult keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
+We also feel that this is also a perfect case for hosting an API's discovery for available resources capabilities.
+We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
 `/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
+
+### 10.2 Using new relation tyes using Web Linking's rel parameter
+
+- overloading, say about linksets.
 
 ### 10.2 MicroTypes in HTTP
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
