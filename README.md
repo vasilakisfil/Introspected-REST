@@ -192,7 +192,8 @@ As Roy notes:
 > --- Roy Fielding
 
 `Introspected REST` is based on Roy's initial model but removes the need for runtime HATEOAS.
-Instead, the client derives the state on demand, using introspection.
+Instead, the client derives the state on demand, using introspection, by retrieving the necessary metadata
+that are of interest.
 Eventually this brings the same advantages as Roy's model while being it's much simpler,
 much more flexible and backwards compatible with any RESTful API.
 
@@ -370,7 +371,8 @@ not self-descriptive messages that will require out-of-band information, like do
 This is one of the most misunderstood parts of Roy's REST model. The idea here is that,
 once the client and server have reached a concensus on the Media Type after the negotiation,
 the server's response should strictly provide all the available options for the client
-to manipulate the resource and navigate to other resources.
+to manipulate the resource and navigate to other resources, using semantics defined by
+the Media Type agreed.
 
 As Roy notes:
 
@@ -431,7 +433,7 @@ The only thing that the client requires is the initial URI of the API.
 * **multi-fold**: Programming the client once to understand the Media Type.
 Then modify the client to parse and understand the API correctly using some offline contract (i.e. documentation for available resources, fields, pagination etc) and then
 every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
-during that phase is variable depending on the weakness of the Media Type.
+during that phase depends on the weakness of the Media Type.
 
 An API that follows the `REST` model should be evolvable without the need
 of human involvement in the client side, given that the client understands the Media Type.
@@ -513,7 +515,7 @@ has maximum length of 255 characters, it follows a specific regex etc.
 
 #### 6.1.7 Plot twist: this list is endless
 Although we feel that _today_ these capabilities should exist in any modern API, **this list is not exclusive**.
-In fact, there could be capabilities in the future that might not seem necessary today, but help the client can get the necessary data in the structure needed.
+In fact, there could be capabilities in the future that might not seem necessary today.
 For example, joining together one or more resources, other db-inspired operations applied on resources,
 internationalization and localization of the data, HTTP/2 Server Push on some requests, Generic Event Delivery Using HTTP Push on other
 resources on specific states and other capabilities that we haven't even imagined yet.
@@ -551,7 +553,6 @@ describe the resource-specific capabilities.
 
 However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
 which means that the client must be programmed by a human before hand in order to support that Media Type.
-
 As a result, the Media Type can't be very restrictive because that would mean it would restrict the API designer's freedom
 to design the API the way she wants.
 
@@ -564,8 +565,9 @@ On the other hand, if everyone follows that Media Type then it's easier to progr
 Specifically, especially when having a restrictive Media Type, if we create a client that parses responses using that Media Type
 then it's easy to "configure" it for another API which also follows the same Media Type.
 
-HATEOAS should describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
-Essentially, HATEOAS should **complement** the Media Type by providing the Media Type's hypermedia in **runtime** for the client to work properly.
+Essentially, HATEOAS should **complement** the Media Type by providing the Media Type's hypermedia-ed defined semantics in **runtime**
+for the client to work properly.
+For instance, HATEOAS could describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
 
 #### 6.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
@@ -1341,7 +1343,7 @@ of a specific MicroType there are various advantages because each MicroType beco
 For instance, **caching** will be possible using the underlying protocol's mechanisms, for each metadata type separately.
 Another example is the **detached evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
 
-#### 9.3.4. Discovery of API resources and capabilities
+#### 9.3.4. Discovery of API resources and capabilities ++
 Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of **performance**.
 An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all the metadata from all MicroTypes for all resources,
 and their states that the client can access, wherever this is possible.
