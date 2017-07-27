@@ -1348,7 +1348,6 @@ The way the documentation is requested and its format should be distincly define
 ## 10. Introspected REST applied to HTTP
 ### 10.1 Method of introspection
 #### 10.1.1 The established OPTIONS method
-##### 10.1.1.1. Resource capabilities discovery
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, **OPTIONS method has been historically used
 for getting informtation on methods supported on a specific resource**.
@@ -1369,7 +1368,6 @@ we feel HTTP OPTIONS is a perfect match for API introspection.
 As the RFC notes, the OPTIONS request should not imply any specific resource action and
 as a result should return all the available capabilities for that resource, for all actions.
 
-##### 10.1.1.2. API capabilities discovery
 The same RFC mentions that there isn't any practical use of sending an OPTIONS request
 to the root url.
 
