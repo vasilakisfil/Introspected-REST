@@ -1346,6 +1346,72 @@ In the same way, the API should **automate the generation of the documentation u
 The way the documentation is requested and its format should be distincly defined by a MicroType or the parent Media Type.
 
 ## 10. Introspected REST applied to HTTP
+Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
+Here we will review its adaptation in HTTP protocol.
+
+### 10.1 Revisiting content negotiation in HTTP
+As we have already seen, content negotiation in HTTP is achieved through `Accept` request header but it's not the
+only header which can be used by the server to determine the appropriate representation for the client.
+`Accept-Charset`, `Accept-Encoding`, `Accept-Language` can also be used.
+In practice, `User-Agent` header is also used by the server for choosing the right content for the client
+because it contains some device and agent characteristics.
+Lately even, a new draft stadard is created called [HTTP Client Hints](http://httpwg.org/http-extensions/client-hints.html)
+that extends the HTTP with new request headers which indicate device and agent characteristics.
+
+The server uses all those headers as hints in order to determine the most suitable representation of the content
+to be served to the client.
+This hint-based mechanism is called server-driven or proactive content negotiation and although it is used extensively
+by the web now, it does have some drawbacks. As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes:
+
+>   Proactive negotiation has serious disadvantages:
+>
+>   o  It is impossible for the server to accurately determine what might
+>      be "best" for any given user, since that would require complete
+>      knowledge of both the capabilities of the user agent and the
+>      intended use for the response (e.g., does the user want to view it
+>      on screen or print it on paper?);
+>
+>   o  Having the user agent describe its capabilities in every request
+>      can be both very inefficient (given that only a small percentage
+>      of responses have multiple representations) and a potential risk
+>      to the user's privacy;
+>
+>   o  It complicates the implementation of an origin server and the
+>      algorithms for generating responses to a request; and,
+>
+>   o  It limits the reusability of responses for shared caching.
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
+In fact, from the beginnings of HTTP (since [RFC 2068](https://tools.ietf.org/html/rfc2068#section-12.2), published in 1997),
+the protocol allowed another negotiation type: agent-driven or reactive content negotiation negotiation.
+As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes, reactive content negotiation the server provides a
+list of options to the client to choose from.
+
+>  With reactive negotiation (a.k.a., agent-driven negotiation),
+>   selection of the best response representation (regardless of the
+>   status code) is performed by the user agent after receiving an
+>   initial response from the origin server that contains a list of
+>   resources for alternative representations.
+>
+>   (...)
+>
+>   A server might choose not to send an initial representation, other
+>   than the list of alternatives, and thereby indicate that reactive
+>   negotiation by the user agent is preferred.  For example, the
+>   alternatives listed in responses with the 300 (Multiple Choices) and
+>   406 (Not Acceptable) status codes include information about the
+>   available representations so that the user or user agent can react by
+>   making a selection.
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
+With reactive negotiation, the client is responsible for choosing the most appropriate representation,
+according to its needs.
+
+
 ### 10.1 Method of introspection
 #### 10.1.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
@@ -1396,6 +1462,9 @@ The Content-Type header is limited up to 128 characters so we might need another
 Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
 The communaity will choose the headers and implementation.
 
++ the profile link relation
+Surprisingly for each new link relation the 
+
 #### 10.2.1. Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
 2 issues
@@ -1404,6 +1473,11 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 3. Order of MicroTypes (JSON-LD vs JsonSchema)
 4. Identification of MicroTypes
 
+
+#### 10.3. Limitations of HTTP
+We need to do an options request everytime, performance issue.
+This can be mitigated if we emulate GraphQL/Apple and have the same Media Type for all metadata.
+But it's not part of Introspected REST, by design but can be enhanced by parent Media Type.
 
 ## 11. An Introspected REST API prototype in the world of HTTP and JSON
 In the following we will describe the architecture of the Introspected REST APIs through
@@ -2008,6 +2082,35 @@ for client bootstraping.
 We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
 
+To hackenrews:
+Hi, author here. Some comments:
+
+
+**REST is all about evolvability by applying a uniform interface in your implementation.**.
+
+If you don't have evolvability in your API architecture don't even try to compare it to REST because these are 2 different things.
+A non evolvable API can only be compared to RPC.
+It can be great RPC but it's an RPC.
+Does it mean it's bad ? Not neceserily, it depends on the context it's used.
+But for long-term APIs, evolvability is very nice thing to have. But again, it all depends on the amount of time/money you
+want to invest for it in combination with the use case.
+However, comparing a non-evolvable JSON API and saying that it's better or equivelent than REST then this means that you don't understand what REST is.
+
+If you **do have** evolvability then my guess is that it will be either REST or GraphQL.
+If it's not one of these, please show up and tell us how you did it. Tell us what was good and what was bad of your decisions.
+It's important to share new architectural styles and common practices.
+
+Here, we propose an alternative to REST and GraphQL, Introspected REST.
+It's a new architectural style that tries to mitigate drawbacks of REST (mostly it's complexity)
+by requesting metadata/hypermedia on demand instead of mixing up everything in the same response object.
+Introspected REST is not perfect either, it does have it's own drawbacks and limitations.
+But we feel that in order to move forward to evolvable, managable, sustainable APIs, we need to levarage
+such architectures that use composable, reusable modules and serve the metadata/hypermedia on the side, on demand.
+
+Now, pleaase go on and comment, we are open to any feedback :)
+The manifesto is still on draft stage, open for suggestions/feedback/pull requests and
+it will be locked in one year from now (already got introspected.rest domain for it :) )
+
 ### The future is full of posibilities
 **How do we negotiate to the client that a resource is available through HTTP/2 Stream Server Push without documentation ?**
 That requirement would be very impractical using a REST interface because everything would have to be in the same response.
@@ -2046,7 +2149,7 @@ Final review:
 3. check links
 4. check bolds
 
-who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik
+who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik, I. Grigorik, mark nottigham, amdusen, MIKE AMUNDSEN
 
 The ratio of data/hypermedia of a resource
 
@@ -2089,3 +2192,4 @@ Add a note on unfinished RFCs
 https://www.mnot.net/blog/2012/10/29/NO_OPTIONS --- important !!
 
 say that this is hard work as REST is mentioned in HTTP RFCs !!!
+
