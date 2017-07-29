@@ -1272,8 +1272,9 @@ Examples of MicroTyes could be semantics for:
 
 Each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
 At the same time they should be generic enough or follow some specific semantics so that it's possible to be included in any Introspected API.
-The parent Media Type doesn't need to know in advance all the MicroTypes that it will use (in contrast to what rfc defines)
+The parent Media Type doesn't need to know in advance all the MicroTypes that the API designed intends to use (in contrast to what rfc defines)
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
+Instead, each MicroType should be attachable to a parent Media Type that defines such behaviour.
 
 #### 9.2.1. MicroType shims
 According to [RFC 6831](https://tools.ietf.org/html/rfc6838), section [4.1](https://tools.ietf.org/html/rfc6838#section-4.1):
