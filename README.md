@@ -1276,8 +1276,10 @@ The parent Media Type doesn't need to know in advance all the MicroTypes that th
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 Instead, each MicroType should be attachable to a parent Media Type that defines such behaviour.
 
+#### 9.2.1. Benefits of such architecture
 The benefits when leveraging such architecture are multi-fold.
 
+##### 9.2.1.1. Granular parameterization of API functionality by clients 
 First, by allowing the client and server to do the regular negotiation flow even for those sub-media-types, the communication
 between the 2 ends is parametrized to the needs of the client, down to the semantics level.
 For instance, a server might provide 3 MicroTypes for error information, each one having different representation or semantics.
@@ -1293,13 +1295,14 @@ for each API functionality, from the server's options, which eventually will lea
 MicroTypes.
 As we will see later, this is called reactive negotiation, a forgotten but still valid negotiation mechanism in HTTP protocol.
 
+##### 9.2.1.2. Reusability 
 Secondly, the MicroTypes specs and possibly implementations can be re-used by both the servers and clients.
 Instead of defining a whole Media Type, API designers will be able to include various small modules
 that extend the API functionality they way it's needed.
 
 
 
-#### 9.2.1. MicroType shims
+#### 9.2.2. MicroType shims
 We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
