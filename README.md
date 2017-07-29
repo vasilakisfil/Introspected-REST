@@ -1276,6 +1276,20 @@ The parent Media Type doesn't need to know in advance all the MicroTypes that th
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 Instead, each MicroType should be attachable to a parent Media Type that defines such behaviour.
 
+We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
+
+> Media types MAY elect to use one or more media type parameters, or
+>   some parameters may be automatically made available to the media type
+>   by virtue of being a subtype of a content type that defines a set of
+>   parameters applicable to any of its subtypes.  In either case, the
+>   names, values, and meanings of any parameters MUST be fully specified
+>   when a media type is registered in the standards tree, and SHOULD be
+>   specified as completely as possible when media types are registered
+>   in the vendor or personal trees.
+
+This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
+We will see in the next section what are the possible solutions to overcome this limitation.
+
 #### 9.2.1. Benefits of such architecture
 The benefits when leveraging such architecture are multi-fold.
 
@@ -1303,19 +1317,6 @@ that extend the API functionality they way it's needed.
 
 
 #### 9.2.2. MicroType shims
-We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
-
-> Media types MAY elect to use one or more media type parameters, or
->   some parameters may be automatically made available to the media type
->   by virtue of being a subtype of a content type that defines a set of
->   parameters applicable to any of its subtypes.  In either case, the
->   names, values, and meanings of any parameters MUST be fully specified
->   when a media type is registered in the standards tree, and SHOULD be
->   specified as completely as possible when media types are registered
->   in the vendor or personal trees.
-
-This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
-
 Another constraint of [RFC 6831](https://tools.ietf.org/html/rfc6838) is that each Media Type's primary functionality shoud be that of being media formats.
 
 >   Media types MUST function as actual media formats.  Registration of
