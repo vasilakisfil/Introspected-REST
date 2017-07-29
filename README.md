@@ -1280,7 +1280,7 @@ The benefits when leveraging such architecture are multi-fold.
 
 First, by allowing the client and server to do the regular negotiation flow even for those sub-media-types, the communication
 between the 2 ends is parametrized to the needs of the client, down to the semantics level.
-For instance, a server might provide 3 types of error information, each one optimized for different type of device.
+For instance, a server might provide 3 MicroTypes for error information, each one optimized for different type of device.
 Using proactive negotiation, the server can't be able to know in advance the needs of the client but only some of its properties.
 Even with this partial information, the server will make an arbiratry choice for the client, what it thinks best.
 By giving the client the option to negotiate parts of the API functionality, we shift the responsibility towards the client
