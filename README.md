@@ -1452,7 +1452,7 @@ according to its needs.
 
 ### 10.1 Method of introspection
 But how can the server show the available options to the client?
-Given that reactive-based negotiation has never been used, as far as we know, we will present two possible
+Given that reactive-based negotiation has never been used, to our knowledge, we will present two possible
 methods of but without being the only ones.
 
 #### 10.1.1 The established OPTIONS method
