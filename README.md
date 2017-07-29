@@ -2149,7 +2149,7 @@ Introspected REST is not perfect either, it does have it's own drawbacks and lim
 But we feel that in order to move forward to evolvable, managable, sustainable APIs, we need to levarage
 such architectures that use composable, reusable modules and serve the metadata/hypermedia on the side, on demand.
 
-Now, pleaase go on and comment, we are open to any feedback :)
+We are open to any feedback here or as a github issue/PR :)
 The manifesto is still on draft stage, open for suggestions/feedback/pull requests and
 it will be locked in one year from now (already got introspected.rest domain for it :) )
 
