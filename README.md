@@ -1449,18 +1449,41 @@ list of options to the client to choose from.
 With reactive negotiation, the client is responsible for choosing the most appropriate representation,
 according to its needs.
 
+### 10.2 MicroTypes in HTTP
+But how can the client can negotiate with the server the MicroTypes to be used ? 
+Given that reactive-based negotiation has never been used, to our knowledge, we will present a possible
+implementations of that mechanism, with the least possible changes to the HTTP protocol.
 
-### 10.1 Method of introspection
-But how can the server show the available options to the client?
-Given that reactive-based negotiation has never been used, to our knowledge, we will present two possible
-implementations of that mechanism in the HTTP protocol.
+We need to specify the following:
+1. How the client informs the server its preferred Media Types along with the MicroTypes to be used with each Media Type
+2. How the server informs the selected Media Type along with the MicroTypes
+3. How the server informs the user the order of applicability when 2 MicroTypes define similar semantics or overlap
+
+#### 10.2.1. Signaling and negotiating MicroTypes
+Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
+2 issues
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
+The Content-Type header is limited up to 128 characters so we might need another header for that.
+Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
+The communaity will choose the headers and implementation.
+
++ the profile link relation
+Surprisingly for each new link relation the 
+
+### 10.3 Method of introspection
+After the client has selected its ideal combination of MicroTypes, the client should start
+introspecting the metadata of those MicroTypes. Here, we will present two possible
+implementations of introspection in the HTTP protocol.
+
++ Identification of MicroTypes
 
 #### 10.1.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, **OPTIONS method has historically been used for getting informtation on methods supported on a specific resource**.
 
 Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231), which is a part of the HTTP RFC series, mentions that this method should be used to determine the capabilities of the server, for that particular resource so
-we feel HTTP OPTIONS is a perfect match for API introspection through reactive negotiation.
+we feel HTTP OPTIONS is a perfect match for API introspection after reactive negotiation.
 
 > The OPTIONS method requests information about the communication
 > options available for the target resource, at either the origin
@@ -1496,23 +1519,6 @@ We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and
 ### 10.2 Using new relation tyes using Web Linking's rel parameter
 
 - overloading, say about linksets.
-
-### 10.2 MicroTypes in HTTP
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
-The Content-Type header is limited up to 128 characters so we might need another header for that.
-Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
-The communaity will choose the headers and implementation.
-
-+ the profile link relation
-Surprisingly for each new link relation the 
-
-#### 10.2.1. Signaling and negotiating MicroTypes
-Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
-2 issues
-1. Root/home endpoint has multiple MicroTypes (for metadata mostly) (use the Media Type token as JSON attribute)
-2. Unexpected MicroType at any point (like updating an Object and getting an Errors object).
-3. Order of MicroTypes (JSON-LD vs JsonSchema)
-4. Identification of MicroTypes
 
 
 #### 10.3. Enhancements in HTTP
