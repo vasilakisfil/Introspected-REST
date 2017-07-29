@@ -1453,7 +1453,7 @@ according to its needs.
 ### 10.1 Method of introspection
 But how can the server show the available options to the client?
 Given that reactive-based negotiation has never been used, to our knowledge, we will present two possible
-methods of but without being the only ones.
+implementations of that mechanism in the HTTP protocol.
 
 #### 10.1.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
