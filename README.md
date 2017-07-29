@@ -1292,6 +1292,8 @@ Instead of defining a whole Media Type, API designers will be able to include va
 that extend the API functionality they way it's needed.
 
 
+
+#### 9.2.1. MicroType shims
 We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
@@ -1305,8 +1307,6 @@ We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838)
 
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 
-
-#### 9.2.1. MicroType shims
 Another constraint of [RFC 6831](https://tools.ietf.org/html/rfc6838) is that each Media Type's primary functionality shoud be that of being media formats.
 
 >   Media types MUST function as actual media formats.  Registration of
