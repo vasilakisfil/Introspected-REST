@@ -1385,7 +1385,7 @@ The way the documentation is requested and its format should be distincly define
 
 ## 10. Introspected REST applied to HTTP
 Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
-Here we will review its adaptation in HTTP protocol.
+Here we will review the challenges that are rising through its adaptation in HTTP protocol.
 
 ### 10.1 Revisiting content negotiation in HTTP
 As we have already seen, content negotiation in HTTP is achieved through `Accept` request header but it's not the
