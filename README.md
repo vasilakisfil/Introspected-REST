@@ -1279,7 +1279,7 @@ The benefits when leveraging such architecture are multi-fold.
 First, by allowing the client and server to do the regular negotiation flow even for those sub-media-types, the communication
 between the 2 ends is parametrized to the needs of the client, down to the semantics level.
 For instance, a server might provide 3 types of pagination, the client can specify what exactly needs at that time.
-Using proactive negotiation, wouldn't be able to know in advance the needs of the client but only some of its properties.
+Using proactive negotiation, the server can't be able to know in advance the needs of the client but only some of its properties.
 Even with this partial information, the server will make an arbiratry choice for the client, what it thinks best.
 By given the client the option to negotiate parts of the API functionality, we shift towards the reactive negotiation
 in which the client is responsible to select the best representation/semantics of API functionalities.
