@@ -1281,11 +1281,12 @@ between the 2 ends is parametrized to the needs of the client, down to the seman
 For instance, a server might provide 3 types of pagination, the client can specify what exactly needs at that time.
 Using proactive negotiation, the server can't be able to know in advance the needs of the client but only some of its properties.
 Even with this partial information, the server will make an arbiratry choice for the client, what it thinks best.
-By giving the client the option to negotiate parts of the API functionality, we shift towards the reactive negotiation
-in which the client is responsible to select the best representation and semantics of various, isolated, API functionalities.
+By giving the client the option to negotiate parts of the API functionality, we shift the responsibility towards the client
+to select the best representation and semantics of various, isolated, API functionalities.
 Given that the client can know much more about its needs than the server, it will make the best available choice
 for each API functionality, from the server's options, which eventually will lead to the optimized combination of
 MicroTypes.
+As we will see later, this is called reactive negotiation, a forgotten but still valid mechanism in HTTP protocol.
 
 Secondly, the MicroTypes specs and possibly implementations can be re-used by both the servers and clients.
 Instead of defining a whole Media Type, API designers will be able to include various small modules
