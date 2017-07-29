@@ -1281,7 +1281,7 @@ between the 2 ends is parametrized to the needs of the client, down to the seman
 For instance, a server might provide 3 types of pagination, the client can specify what exactly needs at that time.
 Using proactive negotiation, the server can't be able to know in advance the needs of the client but only some of its properties.
 Even with this partial information, the server will make an arbiratry choice for the client, what it thinks best.
-By given the client the option to negotiate parts of the API functionality, we shift towards the reactive negotiation
+By giving the client the option to negotiate parts of the API functionality, we shift towards the reactive negotiation
 in which the client is responsible to select the best representation/semantics of API functionalities.
 Given that the client can know much more about its needs than the server, it will make the best available choice
 for each API functionality, from the server's options, which eventually will lead to the optimized combination of
