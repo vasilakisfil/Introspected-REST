@@ -1290,7 +1290,7 @@ We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838)
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 We will see in the next section what are the possible solutions to overcome this limitation.
 
-#### 9.2.1. Benefits of such architecture
+#### 9.2.1. Benefits of MicroTypes
 The benefits when leveraging such architecture are multi-fold.
 
 ##### 9.2.1.1. Granular parameterization of API functionality by clients 
@@ -1396,6 +1396,17 @@ The way the documentation is requested and its format should be distincly define
 Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
 Here we will review the challenges that are rising through its adaptation in HTTP protocol.
 
+But how can the client can negotiate with the server the MicroTypes to be used ? 
+Given that reactive-based negotiation has never been used, to our knowledge, we will present a possible
+implementations of that mechanism, with the least possible changes to the HTTP protocol.
+
+We need to specify the following:
+1. How the client informs the server its preferred Media Types along with the MicroTypes to be used with each Media Type
+2. How the server informs the selected Media Type along with the MicroTypes
+3. How the server informs the client the order of applicability when 2 MicroTypes define similar semantics, overlap or collide
+
++ indentification/introspectiveness of MicroTypes
+
 ### 10.1 Revisiting content negotiation in HTTP
 As we have already seen, content negotiation in HTTP is achieved through `Accept` request header but it's not the
 only header which can be used by the server to determine the appropriate representation for the client.
@@ -1458,15 +1469,11 @@ list of options to the client to choose from.
 With reactive negotiation, the client is responsible for choosing the most appropriate representation,
 according to its needs.
 
-### 10.2 MicroTypes in HTTP
-But how can the client can negotiate with the server the MicroTypes to be used ? 
-Given that reactive-based negotiation has never been used, to our knowledge, we will present a possible
-implementations of that mechanism, with the least possible changes to the HTTP protocol.
+### 10.2. Runtime MicroTypes
+Runtime microtypes (like pagination or error description) will be negotiated using regular Accept/Content-Type header
 
-We need to specify the following:
-1. How the client informs the server its preferred Media Types along with the MicroTypes to be used with each Media Type
-2. How the server informs the selected Media Type along with the MicroTypes
-3. How the server informs the client the order of applicability when 2 MicroTypes define similar semantics, overlap or collide
+Introspetive Microtypes, which are identifiable, will use Options/rel
+
 
 #### 10.2.1. Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
@@ -1480,14 +1487,18 @@ The communaity will choose the headers and implementation.
 + the profile link relation
 Surprisingly for each new link relation the 
 
-### 10.3 Method of introspection
+### 10.3. Introspective MicroTypes
+
+#### 10.3.1. Signaling and negotiating MicroTypes
+
+#### 10.4 Method of introspection
 After the client has selected its ideal combination of MicroTypes, the client should start
 introspecting the metadata of those MicroTypes. Here, we will present two possible
 implementations of introspection in the HTTP protocol.
 
 + Identification of MicroTypes
 
-#### 10.1.1 The established OPTIONS method
+##### 10.4.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, **OPTIONS method has historically been used for getting informtation on methods supported on a specific resource**.
 
@@ -1525,12 +1536,12 @@ We also feel that this is also a perfect case for hosting an API's discovery for
 We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
 `/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
 
-### 10.2 Using new relation tyes using Web Linking's rel parameter
+##### 10.4.2. Using new relation tyes using Web Linking's rel parameter
 
 - overloading, say about linksets.
 
 
-#### 10.3. Enhancements in HTTP
+#### 10.5. Limitations and enhancements
 We need to do an options request everytime, performance issue.
 This can be mitigated if we emulate GraphQL/Apple and have the same Media Type for all metadata.
 But it's not part of Introspected REST, by design but can be enhanced by parent Media Type.
