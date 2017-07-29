@@ -1251,7 +1251,7 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 > --- Roy Fielding
 >
 
-Why have been talking so much about the concept of MicroTypes but what exatly are ?
+We have been talking so much about the concept of MicroTypes but what exatly are ?
 
 Currently media types act as a big monolith that clients need to understand beforehand through human involvement.
 We believe that Media Types should be broken in smaller
