@@ -1258,8 +1258,6 @@ We believe that Media Types should be broken in smaller
 reusable media types, MicroTypes, each describing very carefully a specific functionality of a modern API.
 The reasoning is that, in our experience, we have seen that different APIs and API specs define the same functionalities in similar,
 but not identical, ways.
-Client and server should still do the regular negotiation flow even for those sub-media-types, and thus
-parametrizing the communication in their needs, down to the semantics level.
 
 Examples of MicroTyes could be semantics for:
 * pagination
@@ -1276,7 +1274,25 @@ The parent Media Type doesn't need to know in advance all the MicroTypes that th
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 Instead, each MicroType should be attachable to a parent Media Type that defines such behaviour.
 
-Note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
+The benefits when leveraging such architecture are multi-fold.
+
+First, by allowing the client and server to do the regular negotiation flow even for those sub-media-types, the communication
+between the 2 ends is parametrized to the needs of the client, down to the semantics level.
+For instance, a server might provide 3 types of pagination, the client can specify what exactly needs at that time.
+Using proactive negotiation, wouldn't be able to know in advance the needs of the client but only some of its properties.
+Even with this partial information, the server will make an arbiratry choice for the client, what it thinks best.
+By given the client the option to negotiate parts of the API functionality, we shift towards the reactive negotiation
+in which the client is responsible to select the best representation/semantics of API functionalities.
+Given that the client can know much more about its needs than the server, it will make the best available choice
+for each API functionality, from the server's options, which eventually will lead to the optimized combination of
+MicroTypes.
+
+Secondly, the MicroTypes specs and possibly implementations can be re-used by both the servers and clients.
+Instead of defining a whole Media Type, API designers will be able to include various small modules
+that extend the API functionality they way it's needed.
+
+
+We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
 >   some parameters may be automatically made available to the media type
@@ -1289,8 +1305,9 @@ Note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media
 
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 
+
 #### 9.2.1. MicroType shims
-Another constraint of the same RFC is that each Media Type's primary functionality shoud be that of being media formats.
+Another constraint of [RFC 6831](https://tools.ietf.org/html/rfc6838) is that each Media Type's primary functionality shoud be that of being media formats.
 
 >   Media types MUST function as actual media formats.  Registration of
 >  things that are better thought of as a transfer encoding, as a
