@@ -1,4 +1,4 @@
-# Introspected REST
+# Introspected REST: An alternative to REST and GraphQL
 (Sliding away from Roy's `REST` model)
 
 There has been a great confusion of what a `REST` API is.
@@ -2124,7 +2124,7 @@ for client bootstraping.
 We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
 
-To hackenrews:
+To hackenrews: Introspected REST: An alternative to REST and GraphQL
 Hi, author here. Some comments:
 
 
