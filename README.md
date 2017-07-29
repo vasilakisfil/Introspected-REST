@@ -1392,7 +1392,7 @@ As we have already seen, content negotiation in HTTP is achieved through `Accept
 only header which can be used by the server to determine the appropriate representation for the client.
 `Accept-Charset`, `Accept-Encoding`, `Accept-Language` request headers can also be used.
 In practice, `User-Agent` header is also used by the server for choosing the right content for the client
-because it contains some device and agent characteristics.
+because it contains some device and agent characteristics, although it's not part of the negotiation standard headers.
 Lately even, a new draft stadard is created called [HTTP Client Hints](http://httpwg.org/http-extensions/client-hints.html)
 that extends the HTTP with new request headers which indicate device and agent characteristics.
 
