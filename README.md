@@ -1269,7 +1269,8 @@ Examples of MicroTyes could be semantics for:
 * and many more, like HTTP/2 server push for specific resources/states etc
 
 Each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
-At the same time they should be generic enough or follow some specific semantics so that it's possible to be included in any Introspected API.
+At the same time they should be generic enough or follow some specific semantics so that it's possible to be referenced parent
+Media Types targetd for Introspected APIs.
 The parent Media Type doesn't need to know in advance all the MicroTypes that the API designed intends to use
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 Instead, each MicroType should be attachable to a parent Media Type that defines such behaviour.
