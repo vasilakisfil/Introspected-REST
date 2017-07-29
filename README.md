@@ -1272,12 +1272,25 @@ Examples of MicroTyes could be semantics for:
 
 Each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
 At the same time they should be generic enough or follow some specific semantics so that it's possible to be included in any Introspected API.
-The parent Media Type doesn't need to know in advance all the MicroTypes that the API designed intends to use (in contrast to what rfc defines)
+The parent Media Type doesn't need to know in advance all the MicroTypes that the API designed intends to use
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 Instead, each MicroType should be attachable to a parent Media Type that defines such behaviour.
 
+Note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
+
+> Media types MAY elect to use one or more media type parameters, or
+>   some parameters may be automatically made available to the media type
+>   by virtue of being a subtype of a content type that defines a set of
+>   parameters applicable to any of its subtypes.  In either case, the
+>   names, values, and meanings of any parameters MUST be fully specified
+>   when a media type is registered in the standards tree, and SHOULD be
+>   specified as completely as possible when media types are registered
+>   in the vendor or personal trees.
+
+This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
+
 #### 9.2.1. MicroType shims
-According to [RFC 6831](https://tools.ietf.org/html/rfc6838), section [4.1](https://tools.ietf.org/html/rfc6838#section-4.1):
+Another constraint of the same RFC is that each Media Type's primary functionality shoud be that of being media formats.
 
 >   Media types MUST function as actual media formats.  Registration of
 >  things that are better thought of as a transfer encoding, as a
@@ -1289,22 +1302,21 @@ According to [RFC 6831](https://tools.ietf.org/html/rfc6838), section [4.1](http
 >  This requirement applies regardless of the registration tree
 >  involved.
 >
->  [RFC 6831](https://tools.ietf.org/html/rfc6838), section [4.1](https://tools.ietf.org/html/rfc6838#section-4.1)
+>  [RFC 6831](https://tools.ietf.org/html/rfc6838)
 >
 
-This paragraph lines up with our thinking: in the context of MicroTypes, the parent Media Type acts as the base media format.
+In our cocept of MicroTypes, the parent Media Type acts as the base media format.
 The details however, are defined by small components that define functionalities of different parts of the API.
 
-However what happens when we want to wrap an existing spec (like base64) as a MicroType? We definitely can't link
+We still want to preserve the "functionality" requirement in the concept of MicroTypes though.
+Imagine that we want to wrap an existing spec (like base64) as a MicroType. We definitely can't link
 to the Base64 RFC because it lacks the context of the underlying protocol (like HTTP) and Media Type with which it will be
 used.
-As a result, we need to wrap this in a "shim": link and add references to the initial spec but also define the additional
-semantics for the context that will be used.
-Such semantics should be the minimal possible, with respect to the initial specification without altering its core semantics
+As a result, we need to wrap this in a "shim": link the initial spec with references to it, explicitly say that
+this MicroType is nothing more than wrapping the spec in the context of Media Types with the necessary, additional
+semantics for it to happen and finally define those semantics.
+Of course, the additional semantics should be as minimal as possible, with respect to the initial specification and without altering its core semantics
 but enough for usage in its new context.
-
-
-Maybe self-dependent and moduled-to-be-included MicroType categories ?
 
 ### 9.3. Introspection as the engine of application state (IATEOAS)
 The idea of introspection is to be able to examine properties of a system at runtime.
@@ -1482,7 +1494,7 @@ Note that delivering problem+json (a Media Type that was never negotiated) is a 
 4. Identification of MicroTypes
 
 
-#### 10.3. Limitations of HTTP
+#### 10.3. Enhancements in HTTP
 We need to do an options request everytime, performance issue.
 This can be mitigated if we emulate GraphQL/Apple and have the same Media Type for all metadata.
 But it's not part of Introspected REST, by design but can be enhanced by parent Media Type.
