@@ -2240,3 +2240,8 @@ https://www.mnot.net/blog/2012/10/29/NO_OPTIONS --- important !!
 
 say that this is hard work as REST is mentioned in HTTP RFCs !!!
 
+
+For introduction: There is a confusion of what REST is. REST is all about evolvability (copy blog post).
+We will start by analyzing and giving concrete definitions of what REST is.
+Then we will show REST's drawbacks explaining why REST never flew off, why people have been unconciously avoiding it.
+We will propose a new model, alternative to REST. We will also present the concept of MicroTypes.
