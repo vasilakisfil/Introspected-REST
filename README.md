@@ -1466,7 +1466,7 @@ implementations of that mechanism, with the least possible changes to the HTTP p
 We need to specify the following:
 1. How the client informs the server its preferred Media Types along with the MicroTypes to be used with each Media Type
 2. How the server informs the selected Media Type along with the MicroTypes
-3. How the server informs the user the order of applicability when 2 MicroTypes define similar semantics or overlap
+3. How the server informs the client the order of applicability when 2 MicroTypes define similar semantics, overlap or collide
 
 #### 10.2.1. Signaling and negotiating MicroTypes
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
