@@ -1261,10 +1261,16 @@ The reasoning is that, in our experience, we have seen that different APIs and A
 Client and server should still do the regular negotiation flow even for those sub-media-types, and thus
 parametrizing the communication in their needs, down to the semantics level.
 
-In HTTP, semantics for pagination, querying over url (applying filters, aggregations, pagination/sorting on a resource),
-resource/assotiation inclusion in the same response, semantic/linked data, hypermedia actions (required fields, available fields),
-data types and resource scehmas but even more advaned like HTTP/2 server push for specific resources/states etc,
-each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
+Examples of MicroTyes could be semantics for:
+* pagination
+* querying over url (applying filters, aggregations, pagination/sorting on a resource),
+* resource/assotiation inclusion in the same response
+* semantic/linked data
+* hypermedia actions (required fields, available fields),
+* data types and resource scehmas
+* and many more, like HTTP/2 server push for specific resources/states etc
+
+Each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
 At the same time they should be generic enough or follow some specific semantics so that it's possible to be included in any Introspected API.
 The parent Media Type doesn't need to know in advance all the MicroTypes that it will use (in contrast to what rfc defines)
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
