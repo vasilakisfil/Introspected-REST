@@ -1253,7 +1253,7 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 
 We have been talking so much about the concept of MicroTypes but what exatly are ?
 
-Currently media types act as a big monolith that clients need to understand beforehand through human involvement.
+Currently, Media Types act as a big monolith that clients need to understand beforehand through human involvement.
 We believe that Media Types should be broken in smaller
 reusable media types, MicroTypes, each describing very carefully a specific functionality of a modern API.
 The reasoning is that, in our experience, we have seen that different APIs and API specs define the same functionalities in similar,
