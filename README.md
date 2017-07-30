@@ -1653,15 +1653,15 @@ relation type.
 >   indicated by the method definition or explicit cache controls (see
 >   Section 4.2.2 of [RFC7234]).
 >
->      Note: The original proposal for the 300 status code defined the
->      URI header field as providing a list of alternative
->      representations, such that it would be usable for 200, 300, and
->      406 responses and be transferred in responses to the HEAD method.
->      However, lack of deployment and disagreement over syntax led to
->      both URI and Alternates (a subsequent proposal) being dropped from
->      this specification.  It is possible to communicate the list using
->      a set of Link header fields [RFC5988], each with a relationship of
->      "alternate", though deployment is a chicken-and-egg problem.
+>   Note: The original proposal for the 300 status code defined the
+>   URI header field as providing a list of alternative
+>   representations, such that it would be usable for 200, 300, and
+>   406 responses and be transferred in responses to the HEAD method.
+>   However, lack of deployment and disagreement over syntax led to
+>   both URI and Alternates (a subsequent proposal) being dropped from
+>   this specification.  It is possible to communicate the list using
+>   a set of Link header fields [RFC5988], each with a relationship of
+>   "alternate", though deployment is a chicken-and-egg problem.
 >
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
