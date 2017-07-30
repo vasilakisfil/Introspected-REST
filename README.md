@@ -1542,6 +1542,7 @@ Possible problems or misses that arise from such pattern are discussed in the Li
 (media type parameters constraints, functionlity contraing, a client might want a more complex combination (
 like I am ok with MT-A if it offers paginationA AND querying B, otherwise go with MT-C).
 +add a note that this is in infant stage and the community will drive the IETF to create/alter standards for it.
++ add note about Media Type functionality taken from shims
 
 
 ### 10.3. Introspective MicroTypes
