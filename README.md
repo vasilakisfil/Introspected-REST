@@ -2453,3 +2453,5 @@ The communaity will choose the headers and implementation.
 + the profile link relation
 Surprisingly for each new link relation the 
 
+
++ I should say in the conclusion that all protocols are build upon REST so parametrizing them was a great challenge
