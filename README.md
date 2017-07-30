@@ -1603,6 +1603,9 @@ Now that we know how to fetch the MicroTypes that the server offers, we need to 
 an appropriate representation for it.
 One option is to employ a common JSON format for describing each MicroType, its url for introspection along
 with the expected Media Type its introspection representation uses.
+vale exmaple
+
+
 Another option is to have use the `Link` header, as described below.
 
 
@@ -1628,8 +1631,21 @@ is an alternative way of publishing the available MicroTypes by the server.
 > --- [RFC 5988](https://tools.ietf.org/html/rfc5988)
 >
 
-Surprisingly, [RFC 7231](https://tools.ietf.org/html/rfc7231)
-on HTTP status code 300 (Multiple Choices) that should be used for reactive negotiation along with
+[RFC 5988](https://tools.ietf.org/html/rfc5988) defines a way of publishing a set of links,
+using the `Link` header and link types. For instance,
+
+foobar.
+
+
+In our use case
+
+
+
+
+
+
+Surprisingly, [RFC 7231](https://tools.ietf.org/html/rfc7231) notes
+on HTTP status code 300 (Multiple Choices) that should it be used for reactive negotiation along with
 `Link` header to communicate the available options to the client, using the `alternate` link
 relation type.
 
@@ -1669,6 +1685,9 @@ relation type.
 
 
 #### 10.5. Limitations and enhancements
+say about breaking rfcs
+We feel that these are small breaks.
+
 We need to do an options request everytime, performance issue.
 This can be mitigated if we emulate GraphQL/Apple and have the same Media Type for all metadata.
 But it's not part of Introspected REST, by design but can be enhanced by parent Media Type.
