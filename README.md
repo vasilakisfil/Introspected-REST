@@ -1303,6 +1303,7 @@ that extend the API functionality they way it's needed.
 
 
 #### 9.2.2. MicroType shims
+feugei?
 According to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's primary functionality shoud be that of being media formats.
 
 >   Media types MUST function as actual media formats.  Registration of
@@ -1358,7 +1359,7 @@ adoptability, clarity** and possibly implementation, for both ends of the commun
 #### 9.3.2. Plain data separated from metadata
 The process of introspection **should be distinctly different** from requesting data.
 To that extend, introspection responses should not include any data but only metadata and data
-responses should not include any metadata, except possibly runtime metadata.
+responses should not include any metadata, except, possibly, runtime metadata.
 
 #### 9.3.3. Identifiable metadata of each Microtype
 Given that metadata are already separated from plain data, by being able to identify and retrieve metadata
@@ -1409,16 +1410,16 @@ The server uses all those headers as hints in order to determine the most suitab
 to be served to the client.
 
 According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this hint-based mechanism is called server-driven
-or proactive content negotiation it has been used extensively in HTTP protocol.
-In the context of MicroTypes, the client can negotiate for runtime MicroTypes,
-API functionalities that define semantics for the runtime metadata, as the Introspected REST
-defines them.
+or proactive content negotiation and it has been used extensively in HTTP protocol.
+In the context of MicroTypes and Introspected REST, through that mechanism, the client
+can negotiate for runtime MicroTypes, API functionalities that define semantics
+for the runtime metadata.
+Runtime metadata and MicroTypes should tend to appear less often because
+if anything can be introspected on the side instead of runtime, it will be
+defined as non-runtime, introspective metadata.
 
-
-However, as the manifesto says, runtime metadata tend to be much less and usually,
-introspective metadata are the big thing.
-
-it does have some drawbacks. As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes:
+Surpringly [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that reactive negotiation has
+some serious disadvantegaes:
 
 >   Proactive negotiation has serious disadvantages:
 >
@@ -1442,7 +1443,8 @@ it does have some drawbacks. As [RFC 7231](https://tools.ietf.org/html/rfc7231) 
 >
 
 In fact, from the beginnings of HTTP (since [RFC 2068](https://tools.ietf.org/html/rfc2068#section-12.2), published in 1997),
-the protocol allowed another negotiation type: agent-driven or reactive content negotiation negotiation.
+the protocol allowed another negotiation type: agent-driven or reactive content negotiation negotiation,
+that matches very well our introspective concept.
 As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes, reactive content negotiation the server provides a
 list of options to the client to choose from.
 
@@ -1467,35 +1469,80 @@ list of options to the client to choose from.
 
 With reactive negotiation, the client is responsible for choosing the most appropriate representation,
 according to its needs.
+That goes inline with Introspective REST, as the client, after receiving all the possible server options,
+negotiates for the ones that best fit to its use case.
+As the RFC notes, such negotiation has the advantage of choosing the best combination MicroTypes,
+because the client does the selection out of a predefined list that the server publishes.
 
 ### 10.2. Runtime MicroTypes
-Runtime microtypes (like pagination or error description) will be negotiated using regular Accept/Content-Type header
+Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
+of plain data.
+Such functionality could be pagination, URI  querying language, error descriptions etc.
 
-Introspetive Microtypes, which are identifiable, will use Options/rel
 
+The negitiation of runtime MicroTypes should follow the regular negotiation flow:
+The client should negotiate for the principal Media Type using the `Accept` request
+header and the `Content-Type` response header.
+However the key difference is that for each principal Media Type, it should also
+negotiate for the MicroTypes to be used with it.
+For that, we will employ the Media Type parameters, is a rarely used mechanism:
 
-#### 10.2.1. Signaling and negotiating MicroTypes
-Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
-2 issues
+>  Media types MAY elect to use one or more media type parameters, or
+>   some parameters may be automatically made available to the media type
+>   by virtue of being a subtype of a content type that defines a set of
+>   parameters applicable to any of its subtypes.  In either case, the
+>   names, values, and meanings of any parameters MUST be fully specified
+>   when a media type is registered in the standards tree, and SHOULD be
+>   specified as completely as possible when media types are registered
+>   in the vendor or personal trees.
+>
+>   Parameter names have the syntax as media type names and values:
+>
+>       parameter-name = restricted-name
+>
+> --- [RFC 6838](https://tools.ietf.org/html/rfc6838)
+>
 
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
-The Content-Type header is limited up to 128 characters so we might need another header for that.
-Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
-The communaity will choose the headers and implementation.
+An example of an imaginary Media Type with a couple of parameters is:
 
-+ the profile link relation
-Surprisingly for each new link relation the 
+```
+Accept: application/vnd.api+json; pagination=spec-a; querying=graphql;
+```
+
+In the aforementioned example, the client asks for representation of `application/vnd.api+json`,
+(which as we have seen earlier it vageuly means a vendor application that follows the semantics of `api`, in JSON representation)
+but wants the pagination to follow the semantics of `spec-a` and the querying language of `graphql`.
+
+The client should be able to even set a preference order:
+
+```
+Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi; 
+```
+Here the client shows preference to the imaginary `graphql` querying language but if that doesn't exist
+then it will accept the `jsonapi` querying language.
+It should be noted that this preference is different from a Media Type preference using the relative
+weight `q` parameter (also called quality value) as it applies to the MicroType level.
+An example with multiple Media Types could be:
+
+```
+Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi, application/vnd.api2+json; pagination=spec-a; querying=jsonapi; q=0.9
+```
+
+In this example the client shows preference to the `application/vnd.api+json` Media Type (it has default quality value of 1.0)
+with specific preferences on MicroType level, as we explained above.
+However if this Media Type is not available then it will accept the next most preferred, `application/vnd.api2+json`, by requesting
+specific MicroTypes.
 
 ### 10.3. Introspective MicroTypes
 
 #### 10.3.1. Signaling and negotiating MicroTypes
 
++ Identification of MicroTypes
 #### 10.4 Method of introspection
 After the client has selected its ideal combination of MicroTypes, the client should start
 introspecting the metadata of those MicroTypes. Here, we will present two possible
 implementations of introspection in the HTTP protocol.
 
-+ Identification of MicroTypes
 
 ##### 10.4.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
@@ -2279,4 +2326,17 @@ We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838)
 
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 We will see in the next section what are the possible solutions to overcome this limitation.
+
+
+
+Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
+2 issues
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
+The Content-Type header is limited up to 128 characters so we might need another header for that.
+Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
+The communaity will choose the headers and implementation.
+
++ the profile link relation
+Surprisingly for each new link relation the 
 
