@@ -1681,7 +1681,14 @@ relation type.
 >
 
 
+We solve the problem of having it representation/serialization-agnostic, however it limits us (+no Media Types, +use of linksets,
+feels like rel should be used for very specific, generic things and not overloaded, we are reluctant to suggest it but we
+leave the community to decide).
+
 - overloading, say about linksets, no Media Type, must be pre-defined.
+
+
++ add quote for 300 in reactive negotiation ?
 
 
 #### 10.5. Limitations and enhancements
@@ -2411,6 +2418,9 @@ For introduction: There is a confusion of what REST is. REST is all about evolva
 We will start by analyzing and giving concrete definitions of what REST is.
 Then we will show REST's drawbacks explaining why REST never flew off, why people have been unconciously avoiding it.
 We will propose a new model, alternative to REST. We will also present the concept of MicroTypes.
+
++ lately we have seen the rise of GraphQL? Say why, say in summury what it solves and why it lacks.
+Then introduce the new model.
 
 
 We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
