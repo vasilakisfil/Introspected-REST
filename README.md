@@ -1606,9 +1606,7 @@ with the expected Media Type its introspection representation uses.
 Another option is to have use the `Link` header, as described below.
 
 
-
-
-##### 10.4.2. Using new relation tyes using Web Linking's rel parameter
+### 10.4.2. Using new relation tyes using Web Linking's rel parameter
 Regadless if `HTTP OPTIONS` is used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
 is an alternative way of publishing the available MicroTypes by the server.
 
