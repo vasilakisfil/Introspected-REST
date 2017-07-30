@@ -1482,7 +1482,7 @@ Such functionality could be pagination, URI  querying language, error descriptio
 
 The negotiation of runtime MicroTypes should follow the regular negotiation flow:
 The client should negotiate for the principal Media Type using the `Accept` request
-header and the `Content-Type` response header.
+header and the server responds with `Content-Type` response header, denoting the selected representation.
 However the key difference is that for each principal Media Type, it should also
 negotiate for the MicroTypes to be used with it.
 For that, we will employ the Media Type parameters, is a rarely used mechanism:
