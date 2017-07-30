@@ -1276,20 +1276,6 @@ The parent Media Type doesn't need to know in advance all the MicroTypes that th
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 Instead, each MicroType should be attachable to a parent Media Type that defines such behaviour.
 
-We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
-
-> Media types MAY elect to use one or more media type parameters, or
->   some parameters may be automatically made available to the media type
->   by virtue of being a subtype of a content type that defines a set of
->   parameters applicable to any of its subtypes.  In either case, the
->   names, values, and meanings of any parameters MUST be fully specified
->   when a media type is registered in the standards tree, and SHOULD be
->   specified as completely as possible when media types are registered
->   in the vendor or personal trees.
-
-This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
-We will see in the next section what are the possible solutions to overcome this limitation.
-
 #### 9.2.1. Benefits of MicroTypes
 The benefits when leveraging such architecture are multi-fold.
 
@@ -1335,15 +1321,19 @@ Another constraint of [RFC 6831](https://tools.ietf.org/html/rfc6838) is that ea
 In our cocept of MicroTypes, the parent Media Type acts as the base media format.
 The details however, are defined by small components that define functionalities of different parts of the API.
 
-We still want to preserve the "functionality" requirement in the concept of MicroTypes though.
-Imagine that we want to wrap an existing spec (like base64) as a MicroType. We definitely can't link
-to the Base64 RFC because it lacks the context of the underlying protocol (like HTTP) and Media Type with which it will be
+We still want to preserve the "functionality" requirement in the concept of MicroTypes, however such functionality
+should be in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
+Imagine that we want to use an existing spec as a MicroType.
+We cannot create a MicroType out of it with just a reference
+to the original spec because it lacks the context of the underlying protocol (like HTTP) and Media Type with which it will be
 used.
-As a result, we need to wrap this in a "shim": link the initial spec with references to it, explicitly say that
-this MicroType is nothing more than wrapping the spec in the context of Media Types with the necessary, additional
-semantics for it to happen and finally define those semantics.
-Of course, the additional semantics should be as minimal as possible, with respect to the initial specification and without altering its core semantics
+It also lacks information about the requirements of the parent Media Type and the compatability with other MicroTypes.
+As a result, we need to extend the original spec with the necessary semantics, additional, semantics in the context
+of Media Types.
+Those semantics should be as minimal as possible, with respect to the initial specification and without altering its core semantics
 but enough for usage in its new context.
+When this method is followed, the new MicroType is called a "shim" of the original spec.
+
 
 ### 9.3. Introspection as the engine of application state (IATEOAS)
 The idea of introspection is to be able to examine properties of a system at runtime.
@@ -2265,3 +2255,19 @@ For introduction: There is a confusion of what REST is. REST is all about evolva
 We will start by analyzing and giving concrete definitions of what REST is.
 Then we will show REST's drawbacks explaining why REST never flew off, why people have been unconciously avoiding it.
 We will propose a new model, alternative to REST. We will also present the concept of MicroTypes.
+
+
+We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
+
+> Media types MAY elect to use one or more media type parameters, or
+>   some parameters may be automatically made available to the media type
+>   by virtue of being a subtype of a content type that defines a set of
+>   parameters applicable to any of its subtypes.  In either case, the
+>   names, values, and meanings of any parameters MUST be fully specified
+>   when a media type is registered in the standards tree, and SHOULD be
+>   specified as completely as possible when media types are registered
+>   in the vendor or personal trees.
+
+This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
+We will see in the next section what are the possible solutions to overcome this limitation.
+
