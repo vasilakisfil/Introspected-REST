@@ -1303,7 +1303,7 @@ that extend the API functionality they way it's needed.
 
 
 #### 9.2.2. MicroType shims
-Another constraint of [RFC 6831](https://tools.ietf.org/html/rfc6838) is that each Media Type's primary functionality shoud be that of being media formats.
+According to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's primary functionality shoud be that of being media formats.
 
 >   Media types MUST function as actual media formats.  Registration of
 >  things that are better thought of as a transfer encoding, as a
