@@ -1485,7 +1485,7 @@ The client should negotiate for the principal Media Type using the `Accept` requ
 header and the server responds with `Content-Type` response header, denoting the selected representation.
 However the key difference is that for each principal Media Type, it should also
 negotiate for the MicroTypes to be used with it.
-For that, we will employ the Media Type parameters, is a rarely used mechanism:
+For that, we will employ the Media Type parameters, a rarely used mechanism:
 
 >  Media types MAY elect to use one or more media type parameters, or
 >   some parameters may be automatically made available to the media type
