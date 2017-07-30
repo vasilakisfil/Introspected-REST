@@ -1480,7 +1480,7 @@ of plain data.
 Such functionality could be pagination, URI  querying language, error descriptions etc.
 
 
-The negitiation of runtime MicroTypes should follow the regular negotiation flow:
+The negotiation of runtime MicroTypes should follow the regular negotiation flow:
 The client should negotiate for the principal Media Type using the `Accept` request
 header and the `Content-Type` response header.
 However the key difference is that for each principal Media Type, it should also
