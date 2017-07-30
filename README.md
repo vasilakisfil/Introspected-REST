@@ -1535,7 +1535,7 @@ specific MicroTypes.
 
 If the server can provide only the less preferred Media Type with the less preferred quering it would answer:
 ```
-Accept: application/vnd.api2+json; pagination=spec-a; querying=graphql
+Content-Type: application/vnd.api2+json; pagination=spec-a; querying=graphql
 ```
 
 Possible problems or misses that arise from such pattern are discussed in the Limitations and enhancements section.
