@@ -1405,11 +1405,20 @@ In practice, `User-Agent` header is also used by the server for choosing the rig
 because it contains some device and agent characteristics, although it's not part of the negotiation standard headers.
 Lately even, a new draft stadard is created called [HTTP Client Hints](http://httpwg.org/http-extensions/client-hints.html)
 that extends the HTTP with new request headers which indicate device and agent characteristics.
-
 The server uses all those headers as hints in order to determine the most suitable representation of the content
 to be served to the client.
-This hint-based mechanism is called server-driven or proactive content negotiation and although it is used extensively
-by the web now, it does have some drawbacks. As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes:
+
+According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this hint-based mechanism is called server-driven
+or proactive content negotiation it has been used extensively in HTTP protocol.
+In the context of MicroTypes, the client can negotiate for runtime MicroTypes,
+API functionalities that define semantics for the runtime metadata, as the Introspected REST
+defines them.
+
+
+However, as the manifesto says, runtime metadata tend to be much less and usually,
+introspective metadata are the big thing.
+
+it does have some drawbacks. As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes:
 
 >   Proactive negotiation has serious disadvantages:
 >
