@@ -1525,7 +1525,7 @@ weight `q` parameter (also called quality value) as it applies to the MicroType 
 An example with multiple Media Types could be:
 
 ```
-Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi, application/vnd.api2+json; pagination=spec-a; querying=jsonapi; q=0.9
+Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi, application/vnd.api2+json; pagination=spec-a; querying=jsonapi; querying=jsonapi; q=0.9
 ```
 
 In this example the client shows preference to the `application/vnd.api+json` Media Type (it has default quality value of 1.0)
@@ -1533,22 +1533,38 @@ with specific preferences on MicroType level, as we explained above.
 However if this Media Type is not available then it will accept the next most preferred, `application/vnd.api2+json`, by requesting
 specific MicroTypes.
 
+If the server can provide only the less preferred Media Type with the less preferred quering it would answer:
+```
+Accept: application/vnd.api2+json; pagination=spec-a; querying=graphql
+```
+
+Possible problems or misses that arise from such pattern are discussed in the Limitations and enhancements section.
+(media type parameters constraints, functionlity contraing, a client might want a more complex combination (
+like I am ok with MT-A if it offers paginationA AND querying B, otherwise go with MT-C).
++add a note that this is in infant stage and the community will drive the IETF to create/alter standards for it.
+
+
 ### 10.3. Introspective MicroTypes
+Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
+of plain data.
+MicroTypes that define semantics of functionality that does not depend on runtime data but instead are expected to be
+introspected should employ reactive negotiation. 
+Such functionality could be pagination, URI  querying language, error descriptions etc.
 
-#### 10.3.1. Signaling and negotiating MicroTypes
+The question though is how can the server advertise the availability of MicroTypes for the client
+to introspect, in a representation-agnostic way.
+Moreover, the server should publish the mechanism (usually a url) that the client can use in order
+to introspect the selected MicroTypes.
+To our knowledge, employing reactive negotiation has not been used since today, at least in the protol level.
+Here, we suggest to ways of dealing with it.
 
-+ Identification of MicroTypes
-#### 10.4 Method of introspection
-After the client has selected its ideal combination of MicroTypes, the client should start
-introspecting the metadata of those MicroTypes. Here, we will present two possible
-implementations of introspection in the HTTP protocol.
 
-
-##### 10.4.1 The established OPTIONS method
+### 10.4.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, **OPTIONS method has historically been used for getting informtation on methods supported on a specific resource**.
 
-Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231), which is a part of the HTTP RFC series, mentions that this method should be used to determine the capabilities of the server, for that particular resource so
+Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231), which is a part of the HTTP RFC series,
+mentions that this method should be used to determine the capabilities of the server, for that particular resource so
 we feel HTTP OPTIONS is a perfect match for API introspection after reactive negotiation.
 
 > The OPTIONS method requests information about the communication
@@ -1578,13 +1594,80 @@ to the root url.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-We also feel that this is also a perfect case for hosting an API's discovery for available resources capabilities.
+However, we feel that this is the perfect case for hosting an API's discovery for available capabilities.
 We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
-`/` for listing all API's capabilities for all resources, as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
+`/` for listing all API's capabilities through MicroTypes for all resources,
+as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
+
+Now that we know how to fetch the MicroTypes that the server offers, we need to find
+an appropriate representation for it.
+One option is to employ a common JSON format for describing each MicroType, its url for introspection along
+with the expected Media Type its introspection representation uses.
+Another option is to have use the `Link` header, as described below.
+
+
+
 
 ##### 10.4.2. Using new relation tyes using Web Linking's rel parameter
+Regadless if `HTTP OPTIONS` is used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
+is an alternative way of publishing the available MicroTypes by the server.
 
-- overloading, say about linksets.
+>  A means of indicating the relationships between resources on the Web,
+>   as well as indicating the type of those relationships, has been
+>   available for some time in HTML [W3C.REC-html401-19991224], and more
+>   recently in Atom [RFC4287].  These mechanisms, although conceptually
+>   similar, are separately specified.  However, links between resources
+>   need not be format specific; it can be useful to have typed links
+>   that are independent of their serialisation, especially when a
+>   resource has representations in multiple formats.
+>
+>   To this end, this document defines a framework for typed links that
+>   isn't specific to a particular serialisation or application.  It does
+>   so by redefining the link relation registry established by Atom to
+>   have a broader domain, and adding to it the relations that are
+>   defined by HTML.
+>
+> --- [RFC 5988](https://tools.ietf.org/html/rfc5988)
+>
+
+Surprisingly, [RFC 7231](https://tools.ietf.org/html/rfc7231)
+on HTTP status code 300 (Multiple Choices) that should be used for reactive negotiation along with
+`Link` header to communicate the available options to the client, using the `alternate` link
+relation type.
+
+>  The 300 (Multiple Choices) status code indicates that the target
+>   resource has more than one representation, each with its own more
+>   specific identifier, and information about the alternatives is being
+>   provided so that the user (or user agent) can select a preferred
+>   representation by redirecting its request to one or more of those
+>   identifiers.  In other words, the server desires that the user agent
+>   engage in reactive negotiation to select the most appropriate
+>   representation(s) for its needs (Section 3.4). (...)
+>
+>   For request methods other than HEAD, the server SHOULD generate a
+>   payload in the 300 response containing a list of representation
+>   metadata and URI reference(s) from which the user or user agent can
+>   choose the one most preferred. (...)
+>
+>   A 300 response is cacheable by default; i.e., unless otherwise
+>   indicated by the method definition or explicit cache controls (see
+>   Section 4.2.2 of [RFC7234]).
+>
+>      Note: The original proposal for the 300 status code defined the
+>      URI header field as providing a list of alternative
+>      representations, such that it would be usable for 200, 300, and
+>      406 responses and be transferred in responses to the HEAD method.
+>      However, lack of deployment and disagreement over syntax led to
+>      both URI and Alternates (a subsequent proposal) being dropped from
+>      this specification.  It is possible to communicate the list using
+>      a set of Link header fields [RFC5988], each with a relationship of
+>      "alternate", though deployment is a chicken-and-egg problem.
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
+
+- overloading, say about linksets, no Media Type, must be pre-defined.
 
 
 #### 10.5. Limitations and enhancements
@@ -2326,6 +2409,8 @@ We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838)
 
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 We will see in the next section what are the possible solutions to overcome this limitation.
+
++ Media Type parameters
 
 
 
