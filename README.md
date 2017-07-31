@@ -1565,7 +1565,7 @@ To our knowledge, employing reactive negotiation has not been used since today, 
 Here, we suggest to ways of dealing with it.
 
 
-### 10.4.1 The established OPTIONS method
+#### 10.4.1 The established OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, OPTIONS method has historically been used for getting informtation on methods supported on a specific resource.
 
@@ -1612,7 +1612,7 @@ vale exmaple
 Another option is to have use the `Link` header, as described below.
 
 
-### 10.4.2. Using new relation tyes using Web Linking's rel parameter
+#### 10.4.2. Using new relation tyes using Web Linking's rel parameter
 Regadless if HTTP OPTIONS is used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
 is an alternative way of publishing the available MicroTypes by the server.
 
@@ -1694,7 +1694,7 @@ leave the community to decide).
 + add quote for 300 in reactive negotiation ?
 
 
-#### 10.5. Limitations and enhancements
+### 10.5. Limitations
 say about breaking rfcs
 We feel that these are small breaks.
 
