@@ -1449,7 +1449,7 @@ some serious disadvanteges:
 In fact, from the beginnings of HTTP (since [RFC 2068](https://tools.ietf.org/html/rfc2068#section-12.2), published in 1997),
 the protocol allowed another negotiation type: agent-driven or reactive content negotiation negotiation,
 that matches very well our introspective concept.
-As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes, reactive content negotiation the server provides a
+As [RFC 7231](https://tools.ietf.org/html/rfc7231) notes, in reactive content negotiation the server provides a
 list of options to the client to choose from.
 
 >  With reactive negotiation (a.k.a., agent-driven negotiation),
