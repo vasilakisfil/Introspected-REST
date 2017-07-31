@@ -1569,10 +1569,6 @@ Here, we suggest to ways of dealing with it.
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, OPTIONS method has historically been used for getting informtation on methods supported on a specific resource.
 
-Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231),
-mentions that this method should be used to determine the capabilities of the server, for that particular resource so
-we feel HTTP OPTIONS is a perfect match for API introspection after reactive negotiation.
-
 According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this method should be used to
 determine the capabilities of the server for the interested resource URL:
 
