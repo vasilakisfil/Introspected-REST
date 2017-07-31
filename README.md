@@ -1573,6 +1573,9 @@ Specifically, the [RFC 7231](https://tools.ietf.org/html/rfc7231),
 mentions that this method should be used to determine the capabilities of the server, for that particular resource so
 we feel HTTP OPTIONS is a perfect match for API introspection after reactive negotiation.
 
+According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this method should be used to
+determine the capabilities of the server for the interested resource URL:
+
 > The OPTIONS method requests information about the communication
 > options available for the target resource, at either the origin
 > server or an intervening intermediary.  This method allows a client
@@ -1582,9 +1585,6 @@ we feel HTTP OPTIONS is a perfect match for API introspection after reactive neg
 >
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
-
-As the RFC notes, the OPTIONS request should not imply any specific resource action and
-as a result should return all the available capabilities for that resource, for all actions.
 
 The same RFC mentions that there isn't any practical use of sending an OPTIONS request
 to the root url.
@@ -1600,7 +1600,8 @@ to the root url.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-However, we feel that this is the perfect case for hosting an API's discovery for available capabilities.
+However, we feel that this is the perfect case for hosting an API's discovery for available capabilities using
+reactive negotiation.
 We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
 `/` for listing all API's capabilities through MicroTypes for all resources,
 as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
