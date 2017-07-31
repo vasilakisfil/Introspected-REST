@@ -1295,33 +1295,15 @@ for each API functionality, from the server's options, which eventually will lea
 MicroTypes.
 As we will see later, this is called reactive negotiation, a forgotten but still valid negotiation mechanism in HTTP protocol.
 
-##### 9.2.1.2. Reusability 
+##### 9.2.1.2. Reusability
 Secondly, the MicroTypes specs and possibly implementations can be re-used by both the servers and clients.
 Instead of defining a whole Media Type, API designers will be able to include various small modules
 that extend the API functionality they way it's needed.
-
+We firmly believe that once the community defines a number of MicroTypes, it will be much easier for an API designer
+to design a new API by reusing the MicroTypes she thinks fit best to her needs.
 
 
 #### 9.2.2. MicroType shims
-feugei?
-According to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's primary functionality shoud be that of being media formats.
-
->   Media types MUST function as actual media formats.  Registration of
->  things that are better thought of as a transfer encoding, as a
->  charset, or as a collection of separate entities of another type, is
->  not allowed.  For example, although applications exist to decode the
->  base64 transfer encoding [RFC2045], base64 cannot be registered as a
->  media type.
->
->  This requirement applies regardless of the registration tree
->  involved.
->
->  [RFC 6831](https://tools.ietf.org/html/rfc6838)
->
-
-In our cocept of MicroTypes, the parent Media Type acts as the base media format.
-The details however, are defined by small components that define functionalities of different parts of the API.
-
 We still want to preserve the "functionality" requirement in the concept of MicroTypes, however such functionality
 should be in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
 Imagine that we want to use an existing spec as a MicroType.
@@ -2425,7 +2407,7 @@ We will propose a new model, alternative to REST. We will also present the conce
 + lately we have seen the rise of GraphQL? Say why, say in summury what it solves and why it lacks.
 Then introduce the new model.
 
-
+llllllimitations
 We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
@@ -2440,7 +2422,23 @@ We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838)
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 We will see in the next section what are the possible solutions to overcome this limitation.
 
-+ Media Type parameters
+According to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's primary functionality shoud be that of being media formats.
+
+>   Media types MUST function as actual media formats.  Registration of
+>  things that are better thought of as a transfer encoding, as a
+>  charset, or as a collection of separate entities of another type, is
+>  not allowed.  For example, although applications exist to decode the
+>  base64 transfer encoding [RFC2045], base64 cannot be registered as a
+>  media type.
+>
+>  This requirement applies regardless of the registration tree
+>  involved.
+>
+>  [RFC 6831](https://tools.ietf.org/html/rfc6838)
+>
+
+In our cocept of MicroTypes, the parent Media Type acts as the base media format.
+The details however, are defined by small components that define functionalities of different parts of the API.
 
 
 
