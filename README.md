@@ -1561,7 +1561,7 @@ to introspect, in a representation-agnostic way.
 Ideally we would like this to happen in the protocol level, in HTTP.
 Moreover, the server should publish the mechanism (usually a url) that the client can use in order
 to introspect the selected MicroTypes.
-To our knowledge, employing reactive negotiation has not been used since today, at least in the protol level.
+To our knowledge, employing reactive negotiation has not been used since today, at least in the protocol level.
 Here, we suggest to ways of dealing with it.
 
 
