@@ -1183,7 +1183,7 @@ yet have all of them on demand and separated by the actual data.
 >
 
 In the following section we will describe our new architectural style based on a model for Networked APIs that goes beyond `REST`.
-The model itself steps on initial Roy's `REST` model but with the difference that instead of providing resource hypermedia at
+The model itself steps on Roy's initial `REST` model but with the difference that instead of providing resource hypermedia at
 runtime, **it provides them on the side, only if requested**.
 Hence, by keeping the _uniform interface_ the derived 3 out of 4 REST constraints that Roy defined still exist in this model:
 _identification of resources_; _manipulation of resources through representations_ and _self-descriptive messages_.
