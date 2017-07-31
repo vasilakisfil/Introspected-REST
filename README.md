@@ -1570,7 +1570,7 @@ The server can describe the meta-data of a resource in the response body of the 
 In fact, OPTIONS method has historically been used for getting informtation on methods supported on a specific resource.
 
 According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this method should be used to
-determine the capabilities of the server for the interested resource URL:
+determine the capabilities of the server for the targeted resource:
 
 > The OPTIONS method requests information about the communication
 > options available for the target resource, at either the origin
