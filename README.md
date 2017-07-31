@@ -1321,7 +1321,7 @@ The idea of introspection is to be able to examine properties of a system at run
 In the case of Introspected REST, **introspection defines a process for a client to be able to introspect
 the API's, resource's, action's or even object's metadata at runtime**.
 Through those metadata, server provides all the available states, manipulation actions as well as the available transitions.
-The implementation of the process is up to the API designer although usually a REST interface even for each MicroType's metadata is a wise choise.
+The implementation of the process is up to the API designer although usually a RESTish interface even for each MicroType's metadata is a wise choise.
 In any case, we would like to point out some key properties that should appear on any introspection process.
 
 #### 9.3.1. Composability over monoliths
