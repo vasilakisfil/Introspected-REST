@@ -1553,11 +1553,12 @@ like I am ok with MT-A if it offers paginationA AND querying B, otherwise go wit
 Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
 of plain data.
 MicroTypes that define semantics of functionality that does not depend on runtime data but instead are expected to be
-introspected should employ reactive negotiation. 
+introspected should employ reactive negotiation.
 Such functionality could be pagination, URI  querying language, error descriptions etc.
 
 The question though is how can the server advertise the availability of MicroTypes for the client
 to introspect, in a representation-agnostic way.
+Ideally we would like this to happen in the protocol level, in HTTP.
 Moreover, the server should publish the mechanism (usually a url) that the client can use in order
 to introspect the selected MicroTypes.
 To our knowledge, employing reactive negotiation has not been used since today, at least in the protol level.
