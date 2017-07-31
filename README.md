@@ -1304,18 +1304,16 @@ to design a new API by reusing the MicroTypes she thinks fit best to her needs.
 
 
 #### 9.2.2. MicroType shims
-We still want to preserve the "functionality" requirement in the concept of MicroTypes, however such functionality
-should be in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
-Imagine that we want to use an existing spec as a MicroType.
+Imagine that we want to use an existing spec as a MicroType, like [JSON Schema](https://tools.ietf.org/html/draft-wright-json-schema-validation).
 We cannot create a MicroType out of it with just a reference
 to the original spec because it lacks the context of the underlying protocol (like HTTP) and Media Type with which it will be
 used.
 It also lacks information about the requirements of the parent Media Type and the compatability with other MicroTypes.
-As a result, we need to extend the original spec with the necessary semantics, additional, semantics in the context
+Instead, we need to extend the original spec with the necessary , additional, semantics in the context
 of Media Types.
 Those semantics should be as minimal as possible, with respect to the initial specification and without altering its core semantics
 but enough for usage in its new context.
-When this method is followed, the new MicroType is called a "shim" of the original spec.
+When this method is followed, the new MicroType is called a "wrapper" or a "shim" of the original spec.
 
 
 ### 9.3. Introspection as the engine of application state (IATEOAS)
@@ -2440,6 +2438,9 @@ According to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's p
 In our cocept of MicroTypes, the parent Media Type acts as the base media format.
 The details however, are defined by small components that define functionalities of different parts of the API.
 
+We still want to preserve the "functionality" requirement in the concept of MicroTypes, however such functionality
+should be in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
+llllllimitations
 
 
 Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
