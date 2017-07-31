@@ -1309,7 +1309,7 @@ We cannot create a MicroType out of it with just a reference
 to the original spec because it lacks the context of the underlying protocol (like HTTP) and Media Type with which it will be
 used.
 It also lacks information about the requirements of the parent Media Type and the compatability with other MicroTypes.
-Instead, we need to extend the original spec with the necessary , additional, semantics in the context
+Instead, we need to extend the original spec with the necessary, additional, semantics in the context
 of Media Types.
 Those semantics should be as minimal as possible, with respect to the initial specification and without altering its core semantics
 but enough for usage in its new context.
