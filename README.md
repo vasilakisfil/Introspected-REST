@@ -1395,8 +1395,8 @@ to be served to the client.
 
 According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this hint-based mechanism is called server-driven
 or proactive content negotiation and it has been used extensively in HTTP protocol.
-In the context of MicroTypes and Introspected REST, through that mechanism, the client
-can negotiate for [runtime MicroTypes](): API functionalities that define semantics
+In the context of MicroTypes and Introspected REST, the client
+can negotiate for [runtime MicroTypes]() through that mechanism: API functionalities that define semantics
 for the runtime metadata.
 This type of MicroTypes, should tend to appear less often because
 if anything can be introspected on the side instead of runtime, it will be
