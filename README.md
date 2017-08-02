@@ -1283,7 +1283,7 @@ The benefits when leveraging such architecture are multi-fold.
 First, by allowing the client and server to do the regular negotiation flow even for those sub-media-types, the communication
 between the 2 ends is parametrized to the needs of the client, down to the semantics level.
 For instance, a server might provide 3 MicroTypes for error information, each one having different representation or semantics.
-By letting the server to pick the appropriate MicroType for the client by analyzing the client's incoming request,
+By letting the server to decide the appropriate MicroType for the client by analyzing the client's incoming request,
 might not be efficient as the client can only send a part of its properties through the request, for various reasons like privacy concerns and performance,
 and thus the server has partial knowledge of the client's state and properties.
 The server has to make an arbiratry choice for the client, what it thinks it's thinks best, using this partial knowledge.
