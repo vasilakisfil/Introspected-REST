@@ -1272,7 +1272,7 @@ Examples of MicroTyes could be semantics for:
 Each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
 At the same time they should be generic enough or follow some specific semantics so that it's possible to be referenced parent
 Media Types targetd for Introspected APIs.
-The parent Media Type doesn't need to know in advance all the MicroTypes that the API designed intends to use
+The parent Media Type doesn't need to know in advance all the MicroTypes that the API designer intends to use
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
 Instead, each MicroType should be attachable to a parent Media Type that defines introspected behaviour.
 
@@ -2456,3 +2456,7 @@ Surprisingly for each new link relation the
 
 
 + I should say in the conclusion that all protocols are build upon REST so parametrizing them was a great challenge
+
+
++ say that emulating Machine2Machine communication with what the browser/human does when visiting a web page is a wrong approach
+Machines can be more powerful, smarter an decisive if we program them correctly.
