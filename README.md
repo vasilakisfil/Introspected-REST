@@ -1613,7 +1613,7 @@ vale exmaple
 Another option is to have use the `Link` header, as described below.
 
 
-#### 10.4.2. Using new relation tyes using Web Linking's rel parameter
+#### 10.4.2. Provide link relation types through Link header
 Regadless if HTTP OPTIONS is used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
 is an alternative way of publishing the available MicroTypes by the server.
 
@@ -1686,6 +1686,7 @@ feels like rel should be used for very specific, generic things and not overload
 leave the community to decide).
 
 - overloading, say about linksets, no Media Type, must be pre-defined.
++ the rfc says "they only describe how the current context is related to another resource" so maybe not the right way?
 
 
 + add quote for 300 in reactive negotiation ?
