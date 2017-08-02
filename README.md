@@ -1279,7 +1279,7 @@ Instead, each MicroType should be attachable to a parent Media Type that defines
 #### 9.2.1. Benefits of MicroTypes
 The benefits when leveraging such architecture are multi-fold.
 
-##### 9.2.1.1. Granular parameterization of API functionality by clients 
+##### 9.2.1.1. Granular parameterization of API functionality by clients
 First, by allowing the client and server to do the regular negotiation flow even for those sub-media-types, the communication
 between the 2 ends is parametrized to the needs of the client, down to the semantics level.
 For instance, a server might provide 3 MicroTypes for error information, each one having different representation or semantics.
@@ -1371,7 +1371,7 @@ machine to use the API.
 Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
 Here we will review the challenges that are rising through its adaptation in HTTP protocol.
 
-But how can the client can negotiate with the server the MicroTypes to be used ? 
+But how can the client can negotiate with the server the MicroTypes to be used ?
 Given that reactive-based negotiation has never been used, to our knowledge, we will present a possible
 implementations of that mechanism, with the least possible changes to the HTTP protocol.
 
@@ -1395,8 +1395,8 @@ to be served to the client.
 
 According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this hint-based mechanism is called server-driven
 or proactive content negotiation and it has been used extensively in HTTP protocol.
-In the context of MicroTypes and Introspected REST, the client
-can negotiate for [runtime MicroTypes]() through that mechanism: API functionalities that define semantics
+In the context of MicroTypes and Introspected REST, using this mechanism, the client
+can negotiate for [runtime MicroTypes](): API functionalities that define semantics
 for the runtime metadata.
 This type of MicroTypes, should tend to appear less often because
 if anything can be introspected on the side instead of runtime, it will be
@@ -1500,7 +1500,7 @@ but wants the pagination to follow the semantics of `spec-a` and the querying la
 The client should be able to even set a preference order:
 
 ```
-Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi; 
+Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi;
 ```
 Here the client shows preference to the imaginary `graphql` querying language but if that doesn't exist
 then it will accept the `jsonapi` querying language.
@@ -1531,21 +1531,39 @@ like I am ok with MT-A if it offers paginationA AND querying B, otherwise go wit
 
 ### 10.3. Introspective MicroTypes
 Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
-of plain data.
+of plain data, like pagination.
 MicroTypes that define semantics of functionality that does not depend on runtime data but instead are expected to be
 introspected should employ reactive negotiation.
-Such functionality could be pagination, URI  querying language, error descriptions etc.
 
 The question though is how can the server advertise the availability of MicroTypes for the client
 to introspect, in a representation-agnostic way.
-Ideally we would like this to happen in the protocol level, in HTTP.
-Moreover, the server should publish the mechanism (usually a url) that the client can use in order
-to introspect the selected MicroTypes.
-To our knowledge, employing reactive negotiation has not been used since today, at least in the protocol level.
-Here, we suggest to ways of dealing with it.
+The HTTP protocol doesn't say much about this type of negotiation, other than the status code when receiving
+the list with all the available options:
+
+>  The 300 (Multiple Choices) status code indicates that the target
+>   resource has more than one representation, each with its own more
+>   specific identifier, and information about the alternatives is being
+>   provided so that the user (or user agent) can select a preferred
+>   representation by redirecting its request to one or more of those
+>   identifiers.  In other words, the server desires that the user agent
+>   engage in reactive negotiation to select the most appropriate
+>   representation(s) for its needs (Section 3.4). (...)
+>
+>   For request methods other than HEAD, the server SHOULD generate a
+>   payload in the 300 response containing a list of representation
+>   metadata and URI reference(s) from which the user or user agent can
+>   choose the one most preferred. (...)
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
+Ideally we would like to inform the client for all possible option through HTTP instead of employing a serialization format.
+To our knowledge, reactive negotiation hasn't been used before.
+Here, we suggest 2 different implementation solitions for it.
 
 
-#### 10.4.1 The established OPTIONS method
+
+#### 10.4.1 The HTTP OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
 In fact, OPTIONS method has historically been used for getting informtation on methods supported on a specific resource.
 
@@ -1561,6 +1579,10 @@ determine the capabilities of the server for the targeted resource:
 >
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
+
+The OPTIONS method could be used for the server to provide a list of available introspective MicroTypes
+and let the client choose what it thinks best.
+
 
 The same RFC mentions that there isn't any practical use of sending an OPTIONS request
 to the root url.
@@ -1579,8 +1601,7 @@ to the root url.
 However, we feel that this is the perfect case for hosting an API's discovery for available capabilities using
 reactive negotiation.
 We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
-`/` for listing all API's capabilities through MicroTypes for all resources,
-as [IATEOAS notes](#934-discovery-of-api-resources-and-capabilities).
+`/` for listing all API's capabilities through MicroTypes for all resources.
 
 Now that we know how to fetch the MicroTypes that the server offers, we need to find
 an appropriate representation for it.
@@ -1645,10 +1666,6 @@ relation type.
 >   payload in the 300 response containing a list of representation
 >   metadata and URI reference(s) from which the user or user agent can
 >   choose the one most preferred. (...)
->
->   A 300 response is cacheable by default; i.e., unless otherwise
->   indicated by the method definition or explicit cache controls (see
->   Section 4.2.2 of [RFC7234]).
 >
 >   Note: The original proposal for the 300 status code defined the
 >   URI header field as providing a list of alternative
