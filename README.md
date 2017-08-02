@@ -1235,7 +1235,7 @@ If hypermedia is links and actions, then what is metadata ?
 
 Metadata are information about the resource that is not related with the data, including hypermedia.
 In essence, metadata is a superset of hypermedia and it's crucial for the client
-to understand API's responses and access the API's capabilities and manipulate the resources.
+to understand API's responses, access the API's capabilities and manipulate the resources.
 
 Metadata could be **API-specific, resource-specific, action-specific or even object-specific**.
 There could also be different kinds of metadata: runtime (i.e. pagination information), structural (i.e. data types of a resource object),
