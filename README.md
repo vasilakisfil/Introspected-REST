@@ -1454,7 +1454,7 @@ list of options to the client to choose from.
 With reactive negotiation, the client is responsible for choosing the most appropriate representation,
 according to its needs.
 That goes inline with Introspective REST, as the client, after receiving all the possible server options,
-negotiates for the ones that best fit to its use case.
+uses the ones that best fit to its use case.
 As the RFC notes, such negotiation has the advantage of choosing the best combination of MicroTypes,
 because the client does the selection out of a predefined list that the server publishes.
 
