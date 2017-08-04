@@ -1534,10 +1534,8 @@ like I am ok with MT-A if it offers paginationA AND querying B, otherwise go wit
 
 
 ### 10.3. Introspective MicroTypes
-Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
-of plain data, like pagination.
 MicroTypes that define semantics of functionality that does not depend on runtime data but instead are expected to be
-introspected should employ reactive negotiation.
+introspected should employ reactive negotiation.++
 
 The question though is how can the server advertise the availability of MicroTypes for the client
 to introspect, in a representation-agnostic way.
@@ -1611,7 +1609,28 @@ Now that we know how to fetch the MicroTypes that the server offers, we need to 
 an appropriate representation for it.
 One option is to employ a common JSON format for describing each MicroType, its url for introspection along
 with the expected Media Type its introspection representation uses.
-vale exmaple
+
+```json
+{
+  "microType-a": {
+    "url": "api/specA",
+    "method": "OPTIONS",
+    "content-type": "application/json"
+  },
+  "microType-b": {
+    "url": "api/specb",
+    "method": "OPTIONS",
+    "content-type": "application/json"
+  },
+  "microType-c": {
+    "url": "api/specC",
+    "method": "OPTIONS",
+    "content-type": "application/xml"
+  }
+}
+```
+The problem though is that such functionality must be described somewhere so that the client knows
+where to look for it, possibly in the parent Media Type.
 
 
 Another option is to have use the `Link` header, as described below.
@@ -1619,7 +1638,8 @@ Another option is to have use the `Link` header, as described below.
 
 #### 10.4.2. Provide link relation types through Link header
 Regadless if HTTP OPTIONS is used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
-is an alternative way of publishing the available MicroTypes by the server.
+is an alternative way of publishing the available MicroTypes by the server,
+in a representation-agnostic way.
 
 >  A means of indicating the relationships between resources on the Web,
 >   as well as indicating the type of those relationships, has been
@@ -1653,7 +1673,7 @@ In our use case
 
 
 Surprisingly, [RFC 7231](https://tools.ietf.org/html/rfc7231) notes
-on HTTP status code 300 (Multiple Choices) that should it be used for reactive negotiation along with
+on HTTP status code 300 (Multiple Choices) that it could be used for reactive negotiation along with
 `Link` header to communicate the available options to the client, using the `alternate` link
 relation type.
 
