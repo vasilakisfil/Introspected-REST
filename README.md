@@ -1189,8 +1189,10 @@ Hence, by keeping the _uniform interface_ the derived 3 out of 4 REST constraint
 _identification of resources_; _manipulation of resources through representations_ and _self-descriptive messages_.
 However instead of having the constraint of _hypermedia as the engine of application state_ (HATEOAS), we have
 **_introspection as the engine of application state_ (IATEOAS)**.
+Moreover, the introspection process can provide other kind of information, apart from hypermedia and links, that
+can facilitate the client to take decisions on how to proceed with the application's requests.
 
-Composition of different specs is a vital part of our model and for that we will use a new concept,
+To achieve this, composition of different specs is a vital part of our model and for that we will use a new concept,
 MicroTypes, small reusable modules that a final Media Type can be composed of.
 Before moving on, we will give concise definitions over hypermedia and metadata and break it down to different kinds of classes,
 according to Introspected REST model.
