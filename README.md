@@ -1395,8 +1395,8 @@ that extends the HTTP with new request headers which indicate device and agent c
 The server uses all those headers as hints in order to determine the most suitable representation of the content
 to be served to the client.
 
-According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this hint-based mechanism is called server-driven
-or proactive content negotiation and it has been used extensively in HTTP protocol.
+This hint-based mechanism, which according to [RFC 7231](https://tools.ietf.org/html/rfc7231) is called server-driven
+or proactive content negotiation, has been extensively used in HTTP protocol.
 In the context of MicroTypes and Introspected REST, using this mechanism, the client
 can negotiate for [runtime MicroTypes](): API functionalities that define semantics
 for the runtime metadata.
