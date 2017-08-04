@@ -1465,7 +1465,7 @@ Runtime MicroTypes are targeted for API functonality that is used during the req
 of plain data.
 Such functionality could be pagination, URI  querying language, error descriptions etc.
 It should be noted that even runtime MicroTypes could have content for introspection but the key difference
-from pure introspective MicroTypes is that part of their functionality the semantics of the client's request
+from pure introspective MicroTypes is that part of their functionality affects the semantics of the client's request
 or server's response.
 
 The negotiation of runtime MicroTypes should follow the regular negotiation flow:
