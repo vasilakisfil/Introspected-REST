@@ -1404,7 +1404,7 @@ This type of MicroTypes, should tend to appear less often because
 if anything can be introspected on the side instead of runtime, it will be
 defined as non-runtime, introspective metadata.
 
-Surpringly [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that reactive negotiation has
+Interestingly [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that reactive negotiation has
 some serious disadvanteges:
 
 >   Proactive negotiation has serious disadvantages:
