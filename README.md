@@ -1619,21 +1619,21 @@ with the expected Media Type its introspection representation uses.
 
 ```json
 {
-  "microType-a": {
-    "url": "api/specA",
+  "JSON-Schema": {
+    "url": "users/1?microtype=json-schema",
     "method": "OPTIONS",
-    "content-type": "application/json"
+    "content-type": "application/schema+json"
   },
-  "microType-b": {
-    "url": "api/specb",
+  "RDF": {
+    "url": "users/1?microtype=rdf",
     "method": "OPTIONS",
-    "content-type": "application/json"
+    "content-type": "application/rdf+xml"
   },
-  "microType-c": {
-    "url": "api/specC",
+  "JSON-LD": {
+    "url": "users/1?microtype=json-ld",
     "method": "OPTIONS",
-    "content-type": "application/xml"
-  }
+    "content-type": "application/ld+json"
+  },
 }
 ```
 The problem though is that such functionality must be described somewhere so that the client knows
