@@ -1787,6 +1787,10 @@ essentially flatting and removing the MicroTypes priority scheme that we showed 
 ```
 Accept: application/vnd.api+json; pagination=spec-a; querying=graphql, application/vnd.api2+json, application/vnd.api+json; pagination=spec-a; querying=jsonapi;
 ```
+In our experience though, negotiation in HTTP is not used that extensively (although it should): clients
+are usually prepared before hand for one Media Type (and its MicroTypes in our context).
+Thus, we don't think this will be an issue, at least initially, until community embraces Introspectiveness and new standards are created
+solving these limimtations.
 
 To our knowledge we haven't broken any other HTTP-related specification for Introspected REST and the broken changes that
 we had were very minor to our understanding.
