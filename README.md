@@ -1729,8 +1729,22 @@ Although we have managed to apply Introspective REST to HTTP, a protocol that ha
 vice verca) this adaptation comes to a cost: we need to "diversify" from some details of RFCs and specifications we use.
 Fortunately this diversification is that big.
 
+First and most importantly, according to [RFC 7231](https://tools.ietf.org/html/rfc7231):
 
-First, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
+>   Responses to the OPTIONS method are not cacheable.
+>
+> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
+>
+
+This is the biggest breaking change to existing HTTP specs that Introspected REST applies.
+Unfortunately for a reason unknown to us, HTTP spec requires the clients to not cache responses of
+HTTP OPTIONS, essentially breaking out sideload thinking of hypermedia and other metadata.
+In practice though, adding cache headers to denote to the client should be possible although
+limittions by existing client implementations could exist.
+If an API engineer doesn't want to break this part of HTTP spec that she should define the introspection
+process through regular GET requests in a different url but still related and consistently computable from resource's URL
+
+Moreover, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
 >   some parameters may be automatically made available to the media type
@@ -1764,7 +1778,7 @@ In our concept of MicroTypes, the parent Media Type acts as the base media forma
 The details however, are defined by small components that define functionalities of different parts of the API
 and such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
 
-Another limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
+One more limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
 between MicroTypes and parent Media Types.
 Imagine the client is sending the following to the server:
 
@@ -1797,18 +1811,31 @@ To our knowledge we haven't broken any other HTTP-related specification for Intr
 we had were very minor to our understanding.
 Given that the whole HTTP, related protocols and implementations since its inception have always been based on proactive
 negotiation we think that these changes are affordable.
-After all, IETF, W3C and related organizations usually are not preceding implementations but instead implementation
-affects and drives those specifications.
+Even when they are not affordable we feel that there are alternative ways to mitigate those limitations.
+But after all, IETF, W3C and related organizations usually are not preceding implementations but instead implementation
+affect and drives those specifications.
 If IETF sees that people are using the specifications differently than these have been defined, IETF should update them
 or create new ones.
 
 ### 10.5.2. Other limitations
-Performance issues of sending an introspective request
+Apart from specifications, Introspected REST adds some performance issues related to introspection process:
+the client needs to first do a reconnaissance request to figure out what capabilities the server support.
+Then for each capability that is described by a MicroType, the client must be possible send another request
+to retrieve the metadata of that MicroType.
+This add much more requests than regular REST APIs which would lead to increased latency until the client fetches
+or sends the actual resource.
 
-### 10.6 Enhancements
-We need to do an options request everytime, performance issue.
-This can be mitigated if we emulate GraphQL/Apple and have the same Media Type for all metadata.
-But it's not part of Introspected REST, by design but can be enhanced by parent Media Type.
+However, according to Introspected REST, the client can cache all this information using server's caching headers,
+which could be different for each MicroType.
+In that way, Introspected REST could possibly be more performant than regular REST because the client might have to actually
+request the metadat in very sparsely compared to actual data requests and given that the data responses will be much
+smaller than REST's equivelent responses which would also hold all the necessary metadata, it should lead to better performance
+overall.
+We should also note that Introspected REST is not ideal for all architectural styles and there could be cases that REST
+becomes a better choice than Introspected REST.
+Nevertheless, we feel that for most machine-to-machine communications Introspected REST is a better choice for all the advantages
+it offers and possible more performant than REST.
+
 
 ## 11. An Introspected REST API prototype in the world of HTTP and JSON
 In the following we will describe the architecture of the Introspected REST APIs through
@@ -2558,3 +2585,7 @@ Surprisingly for each new link relation the
 
 + say that emulating Machine2Machine communication with what the browser/human does when visiting a web page is a wrong approach
 Machines can be more powerful, smarter an decisive if we program them correctly.
+
+
+https://tools.ietf.org/html/draft-nottingham-json-home-02 Why non-browser clients? It seems like the
+saying machines are just like browsers is not valid anymore (and was never valid)
