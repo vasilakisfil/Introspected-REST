@@ -1534,8 +1534,10 @@ Such MicroTyoes should employ reactive negotiation.
 
 The question though is how can the server advertise the availability of MicroTypes for the client
 to introspect, in a representation-agnostic way.
-The HTTP protocol doesn't say much about this type of negotiation, other than the status code when receiving
-the list with all the available options:
+Ideally we would like to inform the client for all possible option through HTTP instead of employing a serialization format.
+Unfortunately, the HTTP protocol doesn't say much about this type of negotiation, only that the status code when requesting
+such information should be 300 and `Link` relation header of [RFC 5988](https://tools.ietf.org/html/rfc5988) could be potentially used
+to provide the list with all the available options:
 
 >  The 300 (Multiple Choices) status code indicates that the target
 >   resource has more than one representation, each with its own more
@@ -1551,13 +1553,22 @@ the list with all the available options:
 >   metadata and URI reference(s) from which the user or user agent can
 >   choose the one most preferred. (...)
 >
+>   Note: The original proposal for the 300 status code defined the
+>   URI header field as providing a list of alternative
+>   representations, such that it would be usable for 200, 300, and
+>   406 responses and be transferred in responses to the HEAD method.
+>   However, lack of deployment and disagreement over syntax led to
+>   both URI and Alternates (a subsequent proposal) being dropped from
+>   this specification.  It is possible to communicate the list using
+>   a set of Link header fields [RFC5988], each with a relationship of
+>   "alternate", though deployment is a chicken-and-egg problem.
+>
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-Ideally we would like to inform the client for all possible option through HTTP instead of employing a serialization format.
 To our knowledge, reactive negotiation hasn't been used before.
-Here, we suggest two different implementation solitions for it.
-
+Here, apart from `Link` relation header, we also suggest an alternative implementation to solve
+this issue, through the `HTTP OPTIONS` method.
 
 
 #### 10.4.1 The HTTP OPTIONS method
