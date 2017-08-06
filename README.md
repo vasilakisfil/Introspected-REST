@@ -1269,7 +1269,7 @@ Examples of MicroTyes could be semantics for:
 * hypermedia actions (required fields, available fields),
 * data types and resource scehmas
 * error information
-* and many more, like HTTP/2 server push for specific resources/states etc
+* and more advanced, like HTTP/2 server push for specific resources/states etc
 
 Each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
 At the same time they should be generic enough or follow some specific semantics so that it's possible to be referenced parent
