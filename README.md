@@ -1250,7 +1250,7 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 > Imagine how poor the Web would have been if we had limited HTML to what was
 > needed by an FTP client. That's what most JSON APIs are today.
 >
-> --- Roy Fielding
+> --- Roy Fielding, on [twitter](https://twitter.com/fielding/status/769318894045507584) 27th August, 2016
 >
 
 We have been talking so much about the concept of MicroTypes but what exatly are ?
@@ -2659,3 +2659,5 @@ Machines can be more powerful, smarter an decisive if we program them correctly.
 
 https://tools.ietf.org/html/draft-nottingham-json-home-02 Why non-browser clients? It seems like the
 saying machines are just like browsers is not valid anymore (and was never valid)
+
+Specs that slip away from REST: Linkset, JSON Home, HTTP Errors
