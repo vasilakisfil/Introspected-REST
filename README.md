@@ -1537,7 +1537,8 @@ to introspect, in a representation-agnostic way.
 Ideally we would like to inform the client for all possible option through HTTP instead of employing a serialization format.
 Unfortunately, the HTTP protocol doesn't say much about this type of negotiation, only that the status code when requesting
 such information should be 300 and `Link` relation header of [RFC 5988](https://tools.ietf.org/html/rfc5988) could be potentially used
-to provide the list with all the available options:
+to provide the list with all the available options,
+mostly for historical reasons that date back to [RFC 2068](https://tools.ietf.org/html/rfc2068#section-12.2):
 
 >  The 300 (Multiple Choices) status code indicates that the target
 >   resource has more than one representation, each with its own more
