@@ -1778,7 +1778,8 @@ leave the community to decide).
 ### 10.5. Considerations
 Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced by Roy's REST model (and
 vice verca) this adaptation comes to a cost: we need to "diversify" from some RFCs specifications that we make use of.
-Fortunately this diversification is relatively very small compared to the gains.
+Fortunately this diversification is relatively very small compared to the gains and all changes are
+backwards compatible with existing clients and specifications.
 
 #### 10.5.1. HTTP OPTIONS responses are not cacheable 
 First and most importantly, according to [RFC 7231](https://tools.ietf.org/html/rfc7231):
@@ -1801,7 +1802,7 @@ requests.
 The authors of Introspected REST don't see the reasoning of this constraint by HTTP spec and advise the community to investigate
 the possibility of ingonring this limitation and proceed with HTTP OPTIONS introspection
 process that fits best to this architectural style.
-Eventually that would lead the IETF to completely drop it from HTTP spec.
+Eventually, that would lead the IETF to completely drop it from HTTP spec.
 
 #### 10.5.2. Media Type parameters must be very well defined
 According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
@@ -1886,7 +1887,7 @@ Even when they are not affordable we feel that there are alternative ways to mit
 But after all, IETF, W3C and related organizations usually are not preceding implementations but instead implementation
 affect and drives those specifications.
 If IETF sees that people are using the specifications differently than these have been defined, IETF should update them
-or create new ones.
+or create new ones, as long as these are backwards compatible.
 
 ### 10.5.2. Other limitations
 Apart from specifications, Introspected REST adds some performance issues related to introspection process:
