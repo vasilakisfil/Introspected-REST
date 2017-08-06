@@ -1350,15 +1350,11 @@ of a specific MicroType there are various advantages because each MicroType beco
 For instance, **caching** will be possible using the underlying protocol's mechanisms, for each metadata type separately.
 Another example is the **detached evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
 
-#### 9.3.4. Something more
-<!--
-#### 9.3.4. Discovery of API capabilities and resources
-Given that for each resource, the client needs to perform an introspection request, this becomes problematic in terms of **performance**.
-An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all the metadata from all MicroTypes for all resources,
-and their states that the client can access, wherever this is possible.
+#### 9.3.4. Discovery of API-wide capabilities and resources
+An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all all MicroTypes that are used API-wide and all resources
+that can be accessed directly by the client.
 
 The location of this detailed list should be in the conceptual _root_ resource/URL of the API.
--->
 
 #### 9.3.5. Automatic documentation generation
 Possibly the API will provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
