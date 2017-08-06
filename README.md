@@ -1743,7 +1743,7 @@ First, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Ty
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 However we feel that given the sparse use of Media Types parameters, such breaking change will have a very small effect.
 
-Another thing that we differentiate is that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's
+Another thing that we differentiate is that according to same spec, each Media Type's
 primary functionality shoud be that of being media formats.
 
 >   Media types MUST function as actual media formats.  Registration of
