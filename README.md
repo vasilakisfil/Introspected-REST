@@ -1760,7 +1760,7 @@ primary functionality shoud be that of being media formats.
 >
 
 In our concept of MicroTypes, the parent Media Type acts as the base media format.
-The details however, are defined by small components that define functionalities of different parts of the API.
+The details however, are defined by small components that define functionalities of different parts of the API
 and such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
 
 Another limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
