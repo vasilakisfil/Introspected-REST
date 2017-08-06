@@ -1778,8 +1778,9 @@ The client says that it wants to have either of the following 2:
 * `application/vnd.api2+json`
 
 
-But how can the client say that if you don't have `querying=graphql` then I prefer `application/vnd.api2+json`.
-Only if you don't have that I want you to serve me `application/vnd.api+json` with the falling back MicroType of `querying=jsonapi`.
+But how can the client say the following?
+If you don't have `querying=graphql` then I prefer `application/vnd.api2+json` and
+only if you don't have that I want you to serve me `application/vnd.api+json` with the falling back MicroType of `querying=jsonapi`.
 Having multilevel priorities is difficult in this context and could be solved only by sending 3 options to the server,
 essentially flatting and removing the MicroTypes priority scheme that we showed and falling back to the classic Media Type negotiation:
 
