@@ -1368,10 +1368,6 @@ and even for humans such information should weight very little compared to the r
 In the same way, the API should **automate the generation of the documentation using all metadata from all MicroTypes for every resource**.
 The way the documentation is requested and its format should be distincly defined by a MicroType or the parent Media Type.
 
-+++ It's not a requirement per-se but we have seen people being ok with documentation.
-If we want to move on to seamless machine-to-machine communication we need to eliminate the need for documentation for the
-machine to use the API.
-
 ## 10. Introspected REST applied to HTTP
 Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
 Here we will review the challenges that are rising through its adaptation in HTTP protocol.
