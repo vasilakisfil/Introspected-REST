@@ -1525,12 +1525,6 @@ If the server can provide only the less preferred Media Type with the less prefe
 Content-Type: application/vnd.api2+json; pagination=spec-a; querying=graphql
 ```
 
-Possible problems or misses that arise from such pattern are discussed in the Limitations and enhancements section.
-(media type parameters constraints, functionlity contraing, a client might want a more complex combination (
-like I am ok with MT-A if it offers paginationA AND querying B, otherwise go with MT-C).
-+add a note that this is in infant stage and the community will drive the IETF to create/alter standards for it.
-+ add note about Media Type functionality taken from shims
-
 
 ### 10.3. Introspective MicroTypes
 MicroTypes that define semantics of functionality that does not depend on runtime data but instead are expected to be
@@ -2481,6 +2475,13 @@ The details however, are defined by small components that define functionalities
 
 We still want to preserve the "functionality" requirement in the concept of MicroTypes, however such functionality
 should be in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
+
+Possible problems or misses that arise from such pattern are discussed in the Limitations and enhancements section.
+(media type parameters constraints, functionlity contraing, a client might want a more complex combination (
+like I am ok with MT-A if it offers paginationA AND querying B, otherwise go with MT-C).
++add a note that this is in infant stage and the community will drive the IETF to create/alter standards for it.
++ add note about Media Type functionality taken from shims
+
 llllllimitations
 
 
