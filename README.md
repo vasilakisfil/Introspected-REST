@@ -1561,7 +1561,7 @@ the list with all the available options:
 
 Ideally we would like to inform the client for all possible option through HTTP instead of employing a serialization format.
 To our knowledge, reactive negotiation hasn't been used before.
-Here, we suggest 2 different implementation solitions for it.
+Here, we suggest two different implementation solitions for it.
 
 
 
