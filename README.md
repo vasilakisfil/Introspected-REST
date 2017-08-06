@@ -1726,7 +1726,7 @@ leave the community to decide).
 ### 10.5. Limitations
 Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced by Roy's REST model (and
 vice verca) this adaptation comes to a cost: we need to "diversify" from some details of RFCs and specifications we use.
-Fortunately this diversification is not much.
+Fortunately this diversification is that big.
 
 
 First, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
