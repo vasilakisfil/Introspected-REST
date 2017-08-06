@@ -1640,8 +1640,11 @@ information by sending an `OPTIONS` request to the resource's url.
 ```
 The problem though is that such functionality (`OPTIONS /api/users/1`) must be described
 somewhere so that the client knows where to look for it, possibly in the parent Media Type or using a MicroType.
+Another option is to have use the `Link` header, as described later.
 
-Another option is to have use the `Link` header, as described below.
+It is our intention to advice the community to use this solution for the introspection process.
+Although, as we will see later, it comes at a cost, it's the best among all three solutions and
+RFCs details for HTTP OPTIONS match very close for our intended use case.
 
 #### 10.4.2. Well-known URIs and JSON Home
 [RFC 5785](https://tools.ietf.org/html/rfc5785) defines a pre-defined URI for accessing server's various metadata:
@@ -1772,12 +1775,12 @@ leave the community to decide).
 + add quote for 300 in reactive negotiation ?
 
 
-### 10.5. Limitations
-#### 10.5.1. Differentiating from existing specs
+### 10.5. Considerations
 Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced by Roy's REST model (and
-vice verca) this adaptation comes to a cost: we need to "diversify" from some details of RFCs and specifications we use.
-Fortunately this diversification is that big.
+vice verca) this adaptation comes to a cost: we need to "diversify" from some RFCs specifications that we make use of.
+Fortunately this diversification is relatively very small compared to the gains.
 
+#### 10.5.1. HTTP OPTIONS responses are not cacheable 
 First and most importantly, according to [RFC 7231](https://tools.ietf.org/html/rfc7231):
 
 >   Responses to the OPTIONS method are not cacheable.
@@ -1790,10 +1793,17 @@ Unfortunately for a reason unknown to us, HTTP spec requires the clients to not 
 HTTP OPTIONS, essentially breaking out sideload thinking of hypermedia and other metadata.
 In practice though, adding cache headers to denote to the client should be possible although
 limittions by existing client implementations could exist.
-If an API engineer doesn't want to break this part of HTTP spec that she should define the introspection
-process through regular GET requests in a different url but still related and consistently computable from resource's URL
+If an API designer doesn't want to break this part of HTTP spec then she should define the introspection
+process through the other suggested solutions.
+What is important though is that, as Introspected REST specifies, introspection process should be recognizably distinct from regular
+requests.
+The authors of Introspected REST don't see the reasoning of this constraint by HTTP spec and advise the community to investigate
+the possibility of ingonring this limitation and proceed with HTTP OPTIONS introspection
+process that fits best to this architectural style.
+Eventually that would lead the IETF to completely drop it from HTTP spec.
 
-Moreover, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
+#### 10.5.2. Media Type parameters must be very well defined
+According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
 >   some parameters may be automatically made available to the media type
@@ -1806,7 +1816,10 @@ Moreover, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media
 
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 However we feel that given the sparse use of Media Types parameters, such breaking change will have a very small effect.
+The authors of Introspected REST advice the community to investigate the possibility of pushint IETF to drop this requirement,
+or extend Media Type parameters with specialized parameters that can be have arbiratry names.
 
+#### 10.5.3. Media Types must function as actual media formats
 Another thing that we differentiate is that according to same spec, each Media Type's
 primary functionality shoud be that of being media formats.
 
@@ -1827,6 +1840,10 @@ In our concept of MicroTypes, the parent Media Type acts as the base media forma
 The details however, are defined by small components that define functionalities of different parts of the API
 and such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
 
+It's not a breaking change per-se but it's good to have it in mind and possibly reconsider it or alter it
+when eventually patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
+
+#### 10.5.4. Mixed priorities are confusing
 One more limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
 between MicroTypes and parent Media Types.
 Imagine the client is sending the following to the server:
@@ -1856,6 +1873,10 @@ are usually prepared before hand for one Media Type (and its MicroTypes in our c
 Thus, we don't think this will be an issue, at least initially, until community embraces Introspectiveness and new standards are created
 solving these limimtations.
 
+This is also not a breaking change per-se but it's good to have it in mind and possibly reconsider it or alter it
+when eventually patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
+
+#### 10.5.5. The community should experiment
 To our knowledge we haven't broken any other HTTP-related specification for Introspected REST and the broken changes that
 we had were very minor to our understanding.
 Given that the whole HTTP, related protocols and implementations since its inception have always been based on proactive
