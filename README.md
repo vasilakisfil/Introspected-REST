@@ -1616,32 +1616,32 @@ Now that we know how to fetch the MicroTypes that the server offers, we need to 
 an appropriate representation for it.
 One option is to employ a common JSON format for describing each MicroType, its url for introspection along
 with the expected Media Type its introspection representation uses.
+For instance if we would like to introspect resource `/api/users/1` of an API we would get the following
+information by sending an `OPTIONS` request to the resource's url.
 
 ```json
 {
   "JSON-Schema": {
-    "url": "users/1?microtype=json-schema",
+    "url": "/api/users/1?microtype=json-schema",
     "method": "OPTIONS",
     "content-type": "application/schema+json"
   },
   "RDF": {
-    "url": "users/1?microtype=rdf",
+    "url": "/api/users/1?microtype=rdf",
     "method": "OPTIONS",
     "content-type": "application/rdf+xml"
   },
   "JSON-LD": {
-    "url": "users/1?microtype=json-ld",
+    "url": "api/users/1?microtype=json-ld",
     "method": "OPTIONS",
     "content-type": "application/ld+json"
   },
 }
 ```
-The problem though is that such functionality must be described somewhere so that the client knows
-where to look for it, possibly in the parent Media Type.
-
+The problem though is that such functionality (`OPTIONS /api/users/1`) must be described
+somewhere so that the client knows where to look for it, possibly in the parent Media Type.
 
 Another option is to have use the `Link` header, as described below.
-
 
 #### 10.4.2. Provide link relation types through Link header
 Regadless if HTTP OPTIONS is used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
