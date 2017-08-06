@@ -1250,7 +1250,7 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 > Imagine how poor the Web would have been if we had limited HTML to what was
 > needed by an FTP client. That's what most JSON APIs are today.
 >
-> --- Roy Fielding, on the [27th of August 2016](https://twitter.com/fielding/status/769318894045507584)
+> --- Roy Fielding, on [Twitter](https://twitter.com/fielding/status/769318894045507584), 27 Aug 2016
 >
 
 We have been talking so much about the concept of MicroTypes but what exatly are ?
