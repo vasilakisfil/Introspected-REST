@@ -1566,7 +1566,7 @@ to provide the list with all the available options:
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-To our knowledge, reactive negotiation hasn't been used before.
+To our knowledge, reactive negotiation hasn't been analyzed, used or suggested before.
 Here, apart from `Link` relation header, we also suggest an alternative implementation to solve
 this issue, through the `HTTP OPTIONS` method.
 
