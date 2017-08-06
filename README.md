@@ -1801,7 +1801,7 @@ the possibility of ingonring this limitation and proceed with HTTP OPTIONS intro
 process that fits best to this architectural style.
 Eventually, that would lead the IETF to completely drop it from HTTP spec.
 
-#### 10.5.2. Media Type parameters must be very well defined
+#### 10.5.2. Media Type parameters must be very well defined beforehand
 According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
