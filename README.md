@@ -1527,8 +1527,10 @@ Content-Type: application/vnd.api2+json; pagination=spec-a; querying=graphql
 
 
 ### 10.3. Introspective MicroTypes
-MicroTypes that define semantics of functionality that does not depend on runtime data but instead are expected to be
-introspected should employ reactive negotiation.++
+Introspective MicroTypes don't alter the semantics of request/response cycle but are still valuable to the client
+and the decisions they should take based on the current state and the input from the application developer.
+They can provide information about the data types, RDF Schema of the resources, etc.
+Such MicroTyoes should employ reactive negotiation.
 
 The question though is how can the server advertise the availability of MicroTypes for the client
 to introspect, in a representation-agnostic way.
