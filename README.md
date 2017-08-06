@@ -1725,7 +1725,7 @@ leave the community to decide).
 
 ### 10.5. Limitations
 Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced by Roy's REST model (and
-vice verca) it comes to a cost: we need to "diversify" from some details of RFCs and specifications we use.
+vice verca) this adaptation comes to a cost: we need to "diversify" from some details of RFCs and specifications we use.
 Fortunately this diversification is not much.
 
 
@@ -1741,6 +1741,7 @@ First, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Ty
 >   in the vendor or personal trees.
 
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
+However we feel that given the sparse use of Media Types parameters, such breaking change will have a very small effect.
 
 Another thing that we differentiate is that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's
 primary functionality shoud be that of being media formats.
@@ -1760,7 +1761,7 @@ primary functionality shoud be that of being media formats.
 
 In our concept of MicroTypes, the parent Media Type acts as the base media format.
 The details however, are defined by small components that define functionalities of different parts of the API.
-However such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
+and such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
 
 Another limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
 between MicroTypes and parent Media Types.
@@ -1770,7 +1771,7 @@ Imagine the client is sending the following to the server:
 Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi, application/vnd.api2+json;
 ```
 
-I want to have either of the following 2:
+The client says that it wants to have either of the following 2:
 * `application/vnd.api+json` with the following MicroTypes
   * `pagination=spec-a`
   * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
@@ -1778,20 +1779,24 @@ I want to have either of the following 2:
 
 
 But how can the client say that if you don't have `querying=graphql` then I prefer `application/vnd.api2+json`.
-Only if you don't have that I want you to serve me `application/vnd.api+json` with falling back to `querying=jsonapi`.
+Only if you don't have that I want you to serve me `application/vnd.api+json` with the falling back MicroType of `querying=jsonapi`.
 Having multilevel priorities is difficult in this context and could be solved only by sending 3 options to the server,
-essentially flatting the MicroTypes priority scheme and falling back to the classic Media Type negotiation:
+essentially flatting and removing the MicroTypes priority scheme that we showed and falling back to the classic Media Type negotiation:
 
 ```
 Accept: application/vnd.api+json; pagination=spec-a; querying=graphql, application/vnd.api2+json, application/vnd.api+json; pagination=spec-a; querying=jsonapi;
 ```
 
-+add a note that this is in infant stage and the community will drive the IETF to create/alter standards for it.
-+ add note about Media Type functionality taken from shims
+To our knowledge we haven't broken any other HTTP-related specification for Introspected REST and the broken changes that
+we had were very minor to our understanding.
+Given that the whole HTTP, related protocols and implementations since its inception have always been based on proactive
+negotiation we think that these changes are affordable.
+After all, IETF, W3C and related organizations usually are not preceding implementations but instead implementation
+affects and drives those specifications.
+If IETF sees that people are using the specifications differently than these have been defined, IETF should update them
+or create new ones.
 
-say about breaking rfcs
-We feel that these are small breaks.
-
+### 10.6 Enhancements
 We need to do an options request everytime, performance issue.
 This can be mitigated if we emulate GraphQL/Apple and have the same Media Type for all metadata.
 But it's not part of Introspected REST, by design but can be enhanced by parent Media Type.
