@@ -1773,12 +1773,13 @@ leave the community to decide).
 
 
 ### 10.5. Considerations
+#### 10.5.1 Diversifing from existing RFCs
 Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced by Roy's REST model (and
 vice verca) this adaptation comes to a cost: we need to "diversify" from some RFCs specifications that we make use of.
 Fortunately this diversification is relatively very small compared to the gains and all changes are
 backwards compatible with existing clients and specifications.
 
-#### 10.5.1. HTTP OPTIONS responses are not cacheable 
+##### 10.5.1. HTTP OPTIONS responses are not cacheable 
 First and most importantly, according to [RFC 7231](https://tools.ietf.org/html/rfc7231):
 
 >   Responses to the OPTIONS method are not cacheable.
@@ -1801,7 +1802,7 @@ the possibility of ingonring this limitation and proceed with HTTP OPTIONS intro
 process that fits best to this architectural style.
 Eventually, that would lead the IETF to completely drop it from HTTP spec.
 
-#### 10.5.2. Media Type parameters must be very well defined beforehand
+##### 10.5.2. Media Type parameters must be very well defined beforehand
 According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
 
 > Media types MAY elect to use one or more media type parameters, or
@@ -1818,7 +1819,7 @@ However we feel that given the sparse use of Media Types parameters, such breaki
 The authors of Introspected REST advice the community to investigate the possibility of pushint IETF to drop this requirement,
 or extend Media Type parameters with specialized parameters that can be have arbiratry names.
 
-#### 10.5.3. Media Types must function as actual media formats
+##### 10.5.3. Media Types must function as actual media formats
 Another thing that we differentiate is that according to same spec, each Media Type's
 primary functionality shoud be that of being media formats.
 
@@ -1842,7 +1843,7 @@ and such functionality is not always in the context of media formats as [RFC 683
 It's not a breaking change per-se but it's good to have it in mind and possibly reconsider it or alter it
 when eventually patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
 
-#### 10.5.4. Mixed priorities are confusing
+##### 10.5.4. Mixed priorities are confusing
 One more limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
 between MicroTypes and parent Media Types.
 Imagine the client is sending the following to the server:
@@ -1875,7 +1876,7 @@ solving these limimtations.
 This is also not a breaking change per-se but it's good to have it in mind and possibly reconsider it or alter it
 when eventually patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
 
-#### 10.5.5. The community should experiment
+##### 10.5.5. The community should experiment
 To our knowledge we haven't broken any other HTTP-related specification for Introspected REST and the broken changes that
 we had were very minor to our understanding.
 Given that the whole HTTP, related protocols and implementations since its inception have always been based on proactive
@@ -1886,8 +1887,8 @@ affect and drives those specifications.
 If IETF sees that people are using the specifications differently than these have been defined, IETF should update them
 or create new ones, as long as these are backwards compatible.
 
-### 10.5.2. Other limitations
-Apart from specifications, Introspected REST adds some performance issues related to introspection process:
+### 10.5.2. Performance considerations
+Introspected REST adds some performance issues related to introspection process:
 the client needs to first do a reconnaissance request to figure out what capabilities the server support.
 Then for each capability that is described by a MicroType, the client must be possible send another request
 to retrieve the metadata of that MicroType.
