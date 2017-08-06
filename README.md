@@ -1246,7 +1246,7 @@ hypermedia (i.e. links, actions, forms), informational targeted to humans (i.e. 
 Usually metadata is much less volatile than data, if not static, except runtime metadata that depend on the request and the resource at the given time and state respectively.
 
 
-### 9.2. MicroTypes: modules composing a Media Type
+### 9.2. MicroTypes: reusable modules composing a Media Type
 > Imagine how poor the Web would have been if we had limited HTML to what was
 > needed by an FTP client. That's what most JSON APIs are today.
 >
