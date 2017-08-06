@@ -1896,9 +1896,9 @@ What is important here is that the **data does not contain any metadata**, apart
 
 ### 11.2. Runtime Metadata
 
-### 11.2.1. Pagination
+#### 11.2.1. Pagination
 
-### 11.2.2 The Errors MicroType
+#### 11.2.2 The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
 
