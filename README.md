@@ -1724,6 +1724,7 @@ leave the community to decide).
 
 
 ### 10.5. Limitations
+#### 10.5.1. Differentiating from existing specs
 Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced by Roy's REST model (and
 vice verca) this adaptation comes to a cost: we need to "diversify" from some details of RFCs and specifications we use.
 Fortunately this diversification is that big.
@@ -1800,6 +1801,9 @@ After all, IETF, W3C and related organizations usually are not preceding impleme
 affects and drives those specifications.
 If IETF sees that people are using the specifications differently than these have been defined, IETF should update them
 or create new ones.
+
+### 10.5.2. Other limitations
+Performance issues of sending an introspective request
 
 ### 10.6 Enhancements
 We need to do an options request everytime, performance issue.
@@ -1890,312 +1894,11 @@ The actual format of the data could vary regarding the root element or possibly 
 Such details will be described by the Media Type.
 What is important here is that the **data does not contain any metadata**, apart from runtime metadata.
 
-### 11.2. Composing different metadata MicroTypes together
-We will describe our APIs capabilities by mixing together different MicroTypes targeted each one for a specific capability
-of our API, following the Single Responsibility Principle.
-The client will be able to retrieve the information of each metadata MicroType by introspecting the resource.
+### 11.2. Runtime Metadata
 
-#### 11.2.1. Structural metadata
-One of the most important things for a client to know is the expected structure of the request/response resource object
-along with information on the data types.
-For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
+### 11.2.1. Pagination
 
-Given that this specification has been published as an Internet-Draft and its popularity it is very probable that there _is_
-an implementation for that MicroType for the client's environment.
-Also, a cool side effect of having the structure definition of the resource as a MicroType available through resource's introspection,
-is that the client can use this information to first validate the object before sending it over the wire to the server.
-
-##### 11.2.1.1. User resource
-
-```json
-{
-  "$schema":"https://json-schema.org/draft-04/schema#",
-  "$id":"https://example.com/user.json",
-  "properties":{
-    "user":{
-      "type":"object",
-      "properties":{
-        "id":{
-          "maxLength":64,
-          "type":"string"
-        },
-        "email":{
-          "maxLength":255,
-          "type":"string",
-          "format":"email"
-        },
-        "name":{
-          "maxLength":255,
-          "type":["null", "string"]
-        },
-        "birth_date":{
-          "type":"string",
-          "pattern":"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-        },
-        "created_at":{
-          "maxLength":255,
-          "type":"string",
-          "formate":"date-time"
-        },
-        "microposts_count":{
-          "type":"integer"
-        }
-      },
-      "required":[
-        "id",
-        "email",
-        "name",
-        "birth_date",
-        "created_at",
-        "microposts_count"
-      ]
-    }
-  },
-  "required":[
-    "user"
-  ],
-  "type":"object"
-}
-```
-
-##### 11.2.1.2. Users resource
-Note that the Users resource is just a collection of User object and as a result
-it references the User schema.
-
-```json
-{
-  "$schema":"https://json-schema.org/draft-04/schema#",
-  "$id":"https://example.com/users.json",
-  "properties":{
-    "users":{
-      "type": "array",
-      "$href": "https://example.com/user.json#/properties/user"
-    },
-    "meta": {
-      "type":"object",
-      "page": {
-        "type": "integer",
-        "default": 0,
-        "minimum": 0,
-        "$ref": "#/definitions/extra"
-      },
-      "per_page": {
-        "type": "integer",
-        "minimum": 1,
-        "maximum": 100,
-        "default": 50
-      },
-      "offset": {
-        "type": "integer",
-        "minimum": 0,
-        "default": 0
-      },
-      "required":[
-        "page",
-        "per_page",
-        "offset"
-      ],
-    }
-  },
-  "required":[
-    "users",
-    "meta"
-  ],
-  "type":"object"
-}
-```
-
-##### 11.2.1.3. Request Response inconsistency
-Although here we have the same object semantics for request and response object, in theory these could be different.
-If that's the case, we should denote each object in the response parented under
-distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
-
-#### 11.2.2. Hypermedia metadata
-For the Hypermedia part we will use JSON Hyper Schemas.
-Specifically we will use the draft [V4](https://tools.ietf.org/html/draft-luff-json-hyper-schema-00) of JSON Hyper Schemas as the
-next drafts ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
-are HTML-equivelents. For instance, there is no way you can define a `method` attribute, restricting you to `GET` and `POST`
-depending whether there is a body to send or not.
-
-Resource schemas defined in the previous section are referenced by the following Hyper Schemas, in order to avoid
-duplication of our metadata.
-
-##### 11.2.2.1. User resource
-```json
-{
-  "$schema":"https://json-schema.org/draft-04/schema#",
-  "$id":"https://example.com/user-links.json",
-  "properties":{
-    "$href": "https://example.com/user.json#/properties"
-  },
-  "links": [
-    {
-      "rel": "microposts",
-      "href": "/microposts?user={userId}&page={page}&per_page={per_page}&offset={offset}",
-      "hrefSchema": {
-        "allOf": [
-          {
-            "$ref": "https://example.com/users.json#/properties/meta"
-          },
-          {
-            "$ref": "https://example.com/users.json#/properties/user/id"
-          },
-        ]
-      }
-    },
-    {
-      "rel": "update-user",
-      "href": "/users",
-      "method": "PATCH",
-      "targetSchema": {
-        "$ref": "https://example.com/user.json"
-      }
-    },
-    {
-      "rel": "delete-user",
-      "href": "/users",
-      "method": "DELETE",
-      "targetSchema": {
-        "$ref": "https://example.com/user.json"
-      }
-    }
-  ]
-}
-```
-
-##### 11.2.2.2. Users resource
-```json
-{
-  "$schema":"https://json-schema.org/draft-04/schema#",
-  "$id":"https://example.com/users-links.json",
-  "properties":{
-    "$href": "https://example.com/users.json#/properties"
-  },
-  "links": [
-    {
-      "rel": "self",
-      "href": "/users?page={page}&per_page={per_page}&offset={offset}",
-      "hrefSchema": {
-        "$ref": "https://example.com/users.json#/properties/meta"
-      }
-    },
-    {
-      "rel": "create-user",
-      "href": "/users",
-      "method": "POST",
-      "targetSchema": {
-        "$ref": "https://example.com/user.json"
-      }
-    }
-  ]
-}
-```
-
-Notice how we define the pagination, by referencing parts of the user's `meta` object.
-We don't treat the clients as stupid but smart enough to understand what they need to do on their part to get what they want.
-
-
-#### 11.2.4. Descriptions metadata
-For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
-Note that **this information must not be required to parse and understand the API but to use the API data on our application domain**.
-For instance, understanding that when updating the `email` attribute an email is triggered to inform the user for the change,
-is not part of the API client responsibility but it's vital for the application developer to to know what to expect from it.
-
-
-```json
-{
-  "user": {
-    "id": {
-      "title": "The identifier of the resource.",
-      "description": [
-        "This identifier should not be exposed to the user, to avoid any confusions."
-      ]
-    },
-    "email": {
-      "title": "The primary email of the user's account",
-      "description": [
-        "The email is used for any transactional email.",
-        "Also, the same email is used when user authenticates to the system.",
-        "Please note that whenever you update the email, user receives an automated email describing the change"
-      ]
-    },
-    "name": {
-      "title": "The user's full name (first and last name concataned)",
-      "description": [
-        "This field could be empty or null.",
-        "If so, the application should show the email instead for the user's name."
-      ]
-    },
-    "birth_date": {
-      "title": "The date of birth of the user",
-      "description": []
-    },
-    "microposts_count": {
-      "title": "The number of published microposts the user has.",
-      "description": [
-        "Please note that due to caching this number could have a small delay to reflect the actual number",
-        "The application should either inform the user about that or make sure it manually updates the microposts counter after publishing/deleting a micropost after publishing/deleting a micropost."
-      ]
-    }
-  }
-}
-```
-
-This metadata will be used for the documentation generation, as we will se in section [10.6](#106-automating-the-documentation-generation).
-
-#### 11.2.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD
-For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
-It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
-to transform their existing JSON to JSON-LD but also to not require breaking changes to your
-existing API, which makes it backwards compatible with any current deployed API.
-This conflicts with our design of introspection because having contexts without the data would break the spec.
-As a result we have the following 2 options.
-
-##### 11.2.5.1. Extending spec by creating a Shim MicroType
-Our first option is to create a wrapper **shim** MicroType that defines how the spec should work
-for the clients to parse and understand the data, with the least possible changes.
-A naive shim, that we show here, would output the context information in the introspected process.
-Then the client should match this information in combination with the runtime data.
-
-###### 11.2.3.1. User resource
-```json
-{
-  "@context": {
-    "@vocab": "https://schema.org/",
-    "@type": "Person",
-    "birth_date": "birthDate",
-    "created_at": "dateCreated",
-    "microposts_count": null
-  }
-}
-```
-
-###### 11.2.3.2. Users resource
-
-```json
-{
-  "@context": {
-    "@vocab": "https://schema.org/",
-    "birth_date": "birthDate",
-    "created_at": "dateCreated",
-    "microposts_count": null
-  },
-  "@graph": [
-    {
-      "@type": "Person"
-    }
-  ]
-}
-```
-
-##### 11.2.5.2. Considering it as runtime metadata
-Our second option is to exploit the IATEOAS principles regarding runtime metadata
-and append them inside the response by considering them as object-specific runtime metadata.
-However, we feel that such dicision should be taken only if nothing else is possible,
-given that in Introspected REST data and metadata should be distinctively separated.
-
-
-### 11.4. The Errors MicroType
+### 11.2.2 The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
 
@@ -2265,7 +1968,312 @@ application/vnd.api+json, application/problem-extensive+json, application/proble
 ```
 
 
-### 11.6. Automating the documentation generation
+### 11.3. Introspective Metadata
+We will describe our APIs capabilities by mixing together different MicroTypes targeted each one for a specific capability
+of our API, following the Single Responsibility Principle.
+The client will be able to retrieve the information of each metadata MicroType by introspecting the resource.
+
+#### 11.3.1. Structural metadata
+One of the most important things for a client to know is the expected structure of the request/response resource object
+along with information on the data types.
+For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
+
+Given that this specification has been published as an Internet-Draft and its popularity it is very probable that there _is_
+an implementation for that MicroType for the client's environment.
+Also, a cool side effect of having the structure definition of the resource as a MicroType available through resource's introspection,
+is that the client can use this information to first validate the object before sending it over the wire to the server.
+
+##### 11.3.1.1. User resource
+
+```json
+{
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/user.json",
+  "properties":{
+    "user":{
+      "type":"object",
+      "properties":{
+        "id":{
+          "maxLength":64,
+          "type":"string"
+        },
+        "email":{
+          "maxLength":255,
+          "type":"string",
+          "format":"email"
+        },
+        "name":{
+          "maxLength":255,
+          "type":["null", "string"]
+        },
+        "birth_date":{
+          "type":"string",
+          "pattern":"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "created_at":{
+          "maxLength":255,
+          "type":"string",
+          "formate":"date-time"
+        },
+        "microposts_count":{
+          "type":"integer"
+        }
+      },
+      "required":[
+        "id",
+        "email",
+        "name",
+        "birth_date",
+        "created_at",
+        "microposts_count"
+      ]
+    }
+  },
+  "required":[
+    "user"
+  ],
+  "type":"object"
+}
+```
+
+##### 11.3.1.2. Users resource
+Note that the Users resource is just a collection of User object and as a result
+it references the User schema.
+
+```json
+{
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/users.json",
+  "properties":{
+    "users":{
+      "type": "array",
+      "$href": "https://example.com/user.json#/properties/user"
+    },
+    "meta": {
+      "type":"object",
+      "page": {
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "$ref": "#/definitions/extra"
+      },
+      "per_page": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 100,
+        "default": 50
+      },
+      "offset": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0
+      },
+      "required":[
+        "page",
+        "per_page",
+        "offset"
+      ],
+    }
+  },
+  "required":[
+    "users",
+    "meta"
+  ],
+  "type":"object"
+}
+```
+
+##### 11.3.1.3. Request Response inconsistency
+Although here we have the same object semantics for request and response object, in theory these could be different.
+If that's the case, we should denote each object in the response parented under
+distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
+
+#### 11.3.2. Hypermedia metadata
+For the Hypermedia part we will use JSON Hyper Schemas.
+Specifically we will use the draft [V4](https://tools.ietf.org/html/draft-luff-json-hyper-schema-00) of JSON Hyper Schemas as the
+next drafts ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
+are HTML-equivelents. For instance, there is no way you can define a `method` attribute, restricting you to `GET` and `POST`
+depending whether there is a body to send or not.
+
+Resource schemas defined in the previous section are referenced by the following Hyper Schemas, in order to avoid
+duplication of our metadata.
+
+##### 11.3.2.1. User resource
+```json
+{
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/user-links.json",
+  "properties":{
+    "$href": "https://example.com/user.json#/properties"
+  },
+  "links": [
+    {
+      "rel": "microposts",
+      "href": "/microposts?user={userId}&page={page}&per_page={per_page}&offset={offset}",
+      "hrefSchema": {
+        "allOf": [
+          {
+            "$ref": "https://example.com/users.json#/properties/meta"
+          },
+          {
+            "$ref": "https://example.com/users.json#/properties/user/id"
+          },
+        ]
+      }
+    },
+    {
+      "rel": "update-user",
+      "href": "/users",
+      "method": "PATCH",
+      "targetSchema": {
+        "$ref": "https://example.com/user.json"
+      }
+    },
+    {
+      "rel": "delete-user",
+      "href": "/users",
+      "method": "DELETE",
+      "targetSchema": {
+        "$ref": "https://example.com/user.json"
+      }
+    }
+  ]
+}
+```
+
+##### 11.3.2.2. Users resource
+```json
+{
+  "$schema":"https://json-schema.org/draft-04/schema#",
+  "$id":"https://example.com/users-links.json",
+  "properties":{
+    "$href": "https://example.com/users.json#/properties"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "/users?page={page}&per_page={per_page}&offset={offset}",
+      "hrefSchema": {
+        "$ref": "https://example.com/users.json#/properties/meta"
+      }
+    },
+    {
+      "rel": "create-user",
+      "href": "/users",
+      "method": "POST",
+      "targetSchema": {
+        "$ref": "https://example.com/user.json"
+      }
+    }
+  ]
+}
+```
+
+Notice how we define the pagination, by referencing parts of the user's `meta` object.
+We don't treat the clients as stupid but smart enough to understand what they need to do on their part to get what they want.
+
+
+#### 11.3.4. Descriptions metadata
+For human-targeted information, we could use a custom MicroType that describes each attribute of the response object.
+Note that **this information must not be required to parse and understand the API but to use the API data on our application domain**.
+For instance, understanding that when updating the `email` attribute an email is triggered to inform the user for the change,
+is not part of the API client responsibility but it's vital for the application developer to to know what to expect from it.
+
+
+```json
+{
+  "user": {
+    "id": {
+      "title": "The identifier of the resource.",
+      "description": [
+        "This identifier should not be exposed to the user, to avoid any confusions."
+      ]
+    },
+    "email": {
+      "title": "The primary email of the user's account",
+      "description": [
+        "The email is used for any transactional email.",
+        "Also, the same email is used when user authenticates to the system.",
+        "Please note that whenever you update the email, user receives an automated email describing the change"
+      ]
+    },
+    "name": {
+      "title": "The user's full name (first and last name concataned)",
+      "description": [
+        "This field could be empty or null.",
+        "If so, the application should show the email instead for the user's name."
+      ]
+    },
+    "birth_date": {
+      "title": "The date of birth of the user",
+      "description": []
+    },
+    "microposts_count": {
+      "title": "The number of published microposts the user has.",
+      "description": [
+        "Please note that due to caching this number could have a small delay to reflect the actual number",
+        "The application should either inform the user about that or make sure it manually updates the microposts counter after publishing/deleting a micropost after publishing/deleting a micropost."
+      ]
+    }
+  }
+}
+```
+
+This metadata will be used for the documentation generation, as we will se in section [10.6](#106-automating-the-documentation-generation).
+
+#### 11.3.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD
+For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
+It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
+to transform their existing JSON to JSON-LD but also to not require breaking changes to your
+existing API, which makes it backwards compatible with any current deployed API.
+This conflicts with our design of introspection because having contexts without the data would break the spec.
+As a result we have the following 2 options.
+
+##### 11.3.5.1. Extending spec by creating a Shim MicroType
+Our first option is to create a wrapper **shim** MicroType that defines how the spec should work
+for the clients to parse and understand the data, with the least possible changes.
+A naive shim, that we show here, would output the context information in the introspected process.
+Then the client should match this information in combination with the runtime data.
+
+###### 11.3.3.1. User resource
+```json
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "@type": "Person",
+    "birth_date": "birthDate",
+    "created_at": "dateCreated",
+    "microposts_count": null
+  }
+}
+```
+
+###### 11.3.3.2. Users resource
+
+```json
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "birth_date": "birthDate",
+    "created_at": "dateCreated",
+    "microposts_count": null
+  },
+  "@graph": [
+    {
+      "@type": "Person"
+    }
+  ]
+}
+```
+
+##### 11.3.5.2. Considering it as runtime metadata
+Our second option is to exploit the IATEOAS principles regarding runtime metadata
+and append them inside the response by considering them as object-specific runtime metadata.
+However, we feel that such dicision should be taken only if nothing else is possible,
+given that in Introspected REST data and metadata should be distinctively separated.
+
+
+### 11.7. Automating the documentation generation
 The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
 by returning a regular web page, targeted to humans and not machines.
 The technical details is out of the scope of this implementation example but we
