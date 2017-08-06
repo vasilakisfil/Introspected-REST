@@ -1568,8 +1568,8 @@ mostly for historical reasons that date back to [RFC 2068](https://tools.ietf.or
 >
 
 To our knowledge, reactive negotiation hasn't been analyzed, used or suggested before.
-Here, apart from `Link` relation header, we also suggest an alternative implementation to solve
-this issue, through the `HTTP OPTIONS` method.
+Here, apart from `Link` relation header, we also suggest two more alternative implementation to solve
+this issue and we will let the community to choose what is the more appropriate solution.
 
 
 #### 10.4.1 The HTTP OPTIONS method
@@ -1639,12 +1639,61 @@ information by sending an `OPTIONS` request to the resource's url.
 }
 ```
 The problem though is that such functionality (`OPTIONS /api/users/1`) must be described
-somewhere so that the client knows where to look for it, possibly in the parent Media Type.
+somewhere so that the client knows where to look for it, possibly in the parent Media Type or using a MicroType.
 
 Another option is to have use the `Link` header, as described below.
 
-#### 10.4.2. Provide link relation types through Link header
-Regadless if HTTP OPTIONS is used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
+#### 10.4.2. Well-known URIs and JSON Home
+[RFC 5785](https://tools.ietf.org/html/rfc5785) defines a pre-defined URI for accessing server's various metadata:
+> It is increasingly common for Web-based protocols to require the
+>   discovery of policy or other information about a host ("site-wide
+>   metadata") before making a request.  For example, the Robots
+>   Exclusion Protocol <http://www.robotstxt.org/> specifies a way for
+>   automated processes to obtain permission to access resources;
+>   likewise, the Platform for Privacy Preferences [W3C.REC-P3P-20020416]
+>   tells user-agents how to discover privacy policy beforehand. (...)
+>
+>   When this happens, it is common to designate a "well-known location"
+>   for such data, so that it can be easily located.  However, this
+>   approach has the drawback of risking collisions, both with other such
+>   designated "well-known locations" and with pre-existing resources.
+>
+>   To address this, this memo defines a path prefix in HTTP(S) URIs for
+>   these "well-known locations", "/.well-known/".  Future specifications
+>   that need to define a resource for such site-wide metadata can
+>   register their use to avoid collisions and minimise impingement upon
+>   sites' URI space.
+>
+> --- [RFC 5785](https://tools.ietf.org/html/rfc5785)
+>
+
+Using this specification, the server can register a well-known
+URI, that is expected to be the first URI the client requests to introspect.
+To that extend, a new draft spec is being developed, [JSON Home](https://mnot.github.io/I-D/json-home/)
+that defines such document structure that provides all the server resources and capabilities.
+Regardless if JSON Home is used, well-known URIs can provide a way to introspect only the
+server-wide capabilities:
+```
+/.well-known/metadata
+```
+
+Here, `metadata` would be a new well-known URI registry that either defined in the parent Media Type
+or defined by itself as a MicroType.
+The spec does not provide a scheme for well-known URIs per resource or nested URI and this means
+that we need to build something upon well-known URIs functionality in order to provide
+introspection per resource.
+How this will be achieved can be defined by the community but a possible implementtion to pass
+the desired resource URL as a query in the `metadata` well-known URI registry:
+```
+/.well-known/metadata?query=/api/users/1
+```
+
+Again as with HTTP OPTIONS, the server will either have to provide a representation
+of the available MicroTypes inside the response body of the well-known URI or use the `Link` header.
+
+
+#### 10.4.3. Provide link relation types through Link header
+Regadless if HTTP OPTIONS or well-known URIs are used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
 is an alternative way of publishing the available MicroTypes by the server,
 in a representation-agnostic way.
 
