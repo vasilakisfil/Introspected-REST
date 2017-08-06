@@ -1724,6 +1724,71 @@ leave the community to decide).
 
 
 ### 10.5. Limitations
+Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced by Roy's REST model (and
+vice verca) it comes to a cost: we need to "diversify" from some details of RFCs and specifications we use.
+Fortunately this diversification is not much.
+
+
+First, according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
+
+> Media types MAY elect to use one or more media type parameters, or
+>   some parameters may be automatically made available to the media type
+>   by virtue of being a subtype of a content type that defines a set of
+>   parameters applicable to any of its subtypes.  In either case, the
+>   names, values, and meanings of any parameters MUST be fully specified
+>   when a media type is registered in the standards tree, and SHOULD be
+>   specified as completely as possible when media types are registered
+>   in the vendor or personal trees.
+
+This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
+
+Another thing that we differentiate is that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's
+primary functionality shoud be that of being media formats.
+
+>   Media types MUST function as actual media formats.  Registration of
+>  things that are better thought of as a transfer encoding, as a
+>  charset, or as a collection of separate entities of another type, is
+>  not allowed.  For example, although applications exist to decode the
+>  base64 transfer encoding [RFC2045], base64 cannot be registered as a
+>  media type.
+>
+>  This requirement applies regardless of the registration tree
+>  involved.
+>
+>  [RFC 6831](https://tools.ietf.org/html/rfc6838)
+>
+
+In our concept of MicroTypes, the parent Media Type acts as the base media format.
+The details however, are defined by small components that define functionalities of different parts of the API.
+However such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
+
+Another limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
+between MicroTypes and parent Media Types.
+Imagine the client is sending the following to the server:
+
+```
+Accept: application/vnd.api+json; pagination=spec-a; querying=graphql; querying=jsonapi, application/vnd.api2+json;
+```
+
+I want to have either of the following 2:
+* `application/vnd.api+json` with the following MicroTypes
+  * `pagination=spec-a`
+  * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
+* `application/vnd.api2+json`
+
+
+But how can the client say that if you don't have `querying=graphql` then I prefer `application/vnd.api2+json`.
+Only if you don't have that I want you to serve me `application/vnd.api+json` with falling back to `querying=jsonapi`.
+Having multilevel priorities is difficult in this context and could be solved only by sending 3 options to the server,
+essentially flatting the MicroTypes priority scheme and falling back to the classic Media Type negotiation:
+
+```
+Accept: application/vnd.api+json; pagination=spec-a; querying=graphql, application/vnd.api2+json, application/vnd.api+json; pagination=spec-a; querying=jsonapi;
+```
+
++add a note that this is in infant stage and the community will drive the IETF to create/alter standards for it.
++ add note about Media Type functionality taken from shims
+
 say about breaking rfcs
 We feel that these are small breaks.
 
@@ -2455,47 +2520,6 @@ We will propose a new model, alternative to REST. We will also present the conce
 Then introduce the new model.
 
 llllllimitations
-We should note that according to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
-
-> Media types MAY elect to use one or more media type parameters, or
->   some parameters may be automatically made available to the media type
->   by virtue of being a subtype of a content type that defines a set of
->   parameters applicable to any of its subtypes.  In either case, the
->   names, values, and meanings of any parameters MUST be fully specified
->   when a media type is registered in the standards tree, and SHOULD be
->   specified as completely as possible when media types are registered
->   in the vendor or personal trees.
-
-This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
-We will see in the next section what are the possible solutions to overcome this limitation.
-
-According to [RFC 6831](https://tools.ietf.org/html/rfc6838) each Media Type's primary functionality shoud be that of being media formats.
-
->   Media types MUST function as actual media formats.  Registration of
->  things that are better thought of as a transfer encoding, as a
->  charset, or as a collection of separate entities of another type, is
->  not allowed.  For example, although applications exist to decode the
->  base64 transfer encoding [RFC2045], base64 cannot be registered as a
->  media type.
->
->  This requirement applies regardless of the registration tree
->  involved.
->
->  [RFC 6831](https://tools.ietf.org/html/rfc6838)
->
-
-In our cocept of MicroTypes, the parent Media Type acts as the base media format.
-The details however, are defined by small components that define functionalities of different parts of the API.
-
-We still want to preserve the "functionality" requirement in the concept of MicroTypes, however such functionality
-should be in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
-
-Possible problems or misses that arise from such pattern are discussed in the Limitations and enhancements section.
-(media type parameters constraints, functionlity contraing, a client might want a more complex combination (
-like I am ok with MT-A if it offers paginationA AND querying B, otherwise go with MT-C).
-+add a note that this is in infant stage and the community will drive the IETF to create/alter standards for it.
-+ add note about Media Type functionality taken from shims
-
 llllllimitations
 
 
