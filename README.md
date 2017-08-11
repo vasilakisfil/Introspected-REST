@@ -1352,7 +1352,7 @@ Another example is the **detached evolvability** of each MicroType's metadata, i
 
 #### 9.3.4. Discovery of API-wide capabilities and resources
 An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all MicroTypes that are used API-wide along with
-their priorities order, all resources that can be accessed directly by the client and other information that might be of interest
+all resources that can be accessed directly and other information that might be of interest
 to the client.
 
 The location of this detailed list should be in the conceptual _root_ resource/URL of the API.
@@ -1395,12 +1395,12 @@ This hint-based mechanism, which according to [RFC 7231](https://tools.ietf.org/
 or proactive content negotiation, has been extensively used in HTTP protocol.
 In the context of MicroTypes and Introspected REST, using this mechanism, the client
 can negotiate for [runtime MicroTypes](): API functionalities that define semantics
-for the runtime metadata.
+for the runtime data and metadata.
 This type of MicroTypes, should tend to appear less often because
 if anything can be introspected on the side instead of runtime, it will be
 defined as non-runtime, introspective metadata.
 
-Interestingly [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that reactive negotiation has
+Interestingly, [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that reactive negotiation has
 some serious disadvanteges:
 
 >   Proactive negotiation has serious disadvantages:
@@ -1459,8 +1459,9 @@ because the client does the selection out of a predefined list that the server p
 ### 10.2. Runtime MicroTypes
 Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
 of plain data.
-Such functionality could be pagination, URI  querying language, error descriptions etc.
-It should be noted that even runtime MicroTypes could have content for introspection but the key difference
+Such functionality could be pagination, URI  querying language, error descriptions etc or it could even be
+semantics around the data itself.
+It should also be noted that even runtime MicroTypes could have content for introspection but the key difference
 from pure introspective MicroTypes is that part of their functionality affects the semantics of the client's request
 or server's response.
 
@@ -1487,7 +1488,7 @@ For that, we will employ the Media Type parameters, a rarely used mechanism:
 > --- [RFC 6838](https://tools.ietf.org/html/rfc6838)
 >
 
-An example of an imaginary Media Type with a couple of parameters is:
+An example of an imaginary Media Type with a couple of parameters for MicroTypes is:
 
 ```
 Accept: application/vnd.api+json; pagination=spec-a; querying=graphql;
@@ -1527,11 +1528,11 @@ Content-Type: application/vnd.api2+json; pagination=spec-a; querying=graphql
 Introspective MicroTypes don't alter the semantics of request/response cycle but are still valuable to the client
 and the decisions they should take based on the current state and the input from the application developer.
 They can provide information about the data types, RDF Schema of the resources, etc.
-Such MicroTyoes should employ reactive negotiation.
+Such MicroTypes should employ reactive negotiation.
 
 The question though is how can the server advertise the availability of MicroTypes for the client
 to introspect, in a representation-agnostic way.
-Ideally we would like to inform the client for all possible option through HTTP instead of employing a serialization format.
+Ideally we would like to inform the client for all possible options through HTTP instead of employing a serialization format.
 Unfortunately, the HTTP protocol doesn't say much about this type of negotiation, only that the status code when requesting
 such information should be 300 and `Link` relation header of [RFC 5988](https://tools.ietf.org/html/rfc5988) could be potentially used
 to provide the list with all the available options,
@@ -1607,12 +1608,12 @@ to the root url.
 However, we feel that this is the perfect case for hosting an API's discovery for available capabilities using
 reactive negotiation.
 We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
-`/` for listing all API's capabilities through MicroTypes for all resources.
+`/` for listing all API's capabilities through MicroTypes for all resources, as [IATEOAS]() denotes.
 
 Now that we know how to fetch the MicroTypes that the server offers, we need to find
 an appropriate representation for it.
-One option is to employ a common JSON format for describing each MicroType, its url for introspection along
-with the expected Media Type its introspection representation uses.
+One option is to employ a common JSON format for describing each MicroType, its URL for introspection along
+with the expected Media Type the response in the specified URL uses.
 For instance if we would like to introspect resource `/api/users/1` of an API we would get the following
 information by sending an `OPTIONS` request to the resource's url.
 
@@ -1637,11 +1638,13 @@ information by sending an `OPTIONS` request to the resource's url.
 ```
 The problem though is that such functionality (`OPTIONS /api/users/1`) must be described
 somewhere so that the client knows where to look for it, possibly in the parent Media Type or using a MicroType.
-Another option is to have use the `Link` header, as described later.
+Another option is to have use the `Link` header, as described later, although in practice
+the functionality should still be described somewhere as the HTTP spec through [RFC 7231](https://tools.ietf.org/html/rfc7231)
+only makes a suggestion.
 
 It is our intention to advice the community to use this solution for the introspection process.
-Although, as we will see later, it comes at a cost, it's the best among all three solutions and
-RFCs details for HTTP OPTIONS match very close for our intended use case.
+Although, as we will see later, it comes at a cost, it's the best among all three solutions presented here
+and the conceptual notion of OPTIONS method, as described by HTTP spec, matches very well with our intended use case.
 
 #### 10.4.2. Well-known URIs and JSON Home
 [RFC 5785](https://tools.ietf.org/html/rfc5785) defines a pre-defined URI for accessing server's various metadata:
@@ -1682,7 +1685,7 @@ or defined by itself as a MicroType.
 The spec does not provide a scheme for well-known URIs per resource or nested URI and this means
 that we need to build something upon well-known URIs functionality in order to provide
 introspection per resource.
-How this will be achieved can be defined by the community but a possible implementtion to pass
+How this will be achieved can be defined by the community but a possible implementation to pass
 the desired resource URL as a query in the `metadata` well-known URI registry:
 ```
 /.well-known/metadata?query=/api/users/1
@@ -1779,7 +1782,7 @@ vice verca) this adaptation comes to a cost: we need to "diversify" from some RF
 Fortunately this diversification is relatively very small compared to the gains and all changes are
 backwards compatible with existing clients and specifications.
 
-##### 10.5.1. HTTP OPTIONS responses are not cacheable 
+##### 10.5.1. HTTP OPTIONS responses are not cacheable
 First and most importantly, according to [RFC 7231](https://tools.ietf.org/html/rfc7231):
 
 >   Responses to the OPTIONS method are not cacheable.
@@ -1793,7 +1796,7 @@ HTTP OPTIONS, essentially breaking out sideload thinking of hypermedia and other
 In practice though, adding cache headers to denote to the client should be possible although
 limittions by existing client implementations could exist.
 If an API designer doesn't want to break this part of HTTP spec then she should define the introspection
-process through the other suggested solutions.
+process through the other suggested solutions, or come up with a new one.
 What is important though is that, as Introspected REST specifies, introspection process should be recognizably distinct from regular
 requests.
 
@@ -1836,12 +1839,13 @@ primary functionality shoud be that of being media formats.
 >  [RFC 6831](https://tools.ietf.org/html/rfc6838)
 >
 
-In our concept of MicroTypes, the parent Media Type acts as the base media format.
-The details however, are defined by small components that define functionalities of different parts of the API
+In our concept of MicroTypes, the parent Media Type acts as the base media format but has
+the possibility to be extended by small components, MicroTypes.
+These small components, which could be different in each request, define functionalities of different parts of the API
 and such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
 
 It's not a breaking change per-se but it's good to have it in mind and possibly reconsider it or alter it
-when eventually patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
+when patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
 
 ##### 10.5.4. Mixed priorities are confusing
 One more limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
@@ -1858,10 +1862,16 @@ The client says that it wants to have either of the following 2:
   * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
 * `application/vnd.api2+json`
 
+Given this header, the client sets the priorities in the following order:
+1. `application/vnd.api+json` with the following MicroTypes
+  * `pagination=spec-a`
+  * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
+2. `application/vnd.api+json` with the following MicroTypes
+  * `pagination=spec-a`
+  * `querying=jsonapi` and if you don't have this, I am fine with `querying=jsonapi`
+3. `application/vnd.api2+json`
 
-But how can the client say the following?
-If you don't have `querying=graphql` then I prefer `application/vnd.api2+json` and
-only if you don't have that I want you to serve me `application/vnd.api+json` with the falling back MicroType of `querying=jsonapi`.
+But how can the client prioritize (3) choice over (2) ?
 Having multilevel priorities is difficult in this context and could be solved only by sending 3 options to the server,
 essentially flatting and removing the MicroTypes priority scheme that we showed and falling back to the classic Media Type negotiation:
 
@@ -1870,7 +1880,7 @@ Accept: application/vnd.api+json; pagination=spec-a; querying=graphql, applicati
 ```
 In our experience though, negotiation in HTTP is not used that extensively (although it should): clients
 are usually prepared before hand for one Media Type (and its MicroTypes in our context).
-Thus, we don't think this will be an issue, at least initially, until community embraces Introspectiveness and new standards are created
+Thus, we don't think this will be an issue in practice, at least initially, until community embraces Introspectiveness and new standards are created
 solving these limimtations.
 
 This is also not a breaking change per-se but it's good to have it in mind and possibly reconsider it or alter it
@@ -1880,26 +1890,26 @@ when eventually patterns for MicroTypes and parent Media Types for Introspected 
 To our knowledge we haven't broken any other HTTP-related specification for Introspected REST and the broken changes that
 we had were very minor to our understanding.
 Given that the whole HTTP, related protocols and implementations since its inception have always been based on proactive
-negotiation we think that these changes are affordable.
+negotiation we think that these changes are affordable for our new model.
 Even when they are not affordable we feel that there are alternative ways to mitigate those limitations.
 But after all, IETF, W3C and related organizations usually are not preceding implementations but instead implementation
 affect and drives those specifications.
-If IETF sees that people are using the specifications differently than these have been defined, IETF should update them
-or create new ones, as long as these are backwards compatible.
+If those organizations see that people are using the specifications differently than these have been defined, they should update them
+or create new ones, as long as these are backwards compatible, which they are in our case.
 
 ### 10.5.2. Performance considerations
 Introspected REST adds some performance issues related to introspection process:
-the client needs to first do a reconnaissance request to figure out what capabilities the server support.
-Then for each capability that is described by a MicroType, the client must be possible send another request
+the client needs to first do a reconnaissance request to figure out what capabilities the server supports.
+Then for each capability that is described by a MicroType, the client might possibly need to send another request
 to retrieve the metadata of that MicroType.
-This add much more requests than regular REST APIs which would lead to increased latency until the client fetches
+This adds much more requests than regular REST APIs which would lead to increased latency until the client fetches
 or sends the actual resource.
 
 However, according to Introspected REST, the client can cache all this information using server's caching headers,
 which could be different for each MicroType.
 In that way, Introspected REST could possibly be more performant than regular REST because the client might have to actually
-request the metadat in very sparsely compared to actual data requests and given that the data responses will be much
-smaller than REST's equivelent responses which would also hold all the necessary metadata, it should lead to better performance
+request metadata very sparsely compared to actual data requests and given that the data responses will be much
+smaller than REST's equivelent responses (which would also hold all the necessary metadata), it should lead to better performance
 overall.
 We should also note that Introspected REST is not ideal for all architectural styles and there could be cases that REST
 becomes a better choice than Introspected REST.
@@ -2481,8 +2491,6 @@ We think that linksets is anohter small piece towards a introspectiveness and he
 However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
 
 ### JSON home
-
-### HTTP Hints
 
 ### 12.4. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
