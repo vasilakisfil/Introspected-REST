@@ -1734,38 +1734,41 @@ in a representation-agnostic way.
 > --- [RFC 5988](https://tools.ietf.org/html/rfc5988)
 >
 
-[RFC 5988](https://tools.ietf.org/html/rfc5988) defines a way of publishing a set of links,
-using the `Link` header and link types. For instance,
+As the next (draft) version of [RFC 5988](https://tools.ietf.org/html/rfc5988) notes, a link
+published through `Link` header can be viewed as a statement of the form
+"link context has a link relation type resource at link target, which has target attributes".
+As a result, this RFC provides us a representation-agnoistic mechanism through which we can
+announce link relations of the current visitied URL, along with their relation types.
+For instance, the following example (also taken from the RFC)
+```
+Link: <http://example.com/TheBook/chapter2>; rel="previous";
+     title="previous chapter"
+```
+would denote that that "chapter2" is previous to this resource in a logical
+navigation path.
+Note that title is a target attribute or parameter to this link relation.
 
-foobar.
 
+In the case of Introspected REST, we would use it to announce introspective MicroTypes related
+to the resource the client visits.
+By exploiting the target attributes we would also like to specify the HTTP method and
+optionally the Media Type the client should expect in order to introspect
+the given MicroType.
 
-In our use case
+```
+Link: <https://www.example.com/api/users/1?microtype=json-schema>; rel="microtype";
+     method="options"; type="application/schema+json" name="json-schema",
+      <https://www.example.com/api/users/1?microtype=rdf>; rel="microtype";
+     method="options"; type="application/schema+json" name="rdf",
+      <https://www.example.com/api/users/1?microtype=json-ld>; rel="microtype";
+     method="options"; type="application/schema+json" name="json-ld",
+```
 
-
-
-
-
-
-Surprisingly, [RFC 7231](https://tools.ietf.org/html/rfc7231) notes
-on HTTP status code 300 (Multiple Choices) that it could be used for reactive negotiation along with
-`Link` header to communicate the available options to the client, using the `alternate` link
+On a side note, [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that
+on HTTP status code 300 (Multiple Choices) which should be used for reactive negotiation,
+`Link` header is a good candidate for communicating the available options to the client, using the `alternate` link
 relation type.
 
->  The 300 (Multiple Choices) status code indicates that the target
->   resource has more than one representation, each with its own more
->   specific identifier, and information about the alternatives is being
->   provided so that the user (or user agent) can select a preferred
->   representation by redirecting its request to one or more of those
->   identifiers.  In other words, the server desires that the user agent
->   engage in reactive negotiation to select the most appropriate
->   representation(s) for its needs (Section 3.4). (...)
->
->   For request methods other than HEAD, the server SHOULD generate a
->   payload in the 300 response containing a list of representation
->   metadata and URI reference(s) from which the user or user agent can
->   choose the one most preferred. (...)
->
 >   Note: The original proposal for the 300 status code defined the
 >   URI header field as providing a list of alternative
 >   representations, such that it would be usable for 200, 300, and
@@ -1779,6 +1782,21 @@ relation type.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
+This solution has the advantage of solving the MicroTypes announcement in the HTTP
+protocol without being tight to a specific serialization.
+However it does have a couple of drawbacks.
+First and foremost, the link header size is limited and if other headers of the response
+are already overloaded then the server might refuse to render the response to the client
+but instead return an HTTP error possibly "413 Request Entity Too Large" or "414 Request-URI Too Long"
+although there isn't one explicitly defined for such case.
+A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
+RFC if published as it's currently in draft state.
+A linkset could group together a set of links under and provide them to the client by reference.
+However such solution would make things a bit more complex, and eventually the MicroTypes announcement wouldn't
+be solved in the HTTP level as a LinkSet would provide a body as well.
+
+The secondAt the time being, there is a draft RFC that is being developed to solve such issues: 
+The second
 
 We solve the problem of having it representation/serialization-agnostic, however it limits us (+no Media Types, +use of linksets,
 feels like rel should be used for very specific, generic things and not overloaded, we are reluctant to suggest it but we
