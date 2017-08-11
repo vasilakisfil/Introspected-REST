@@ -2669,3 +2669,9 @@ https://tools.ietf.org/html/draft-nottingham-json-home-02 Why non-browser client
 saying machines are just like browsers is not valid anymore (and was never valid)
 
 Specs that slip away from REST: Linkset, JSON Home, HTTP Errors
+
+Hi,
+
+I admire your work you have done in various projects..++
+I would be happy if you could checkout and give some feedback in this little manifesto.
+At the moment it's only me in this.. but I do hope more people will come along and a community will rise :)
