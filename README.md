@@ -1793,7 +1793,7 @@ although there isn't one explicitly defined for such case.
 A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC
 (a work also by Erik Wilde) but currently it's in draft state.
 Once published, a linkset could group together a set of links and provide them to the client by reference.
-However linksets don't actually solve our issue because eventually the MicroTypes announcement wouldn't
+However linksets don't actually solve our issue because eventually the MicroTypes announcement would not
 be solved in the HTTP level as a LinkSet would have to provide a body as well.
 
 Another issue is that the server cannot specify a caching strategy for all links at once because there
