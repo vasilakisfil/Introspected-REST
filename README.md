@@ -1792,7 +1792,8 @@ is no mechanism in HTTP which allows you to specify caching directives for speci
 As a result, unless we used a Linkset which we can't yet, the client would have to dereference all MicroTypes
 to figure out their caching properties.
 
-Over the past few years, we have seen an explosion of link types used along with `Link` header defined by [RFC 5988](https://tools.ietf.org/html/rfc5988).
+On a side note, over the past few years, we have seen an explosion of link types
+used along with `Link` header defined by [RFC 5988](https://tools.ietf.org/html/rfc5988).
 The authors of Introspected REST are skeptical with this trend and feel that the `Link` header should
 not be overused.
 For instance, having more than 5 links in the `Link` header feels that something is wrong, probably too many things
