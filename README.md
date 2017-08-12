@@ -1797,7 +1797,7 @@ used along with `Link` header defined by [RFC 5988](https://tools.ietf.org/html/
 The authors of Introspected REST are skeptical with this trend and feel that the `Link` header should
 not be overused.
 For instance, having more than 5 links in the `Link` header feels that something is wrong, probably too many things
-are defined in the Protocol level whereas maybe they should be defined somewhere else.
+are defined in the protocol level whereas maybe they should be defined somewhere else.
 We will let the community to decide if this approach is good for publishing MicroTypes but we would like to stress
 the point that having a link in the HTTP level through `Link` header might be better
 for related resources that all clients would understand.
