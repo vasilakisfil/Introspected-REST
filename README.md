@@ -2436,7 +2436,8 @@ However it has some issues.
 
 ### 12.2. Linked Data and Semantic Web
 
-#### 12.2.1. JSON-LD and HYDRA
+#### 12.2.1. JSON-LD
+#### 12.2.2 Hydra
 Using linked data in our APIs is just great.
 HYDRA is in the right direction to introspectable APIs.
 
@@ -2444,7 +2445,7 @@ Hydra doesn't always require you to serve metadata on the side.
 In a custom context you might have to serve them runtime.
 
 
-#### 12.3. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
+### 12.3. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
 +say about the [The Profile Media Type Parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
 
 Similar to [the profile media type parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html)
