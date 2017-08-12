@@ -1712,7 +1712,7 @@ was not designed to be used for such specific URIs but instead for more generic 
 that usually apply to the host itself.
 
 
-#### 10.4.3. Provide link relation types through Link header
+#### 10.4.3. Link relations through Link header
 Regadless if HTTP OPTIONS or well-known URIs are used, `Link` header, defined in [RFC 5988](https://tools.ietf.org/html/rfc5988),
 is an alternative way of publishing the available MicroTypes by the server,
 in a representation-agnostic way.
