@@ -1772,8 +1772,8 @@ Link: <https://www.example.com/api/users/1?microtype=json-schema>; rel="microtyp
 
 Also related, Erik Wilde is working on an IETF draft, named [Link Relation Types for Web Services](https://tools.ietf.org/id/draft-wilde-service-link-rel-04.html)
 that defines a way to announce metadata of a resource through this mechanism.
-Taking also into account that this solution has has the advantage of solving the MicroTypes announcement in the HTTP
-protocol without being tight to a specific serialization, one would thing that it's the
+Given that and also the fact that this solution has the advantage of solving the MicroTypes announcement
+in the HTTP protocol without being tight to a specific serialization, one would thing that it's the
 most appropriate way to specify the MicroTypes supported on a specific resource.
 
 Unfortunately, this solution has a couple of drawbacks.
