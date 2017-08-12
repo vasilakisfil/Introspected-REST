@@ -1790,7 +1790,7 @@ First and foremost, the link header size is limited and if other headers of the 
 are already overloaded then the server might refuse to render the response to the client
 but instead return an HTTP error possibly "413 Request Entity Too Large" or "414 Request-URI Too Long"
 although there isn't one explicitly defined for such case.
-A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC
+A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC proposal 
 (a work also by Erik Wilde) but currently it's in draft state.
 Once published, a linkset could group together a set of links and provide them to the client by reference.
 However linksets don't actually solve our issue because eventually the MicroTypes announcement would not
@@ -2045,7 +2045,7 @@ What is important here is that the **data does not contain any metadata**, apart
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
 
-Usually the semantics of an error respond are defined in the API's Media Type but we will use the newly-published [`RFC 7807 Problem Details for HTTP APIs`](https://tools.ietf.org/html/rfc7807),
+Usually the semantics of an error respond are defined in the API's Media Type but we will use the newly-published [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807),
 which defines the `problem+json` Media Type for JSON HTTP APIs.
 To give an example how the response will seem when following this RFC,
 imagine that when updating a User object, the application developer might wrongly send an invalid `birth_date`.
@@ -2444,16 +2444,12 @@ Hydra doesn't always require you to serve metadata on the side.
 In a custom context you might have to serve them runtime.
 
 
-### 12.3. [Web Linking](https://tools.ietf.org/html/rfc5988) and link relation types
-There is a tendency to overload Link rel for links unrelated to application format etc.
-We feel that this is a bad practice and definitely not the right location to add the Microtypes.
-Link rel should be used for very few specific things.
-For instance Media type and links. Not overloading. Dereference only.
-
-#### 12.3.2. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
+#### 12.3. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
 +say about the [The Profile Media Type Parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
 
-Erik Wilde suggested a profiling mechanism of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
+Similar to [the profile media type parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html)
+that Toby A. Inkster had proposed in 2009, Erik Wilde suggested a profiling mechanism,
+of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
 
 >  A profile is defined not to alter the
 >   semantics of the resource representation itself, but to allow clients
@@ -2484,49 +2480,71 @@ This link relation type is similar to our work of MicroTypes but unfortunately f
 > --- [RFC 6906](https://www.ietf.org/rfc/rfc6906.txt)
 >
 
-By having  profiles attached to specific Media Types results in much less adoptability and flexibility and fails to signal the
+By having profiles attached to specific Media Types results in much less adoptability and flexibility and fails to signal the
 actual practicability of such architecture.
 However, if profiles take the conceptual form of independent MicroTypes, then the clients can negotiate for those and eventually choose
 the one that fits best.
 Although the negotiation part is skipped from the RFC, we feel that such works are towards the right direction that will allow us
-to build.
+to build evolvable, self-described APIs.
 
-+no negotiation
+### JSON Home (draft)
+[JSON home](https://tools.ietf.org/html/draft-nottingham-json-home-02) is a draft specification
+that defines "home document" format for non-browser HTTP clients to first request in order to discover
+the server's capabilities that it support.
+Specifically, the document specifies semantics to describe the API itself (like author, documentation link etc)
+along with its resources.
+For each resource, the document can provide a link for the client to access it directly (instead of
+figuring out the link using REST state trantitions) and more information, mostly hints, like
+permitted methods, media types etc.
 
-#### 12.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
-say that Link rel is so overused that Linksets was needed...
-As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
-by the response representation and message format.
-In order to mitigate such issues, Linksets proposal tries to offload HTTP Link links from a resource or url, when having them in there is
-costly or even not possible for the server.
+**It should be noted that JSON Home it's one of the few specifications along with [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807)
+and possibly [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) that
+slide away from Roy's REST model and acknowledge the distinction between
+browser-based clients that are drived by real humans, and non-browser, machine based-clients that should
+be treated differently.**
 
->  Resources on the Web often convey typed Web Links [RFC5988] as a part
->   of resource representations, for example, using the <link> element
->   for HTML representations, or the "Link" header field in HTTP response
->   headers for representations of any media type.  In some cases,
->   however, providing links by value is impractical or impossible.  In
->   these cases, an approach to provide links by reference (instead of by
->   value) can solve the problem.  This specification defines the
->   "linkset" relation type that allows to link resources to sets of
->   links, thereby making it possible to represent links by reference,
->   and not by value.
+As the draft notes the benefits of using such a home document are mutifold:
 >
-> --- [Linkset Internet-Draft](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
+>   o  Extensibility - Because new server capabilities can be expressed
+>      as link relations, new features can be layered in without
+>      introducing a new API version; clients will discover them in the
+>      home document.  This promotes loose coupling between clients and
+>      servers.
+>
+>   o  Evolvability - Likewise, interfaces can change gradually by
+>      introducing a new link relation and/or format while still
+>      supporting the old ones.
+>
+>   o  Customisation - Home documents can be tailored for the client,
+>      allowing diffrent classes of service or different client
+>      permissions to be exposed naturally.
+>
+>   o  Flexible deployment - Since URLs aren't baked into documentation,
+>      the server can choose what URLs to use for a given service.
+>
+>   o  API mixing - Likewise, more than one API can be deployed on a
+>      given server, without fear of collisions.
+>
+> --- [Home Documents for HTTP APIs, draft 06](https://tools.ietf.org/html/draft-nottingham-json-home-06)
 >
 
-For instance, imagine that a resource needs to link a set of links that are managed by not the host owning the resource, but
-by a 3rd party origin.
-Another case scenario is when the Link header is overloaded by holding a large number of links that are needed to be inlcluded along with
-the resource and would result in HTTP error ("413 Request Entity Too Large" and "414 Request-URI Too Long").
+Although we can instantly see the benefits of such structure, we believe that a specification like JSON Home
+is very weak. Specifically, it is tight in JSON message format which, although very popular, could possibly be
+inapropriate in some use cases.
+Instead, a better idea would be to define the necessary attributes that a Home document
+should provide and then let the API designer to choose if these will be implemented in JSON, XML or binary format.
+Such architecture would be more rebust and would give more options to an API designer.
 
-By providing a dereferancable link that points to the 3rd party link set, there could be advantages in numerous cases,
-like different caching policies between the 2 origins and decoupling in general.
+Secondly, the document resource hints are very abstract and generic that probably are not sufficient
+for the client to parse them without some documentation.
+Our work makes use of MicroTypes that allows the API designer to offload such information
+to more specific formats, possible duplicated in multiple specs to support as many as possible
+clients, but also to let the clients select the most appropriate MicroType(s) for them.
 
-
-We think that linksets is anohter small piece towards a introspectiveness and hence we support such initiatives.
-However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
-
-### JSON home
+However we can't neglet the fact that finally people are finally recognizing the
+dissimilarity of browser-based, driven by humans clients and machine-based clients.
+In fact, **carving our infrastructure for machine-based clients to be similar with human-driven clients we
+undestimate their capabilities: machines can be much more powerful and smart than humans.**
 
 ### 12.4. RESTful API Description Languages
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
@@ -2662,3 +2680,37 @@ Final review:
 2. check code terms (RESTxx)
 3. check links
 4. check bolds
+
+
+12.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
+As we saw previously in Introspective MicroTypes, [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
+proposal tries to offload HTTP Link links from a resource or url, when having them in there is
+costly or even not possible for the server.
+
+>  Resources on the Web often convey typed Web Links [RFC5988] as a part
+>   of resource representations, for example, using the <link> element
+>   for HTML representations, or the "Link" header field in HTTP response
+>   headers for representations of any media type.  In some cases,
+>   however, providing links by value is impractical or impossible.  In
+>   these cases, an approach to provide links by reference (instead of by
+>   value) can solve the problem.  This specification defines the
+>   "linkset" relation type that allows to link resources to sets of
+>   links, thereby making it possible to represent links by reference,
+>   and not by value.
+>
+> --- [Linkset Internet-Draft](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
+>
+
+For instance, imagine that a resource needs to link a set of links that are managed by not the host owning the resource, but
+by a 3rd party origin.
+Another case scenario is when the Link header is overloaded by holding a large number of links that are needed to be inlcluded along with
+the resource and would result in HTTP error ("413 Request Entity Too Large" and "414 Request-URI Too Long").
+By providing a dereferancable link that points to the 3rd party link set, there could be advantages in numerous cases,
+like different caching policies between the 2 origins and decoupling in general.
+
+As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
+by the response representation and message format.
+Also, we think that `Link` HTTP header should carefully be used for related resources that if not all, most clients understand
+and care about and at the same time are application-independent.
+We think that linksets is anohter small piece towards a introspectiveness and hence we support such initiatives.
+However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
