@@ -1470,7 +1470,7 @@ according to its needs.
 That goes inline with Introspective REST, as the client, after receiving all the possible server options,
 uses the ones that best fit to its use case.
 As the RFC notes, such negotiation has the advantage of choosing the best combination of MicroTypes,
-because the client does the selection out of a predefined list that the server publishes.
+because the client does the selection, out of a predefined list that the server publishes.
 
 ### 10.2. Runtime MicroTypes
 Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
