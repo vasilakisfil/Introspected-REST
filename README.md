@@ -2500,8 +2500,8 @@ permitted methods, media types etc.
 **It should be noted that JSON Home it's one of the few specifications along with [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807)
 and possibly [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) that
 slide away from Roy's REST model and acknowledge the distinction between
-browser-based clients that are drived by real humans, and non-browser, machine based-clients that should
-be treated differently.**
+browser-based clients that are drived by real humans, and non-browser, machine based-clients and suggests
+that the latter should be treated differently.**
 
 As the draft notes the benefits of using such a home document are mutifold:
 >
