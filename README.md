@@ -1889,9 +1889,6 @@ the possibility to be extended by small components, MicroTypes.
 These small components, which could be different in each request, define functionalities of different parts of the API
 and such functionality is not always in the context of media formats as [RFC 6831](https://tools.ietf.org/html/rfc6838) indicates.
 
-It's not a breaking change per-se but it's good to have it in mind and push IETF to possibly reconsider it or alter it
-when patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
-
 ##### 10.5.4. Mixed priorities are confusing
 One more limitation comes from our MicroTypes definition through Media Type's parameters and is related to priorities
 between MicroTypes and parent Media Types.
