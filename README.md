@@ -14,7 +14,6 @@ yet it's much simpler to implement while at the same time being backwards compat
 As part of this _manifesto_ we will also present the concept of MicroTypes, small reusable modules that compose a Media Type and facilitates
 the evolvability and extensability of our new model.
 
-
 * [1. Definitions](#1-definitions)
 * [2. Introduction](#2-introduction)
 * [3. Networked Services and APIs](#3-networked-services-and-apis)
@@ -49,15 +48,15 @@ the evolvability and extensability of our new model.
   + [7.1. Our use case](#71-our-use-case)
     - [7.1.1. User resource](#711-user-resource)
     - [7.1.2. Users resource (a collection of User resources)](#712-users-resource-a-collection-of-user-resources)
-  + [7.2. JSONAPI](#72-jsonapihttpsjsonapiorg)
+  + [7.2. JSONAPI](#72-jsonapi)
     - [7.2.1. User resource](#721-user-resource)
     - [7.2.2. Users resource (a collection of User resources)](#722-users-resource-a-collection-of-user-resources)
     - [7.2.3. Reflections](#723-reflections)
-  + [7.3. HAL](#73-halhttpstoolsietforghtmldraft-kelly-json-hal-08)
+  + [7.3. HALHALHALHAL](#73-halhalhalhal)
     - [7.3.1. User resource](#731-user-resource)
     - [7.3.2. Users resource (a collection of User resources)](#732-users-resource-a-collection-of-user-resources)
     - [7.3.3. Reflections](#733-reflections)
-  + [7.4. Siren](#74-sirenhttpsgithubcomkevinswibersiren)
+  + [7.4. Siren](#74-siren)
     - [7.4.1. User resource](#741-user-resource)
     - [7.4.2. Users resource (a collection of User resources)](#742-users-resource-a-collection-of-user-resources)
     - [7.4.3. Reflections](#743-reflections)
@@ -94,13 +93,13 @@ the evolvability and extensability of our new model.
     - [9.3.3. Identifiable metadata of each Microtype](#933-identifiable-metadata-of-each-microtype)
     - [9.3.4. Discovery of API-wide capabilities and resources](#934-discovery-of-api-wide-capabilities-and-resources)
     - [9.3.5. Automatic documentation generation](#935-automatic-documentation-generation)
-* [10. **Introspected REST applied to HTTP**](#10-introspected-rest-applied-to-http)
+* [10. Introspected REST applied to HTTP](#10-introspected-rest-applied-to-http)
   + [10.1 Revisiting content negotiation in HTTP](#101-revisiting-content-negotiation-in-http)
   + [10.2. Runtime MicroTypes](#102-runtime-microtypes)
   + [10.3. Introspective MicroTypes](#103-introspective-microtypes)
     - [10.4.1 The HTTP OPTIONS method](#1041-the-http-options-method)
     - [10.4.2. Well-known URIs and JSON Home](#1042-well-known-uris-and-json-home)
-    - [10.4.3. **Link relation types through Link header**](#1043-provide-link-relation-types-through-link-header)
+    - [10.4.3. Link relations through HTTP Link header](#1043-link-relations-through-http-link-header)
   + [10.5. Considerations](#105-considerations)
     - [10.5.1 Diversifing from existing RFCs](#1051-diversifing-from-existing-rfcs)
       * [10.5.1. HTTP OPTIONS responses are not cacheable](#1051-http-options-responses-are-not-cacheable)
@@ -111,9 +110,10 @@ the evolvability and extensability of our new model.
   + [10.5.2. Performance considerations](#1052-performance-considerations)
 * [11. An Introspected REST API prototype in the world of HTTP and JSON](#11-an-introspected-rest-api-prototype-in-the-world-of-http-and-json)
   + [11.1. Isolating the actual data from metadata](#111-isolating-the-actual-data-from-metadata)
+  + [11.2 Introspection Method](#112-introspection-method)
   + [11.2. Runtime Metadata](#112-runtime-metadata)
-    - [11.2.1. **Pagination**](#1121-pagination)
-    - [11.2.2 **The Errors MicroType**](#1122-the-errors-microtype)
+    - [11.2.1. Pagination](#1121-pagination)
+    - [11.2.2 The Errors MicroType](#1122-the-errors-microtype)
   + [11.3. Introspective Metadata](#113-introspective-metadata)
     - [11.3.1. Structural metadata](#1131-structural-metadata)
       * [11.3.1.1. User resource](#11311-user-resource)
@@ -130,17 +130,16 @@ the evolvability and extensability of our new model.
       * [11.3.5.2. Considering it as runtime metadata](#11352-considering-it-as-runtime-metadata)
   + [11.7. Automating the documentation generation](#117-automating-the-documentation-generation)
 * [12. Related Work](#12-related-work)
-  + [12.1. **GraphQL**](#121-graphql)
+  + [12.1. GraphQL](#121-graphql)
   + [12.2. Linked Data and Semantic Web](#122-linked-data-and-semantic-web)
-    - [12.2.1. JSON-LD and HYDRA](#1221-json-ld-and-hydra)
-  + [12.3. **Web Linking and link relation types**](#123-web-linkinghttpstoolsietforghtmlrfc5988-and-link-relation-types)
-    - [12.3.2. **The 'profile' Link Relation Type**](#1232-the-profile-link-relation-typehttpstoolsietforghtmlrfc6906)
-    - [12.3.3. **Linksets (draft)**](#1233-linksetshttpstoolsietforghtmldraft-wilde-linkset-link-rel-02-draft)
-  + [ **JSON home** ](#json-home)
+    - [12.2.1. JSON-LD](#1221-json-ld)
+    - [12.2.2 Hydra](#1222-hydra)
+  + [12.3. The 'profile' Link Relation Type](#123-the-profile-link-relation-type)
+  + [JSON Home (draft)](#json-home-draft)
   + [12.4. RESTful API Description Languages](#124-restful-api-description-languages)
   + [12.5. API directories](#125-api-directories)
-* [ **Conclusion** ](#conclusion)
-  + [ **The future is full of posibilities** ](#the-future-is-full-of-posibilities)
+* [Conclusion](#conclusion)
+  + [The future is full of posibilities](#the-future-is-full-of-posibilities)
 
 ## 1. Definitions
 First some definitions, that we will use through the text:
@@ -2848,3 +2847,5 @@ Also, we think that `Link` HTTP header should carefully be used for related reso
 and care about and at the same time are application-independent.
 We think that linksets is anohter small piece towards a introspectiveness and hence we support such initiatives.
 However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
+
++ ADD LICENSE
