@@ -1769,24 +1769,6 @@ Link: <https://www.example.com/api/users/1?microtype=json-schema>; rel="microtyp
      method="options"; type="application/schema+json" name="json-ld",
 ```
 
-On a side note, [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that
-on HTTP status code 300 (Multiple Choices) which should be used for reactive negotiation,
-`Link` header is a good candidate for communicating the available options to the client, using the `alternate` link
-relation type.
-
->   Note: The original proposal for the 300 status code defined the
->   URI header field as providing a list of alternative
->   representations, such that it would be usable for 200, 300, and
->   406 responses and be transferred in responses to the HEAD method.
->   However, lack of deployment and disagreement over syntax led to
->   both URI and Alternates (a subsequent proposal) being dropped from
->   this specification.  It is possible to communicate the list using
->   a set of Link header fields [RFC5988], each with a relationship of
->   "alternate", though deployment is a chicken-and-egg problem.
->
-> --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
->
-
 
 Also related, Erik Wilde is working on an IETF draft, named [Link Relation Types for Web Services](https://tools.ietf.org/id/draft-wilde-service-link-rel-04.html)
 that defines a way to announce metadata of a resource through this mechanism.
