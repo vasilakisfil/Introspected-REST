@@ -614,14 +614,14 @@ For our message format, we will use JSON as it's the most popular but it could b
   * `microposts_count` an Integer
 
 So given those `REST` model properties we _could_ have the following routes:
-* `Users` resource (`/users`):
-  * List users (`GET /users`): Gets a collection of `User` resources
-  * Create a new user (`/users`): Creates a new `User` with the specified attributes.
+* `Users` resource (`/api/users`):
+  * List users (`GET /api/users`): Gets a collection of `User` resources
+  * Create a new user (`/api/users`): Creates a new `User` with the specified attributes.
 
-* `User` resource (`/users/{id}`):
-  * Get a user (`GET /users/{id}`): Gets the attributes of the specified `User`
-  * Update a user `PATCH /users/{id}`: Updates a `User` with the specified attributes
-  * Delete a user `DELETE /users/{id}`: Updates a `User` with the specified attributes
+* `User` resource (`/api/users/{id}`):
+  * Get a user (`GET /api/users/{id}`): Gets the attributes of the specified `User`
+  * Update a user `PATCH /api/users/{id}`: Updates a `User` with the specified attributes
+  * Delete a user `DELETE /api/users/{id}`: Updates a `User` with the specified attributes
 
 _`Users` and `User` are 2 distinct resources which are often, mistankingly, missthought as a single, one, resource.
 Also, the fact that `Users` is a collection of `User` objects is because it suits our needs but it doesn't have necessarily
@@ -701,12 +701,12 @@ API specs as of 2017 in terms of tools and libraries.
     "relationships":{
       "microposts":{
         "links":{
-          "related":"/api/v1/microposts?user_id=1"
+          "related":"/api/microposts?user_id=1"
         }
       },
       "likes":{
         "links":{
-          "related":"/api/v1/likes?user_id=1"
+          "related":"/api/likes?user_id=1"
         }
       }
     }
@@ -732,12 +732,12 @@ API specs as of 2017 in terms of tools and libraries.
       "relationships":{
         "microposts":{
           "links":{
-            "related":"/api/v1/microposts?user_id=1"
+            "related":"/api/microposts?user_id=1"
           }
         },
         "likes":{
           "links":{
-            "related":"/api/v1/likes?user_id=1"
+            "related":"/api/likes?user_id=1"
           }
         }
       }
@@ -755,21 +755,21 @@ API specs as of 2017 in terms of tools and libraries.
       "relationships":{
         "microposts":{
           "links":{
-            "related":"/api/v1/microposts?user_id=9124"
+            "related":"/api/microposts?user_id=9124"
           }
         },
         "likes":{
           "links":{
-            "related":"/api/v1/likes?user_id=9124"
+            "related":"/api/likes?user_id=9124"
           }
         }
       }
     }
   ],
   "links":{
-    "self":"/api/v1/users?page=1&per_page=10",
-    "next":"/api/v1/users?page=2&per_page=10",
-    "last":"/api/v1/users?page=3&per_page=10"
+    "self":"/api/users?page=1&per_page=10",
+    "next":"/api/users?page=2&per_page=10",
+    "last":"/api/users?page=3&per_page=10"
   }
 }
 ```
@@ -800,14 +800,14 @@ The resources of our use case that are presented here use JSON as a message form
 {
     "_links": {
         "self": {
-            "href": "/api/v1/users/{id}"
+            "href": "/api/users/{id}"
         },
         "microposts": {
-            "href": "/api/v1/microposts/user_id={id}",
+            "href": "/api/microposts/user_id={id}",
             "templated": true
         },
         "likes": {
-            "href": "/api/v1/likes/user_id={id}",
+            "href": "/api/likes/user_id={id}",
             "templated": true
         }
     },
@@ -824,7 +824,7 @@ The resources of our use case that are presented here use JSON as a message form
 {
    "_links":{
       "self":{
-         "href":"/api/v1/users"
+         "href":"/api/users"
       },
       "curries":[
          {
@@ -839,15 +839,15 @@ The resources of our use case that are presented here use JSON as a message form
          {
             "_links":{
               "self":{
-                "href":"/api/v1/users/{id}",
+                "href":"/api/users/{id}",
                 "templated": true
               },
               "microposts":{
-                "href":"/api/v1/microposts?user_id={id}",
+                "href":"/api/microposts?user_id={id}",
                 "templated": true
               },
               "likes": {
-                "href": "/api/v1/likes/user_id={id}",
+                "href": "/api/likes/user_id={id}",
                 "templated": true
               }
             },
@@ -859,15 +859,15 @@ The resources of our use case that are presented here use JSON as a message form
          }, {
             "_links":{
               "self":{
-                "href":"/api/v1/users/{id}",
+                "href":"/api/users/{id}",
                 "templated": true
               },
               "microposts":{
-                "href":"/api/v1/microposts?user_id={id}",
+                "href":"/api/microposts?user_id={id}",
                 "templated": true
               },
               "likes": {
-                "href": "/api/v1/likes/user_id={id}",
+                "href": "/api/likes/user_id={id}",
                 "templated": true
               }
             },
@@ -912,14 +912,14 @@ The resources of our use case that are presented here use JSON as a message form
       "name": "get-user",
       "title": "Get User",
       "method": "GET",
-      "href": "https://example.com/api/v1/users/1",
+      "href": "https://example.com/api/users/1",
       "type": "application/json",
     },
     {
       "name": "update-user",
       "title": "Update User",
       "method": "PUT",
-      "href": "https://example.com/api/v1/users/1",
+      "href": "https://example.com/api/users/1",
       "type": "application/json",
       "fields": [
         { "name": "name", "type": "text" },
@@ -929,14 +929,14 @@ The resources of our use case that are presented here use JSON as a message form
       "name": "delete-user",
       "title": "Get User",
       "method": "GET",
-      "href": "https://example.com/api/v1/users/1",
+      "href": "https://example.com/api/users/1",
       "type": "application/json",
     }
   ],
   "links":[
-    { "rel":["self"], "href":"https://example.com//api/v1/users/1" },
-    { "rel":["microposts"], "href":"/api/v1/microposts?user_id=1" }
-    { "rel":["likes"], "href":"/api/v1/likes?user_id=1" }
+    { "rel":["self"], "href":"https://example.com/api/users/1" },
+    { "rel":["microposts"], "href":"/api/microposts?user_id=1" }
+    { "rel":["likes"], "href":"/api/likes?user_id=1" }
   ]
 }
 ```
@@ -949,8 +949,8 @@ The resources of our use case that are presented here use JSON as a message form
   "entities":[
     {
       "class":["user"],
-      "rel":["https://example.com/v1/users/1"],
-      "href":"https://example.com/v1/users/1",
+      "rel":["https://example.com/users/1"],
+      "href":"https://example.com/users/1",
       "properties":{
         "name": "Filippos Vasilakis",
         "email": "vasilakisfil@gmail.com",
@@ -958,14 +958,14 @@ The resources of our use case that are presented here use JSON as a message form
         "micropostsCount": 50,
       },
       "links":[
-        { "rel":["self"], "href":"https://example.com//api/v1/users/1" },
-        { "rel":["microposts"], "href":"/api/v1/microposts?user_id=1" }
+        { "rel":["self"], "href":"https://example.com/api/users/1" },
+        { "rel":["microposts"], "href":"/api/microposts?user_id=1" }
       ]
     },
     {
       "class":["user"],
-      "rel":["https://example.com/v1/users/9124"],
-      "href":"https://example.com/v1/users/9124",
+      "rel":["https://example.com/users/9124"],
+      "href":"https://example.com/users/9124",
       "properties":{
         "email": "robert.clarsson@gmail.com",
         "name": "Robert Clarsson",
@@ -974,9 +974,9 @@ The resources of our use case that are presented here use JSON as a message form
         "microposts-count": 17,
       },
       "links":[
-        { "rel":["self"], "href":"https://example.com/api/v1/users/9124" },
-        { "rel":["microposts"], "href":"https://example.com/api/v1/microposts?user_id=9124" }
-        { "rel":["likes"], "href":"https://example.com/api/v1/likes?user_id=9124" }
+        { "rel":["self"], "href":"https://example.com/api/users/9124" },
+        { "rel":["microposts"], "href":"https://example.com/api/microposts?user_id=9124" }
+        { "rel":["likes"], "href":"https://example.com/api/likes?user_id=9124" }
       ]
     }
   ],
@@ -985,7 +985,7 @@ The resources of our use case that are presented here use JSON as a message form
       "name":"create-user",
       "title":"Create User",
       "method":"POST",
-      "href":"https://example.com/v1/users/",
+      "href":"https://example.com/users/",
       "type":"application/json",
       "fields": [
         { "name": "name", "type": "text" },
@@ -995,8 +995,8 @@ The resources of our use case that are presented here use JSON as a message form
     }
   ],
   "links":[
-    {"rel":["self"], "href":"https://example.com.api/v1/users"},
-    {"rel":["next"], "href":"https://example.com.api/v1/users?page=2"}
+    {"rel":["self"], "href":"https://example.com.api/users"},
+    {"rel":["next"], "href":"https://example.com.api/users?page=2"}
   ]
 }
 ```
@@ -2022,24 +2022,147 @@ Similarly, a `Users` resource will be a collection of `User` resources:
     "birth_date": "1940-11-10",
     "created-at": "2016-10-06T16:01:24Z",
     "microposts-count": 17,
-  }],
-  "meta": {
-    "page": 1,
-    "per_page": 2,
-    "offset": 0
-  }
+  }]
 }
 ```
-Given that the response should also contain pagination information,
-we add this runtime metadata under a `meta` attribute.
-
 The actual format of the data could vary regarding the root element or possibly the place of the primary id.
 Such details will be described by the Media Type.
 What is important here is that the **data does not contain any metadata**, apart from runtime metadata.
 
-### 11.2. Runtime Metadata
 
+### 11.2 Introspection Method
+For introspection method we will use the HTTP OPTIONS, as described in 10.4.4,
+but with the additional description of runtime metadata, which in our case do
+have some introspective content for the client to fetch.
+The specific semantics of this document will be described in the parent Media Type,
+but it would look like this:
+
+```json
+{
+  "runtime": {
+    "pagination": {
+      "url": "/api/users/1?microtype=pagination",
+      "method": "OPTIONS",
+      "content-type": "application/simple-pagination+json"
+    },
+    "errors": {
+      "url": "/api/users/1?microtype=errors",
+      "method": "OPTIONS",
+      "content-type": "application/simple-pagination+json"
+    }
+  },
+  "introspective": {
+    "JSON-Schema": {
+      "url": "/api/users/1?microtype=json-schema",
+      "method": "OPTIONS",
+      "content-type": "application/schema+json"
+    },
+    "RDF": {
+      "url": "/api/users/1?microtype=rdf",
+      "method": "OPTIONS",
+      "content-type": "application/rdf+xml"
+    },
+    "JSON-LD": {
+      "url": "api/users/1?microtype=json-ld",
+      "method": "OPTIONS",
+      "content-type": "application/ld+json"
+    }
+  }
+}
+```
+
+Each entry describes the url which the client can access it, the HTTP method
+the client should use along with the Media Type of the expected response.
+Note that the Media Type of the introspective content will be described
+by the MicroType the client tries to access.
+As a result, if a client doesn't recognize a MicroType, it wouldn't try to access
+it anyway.
+
+### 11.2. Runtime Metadata
 #### 11.2.1. Pagination
+It goes without sayng that when a client requests a collection of resources,
+it expects some kind of pagination with it.
+
+For pagination we have a number of different options.
+One option is to use the `Link` header and define the links there, in a representation-agnostic way.
+But given that our application is intended to powerful clients that would also parse the JSON body
+we wouldn't gain much, possibly we would make things even more complex for them.
+
+One possibility, with some inspiration from JSONAPI, is to use the `first`, `last`, `prev` and `next` to specify
+the first, last, previous and next page respectively.
+
+```json
+{
+  "users": [{
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count": 50
+  }, {
+    "id":"9124",
+    "email": "robert.clarsson@gmail.com",
+    "name": "Robert Clarsson",
+    "birth_date": "1940-11-10",
+    "created-at": "2016-10-06T16:01:24Z",
+    "microposts-count": 17,
+  }]
+  "meta":{
+    "self":"/api/users?page=2&per_page=10&offset=0",
+    "first":"/api/users?page=1&per_page=10&offset=0",
+    "prev":"/api/users?page=1&per_page=10&offset=0",
+    "next":"/api/users?page=2&per_page=10&offset=0",
+    "last":"/api/users?page=9&per_page=10&offset=0"
+  }
+}
+```
+
+Another, preferred possibility is to just specify
+the `page`, `per_page` and `offset` to the client and also provide a URI template to
+use with those values to access any page.
+
+```json
+{
+  "users": [{
+    "id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count": 50
+  }, {
+    "id":"9124",
+    "email": "robert.clarsson@gmail.com",
+    "name": "Robert Clarsson",
+    "birth_date": "1940-11-10",
+    "created-at": "2016-10-06T16:01:24Z",
+    "microposts-count": 17,
+  }]
+  "meta": {
+    "page": 2,
+    "per_page": 10,
+    "offset": 0
+  }
+}
+```
+
+We could provide the URI template when introspecting the pagination MicroType:
+```json
+{
+  "link": "/api/resource{?page, per_page, offset}"
+}
+```
+Of course, the MicroType spec would specify how the client should parse and determine
+the pagination links from this introspective content.
+
+
+Is that better solution? It depends, and that's why we should embrace MicroTypes.
+The first solution would limit the application developer if she wanted to have a link
+of a specific page, while the second solution would limit the API developer to avoid
+having the number of pages in the response, because it could be a huge cost to the database level.
+In any case, Introspected REST doesn't restrict you to specify two alternative MicroTypes for the same API
+functionality.
 
 #### 11.2.2 The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
