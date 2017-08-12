@@ -1845,6 +1845,10 @@ The authors of Introspected REST don't see the reasoning of this constraint by H
 the possibility of ingonring this limitation and proceed with HTTP OPTIONS introspection
 process that fits best to this architectural style.
 Eventually, that would lead the IETF to completely drop it from HTTP spec.
+Also, although the change itself could be considererd as breaking because we alter a
+functionality that [RFC 7231](https://tools.ietf.org/html/rfc7231) specifies,
+this alteration does not break existing clients but only the existing spec, because
+allowing clients to cache a response where previously was not valid, is backwards compatible.
 
 ##### 10.5.2. Media Type parameters must be very well defined beforehand
 According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
