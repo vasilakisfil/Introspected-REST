@@ -2552,7 +2552,7 @@ undestimate their capabilities: machines can be much more powerful and smart tha
 Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
-shouldn't even exist and thus such approach is fundamentaly wrong.
+shouldn't even exist and thus **such approach is fundamentaly wrong**.
 By giving so much weight on the documentation but at the same time treating it as something different, separated from the code
 leads to inconsistencies beteween the actual API and the API description.
 Those tools have been improved so much lately that now allow you to write the documentation and let them generate
