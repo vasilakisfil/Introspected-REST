@@ -1707,7 +1707,7 @@ the desired resource URL as a query in the `metadata` well-known URI registry:
 Again as with HTTP OPTIONS, the server will either have to provide a representation
 of the available MicroTypes inside the response body of the well-known URI or use the `Link` header.
 
-Althoug this solution could work, we feel that [RFC 5785](https://tools.ietf.org/html/rfc5785)
+Although this solution could work, we feel that [RFC 5785](https://tools.ietf.org/html/rfc5785)
 was not designed to be used for such specific URIs but instead for more generic properties
 that usually applie to all host's URIs.
 
