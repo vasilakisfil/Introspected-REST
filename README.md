@@ -2671,7 +2671,7 @@ In fact, **carving our infrastructure for machine-based clients to be similar wi
 undestimate their capabilities: machines can be much more powerful and smart than humans.**
 
 ### 12.4. RESTful API Description Languages
-Over tha past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
+Over the past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
 shouldn't even exist and thus **such approach is fundamentaly wrong**.
