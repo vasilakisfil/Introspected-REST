@@ -2540,6 +2540,8 @@ for the client to parse them without some documentation.
 Our work makes use of MicroTypes that allows the API designer to offload such information
 to more specific formats, possible duplicated in multiple specs to support as many as possible
 clients, but also to let the clients select the most appropriate MicroType(s) for them.
+we firmly believe that **an MicroType-based architecture is much more powerful than a simple,
+semantically identical for all APIs, JSON-specific, home document**.
 
 However we can't neglet the fact that finally people are finally recognizing the
 dissimilarity of browser-based, driven by humans clients and machine-based clients.
