@@ -2164,8 +2164,8 @@ that don't deal much with the conent but in practice such clients are very rary,
 The second solution would limit the application developer if she wanted to have a link
 of a specific page, while the last solution would limit the API developer to avoid
 having the number of total pages in the response, because it could be a huge cost to the database level.
-In any case, Introspected REST doesn't restrict you to specify two or more alternative MicroTypes for the same API
-functionality, like pagination.
+In any case, **Introspected REST doesn't restrict you to specify two or more alternative MicroTypes for the same API
+functionality**, like pagination.
 
 #### 11.2.2 The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
