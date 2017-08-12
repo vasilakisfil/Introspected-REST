@@ -1928,8 +1928,8 @@ we had were very minor to our understanding, all of them being backwards-compati
 Given that the whole HTTP, related protocols and implementations since its inception have always been based on proactive
 negotiation we think that these changes are affordable for our new model.
 Even when they are not affordable we feel that there are alternative ways to mitigate those limitations.
-But after all, IETF, W3C and related organizations usually are not preceding implementations but instead implementation
-affect and drives those specifications.
+But after all, IETF, W3C and related organizations usually are not preceding implementations but instead implementations
+affect and drive those specifications.
 If those organizations see that people are using the specifications differently than these have been defined, they should update them
 or create new ones, as long as these are backwards compatible, which they are in our case.
 
