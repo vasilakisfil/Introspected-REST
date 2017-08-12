@@ -1945,8 +1945,8 @@ However, according to Introspected REST, the client can cache all this informati
 which could be different for each MicroType.
 In that way, Introspected REST could possibly be more performant than regular REST because the client might have to actually
 request metadata very sparsely compared to actual data requests and given that the data responses will be much
-smaller than REST's equivelent responses (which would also hold all the necessary metadata), it should lead to better performance
-overall.
+smaller than REST's equivelent responses (which would also hold all the necessary metadata), **it should lead to better performance
+in the long run**.
 We should also note that Introspected REST is not ideal for all architectural styles and there could be cases that REST
 becomes a better choice than Introspected REST.
 Nevertheless, we feel that for most machine-to-machine communications Introspected REST is a better choice for all the advantages
