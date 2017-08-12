@@ -1706,7 +1706,8 @@ or defined by itself as a MicroType.
 The spec does not provide a scheme for well-known URIs per resource or nested URI and this means
 that we need to build something upon well-known URIs functionality in order to provide
 introspection per resource.
-How this will be achieved can be defined by the community but a possible implementation could be to pass
+How this will be achieved can be defined by the community, if used eventually,
+but a possible implementation could be to pass
 the desired resource URL as a query in the `metadata` well-known URI registry:
 ```
 /.well-known/metadata?query=/api/users/1
