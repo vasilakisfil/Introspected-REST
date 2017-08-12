@@ -2108,7 +2108,7 @@ the first, last, previous and next page respectively.
     "birth_date": "1940-11-10",
     "created-at": "2016-10-06T16:01:24Z",
     "microposts-count": 17,
-  }]
+  }],
   "meta":{
     "self":"/api/users?page=2&per_page=10&offset=0",
     "first":"/api/users?page=1&per_page=10&offset=0",
