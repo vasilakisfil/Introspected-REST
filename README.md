@@ -2168,7 +2168,7 @@ In any case, **Introspected REST doesn't restrict you to specify two or more alt
 functionality**, like pagination.
 
 #### 11.2.2 The Errors MicroType
-When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
+When the API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
 the response will have a different structure than the resource that the client requested.
 
 Usually the semantics of an error respond are defined in the API's Media Type but we will use the newly-published [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807),
