@@ -1654,10 +1654,18 @@ information by sending an `OPTIONS` request to the resource's url.
 ```
 The problem though is that such functionality (sending an `OPTIONS` request to `/api/users/1`) must be described
 somewhere so that the client knows where to look for it, possibly in the parent Media Type or using a MicroType.
+Another option is to use the `OPTIONS` request in combination with the `Link` header, as described later, that will announce
+the MicroTypes availability. Such functionality should still be described somewhere as
+the HTTP spec through RFC 7231 only makes a suggestion for the `Link` header usage.
 
-It is our intention to advice the community to use this solution for the introspection process.
+It is our intention to advice the community to use this solution for the introspection process, without the `Link` header
+but with a response body that describes the MicroTypes availability.
+The structure and semantics of the response could be available in various serializations and formats and the clients could
+specify their preference using the regular HTTP negotiation flow of Media Types.
 Although, as we will see later, it comes at a cost, we feel that it's the best among all three solutions presented here
 and the conceptual notion of OPTIONS method, as described by HTTP spec, matches very well with our intended use case.
+What is more, such process gives much more flexibility to append any additional information to the client, than
+an HTTP header.
 
 #### 10.4.2. Well-known URIs and JSON Home
 [RFC 5785](https://tools.ietf.org/html/rfc5785) defines a pre-defined URI for accessing server's various metadata:
