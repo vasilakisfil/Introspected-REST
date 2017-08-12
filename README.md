@@ -2719,3 +2719,7 @@ Hi,
 I admire your work you have done in various projects..++
 I would be happy if you could checkout and give some feedback in this little manifesto.
 At the moment it's only me in this.. but I do hope more people will come along and a community will rise :)
+
+should we use bold/emphasized, if yes where?
+is it a good idea that we are referring/talking to drafts?
+is it a good idea that we advice community ?
