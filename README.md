@@ -1751,7 +1751,7 @@ As the [next (draft) version of RFC 5988 notes](https://tools.ietf.org/html/draf
 > --- [rfc5988bis-07](https://tools.ietf.org/html/draft-nottingham-rfc5988bis-07)
 >
 
-As a result, this RFC provides us a representation-agnoistic mechanism through which we can
+As a result, this RFC provides us a representation-agnostic mechanism through which we can
 announce link relations of the current visitied URL, along with their relation types.
 For instance, the following example
 ```
