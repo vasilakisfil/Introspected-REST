@@ -1507,17 +1507,17 @@ For that, we will employ the Media Type parameters, a rarely used mechanism:
 An example of an imaginary Media Type with a couple of parameters for MicroTypes is:
 
 ```
-Accept: application/vnd.api+json; pagination=simple; querying=graphql;
+Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql;
 ```
 
 In the aforementioned example, the client asks for representation of `application/vnd.api+json`,
 (which as we have seen earlier it vageuly means a vendor application that follows the semantics of `api`, in JSON representation)
-but wants the pagination to follow the semantics of `simple` and the querying language of `graphql`.
+but wants the pagination to follow the semantics of `simple-spec` and the querying language of `graphql`.
 
 The client should be able to even set a preference order:
 
 ```
-Accept: application/vnd.api+json; pagination=simple; querying=graphql; querying=jsonapi;
+Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql; querying=jsonapi;
 ```
 Here the client shows preference to the imaginary `graphql` querying language but if that doesn't exist
 then it will accept the `jsonapi` querying language.
@@ -1526,7 +1526,7 @@ weight `q` parameter (also called quality value) as it applies to the MicroType 
 An example with multiple Media Types could be:
 
 ```
-Accept: application/vnd.api+json; pagination=simple; querying=graphql; querying=jsonapi, application/vnd.api2+json; pagination=simple; querying=jsonapi; querying=jsonapi; q=0.9
+Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql; querying=jsonapi, application/vnd.api2+json; pagination=simple-spec; querying=jsonapi; querying=jsonapi; q=0.9
 ```
 
 In this example the client shows preference to the `application/vnd.api+json` Media Type (it has default quality value of 1.0)
@@ -1536,7 +1536,7 @@ specific MicroTypes.
 
 If the server can provide only the less preferred Media Type with the less preferred quering it would answer:
 ```
-Content-Type: application/vnd.api2+json; pagination=simple; querying=graphql
+Content-Type: application/vnd.api2+json; pagination=simple-spec; querying=graphql
 ```
 
 
@@ -1880,21 +1880,21 @@ between MicroTypes and parent Media Types.
 Imagine the client is sending the following to the server:
 
 ```
-Accept: application/vnd.api+json; pagination=simple; querying=graphql; querying=jsonapi, application/vnd.api2+json;
+Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql; querying=jsonapi, application/vnd.api2+json;
 ```
 
 The client says that it wants to have either of the following 2:
 * `application/vnd.api+json` with the following MicroTypes
-  * `pagination=simple`
+  * `pagination=simple-spec`
   * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
 * `application/vnd.api2+json`
 
 Given this header, the client sets the priorities in the following order:
 1. `application/vnd.api+json` with the following MicroTypes
-  * `pagination=simple`
+  * `pagination=simple-spec`
   * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
 2. `application/vnd.api+json` with the following MicroTypes
-  * `pagination=simple`
+  * `pagination=simple-spec`
   * `querying=jsonapi` and if you don't have this, I am fine with `querying=jsonapi`
 3. `application/vnd.api2+json`
 
@@ -1903,7 +1903,7 @@ Having multilevel priorities is difficult in this context and could be solved on
 essentially flatting and removing the MicroTypes priority scheme that we showed and falling back to the classic Media Type negotiation:
 
 ```
-Accept: application/vnd.api+json; pagination=simple; querying=graphql, application/vnd.api2+json, application/vnd.api+json; pagination=simple; querying=jsonapi;
+Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql, application/vnd.api2+json, application/vnd.api+json; pagination=simple-spec; querying=jsonapi;
 ```
 In our experience though, negotiation in HTTP is not used that extensively (although it should): clients
 are usually prepared before hand for one Media Type (and its MicroTypes in our context).
