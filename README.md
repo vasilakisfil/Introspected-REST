@@ -1709,7 +1709,7 @@ of the available MicroTypes inside the response body of the well-known URI or us
 
 Although this solution could work, we feel that [RFC 5785](https://tools.ietf.org/html/rfc5785)
 was not designed to be used for such specific URIs but instead for more generic properties
-that usually apply to all host's URIs.
+that usually apply to all host's URIs, or to the host itself.
 
 
 #### 10.4.3. Provide link relation types through Link header
