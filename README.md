@@ -2139,7 +2139,7 @@ use with those values to access any page.
     "birth_date": "1940-11-10",
     "created-at": "2016-10-06T16:01:24Z",
     "microposts-count": 17,
-  }]
+  }],
   "meta": {
     "page": 2,
     "per_page": 10,
