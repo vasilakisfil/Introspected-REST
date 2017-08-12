@@ -1950,7 +1950,7 @@ in the long run**.
 We should also note that Introspected REST is not ideal for all API designs and there could be cases that REST
 becomes a better choice than Introspected REST.
 Nevertheless, we feel that for most machine-to-machine communications Introspected REST is a better choice for all the advantages
-it offers and possible more performant than REST.
+it offers and possibly more performant than REST.
 
 
 ## 11. An Introspected REST API prototype in the world of HTTP and JSON
