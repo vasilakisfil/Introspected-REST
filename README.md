@@ -1929,8 +1929,8 @@ Given that the whole HTTP, related protocols and implementations since its incep
 negotiation we think that these changes are affordable for our new model.
 Even when they are not affordable we feel that there are alternative ways to mitigate those limitations.
 But after all, IETF, W3C and related organizations usually are not preceding implementations but instead implementations
-affect and drive those specifications through those committees.
-If those organizations see that people are using the specifications differently than these have been defined, they should update them
+affect and drive these specifications.
+If IETF sees that people are using the specifications differently than these have been defined, they should update them
 or create new ones, as long as these are backwards compatible, which they are in our case.
 
 ### 10.5.2. Performance considerations
