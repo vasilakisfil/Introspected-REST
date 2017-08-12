@@ -1739,8 +1739,9 @@ As the [next (draft) version of RFC 5988 notes](https://tools.ietf.org/html/draf
 > a link published through `Link` header can be viewed as a statement of the form
 > "link context has a link relation type resource at link target, which has target attributes".
 >
-> --- [https://tools.ietf.org/html/draft-nottingham-rfc5988bis-07](https://tools.ietf.org/html/draft-nottingham-rfc5988bis-07)
+> --- [rfc5988bis-07](https://tools.ietf.org/html/draft-nottingham-rfc5988bis-07)
 >
+
 As a result, this RFC provides us a representation-agnoistic mechanism through which we can
 announce link relations of the current visitied URL, along with their relation types.
 For instance, the following example
