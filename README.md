@@ -1863,7 +1863,7 @@ According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type para
 >   in the vendor or personal trees.
 
 This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
-However we feel that given the sparse use of Media Types parameters, such breaking change will have a very small effect.
+However, we feel that given the sparse use of Media Types parameters, such breaking change will have a very small effect.
 The authors of Introspected REST advice the community to investigate the possibility of pushint IETF to drop this requirement,
 or extend Media Type parameters with specialized parameters that can be have arbiratry names.
 
