@@ -1904,16 +1904,16 @@ Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql; quer
 The client says that it wants to have either of the following 2:
 * `application/vnd.api+json` with the following MicroTypes
   * `pagination=simple-spec`
-  * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
+  * `querying=graphql` or alternatively `querying=jsonapi`
 * `application/vnd.api2+json`
 
 Given this header, the client sets the priorities in the following order:
 1. `application/vnd.api+json` with the following MicroTypes
   * `pagination=simple-spec`
-  * `querying=graphql` and if you don't have this, I am fine with `querying=jsonapi`
+  * `querying=graphql` or alternatively `querying=jsonapi`
 2. `application/vnd.api+json` with the following MicroTypes
   * `pagination=simple-spec`
-  * `querying=jsonapi` and if you don't have this, I am fine with `querying=jsonapi`
+  * `querying=jsonapi` or alternatively `querying=jsonapi`
 3. `application/vnd.api2+json`
 
 But how can the client prioritize (3) choice over (2) ?
