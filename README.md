@@ -2089,7 +2089,7 @@ One option is to use the `Link` header and define the links there, in a represen
 But given that our application is intended to powerful clients that would also parse the JSON body
 we wouldn't gain much, possibly we would make things even more complex for them.
 
-One possibility, with some inspiration from JSONAPI, is to use the `first`, `last`, `prev` and `next` to specify
+Another possibility, with some inspiration from JSONAPI, is to use the `first`, `last`, `prev` and `next` to specify
 the first, last, previous and next page respectively.
 
 ```json
@@ -2119,7 +2119,7 @@ the first, last, previous and next page respectively.
 }
 ```
 
-Another, preferred possibility is to just specify
+A different approach is to just specify
 the `page`, `per_page` and `offset` to the client and also provide a URI template to
 use with those values to access any page.
 
@@ -2158,12 +2158,14 @@ Of course, the MicroType spec would specify how the client should parse and dete
 the pagination links from this introspective content.
 
 
-Is that better solution? It depends, and that's why we should embrace MicroTypes.
-The first solution would limit the application developer if she wanted to have a link
-of a specific page, while the second solution would limit the API developer to avoid
-having the number of pages in the response, because it could be a huge cost to the database level.
-In any case, Introspected REST doesn't restrict you to specify two alternative MicroTypes for the same API
-functionality.
+Which is the best solution? It depends, and that's why we should embrace MicroTypes.
+The `Link` header-based solution is representation agnoistic and could benefit some clients
+that don't deal much with the conent but in practice such clients are very rary, especially in our use case.
+The second solution would limit the application developer if she wanted to have a link
+of a specific page, while the last solution would limit the API developer to avoid
+having the number of total pages in the response, because it could be a huge cost to the database level.
+In any case, Introspected REST doesn't restrict you to specify two or more alternative MicroTypes for the same API
+functionality, like pagination.
 
 #### 11.2.2 The Errors MicroType
 When there API is supposed to return an unexpected response to the user, like a 4xx or 5xx error,
