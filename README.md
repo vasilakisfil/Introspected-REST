@@ -2720,3 +2720,4 @@ At the moment it's only me in this.. but I do hope more people will come along a
 should we use bold/emphasized, if yes where?
 is it a good idea that we are referring/talking to drafts?
 is it a good idea that we advice community ?
+is diversify correct word ?
