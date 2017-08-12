@@ -680,8 +680,8 @@ We will evaluate the specs for the following:
 we also need to read and understand the documentation to develop our client
 * whether they require multi-fold human factor while the API evolves
 
-### 7.2. [JSONAPI](https://jsonapi.org)
-JSONAPI was originally created by [Yehuda Katz](https://yehudakatz.com/), as part of Ember's ember-data library.
+### 7.2. JSONAPI
+[JSONAPI](https://jsonapi.org) was originally created by [Yehuda Katz](https://yehudakatz.com/), as part of Ember's ember-data library.
 Since then a lot of people have contributed and has rised as one of the most supported
 API specs as of 2017 in terms of tools and libraries.
 
@@ -787,8 +787,8 @@ notable issues. Namely:
 To sum up, it doesn't entirely follow `REST` model while it requires both
 documentation and multi-fold human factor.
 
-### 7.3. [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)
-HAL was created by Mike Kelly in 2012.
+### 7.3. HALHALHALHAL
+[HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) was created by Mike Kelly in 2012.
 The key feature of HAL when it was released was the browsability/explorability of any API that adopted.
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
 However, this feature is rather controversial since the information these links provide are targeted for humans and not machines.
@@ -892,8 +892,8 @@ While the spec does have templated links, we see some notable issues. Namely:
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human factor (curies facilitate that).
 
-### 7.4. [Siren](https://github.com/kevinswiber/siren)
-Siren was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-addressable resource that has properties and actions associated with it.
+### 7.4. Siren
+[Siren](https://github.com/kevinswiber/siren) was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-addressable resource that has properties and actions associated with it.
 
 The resources of our use case that are presented here use JSON as a message format, but Siren is not tighed to that.
 
@@ -2577,10 +2577,11 @@ Hydra doesn't always require you to serve metadata on the side.
 In a custom context you might have to serve them runtime.
 
 
-### 12.3. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
+### 12.3. The 'profile' Link Relation Type
 Similar to [the profile media type parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html)
-that Toby A. Inkster had proposed in 2009, Erik Wilde suggested a profiling mechanism,
-of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
+that Toby A. Inkster had proposed in 2009, Erik Wilde suggested a profiling mechanism
+of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988), that was later
+published as [RFC 6906](https://tools.ietf.org/html/rfc6906).
 
 >  A profile is defined not to alter the
 >   semantics of the resource representation itself, but to allow clients
