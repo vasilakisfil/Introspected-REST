@@ -2214,14 +2214,20 @@ suggests using `application/problem+json` for Media Type.
 >
 > --- [RFC 7807](https://tools.ietf.org/html/rfc7807)
 >
-However in order for this to work the client needs to negotiate it and accept this Media Type.
+However in order for this to work the client needs to negotiate it and accept this Media Type,
+otherwise we have a gap in the client-server communication.
+The client' can't be asking for the API's Media Type and unexpectedly receiving the `application/problem+json`
+Media Type.
+
 In HTTP that would be achieved using the `Accept` header, which could look like that:
 ```
 application/vnd.api+json, application/problem+json
 ```
 
-But why declaring this Media Type as a MicroType?
-Given that such error information is crucial for the user to understand why her action is not advancing,
+But that reminds us the concept of MicroTypes, right?
+Even the negotiation looks very similar.
+
+To take one step further, given that such error information is crucial for the user to understand why her action is not advancing,
 we feel that the client should be able to **negotiate** the errors MicroType, that is, the information and structure of the
 returned errors object.
 Some clients might need the most basic error information, might use only the HTTP status code, other clients might
