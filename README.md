@@ -1813,7 +1813,7 @@ for related resources that all clients would understand**, which is not always t
 The API designer could add more MicroTypes, progressively as the time passes and simultaneously,
 some clients might not be interested or understand all MicroTypes of an Introspected REST.
 Requiring the client to receive all MicroType information when it does a simple request
-would be probably aginst the principles of Introspected REST.
+would probably be against the principles of Introspected REST.
 
 ### 10.5. Considerations
 #### 10.5.1 Diversifing from existing RFCs
