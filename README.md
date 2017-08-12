@@ -2569,8 +2569,6 @@ In a custom context you might have to serve them runtime.
 
 
 ### 12.3. [The 'profile' Link Relation Type](https://tools.ietf.org/html/rfc6906)
-+say about the [The Profile Media Type Parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html) (expired draft)
-
 Similar to [the profile media type parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html)
 that Toby A. Inkster had proposed in 2009, Erik Wilde suggested a profiling mechanism,
 of the underlying Media Type through the [HTTP Link header](https://tools.ietf.org/html/rfc5988).
