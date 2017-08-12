@@ -1924,7 +1924,7 @@ when eventually patterns for MicroTypes and parent Media Types for Introspected 
 
 ##### 10.5.5. The community should experiment
 To our knowledge we haven't broken any other HTTP-related specification for Introspected REST and the broken changes that
-we had were very minor to our understanding.
+we had were very minor to our understanding, all of them being backwards-compatible to existing clients.
 Given that the whole HTTP, related protocols and implementations since its inception have always been based on proactive
 negotiation we think that these changes are affordable for our new model.
 Even when they are not affordable we feel that there are alternative ways to mitigate those limitations.
