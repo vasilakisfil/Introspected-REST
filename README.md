@@ -1783,7 +1783,7 @@ but instead return an HTTP error possibly "413 Request Entity Too Large" or "414
 although there isn't one explicitly defined for such case.
 A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC
 (a work also by Erik Wilde) but currently it's in draft state.
-Once published, a linkset could group together a set of links under and provide them to the client by reference.
+Once published, a linkset could group together a set of links and provide them to the client by reference.
 However linksets don't actually solve our issue because eventually the MicroTypes announcement wouldn't
 be solved in the HTTP level as a LinkSet would have to provide a body as well.
 
