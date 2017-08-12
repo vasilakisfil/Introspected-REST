@@ -2665,7 +2665,7 @@ clients, but also to let the clients select the most appropriate MicroType(s) fo
 We firmly believe that **a MicroType-based architecture is much more powerful than a simple,
 semantically identical for all APIs, JSON-specific, home document**.
 
-However we can't neglet the fact that finally people are finally recognizing the
+However we can't neglect the fact that people are finally recognizing the
 dissimilarity of browser-based, driven by humans clients and machine-based clients.
 In fact, **carving our infrastructure for machine-based clients to be similar with human-driven clients we
 undestimate their capabilities: machines can be much more powerful and smart than humans.**
