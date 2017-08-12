@@ -2555,6 +2555,11 @@ for client bootstraping.
 
 
 ## Conclusion
+>  The best software architecture “knows” what changes often and makes that easy.
+>
+> --- Paul Clements
+>
+
 We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
 
@@ -2608,30 +2613,7 @@ and backwards compatible.
 The key thing here is backwards compatibility, because it allows you to incrementally add REST HATEOAS incrementally.
 
 
-RFC5988: A means of indicating the relationships between resources on the Web,
-   as well as indicating the type of those relationships, has been
-   available for some time in HTML [W3C.REC-html401-19991224], and more
-   recently in Atom [RFC4287].  These mechanisms, although conceptually
-   similar, are separately specified.  However, links between resources
-   need not be format specific; it can be useful to have typed links
-   that are independent of their serialisation, especially when a
-   resource has representations in multiple formats.
-Oh wait..we just figured out that having the links in there might not be the ideal.
-
-
-Final review:
-1. check paragraphs
-2. check code terms (RESTxx)
-3. check links
-4. check bolds
-
-who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik, I. Grigorik, mark nottigham, amdusen, MIKE AMUNDSEN
-
 The ratio of data/hypermedia of a resource
-
-add querying specific elements of an introspection (like links, attributes etc)
-
-Say that about custom capabilities like running functions or having an HTTP2 push. Say also that on metadata.
 
 #### 8.2.3. REST does not make it easy to integrate different APIs together
 Consider a product resource.
@@ -2642,34 +2624,8 @@ This not only decouples product resources from payment management; it also allow
 
 say about atom+json example!! A totally new Media Type that we need to manually understand..
 
->  The best software architecture “knows” what changes often and makes that easy.
->
-> --- Paul Clements
->
 
 ### What Introspected REST does in bullets
-* It simplifies REST
-  * Separates Data from Metadata
-* Gives more to metadata by providing information (vocabularly) to the clinet
-not only about hypermedia but also other metadata (like data types etc)
-* It embraces composability of different MicroTypes
-  * enhances negotiation
-* Fixes broken API negotiation (problem+json)
-* Say that ALPS and related stuff can still be applied, in a different way!
-* Say that MicroTypes is not for Hypermedia only but is **needed** for other micro-definitions as well!
-
-
-Say in intro that Media Types have reached their limits. For AI/evolvable apis we need more than that.
-
-Say about imaturity of rfcs/specs related to introspection (example: JSON schema v4 vs v5/v6)
-
-Add a note on unfinished RFCs
-
-https://www.mnot.net/blog/2012/10/29/NO_OPTIONS --- important !!
-
-say that this is hard work as REST is mentioned in HTTP RFCs !!!
-
-
 For introduction: There is a confusion of what REST is. REST is all about evolvability (copy blog post).
 We will start by analyzing and giving concrete definitions of what REST is.
 Then we will show REST's drawbacks explaining why REST never flew off, why people have been unconciously avoiding it.
@@ -2678,27 +2634,11 @@ We will propose a new model, alternative to REST. We will also present the conce
 + lately we have seen the rise of GraphQL? Say why, say in summury what it solves and why it lacks.
 Then introduce the new model.
 
-llllllimitations
-llllllimitations
-
-
-Note that delivering problem+json (a Media Type that was never negotiated) is a problem in REST API as well!
-2 issues
-
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
-The Content-Type header is limited up to 128 characters so we might need another header for that.
-Content-Type could describe the overall Media Type while Foo header could describe sub-media-types used to produce that Media Type.
-The communaity will choose the headers and implementation.
-
 + the profile link relation
-Surprisingly for each new link relation the 
-
-
 + I should say in the conclusion that all protocols are build upon REST so parametrizing them was a great challenge
-
-
 + say that emulating Machine2Machine communication with what the browser/human does when visiting a web page is a wrong approach
 Machines can be more powerful, smarter an decisive if we program them correctly.
++ Let's move forward to a world that machines are fisrt class citizens to our APIs and documentation is second class citizen.
 
 
 https://tools.ietf.org/html/draft-nottingham-json-home-02 Why non-browser clients? It seems like the
@@ -2706,8 +2646,8 @@ saying machines are just like browsers is not valid anymore (and was never valid
 
 Specs that slip away from REST: Linkset, JSON Home, HTTP Errors
 
+who to ping: https://www.mnot.net/ Eric Wilde, Roy, wycats, Stevel Klabnik, I. Grigorik, mark nottigham, amdusen, MIKE AMUNDSEN
 Hi,
-
 I admire your work you have done in various projects..++
 I would be happy if you could checkout and give some feedback in this little manifesto.
 At the moment it's only me in this.. but I do hope more people will come along and a community will rise :)
@@ -2716,3 +2656,9 @@ should we use bold/emphasized, if yes where?
 is it a good idea that we are referring/talking to drafts?
 is it a good idea that we advice community ?
 is diversify correct word ?
+
+Final review:
+1. check paragraphs
+2. check code terms (RESTxx)
+3. check links
+4. check bolds
