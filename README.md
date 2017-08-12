@@ -1546,8 +1546,8 @@ and the decisions they should take based on the current state and the input from
 They can provide information about the data types, RDF Schema of the resources, etc.
 Such MicroTypes should employ reactive negotiation.
 
-The question though is how can the server advertise the availability of MicroTypes for the client
-to introspect, in a representation-agnostic way.
+The question though is **how can the server advertise the availability of MicroTypes for the client
+to introspect.**
 Ideally we would like to inform the client for all possible options through HTTP instead of employing a serialization format.
 Unfortunately, the HTTP protocol doesn't say much about this type of negotiation, only that the status code when requesting
 such information should be 300 and `Link` relation header of [RFC 5988](https://tools.ietf.org/html/rfc5988) could be potentially used
@@ -1652,14 +1652,11 @@ information by sending an `OPTIONS` request to the resource's url.
   },
 }
 ```
-The problem though is that such functionality (`OPTIONS /api/users/1`) must be described
+The problem though is that such functionality (sending an `OPTIONS` request to `/api/users/1`) must be described
 somewhere so that the client knows where to look for it, possibly in the parent Media Type or using a MicroType.
-Another option is to have use the `Link` header, as described later, although in practice
-the functionality should still be described somewhere as the HTTP spec through [RFC 7231](https://tools.ietf.org/html/rfc7231)
-only makes a suggestion.
 
 It is our intention to advice the community to use this solution for the introspection process.
-Although, as we will see later, it comes at a cost, it's the best among all three solutions presented here
+Although, as we will see later, it comes at a cost, we feel that it's the best among all three solutions presented here
 and the conceptual notion of OPTIONS method, as described by HTTP spec, matches very well with our intended use case.
 
 #### 10.4.2. Well-known URIs and JSON Home
@@ -1701,7 +1698,7 @@ or defined by itself as a MicroType.
 The spec does not provide a scheme for well-known URIs per resource or nested URI and this means
 that we need to build something upon well-known URIs functionality in order to provide
 introspection per resource.
-How this will be achieved can be defined by the community but a possible implementation to pass
+How this will be achieved can be defined by the community but a possible implementation could be to pass
 the desired resource URL as a query in the `metadata` well-known URI registry:
 ```
 /.well-known/metadata?query=/api/users/1
@@ -1709,6 +1706,10 @@ the desired resource URL as a query in the `metadata` well-known URI registry:
 
 Again as with HTTP OPTIONS, the server will either have to provide a representation
 of the available MicroTypes inside the response body of the well-known URI or use the `Link` header.
+
+Althoug this solution could work, we feel that [RFC 5785](https://tools.ietf.org/html/rfc5785)
+was not designed to be used for such specific URIs but instead for more generic properties
+that usually applie to all host's URIs.
 
 
 #### 10.4.3. Provide link relation types through Link header
@@ -1739,7 +1740,7 @@ published through `Link` header can be viewed as a statement of the form
 "link context has a link relation type resource at link target, which has target attributes".
 As a result, this RFC provides us a representation-agnoistic mechanism through which we can
 announce link relations of the current visitied URL, along with their relation types.
-For instance, the following example (also taken from the RFC)
+For instance, the following example
 ```
 Link: <http://example.com/TheBook/chapter2>; rel="previous";
      title="previous chapter"
@@ -1782,32 +1783,37 @@ relation type.
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-This solution has the advantage of solving the MicroTypes announcement in the HTTP
-protocol without being tight to a specific serialization.
-However it does have a couple of drawbacks.
+
+Also related, Erik Wilde is working on an IETF draft, named [Link Relation Types for Web Services](https://tools.ietf.org/id/draft-wilde-service-link-rel-04.html)
+that defines a way to announce metadata of a resource through this mechanism.
+Taking also into account that this solution has has the advantage of solving the MicroTypes announcement in the HTTP
+protocol without being tight to a specific serialization, one would thing that it's the
+most appropriate way to specify the MicroTypes supported on a specific resource.
+
+Unfortunately, this solution has a couple of drawbacks.
 First and foremost, the link header size is limited and if other headers of the response
 are already overloaded then the server might refuse to render the response to the client
 but instead return an HTTP error possibly "413 Request Entity Too Large" or "414 Request-URI Too Long"
 although there isn't one explicitly defined for such case.
-A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
-RFC if published as it's currently in draft state.
-A linkset could group together a set of links under and provide them to the client by reference.
-However such solution would make things a bit more complex, and eventually the MicroTypes announcement wouldn't
-be solved in the HTTP level as a LinkSet would provide a body as well.
+A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC
+(a work also by Erik Wilde) but currently it's in draft state.
+Once published, a linkset could group together a set of links under and provide them to the client by reference.
+However linksets don't actually solve our issue because eventually the MicroTypes announcement wouldn't
+be solved in the HTTP level as a LinkSet would have to provide a body as well.
 
-The secondAt the time being, there is a draft RFC that is being developed to solve such issues: 
-The second
+Another issue is that the server cannot specify a caching for all links at once because there
+is no mechanism in HTTP which allows you to specify caching directives for specific headers only.
+As a result, unless we used a Linkset which we can't yet, the client would have to dereference all MicroTypes
+to figure out their caching properties.
 
-We solve the problem of having it representation/serialization-agnostic, however it limits us (+no Media Types, +use of linksets,
-feels like rel should be used for very specific, generic things and not overloaded, we are reluctant to suggest it but we
-leave the community to decide).
-
-- overloading, say about linksets, no Media Type, must be pre-defined.
-+ the rfc says "they only describe how the current context is related to another resource" so maybe not the right way?
-
-
-+ add quote for 300 in reactive negotiation ?
-
+Over the past few years, we have seen an explosion of link types used along with `Link` header defined by [RFC 5988](https://tools.ietf.org/html/rfc5988).
+The authors of Introspected REST are skeptical with this trend and feel that the `Link` header should
+not be overused.
+For instance, having more than 5 links in the `Link` header feels that something is wrong, probably too many things
+are defined in the Protocol level whereas maybe they should be defined somewhere else.
+We will let the community to decide if this approach is good for publishing MicroTypes but we would like to stress
+the point that having a link in the HTTP level through `Link` header might be better
+for related resources that all clients would understand.
 
 ### 10.5. Considerations
 #### 10.5.1 Diversifing from existing RFCs
