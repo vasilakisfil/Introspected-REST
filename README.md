@@ -1947,7 +1947,7 @@ In that way, Introspected REST could possibly be more performant than regular RE
 request metadata very sparsely compared to actual data requests and given that the data responses will be much
 smaller than REST's equivelent responses (which would also hold all the necessary metadata), **it should lead to better performance
 in the long run**.
-We should also note that Introspected REST is not ideal for all architectural styles and there could be cases that REST
+We should also note that Introspected REST is not ideal for all API designs and there could be cases that REST
 becomes a better choice than Introspected REST.
 Nevertheless, we feel that for most machine-to-machine communications Introspected REST is a better choice for all the advantages
 it offers and possible more performant than REST.
