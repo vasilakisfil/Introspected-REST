@@ -1901,12 +1901,6 @@ Imagine the client is sending the following to the server:
 Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql; querying=jsonapi, application/vnd.api2+json;
 ```
 
-The client says that it wants to have either of the following 2:
-* `application/vnd.api+json` with the following MicroTypes
-  * `pagination=simple-spec`
-  * `querying=graphql` or alternatively `querying=jsonapi`
-* `application/vnd.api2+json`
-
 Given this header, the client sets the priorities in the following order:
 1. `application/vnd.api+json` with the following MicroTypes
   * `pagination=simple-spec`
