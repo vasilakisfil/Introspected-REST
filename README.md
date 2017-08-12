@@ -1819,7 +1819,7 @@ would probably be against the principles of Introspected REST.
 #### 10.5.1 Diversifing from existing RFCs
 Although we have managed to apply Introspective REST to HTTP, a protocol that has been influenced so much
 by Roy's REST model (and
-vice verca) this adaptation comes to a cost: we need to "diversify" from some RFCs specifications that we make use of.
+vice verca) this adaptation comes to a cost: we need to diversify from some RFCs specifications that we make use of.
 Fortunately this diversification is relatively very small compared to the gains and all changes are
 backwards compatible with existing clients and specifications.
 
