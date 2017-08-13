@@ -2364,7 +2364,7 @@ Specifically we will use the draft [V4](https://tools.ietf.org/html/draft-luff-j
 next versions ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
 are HTML-equivelents. For instance, there is no way you can define a `method` attribute, restricting you to `GET` and `POST`
 depending whether there is a body to send or not.
-In the Introspected REST terminology, [V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)
+In the Introspected REST terminology, [V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00) and [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)
 provide hypermedia semantics only for forms and not actions.
 
 Resource schemas defined in the previous section are referenced by the following Hyper Schemas, in order to avoid
