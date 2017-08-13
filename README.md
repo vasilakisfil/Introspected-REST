@@ -2546,11 +2546,11 @@ given that in Introspected REST data and metadata should be distinctively separa
 
 
 ### 11.7. Automating the documentation generation
-The documentation of our API should be a dedicated page under out's API url namespace (i.e. `/api`),
+The documentation of our API should be a dedicated page under the API's URL namespace (i.e. `/api`),
 by returning a regular web page, targeted to humans and not machines.
-The technical details is out of the scope of this implementation example but we
-can't stress enough that the generated documentation should only use information from MicroTypes available for the machines,
-programmatically wrapped in a human-friendly format.
+The technical details is out of the scope of this prototype example but we
+can't stress enough that **the generated documentation should only use information from MicroTypes available for the machines,
+programmatically wrapped in a human-friendly format**.
 
 ## 12. Related Work
 ### 12.1. GraphQL
