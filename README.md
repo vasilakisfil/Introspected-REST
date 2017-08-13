@@ -2698,8 +2698,8 @@ but also, having tools that aim to provide all-in-one to the API designer is aga
 Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
 We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
 The API's root url should provide everyhing that is needed, or using already published protocols
-like WebFinger, which builds upon [Well-Known Uniform Resource Identifiers RFC](https://www.rfc-editor.org/rfc/rfc5785.txt) and can give API information
-for client bootstraping.
+like [WebFinger](https://tools.ietf.org/html/rfc7033), which builds upon [Well-Known Uniform Resource Identifiers RFC](https://www.rfc-editor.org/rfc/rfc5785.txt)
+and can give API information for client bootstraping.
 
 
 
