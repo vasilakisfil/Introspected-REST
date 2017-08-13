@@ -2666,17 +2666,21 @@ So again in our use case, we can specify some actions using Hydra:
 ```
 
 Again, Hydra's-specific content, like operations, can become dereferencable thus
-making response's load much smaller.
+making response's load much smaller, although this is not a requiremend as in
+Introspected REST.
 
 Although we support initiatives that allow developers to serve metadata on the side,
 like Hydra does with dereferencable content, we can't miss the fact that Hydra
-has become a very complex specification.
+has become a very complex specification and still it's type system is a weak one.
+We firmly believe that MicroTypes for actions (Hydra's equivelent to operations)
+will be much more powerful than hydra's semantics of required, writable, readable,
+and soon an API designer will be able to choose one MicroType from the same class of
+MicroTypes, like data types, that fits best for her.
+Specifications that try to define everything in one place, like Hydra does, limit
+the API designers a lot and eventually such specs
+deliver an mediocre set of choices to the API designer.
 Moreover, there could be cases where developers might have to provide the related
 metadata in runtime.
-Our approach of MicroTypes seems better.
-Not only it makes a better distinction between metadata and actual data but also
-it allows developers to mix different classes of MicroTypes together, as a software
-engineer would do using composition.
 
 ### 12.3. The 'profile' Link Relation Type
 Similar to [the profile media type parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html)
