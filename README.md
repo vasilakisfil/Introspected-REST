@@ -2214,7 +2214,7 @@ suggests using `application/problem+json` for Media Type.
 >
 However in order for this to work **the client needs to negotiate it and accept this Media Type,
 otherwise we have a gap in the client-server communication**.
-The client can't be asking for the API's Media Type and unexpectedly receiving the `application/problem+json`
+The client can't be asking for the API's Media Type and unexpectedly receive the `application/problem+json`
 Media Type.
 
 In HTTP that would be achieved using the `Accept` header, which could look like that:
