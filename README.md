@@ -1958,7 +1958,6 @@ In the following we will describe the architecture of the Introspected REST APIs
 a proposed implementation.
 The reader though should not confuse the proposed implementation details with the actual
 architecture style.
-
 **This is by no means a complete Media Type**, but just an example of the potential of Introspected REST.
 The actual MicroTypes and Media Types will be created by the community.
 
@@ -1971,7 +1970,6 @@ each representing a different MicroType.
 But the reader could apply the same ideas using any message format and spec.
 
 Our use case will be the same as the one in [section 7.1](#71-our-use-case), a minature of yet another Social App.
-
 Given that Introspected REST differs only in HATEOAS part of REST, the identification of the resources _should_ be kept the same, namely:
 * `Users` resource (`/users`):
   * List users (`GET /users`): Gets a collection of `User` resources
