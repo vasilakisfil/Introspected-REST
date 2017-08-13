@@ -1653,7 +1653,7 @@ information by sending an `OPTIONS` request to the resource's url.
 ```
 The problem though is that such functionality (sending an `OPTIONS` request to `/api/users/1`) must be described
 somewhere so that the client knows where to look for it, possibly in the parent Media Type or using another MicroType.
-Another option is to use the `OPTIONS` request in combination with the `Link` header, as described later, that will announce
+An alternative option is to use the `OPTIONS` request in combination with the `Link` header, as described later, that will announce
 the MicroTypes availability. Such functionality should still be described somewhere as
 the HTTP spec through RFC 7231 only makes a suggestion for the `Link` header usage.
 
