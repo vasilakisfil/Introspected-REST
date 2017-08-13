@@ -2608,8 +2608,8 @@ The resource ony needs to have the `vocab` attribute inside JSON-LD's `context`.
 ```
 
 In Introspected REST we embrace semantic web by employing the necessary MicroTypes
-and **we don't really feel that this work is related to us but instead, both concepts
-could complement each other**.
+and **we don't really feel that this work is related to Introspected REST in a competing sence
+but instead, both concepts could complement each other**.
 In fact, we feel that using linked data is just great and developers should employ it more often.
 
 #### 12.2.1 Hydra
