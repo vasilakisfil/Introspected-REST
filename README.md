@@ -2081,8 +2081,7 @@ it anyway.
 #### 11.2.1. Pagination
 It goes without sayng that when a client requests a collection of resources,
 it expects some kind of pagination with it.
-
-For pagination we have a number of different options.
+For pagination MicroType we have a number of different options.
 One option is to use the `Link` header and define the links there, in a representation-agnostic way.
 But given that our application is intended to powerful clients that would also parse the JSON body
 we wouldn't gain much, possibly we would make things even more complex for them.
