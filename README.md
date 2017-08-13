@@ -2668,7 +2668,7 @@ Again, Hydra's-specific content, like operations, can become dereferencable thus
 making response's load much smaller, although this is not a requiremend as in
 Introspected REST.
 
-Although we support initiatives that allow developers to serve metadata on the side,
+Although we support initiatives that allow API designers to serve metadata on the side,
 like Hydra does with dereferencable content, we can't miss the fact that Hydra
 has become a very complex specification and still it's type system is a weak one.
 We firmly believe that MicroTypes for actions (Hydra's equivelent to operations)
