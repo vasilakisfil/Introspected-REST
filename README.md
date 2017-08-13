@@ -2361,7 +2361,7 @@ distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 #### 11.3.2. Hypermedia metadata
 For the Hypermedia part we will use JSON Hyper Schemas.
 Specifically we will use the draft [V4](https://tools.ietf.org/html/draft-luff-json-hyper-schema-00) of JSON Hyper Schemas as the
-next drafts ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
+next versions ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
 are HTML-equivelents. For instance, there is no way you can define a `method` attribute, restricting you to `GET` and `POST`
 depending whether there is a body to send or not.
 
