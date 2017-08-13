@@ -1655,7 +1655,7 @@ The problem though is that such functionality (sending an `OPTIONS` request to `
 somewhere so that the client knows where to look for it, possibly in the parent Media Type or using another MicroType.
 An alternative option is to use the `OPTIONS` request in combination with the `Link` header, as described later, that will announce
 the MicroTypes availability. Such functionality should still be described somewhere as
-the HTTP spec through RFC 7231 only makes a suggestion for the `Link` header usage.
+[RFC 7231](https://tools.ietf.org/html/rfc7231) only makes a suggestion for the `Link` header usage.
 
 It is our intention to advice the community to use this solution for the introspection process, without the `Link` header
 but with a response body that describes the MicroTypes availability.
