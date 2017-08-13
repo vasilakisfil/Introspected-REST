@@ -2691,7 +2691,7 @@ Unfortunatey though, such approach leads to an RPC design instead of a hypermedi
 
 We believe that API designers are limited by marrying these tools.
 The tools themselves have limitations,
-but also, having tools that aim to provide all-in-one to the API designer is against our philosophy: tools that do one thing and do it well.
+but also, having tools that aim to provide all-in-one to the API designer is against our philosophy: tools should do one thing and do it well.
 
 
 ### 12.6. API directories
