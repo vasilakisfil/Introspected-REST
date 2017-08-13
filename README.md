@@ -2190,7 +2190,8 @@ We could add extension members, as the spec suggests, to customize the error obj
 self-descriptive, unless we customly extended it.
 
 
-The good thing though is that normally such errors should be caught by running the schema validations from the JSON Schema MicroType on the client side.
+The good thing though is that normally such errors should be caught on the client-side by the introspected MicroTypes for the resource structure,
+which in our use case are the schema validations from the [JSON Schema MicroType](#1131-structural-metadata).
 The error object could be used for more advanced errors, like the following:
 
 ```json
