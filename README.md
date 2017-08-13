@@ -1810,7 +1810,7 @@ are defined in the protocol level whereas maybe they should be defined somewhere
 We will let the community to decide if this approach is good for publishing MicroTypes but we would like to stress
 the point that **having a link in the HTTP level through `Link` header might be better
 for related resources that all clients would understand**, which is not always the case in Introspected REST.
-The API designer could add more MicroTypes, progressively as the time passes and simultaneously,
+The API designer could add more MicroTypes, progressively, as the time passes and simultaneously,
 some clients might not be interested or understand all MicroTypes of an Introspected REST.
 Requiring the client to receive all MicroType information when it does a simple data request
 would probably be against the principles of Introspected REST.
