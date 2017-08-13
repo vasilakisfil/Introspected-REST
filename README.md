@@ -135,11 +135,13 @@ the evolvability and extensability of our new model.
     - [12.2.1. JSON-LD](#1221-json-ld)
     - [12.2.2 Hydra](#1222-hydra)
   + [12.3. The 'profile' Link Relation Type](#123-the-profile-link-relation-type)
-  + [JSON Home (draft)](#json-home-draft)
-  + [12.4. RESTful API Description Languages](#124-restful-api-description-languages)
-  + [12.5. API directories](#125-api-directories)
-* [Conclusion](#conclusion)
-  + [The future is full of posibilities](#the-future-is-full-of-posibilities)
+  + [12.4 JSON Home (draft)](#124-json-home-draft)
+  + [12.5. RESTful API Description Languages](#125-restful-api-description-languages)
+  + [12.6. API directories](#126-api-directories)
+* [13. Conclusion](#13-conclusion)
+  + [13.1. The future is full of posibilities](#131-the-future-is-full-of-posibilities)
+  + [13.2. The future is in the hands of the community](#132-the-future-is-in-the-hands-of-the-community)
+
 
 ## 1. Definitions
 First some definitions, that we will use through the text:
