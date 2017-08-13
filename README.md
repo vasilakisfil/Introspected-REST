@@ -2677,7 +2677,7 @@ and soon an API designer will be able to choose one MicroType from the same clas
 MicroTypes, like data types, that fits best for her.
 Specifications that try to define everything in one place, like Hydra does, limit
 the API designers a lot and eventually such specs
-deliver an mediocre set of choices to the API designer.
+deliver an mediocre set of choices to choose from.
 Moreover, there could be cases where developers might have to provide the related
 metadata in runtime.
 
