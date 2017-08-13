@@ -1580,7 +1580,7 @@ mostly for historical reasons that date back to [RFC 2068](https://tools.ietf.or
 > --- [RFC 7231](https://tools.ietf.org/html/rfc7231)
 >
 
-To our knowledge, reactive negotiation hasn't been analyzed, used or suggested before.
+To our knowledge, **reactive negotiation has never been analyzed, used or suggested before**.
 Here, apart from `Link` relation header, we also suggest two more alternative implementation to solve
 this issue and we will let the community to choose what is the more appropriate solution.
 
