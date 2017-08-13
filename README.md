@@ -2558,15 +2558,125 @@ We are happy that people are trying new things and we support such initiatives.
 However it has some issues.
 
 ### 12.2. Linked Data and Semantic Web
+Linked data and semantic web has been trying to solve the problem of mutual understandment
+between machines.
+Using a pre-defined vocubulary, machines can determine the type of a resource, like if
+it's a person, an employee, an athlete or
+even the types of each attribute of a resource, like a name, an email etc.
+It a step close to have self-descriptive APIs that machines can understand and process.
+For instance, using JSON-LD as we say earlier, you can specify all attributes of a `User` resource:
 
-#### 12.2.1. JSON-LD
-#### 12.2.2 Hydra
-Using linked data in our APIs is just great.
-HYDRA is in the right direction to introspectable APIs.
+```json
+{
+  "user": {
+    "@context": {
+      "@vocab": "https://schema.org/",
+      "@type": "Person",
+      "birth_date": "birthDate",
+      "created_at": "dateCreated",
+      "microposts_count": null
+    }
+    "@id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
+}
+```
 
-Hydra doesn't always require you to serve metadata on the side.
-In a custom context you might have to serve them runtime.
+Moreover, modern specifications like JSON-LD allow developers to ommit
+the definitions from the response's data and instead provide only a link to
+a publicly accessible directory that a machine can dereference,
+similarly to our introspection method.
+The resource ony needs to have the `vocab` attribute inside JSON-LD's `context`.
 
+```json
+{
+  "user": {
+    "@context": {
+      "@vocab": "https://example.com/my-custom-schema/",
+    }
+    "@id":"685",
+    "email":"vasilakisfil@gmail.com",
+    "name":"Filippos Vasilakis",
+    "birth_date": "1988-12-12",
+    "created_at": "2014-01-06T20:46:55Z",
+    "microposts_count":50
+  }
+}
+```
+
+In Introspected REST we embrace semantic web by employing the necessary MicroTypes
+and **we don't really feel that this work is related to us but instead, both concepts
+could complement each other**.
+In fact, we feel that using linked data is just great and developers should employ it more often.
+
+#### 12.2.1 Hydra
+To that extend, Markus Lantaler developed Hydra, which not only allows you to associate
+common resources and attributes with their representation but also RESTful hypermedia
+concepts on them, like actions (called operations), links, status codes etc.
+
+So again in our use case, we can specify some actions using Hydra:
+
+```json
+{
+  "@context": [
+    "http://www.w3.org/ns/hydra/core",
+    {
+      "@vocab": "https://example.com/my-custom-user-vocab",
+      "@type": "Person",
+      "birth_date": "birthDate",
+      "created_at": "dateCreated",
+      "microposts_count": null
+    }
+  ],
+  "@id":"685",
+  "email":"vasilakisfil@gmail.com",
+  "name":"Filippos Vasilakis",
+  "birth_date": "1988-12-12",
+  "created_at": "2014-01-06T20:46:55Z",
+  "microposts_count":50,
+  "operation": {
+    "@type": "UpdateUser",
+    "method": "PATCH",
+    "expects": {
+      "@id": "https://example.com/my-custom-user-vocab",
+      "supportedProperty": [
+        {
+          "@type": "email",
+          "property": "email",
+          "required": false
+        },
+        {
+          "@type": "name",
+          "property": "name",
+          "required": false
+        },
+        {
+          "@type": "birthDate",
+          "property": "birth_date",
+          "required": false
+        }
+      ]
+    }
+  }
+}
+```
+
+Again, Hydra's-specific content, like operations, can become dereferencable thus
+making response's load much smaller.
+
+Although we support initiatives that allow developers to serve metadata on the side,
+like Hydra does with dereferencable content, we can't miss the fact that Hydra
+has become a very complex specification.
+Moreover, there could be cases where developers might have to provide the related
+metadata in runtime.
+Our approach of MicroTypes seems better.
+Not only it makes a better distinction between metadata and actual data but also
+it allows developers to mix different classes of MicroTypes together, as a software
+engineer would do using composition.
 
 ### 12.3. The 'profile' Link Relation Type
 Similar to [the profile media type parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html)
