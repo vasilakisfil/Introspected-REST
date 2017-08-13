@@ -1409,7 +1409,7 @@ to be served to the client.
 This hint-based mechanism, which according to [RFC 7231](https://tools.ietf.org/html/rfc7231) is called server-driven
 or proactive content negotiation, has been extensively used in HTTP protocol.
 In the context of MicroTypes and Introspected REST, using this mechanism, the client
-can negotiate for [runtime MicroTypes](): API functionalities that define semantics
+can negotiate for [runtime MicroTypes](#102-runtime-microtypes): API functionalities that define semantics
 for the runtime data and metadata.
 This type of MicroTypes, should tend to appear less often because
 if anything can be introspected on the side instead of runtime, it will be
@@ -1543,7 +1543,7 @@ Content-Type: application/vnd.api2+json; pagination=simple-spec; querying=graphq
 Introspective MicroTypes don't alter the semantics of request/response cycle but are still valuable to the client
 and the decisions they should take based on the current state and the input from the application developer.
 They can provide information about the data types, RDF Schema of the resources, etc.
-Such MicroTypes should employ reactive negotiation.
+Introspective MicroTypes should employ reactive negotiation.
 
 The question though is **how can the server advertise the availability of MicroTypes for the client
 to introspect.**
