@@ -134,7 +134,7 @@ the evolvability and extensability of our new model.
   + [12.2. Linked Data and Semantic Web](#122-linked-data-and-semantic-web)
     - [12.2.1 Hydra](#1221-hydra)
   + [12.3. The 'profile' Link Relation Type](#123-the-profile-link-relation-type)
-  + [12.4 JSON Home (draft)](#124-json-home-draft)
+  + [12.4. JSON Home (draft)](#124-json-home-draft)
   + [12.5. RESTful API Description Languages](#125-restful-api-description-languages)
   + [12.6. API directories](#126-api-directories)
 * [13. Conclusion](#13-conclusion)
@@ -2723,7 +2723,7 @@ the one that fits best.
 Although the negotiation part is skipped from the RFC, we feel that such works are towards the right direction that will allow us
 to build evolvable, self-described APIs.
 
-### 12.4 JSON Home (draft)
+### 12.4. JSON Home (draft)
 [JSON home](https://tools.ietf.org/html/draft-nottingham-json-home-02) is a draft specification
 that defines a "home document" format for non-browser HTTP clients to first request in order to discover
 the server's capabilities that it support.
