@@ -1834,7 +1834,7 @@ First and most importantly, according to [RFC 7231](https://tools.ietf.org/html/
 This is the biggest breaking change to existing HTTP specs that Introspected REST applies.
 Unfortunately for a reason unknown to us, HTTP spec requires the clients to not cache responses of
 HTTP OPTIONS, essentially breaking out thinking of detaches hypermedia and other metadata from plain data.
-In practice though, adding cache headers to denote to the client should be possible although
+In practice though, adding cache headers in that HTTP method should be possible although
 limittions by existing client implementations could exist.
 If an API designer doesn't want to break this part of HTTP spec then she should define the introspection
 process through the other suggested solutions, or come up with a new one.
