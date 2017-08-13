@@ -2030,7 +2030,7 @@ that we will describe later.
 
 
 ### 11.2 Introspection Method
-For introspection method we will use the HTTP OPTIONS, as described in 10.4.4,
+For introspection method we will use the HTTP OPTIONS, as described in [10.4.1](#1041-the-http-options-method),
 but with the additional description of runtime metadata, which in our case do
 have some introspective content for the client to fetch.
 The specific semantics of this document will be described in the parent Media Type,
