@@ -1385,17 +1385,9 @@ The way the documentation is requested and its format should be distincly define
 ## 10. Introspected REST applied to HTTP
 Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
 Here we will review the challenges that are rising through its adaptation in HTTP protocol.
-
-But how can the client can negotiate with the server the MicroTypes to be used ?
-Given that reactive-based negotiation has never been used, to our knowledge, we will present a possible
-implementations of that mechanism, with the least possible changes to the HTTP protocol.
-
-We need to specify the following:
-1. How the client informs the server its preferred Media Types along with the MicroTypes to be used with each Media Type
-2. How the server informs the selected Media Type along with the MicroTypes
-3. How the server informs the client the order of applicability when 2 MicroTypes define similar semantics, overlap or collide
-
-+ indentification/introspectiveness of MicroTypes
+For instance, we need to solve issues like MicroTypes for specific Media Type announcements,
+negotiation, priority order in case of overlaps or collisions, identification, and
+the actual introspection process in HTTP.
 
 ### 10.1 Revisiting content negotiation in HTTP
 As we have already seen, content negotiation in HTTP is achieved through `Accept` request header but it's not the
