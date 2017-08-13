@@ -52,7 +52,7 @@ the evolvability and extensability of our new model.
     - [7.2.1. User resource](#721-user-resource)
     - [7.2.2. Users resource (a collection of User resources)](#722-users-resource-a-collection-of-user-resources)
     - [7.2.3. Reflections](#723-reflections)
-  + [7.3. HALHALHALHAL](#73-halhalhalhal)
+  + [7.3. HAL](#73-hal)
     - [7.3.1. User resource](#731-user-resource)
     - [7.3.2. Users resource (a collection of User resources)](#732-users-resource-a-collection-of-user-resources)
     - [7.3.3. Reflections](#733-reflections)
@@ -786,7 +786,7 @@ notable issues. Namely:
 To sum up, it doesn't entirely follow `REST` model while it requires both
 documentation and multi-fold human factor.
 
-### 7.3. HALHALHALHAL
+### 7.3. HAL
 [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) was created by Mike Kelly in 2012.
 The key feature of HAL when it was released was the browsability/explorability of any API that adopted.
 Another feature is the idea of curies, links inside the resource that lead to the documentation.
