@@ -1788,7 +1788,7 @@ Unfortunately, this solution has a couple of drawbacks.
 First and foremost, the link header size is limited and if other headers of the response
 are already overloaded then the server might refuse to render the response to the client
 but instead return an HTTP error possibly "413 Request Entity Too Large" or "414 Request-URI Too Long"
-although there isn't one explicitly defined for such case.
+although there isn't an HTTP status code explicitly defined for such case.
 A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC proposal 
 (a work also by Erik Wilde) but currently it's in draft state.
 Once published, a linkset could group together a set of links and provide them to the client by reference.
