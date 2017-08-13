@@ -1691,7 +1691,7 @@ an HTTP header.
 >
 
 Using this specification, the server can register a well-known
-URI, that is expected to be the first URI the client requests to introspect.
+URI that is expected to be the first URI the client requests to introspect.
 To that extend, a new draft spec is being developed, [JSON Home](https://mnot.github.io/I-D/json-home/)
 that defines such document structure that provides all the server resources and capabilities.
 Regardless if JSON Home is used, well-known URIs can provide a way to introspect only the
