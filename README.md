@@ -1848,7 +1848,7 @@ Eventually, that would lead the IETF to completely drop it from HTTP spec.
 Also, although the change itself could be considererd as breaking because we alter a
 functionality that [RFC 7231](https://tools.ietf.org/html/rfc7231) specifies,
 this alteration does not break existing clients but only the existing spec, because
-allowing clients to cache a response where previously was not valid, is backwards compatible.
+allowing clients to cache a response, which previously was not allowed, is backwards compatible.
 
 ##### 10.5.2. Media Type parameters must be very well defined beforehand
 According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type parameters must be very well defined beforehand:
