@@ -1821,7 +1821,7 @@ Although we have managed to apply Introspective REST to HTTP, a protocol that ha
 by Roy's REST model (and
 vice verca) this adaptation comes to a cost: we need to diversify from some RFCs specifications that we make use of.
 Fortunately this diversification is relatively very small compared to the gains and all changes are
-backwards compatible with existing clients and specifications.
+backwards compatible with existing deployed clients.
 
 ##### 10.5.1. HTTP OPTIONS responses are not cacheable
 First and most importantly, according to [RFC 7231](https://tools.ietf.org/html/rfc7231):
