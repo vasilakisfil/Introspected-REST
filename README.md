@@ -2558,7 +2558,7 @@ However it has some issues.
 
 ### 12.2. Linked Data and Semantic Web
 Linked data and semantic web has been trying to solve the problem of mutual understandment
-between machines.
+between machines many years now.
 Using a pre-defined vocubulary, machines can determine the type of a resource, like if
 it's a person, an employee, an athlete or
 even the types of each attribute of a resource, like a name, an email etc.
