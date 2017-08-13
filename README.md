@@ -2613,7 +2613,7 @@ could complement each other**.
 In fact, we feel that using linked data is just great and developers should employ it more often.
 
 #### 12.2.1 Hydra
-To that extend, Markus Lantaler developed Hydra, which not only allows you to associate
+To that extend, Markus Lantaler developed Hydra, which not only allows us to associate
 common resources and attributes with their representation but also RESTful hypermedia
 concepts on them, like actions (called operations), links, status codes etc.
 
@@ -2914,6 +2914,8 @@ should we use bold/emphasized, if yes where?
 is it a good idea that we are referring/talking to drafts?
 is it a good idea that we advice community ?
 is diversify correct word ?
+I think I have mixed you/we and your/our. I prefer we/our but I can see that there could be cases where
+you/your could be a better choice.
 
 Final review:
 1. check paragraphs
