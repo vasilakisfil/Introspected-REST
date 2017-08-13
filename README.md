@@ -2563,7 +2563,7 @@ Using a pre-defined vocubulary, machines can determine the type of a resource, l
 it's a person, an employee, an athlete or
 even the types of each attribute of a resource, like a name, an email etc.
 It is a step close to have self-descriptive APIs that machines can understand and process.
-For instance, using JSON-LD as we say earlier, you can specify all attributes of a `User` resource:
+For instance, using JSON-LD as we saw earlier, we can specify all attributes of a `User` resource:
 
 ```json
 {
