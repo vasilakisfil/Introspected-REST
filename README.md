@@ -2230,9 +2230,6 @@ we feel that the client should be able to **negotiate** the errors MicroType, th
 returned errors object.
 Some clients might need the most basic error information, might use only the HTTP status code, other clients might
 be interested in as much possible information available in order to show it to the user.
-
-The word `MicroType` is used with it's conceptual meaning, that is, it's a real Media Type but
-it can be negotiated between the client/server communication, without affecting the API's Media Type.
 For instance, the client might show preference to another problems Media Type before falling back to `problem+json`, as
 seen in the following Accept header example:
 
