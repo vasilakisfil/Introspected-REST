@@ -1931,7 +1931,7 @@ Even when they are not affordable we feel that there are alternative ways to mit
 But after all, IETF, W3C and related organizations usually are not preceding implementations but instead implementations
 affect and drive these specifications through the committees.
 If IETF sees that people are using the specifications differently than these have been defined, they should update them
-or create new ones, as long as these are backwards compatible, which they are in our case.
+or create new ones, as long as these don't break the existing Internet infrastructure, which they definitely do not in our case.
 
 ### 10.5.2. Performance considerations
 Introspected REST adds some performance issues related to introspection process:
