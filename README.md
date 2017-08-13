@@ -2222,7 +2222,7 @@ In HTTP that would be achieved using the `Accept` header, which could look like 
 application/vnd.api+json, application/problem+json
 ```
 
-But that reminds us the concept of MicroTypes, right?
+But that reminds us the concept of (runtime) MicroTypes, right?
 Even the negotiation looks very similar.
 
 To take one step further, given that such error information is crucial for the user to understand why her action is not advancing,
