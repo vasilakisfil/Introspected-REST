@@ -2158,7 +2158,7 @@ the pagination links from this introspective content.
 Which is the best solution? It depends, and that's why we should embrace MicroTypes.
 The `Link` header-based solution is representation agnoistic and could benefit some clients
 that don't deal much with the conent but in practice such clients are very rary, especially in our use case.
-The second solution would limit the application developer if she wanted to have a link
+The second solution would limit the client application developer if she wanted to have a link
 of a specific page, while the last solution would limit the API developer to avoid
 having the number of total pages in the response, because it could be a huge cost to the database level.
 In any case, **Introspected REST doesn't restrict you to specify two or more alternative MicroTypes for the same API
