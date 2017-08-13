@@ -2618,7 +2618,7 @@ to build evolvable, self-described APIs.
 
 ### 12.4 JSON Home (draft)
 [JSON home](https://tools.ietf.org/html/draft-nottingham-json-home-02) is a draft specification
-that defines "home document" format for non-browser HTTP clients to first request in order to discover
+that defines a "home document" format for non-browser HTTP clients to first request in order to discover
 the server's capabilities that it support.
 Specifically, the document specifies semantics to describe the API itself (like author, documentation link etc)
 along with its resources.
