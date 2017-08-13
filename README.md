@@ -1797,7 +1797,8 @@ be solved in the HTTP level as a Linkset would have to provide a body format as 
 
 Another issue is that the server cannot specify a caching strategy for all links at once because there
 is no mechanism in HTTP which allows you to specify caching directives for specific headers only.
-As a result, unless we used a Linkset which we can't yet and would reverse `Link` header advantages,
+As a result, unless we used a Linkset which we can't yet and would cancel any advantages that `Link` header provides
+due to the need of a response body,
 the client would have to dereference all MicroTypes to figure out their caching properties.
 
 On a side note, over the past few years, we have seen an explosion of link types
