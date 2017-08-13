@@ -1663,7 +1663,7 @@ The structure and semantics of the response could be available in various serial
 specify their preference using the regular, proactive, HTTP negotiation flow of Media Types.
 Although, as we will see later, it comes at a cost, we feel that it's the best among all three solutions presented here
 and the conceptual notion of OPTIONS method, as described by HTTP specs, matches very well with our intended use case.
-What is more, such process gives much more flexibility to append any additional information to the client, than
+Furthermore, such process gives much more flexibility to append any additional information to the client, than
 an HTTP header.
 
 #### 10.4.2. Well-known URIs and JSON Home
