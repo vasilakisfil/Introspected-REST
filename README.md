@@ -2616,7 +2616,7 @@ the one that fits best.
 Although the negotiation part is skipped from the RFC, we feel that such works are towards the right direction that will allow us
 to build evolvable, self-described APIs.
 
-### JSON Home (draft)
+### 12.4 JSON Home (draft)
 [JSON home](https://tools.ietf.org/html/draft-nottingham-json-home-02) is a draft specification
 that defines "home document" format for non-browser HTTP clients to first request in order to discover
 the server's capabilities that it support.
@@ -2677,7 +2677,7 @@ dissimilarity of browser-based, driven by humans clients and machine-based clien
 In fact, **carving our infrastructure for machine-based clients to be similar with human-driven clients we
 undestimate their capabilities: machines can be much more powerful and smart than humans.**
 
-### 12.4. RESTful API Description Languages
+### 12.5. RESTful API Description Languages
 Over the past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
@@ -2694,7 +2694,7 @@ The tools themselves have limitations,
 but also, having tools that aim to provide all-in-one to the API designer is against our philosophy: tools that do one thing and do it well.
 
 
-### 12.5. API directories
+### 12.6. API directories
 Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
 We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
 The API's root url should provide everyhing that is needed, or using already published protocols
@@ -2703,7 +2703,7 @@ for client bootstraping.
 
 
 
-## Conclusion
+## 13. Conclusion
 >  The best software architecture “knows” what changes often and makes that easy.
 >
 > --- Paul Clements
@@ -2741,7 +2741,7 @@ We are open to any feedback here or as a github issue/PR :)
 The manifesto is still on draft stage, open for suggestions/feedback/pull requests and
 it will be locked in one year from now (already got introspected.rest domain for it :) )
 
-### The future is full of posibilities
+### 13.1. The future is full of posibilities
 **How do we negotiate to the client that a resource is available through HTTP/2 Stream Server Push without documentation ?**
 That requirement would be very impractical using a REST interface because everything would have to be in the same response.
 The profile RFC does not do a correct negotiation and it's problematic
@@ -2763,6 +2763,8 @@ The key thing here is backwards compatibility, because it allows you to incremen
 
 
 The ratio of data/hypermedia of a resource
+
+### 13.2. The future is in the hands of the community
 
 #### 8.2.3. REST does not make it easy to integrate different APIs together
 Consider a product resource.
