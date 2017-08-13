@@ -2585,7 +2585,7 @@ For instance, using JSON-LD as we saw earlier, we can specify all attributes of 
 }
 ```
 
-Moreover, modern specifications like JSON-LD allow developers to ommit
+Moreover, modern specifications like JSON-LD allow us to ommit
 the definitions from the response's data and instead provide only a link to
 a publicly accessible directory that a machine can dereference,
 similarly to our introspection method.
