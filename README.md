@@ -2575,7 +2575,7 @@ For instance, using JSON-LD as we say earlier, you can specify all attributes of
       "birth_date": "birthDate",
       "created_at": "dateCreated",
       "microposts_count": null
-    }
+    },
     "@id":"685",
     "email":"vasilakisfil@gmail.com",
     "name":"Filippos Vasilakis",
@@ -2596,8 +2596,8 @@ The resource ony needs to have the `vocab` attribute inside JSON-LD's `context`.
 {
   "user": {
     "@context": {
-      "@vocab": "https://example.com/my-custom-schema/",
-    }
+      "@vocab": "https://example.com/my-custom-schema/"
+    },
     "@id":"685",
     "email":"vasilakisfil@gmail.com",
     "name":"Filippos Vasilakis",
