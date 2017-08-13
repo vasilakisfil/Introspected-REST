@@ -2686,7 +2686,7 @@ By giving so much weight on the documentation but at the same time treating it a
 leads to inconsistencies beteween the actual API and the API description.
 Those tools have been improved so much lately that now allow you to write the documentation and let them generate
 the basis of your code, depending on your language/framework, which could fix the inconsistencies issues.
-However, unfortunatey such a approach leads to an RPC design instead of a hypermedia-based system.
+Unfortunatey though, such approach leads to an RPC design instead of a hypermedia-based system.
 
 
 We believe that API designers are limited by marrying these tools.
