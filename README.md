@@ -21,7 +21,7 @@ and extensibility of our new model.
 For the implemetation of our new model in HTTP, we will have to go back in time,
 dig deep in existing RFCs and uncover forgotten concepts, like reactive content
 negotiation and Media Type parameters, in order to bend the existing Internet
-infrastructure which has been mostly influenced by REST.
+infrastructure which has been mostly influenced by REST concepts.
 
 
 * [1. Definitions](#1-definitions)
@@ -2972,3 +2972,5 @@ We think that linksets is anohter small piece towards a introspectiveness and he
 However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
 
 + ADD LICENSE
++ add deprecations, querying language microtype reference in prototype
++ maybe add a Considerations equivelent to the same ?
