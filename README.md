@@ -1378,7 +1378,7 @@ Another example is the **detached evolvability** of each MicroType's metadata, i
 
 #### 9.3.4. Discovery of API-wide capabilities and resources
 An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all MicroTypes that are used API-wide along with
-all resources that can be accessed directly and other information that might be of interest
+other informational data, like resources that can be accessed directly, that might be of interest
 to the client.
 
 The location of this detailed list should be in the conceptual _root_ resource/URL of the API.
