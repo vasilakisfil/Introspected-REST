@@ -2057,17 +2057,17 @@ but it would look like this:
     }
   },
   "introspective": {
-    "JSON-Schema": {
+    "json-schema": {
       "url": "/api/users/1?microtype=json-schema",
       "method": "OPTIONS",
       "content-type": "application/schema+json"
     },
-    "RDF": {
-      "url": "/api/users/1?microtype=rdf",
+    "json-hyper-schema": {
+      "url": "/api/users/1?microtype=json-hyper-schema",
       "method": "OPTIONS",
-      "content-type": "application/rdf+xml"
+      "content-type": "application/schema+json"
     },
-    "JSON-LD": {
+    "json-ld": {
       "url": "api/users/1?microtype=json-ld",
       "method": "OPTIONS",
       "content-type": "application/ld+json"
@@ -2378,6 +2378,7 @@ provide hypermedia semantics only for forms and not actions.
 
 Resource schemas defined in the previous section are referenced by the following Hyper Schemas, in order to avoid
 duplication of our metadata.
+Such functionality would have to be described by both MicroTypes.
 
 ##### 11.3.2.1. User resource
 ```json
