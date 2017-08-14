@@ -2799,7 +2799,7 @@ As the draft notes the benefits of using such a home document are mutifold:
 Although we can instantly see the benefits of such structure, we believe that a specification like JSON Home
 is very weak. Specifically, it is tight in JSON message format which, although very popular, could possibly be
 inapropriate in some use cases.
-Instead, a better idea would be to define the necessary attributes that a Home document
+Instead, a better idea would be to define the necessary attributes and semantics that a Home document
 should provide and then let the API designer to choose if these will be implemented in JSON, XML or binary format.
 Such architecture would be more rebust and would give more options to an API designer.
 
