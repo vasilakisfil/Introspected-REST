@@ -16,9 +16,9 @@ that solves the issues that REST creates and allows the design of progressively 
 in a much simpler way than conventional REST.
 As part of this manifesto we will also present the **concept of MicroTypes**,
 small reusable modules that compose a Media Type and facilitate the evolvability
-and extensability of our new model.
+and extensibility of our new model.
 
-For the implemtation of our new model in HTTP, we will have to go back in time,
+For the implemetation of our new model in HTTP, we will have to go back in time,
 dig deep in existing RFCs and uncover forgotten concepts, like reactive content
 negotiation and Media Type parameters, in order to bend the existing Internet
 infrastructure which has been mostly influenced by REST.
@@ -165,7 +165,7 @@ We will use the term APIs and networked APIs interchangeably.
 ## 2. Introduction
 `REST` defined by Roy was a magnificent piece of work, much ahead of its time
 which took us 10+ years to understand what its capabilities are.
-However, now, almost 20 years later `REST` model shows its age. It's unflexibile,
+However, now, almost 20 years later `REST` model shows its age. It's inflexible,
 difficult to implement, difficult to test, with performance and implementation issues.
 But most importantly, **any implementation of `REST` model is _very_ complex**.
 Now, one could say that, most APIs are not build with mind to last for decades and maybe
@@ -176,7 +176,7 @@ not suitable for short-term APIs?
 We firmly believe that `REST` is much better than any API that does not follow `REST` principles
 (like `RESTly` APIs), even for short-term APIs.
 Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them
-(see [related Work](#related-work) for an explanation why GraphQL is not an equivelant alternative).
+(see [related Work](#related-work) for an explanation why GraphQL is not an equivalent alternative).
 **Being able to evolve your API without breaking the clients is critical.**
 
 Imagine the following scenario: you have built an Online Social Network and an iOS app that talks to the API on your backend.
@@ -257,12 +257,12 @@ Media Types can be a bit more complex as well: `application/vnd.api+json`, the m
 * the subtype is `vnd.api` which _roughly_ denotes the Media Type name
 * the underlying structure follows JSON semantics
 
-In theory, [JSONAPI](https://jsonapi.org/format) spec spemantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
+In theory, [JSONAPI](https://jsonapi.org/format) spec semantics could also be applied using XML as the data format (like in the case of [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)),
 or even YAML, however in practice we tend to forget that and we treat all Media Types as single and not composite.
 
 However, it should also be noted that the **Media Types and the content negotiation in general, are
 not restricted to HTTP only**.
-Although HTTP is one of the most popular application network protocols today, the same logics could be applied
+Although HTTP is one of the most popular application network protocols today, the same logic could be applied
 in other (mostly text-based) protocols like SIP, CoAP, QUIC etc.
 
 To sum up, the application level semantics are defined by the Media Type requested and should not be tightly coupled to the semantics of the
@@ -276,14 +276,14 @@ formats could successfully be used: XML, YAML, TOML to name a few.
 Usually the message format that is used is described by the Media Type's suffix.
 
 ### 3.3. Protocol level
-In the protcol level, the requests are usually sent using the HTTP.
+In the protocol level, the requests are usually sent using the HTTP.
 After all, nowadays most of the development happens around the Web and
 HTTP is the only protocol that browsers officially support.
 
 Nonetheless, there are other similar stateless protocols as well.
 QUIC is a HTTP alternative protocol that is targeted for low latency and uses UDP
 underneath.
-CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is quite heavy for constrainted devices).
+CoAP is targeted in the IoT and also uses UDP underneath (full TCP/IP stack is quite heavy for constraint devices).
 SIP is also a text-based protocol with the same semantics as HTTP and is used in VoIP.
 
 ### 3.4. Network level
@@ -303,7 +303,7 @@ if you need to add, remove or change functionality of that application
 Such problems that arise from the peculiarities of networks, like discovery and evolvability must be solved using
 machine-to-machine communication.
 
-`REST` model that solves such issues is an arhictectural style which is not tight to any spec, protocol or format of the
+`REST` model that solves such issues is an architectural style which is not tight to any spec, protocol or format of the
 aforementioned levels.
 
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
@@ -341,7 +341,7 @@ it would be impossible to derive REST.
 
 Subsequently, the next 4 constraints, the core of REST, is a result of the effort to obtain a _uniform interface_ between different components.
 
-### 4.2. All important resources are identifed by one resource identifer mechanism
+### 4.2. All important resources are identified by one resource identifier mechanism
 > induces simple, visible, reusable, stateless communication
 
 Roy explains that very well in his thesis:
@@ -363,7 +363,7 @@ Roy explains that very well in his thesis:
 ### 4.3. Resources are manipulated through the exchange of representations
 > induces simple, visible, reusable, cacheable, and evolvable (information hiding)
 
-The respresentation that you expose from your public API could be totally different from
+The representation that you expose from your public API could be totally different from
 your implementation internally or how the data are stored in your database.
 It could also be the same.
 Nevertheless the client expects and is expected to manipulate any resource using the representation
@@ -375,7 +375,7 @@ you expose.
 
 
 This would mean that the data of the response should follow the Media Type that the client
-requested and unrestands.
+requested and understands.
 Given that the client negotiated for that Media Type, **it should be able to parse and understand any part of the response**.
 
 > Interaction is stateless between requests, standard methods and Media Types are used to
@@ -387,7 +387,7 @@ Given that the client negotiated for that Media Type, **it should be able to par
 If your Media Type is very weak (like `application/json`) and you need functionality that the Media Type does not describe
 then you need to define another Media Type which will describe the new semantics and wait until client(s) incorporate the new Media Type changes.
 
-Breaking your Media Type's semantics, or just extending them with new functionality, will have exatly the same result for the client:
+Breaking your Media Type's semantics, or just extending them with new functionality, will have exactly the same result for the client:
 not self-descriptive messages that will require out-of-band information, like documentation.
 
 ### 4.5. Hypertext as the engine of application state (HATEOAS)
@@ -395,7 +395,7 @@ not self-descriptive messages that will require out-of-band information, like do
 > induces evolvable (loose coupling) via late binding of application transitions
 
 This is one of the most misunderstood parts of Roy's REST model. The idea here is that,
-once the client and server have reached a concensus on the Media Type after the negotiation,
+once the client and server have reached a consensus on the Media Type after the negotiation,
 the server's response should strictly provide all the available options for the client
 to manipulate the resource and navigate to other resources, using semantics defined by
 the Media Type agreed.
@@ -418,7 +418,7 @@ As Roy notes:
 >
 
 However, **one of the requirements for HATEOAS to work is that the Media Type itself _must_ allow
-to its vocubulary hypermedia.**
+to its vocabulary hypermedia.**
 For instance, with `application/json` Media Type this wouldn't work as JSON itself
 (`application/json` Media Type is nothing more than a JSON) does not provide any of those mechanisms.
 
@@ -432,7 +432,7 @@ semantics of our API.
 
 ## 5. API Clients and Applications
 
-### 5.1. Client and Application responibilities
+### 5.1. Client and Application responsibilities
 Client and Application responsibilities some times are mixed together.
 
 A client is responsible for understanding, interacting with the API and manipulating any API's resources, based on the Media Type's semantics
@@ -444,7 +444,7 @@ Instead, using the client, it should fetch whatever is needed by the application
 
 Think about the traditional home telephone devices.
 The phone wire and its signals is the API.
-The device used to enode/decode the wire signals is the API client.
+The device used to encode/decode the wire signals is the API client.
 On top of a device we can run our application.
 The PSTN, ISDN, (A)DSL etc are all different Media Types for the same API (wire signals).
 For each one, we need a client (device/modem) that will understand (encode/decode) the wire signals of that Media Type.
@@ -457,7 +457,8 @@ There are 2 types of human involvement when building an API client:
 client work for any API that follows that Media Type even when APIs evolve, given that it adhere in the Media Type specs.
 The only thing that the client requires is the initial URI of the API.
 * **multi-fold**: Programming the client once to understand the Media Type.
-Then modify the client to parse and understand the API correctly using some offline contract (i.e. documentation for available resources, fields, pagination etc) and then
+Then modify the client to parse and understand the API correctly using some offline contract
+(i.e. documentation for available resources, fields, pagination etc) and then
 every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
 during that phase depends on the weakness of the Media Type.
 
@@ -477,7 +478,7 @@ When engineering a REST API, there are 2 approaches:
 * design a specialized, usually UI-driven, API: the resources and their browsability is tightly coupled with the specific application that was built for
 * design a generic, usually data-driven, API: the resources are more generic and the API's capabilities allow a plethora of transformations.
 
-Specialized APIs could be more efficient, or have crucial advantegeous characteristics for the domain that were built for
+Specialized APIs could be more efficient, or have crucial advantageous characteristics for the domain that were built for
 since they are optimized only for that specific case.
 However, they pose difficulties when they need to be reused by any other application which does not share the same UI.
 As a result, such APIs are very special and a bit rare.
@@ -496,7 +497,7 @@ REST model is built for machine-to-machine communication, of any type.
 However, as this form of communication is getting more and more common,
 clients are expecting more options (capabilities) from the server for their responses.
 It's not enough to just request and get the resource but you should be able to specify
-to the server what transformations shoult apply, according to your needs.
+to the server what transformations should apply, according to your needs.
 
 Nowadays we have been using networked APIs so much that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
@@ -512,7 +513,7 @@ attributes for different clients, usually depending on the client's permissions 
 #### 6.1.2. Associations on demand (collection/resource)
 The client should be able to ask related associations to the main initial resource, in the same request.
 
-What deffirintiates an association from an attribute is that the former has
+What differentiates an association from an attribute is that the former has
 a dedicated identification. What is more, if the API exposes the association as a dedicated resource,
 the id can be used as identification.
 
@@ -555,7 +556,7 @@ in our API's Media Type or using HATEOAS ?
 What goes where?
 
 #### 6.2.1. Defining a new Media Type is not easy and should be avoided
-Creating a new Media Type for our API is genrally considered bad practice.
+Creating a new Media Type for our API is generally considered bad practice.
 Create a new Media Type only if you are sure that none of the already published
 Media Types can fit in your API design.
 
@@ -574,7 +575,7 @@ capabilities _in that specific resource_.
 Your API response would just explode in terms of size while making your API super complex.
 
 #### 6.2.3. Balancing between Media Types and HATEOAS
-The idea is that Media Types descibe the generic capabilities while HATEOAS
+The idea is that Media Types describe the generic capabilities while HATEOAS
 describe the resource-specific capabilities.
 
 However we should note that **Media Types are not parsed by the client** (there was never such intention anyway)
@@ -597,7 +598,7 @@ For instance, HATEOAS could describe on a per-resource basis if the pagination i
 
 #### 6.2.4. An alternative architecture
 We feel that the current Media Type specification and use is dated.
-If Software Engineering has learned us something, is that composition can enforce Single Responsibilty Principle, if used correctly.
+If Software Engineering has learned us something, is that composition can enforce Single Responsibility Principle, if used correctly.
 Inspired by that, later, we will suggest a new concept,  MicroTypes, small reusable modules that combined together can form a Media Type.
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
 
@@ -610,7 +611,7 @@ let's see the specs for REST(y) APIs available as today, April 2017, what they p
 closely follow the REST model.
 
 ### 7.1. Our use case
-Our use case is a minature of yet another Social App.
+Our use case is a miniature of yet another Social App.
 Specifically, in our API domain, we have a `User` resource which has other, associated resources, like `Micropost`, `Like`, etc
 
 For our message format, we will use JSON as it's the most popular but it could be anything like XML, YAML etc.
@@ -633,7 +634,7 @@ So given those `REST` model properties we _could_ have the following routes:
   * Update a user `PATCH /api/users/{id}`: Updates a `User` with the specified attributes
   * Delete a user `DELETE /api/users/{id}`: Updates a `User` with the specified attributes
 
-_`Users` and `User` are 2 distinct resources which are often, mistankingly, missthought as a single, one, resource.
+_`Users` and `User` are 2 distinct resources which are often, mistankenly, misthought as a single, one, resource.
 Also, the fact that `Users` is a collection of `User` objects is because it suits our needs but it doesn't have necessarily
 to be like that._
 
@@ -692,7 +693,7 @@ we also need to read and understand the documentation to develop our client
 
 ### 7.2. JSONAPI
 [JSONAPI](https://jsonapi.org) was originally created by [Yehuda Katz](https://yehudakatz.com/), as part of Ember's ember-data library.
-Since then a lot of people have contributed and has rised as one of the most supported
+Since then a lot of people have contributed and has risen as one of the most supported
 API specs as of 2017 in terms of tools and libraries.
 
 #### 7.2.1. User resource
@@ -905,7 +906,7 @@ To sum up, it doesn't entirely follow REST while it requires documentation and m
 ### 7.4. Siren
 [Siren](https://github.com/kevinswiber/siren) was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-addressable resource that has properties and actions associated with it.
 
-The resources of our use case that are presented here use JSON as a message format, but Siren is not tighed to that.
+The resources of our use case that are presented here use JSON as a message format, but Siren is not tight to that.
 
 #### 7.4.1. User resource
 ```json
@@ -1035,7 +1036,7 @@ the request and response.
   * Sorting/pagination, filtering and aggregation queries availability
   * data type of each attribute
   * default embedded associations and available associations to embed
-    * recusrively apply the same information for each association available for embedding
+    * recursively apply the same information for each association available for embedding
   * any other capability (HTTP/2 Server Push, event delivery etc)
 * About each resource sent to the API from the client
   * available actions on the resource
@@ -1043,7 +1044,7 @@ the request and response.
   * required attributes of a resource (attributes a resource _must_ before sending it over)
   * data types of the attributes (could be different from the resource found in the response)
   * associations that are required or can be embedded to the initial request
-    * recusrively apply the same information for each association available for embedding
+    * recursively apply the same information for each association available for embedding
 
 Although this list is not exhaustive, an architecture style is timeless anyway,
 we feel that the aforementioned capabilities ought to appear in an idealized modern REST API.
@@ -1072,7 +1073,7 @@ will support and follow, without taking on defaults. Some clients might want to 
 of the API (and as a result be evolvable) some other clients might want the 50%, some clients might be interested
 only in data.
 
-By outputing a whole bunch of hypermedia-related information to the clients that, after all, might never use
+By outputting a whole bunch of hypermedia-related information to the clients that, after all, might never use
 them is a bad practice.
 
 
@@ -1086,8 +1087,8 @@ temperature: 25
 ```
 
 This API _should_ be REST-compliant by not providing any API capabilities, hypermedia or actions.
-The imaginery Media Type `application/vnd.weather+yaml` is supposed to provide all the necessary information
-because otherwise the client would fail to udnerstand things like
+The imaginary Media Type `application/vnd.weather+yaml` is supposed to provide all the necessary information
+because otherwise the client would fail to understand things like
 
 * what are the attributes of the response
 * what is the data type of the temperature value (float, double, integer, bignum etc)
@@ -1144,7 +1145,8 @@ In REST, even if the hypermedia are rendered by taking into account the user's r
 The client however could only be interested in the data, or specific hypermedia types, like only links, but instead gets a fully bloated response by the server.
 
 #### 8.2.3. REST sacrifices performance for evolvability
-Complex or long-lived APIs tend to have many hypermedia data (links, actions, custom metadata) related to the resource itself, its associations and related resources.
+Complex or long-lived APIs tend to have many hypermedia data (links, actions, custom metadata)
+related to the resource itself, its associations and related resources.
 As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering
 and the client receiving and parsing.
 The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade,
@@ -1165,11 +1167,12 @@ different parts like hypermedia and data, however, in practice, this poses diffi
 #### 8.2.6. REST's power is limited by HTTP and related protocols (SIP, CoAP etc)
 Although REST is not dependent on any protocol or spec, the truth is that it has dominated in HTTP.
 As we [described earlier](#31-application-level), in protocols like HTTP, content negotiation between client and server is achieved using Media Types,
-which is the the only mechanism to define the semantics of a response.
-Given that composite Media Types never had real compositability, and the fact that they cannot be parsed by clients, there is a trade off between what should go to the Media Type and what to the actual response through
+which is the only mechanism to define the semantics of a response.
+Given that composite Media Types never had real composability, and the fact that they cannot be parsed by clients,
+there is a trade off between what should go to the Media Type and what to the actual response through
 hypermedia, as described in section [6.2.3](#623-balancing-between-media-types-and-hateoas).
 This limits the design flexibility and evolvability.
-As a result Media Types become big monoliths that are unflexible and limit the evolvability of the API.
+As a result Media Types become big monoliths that are inflexible and limit the evolvability of the API.
 
 ##### 8.2.6.1. No backwards compatible with any RESTly or RESTless API
 In a perfect world, APIs are built to be alive for many decades and clients are exploiting every little feature of the API and its Media Type.
@@ -1232,16 +1235,16 @@ Data is very volatile compared to other parts of a response.
 
 #### 9.1.2. Hypermedia
 Originally the hypermedia term was mostly used for linked data, in the sense of hyperlinks.
-In `REST`, eventually, it also includes information for interaction and resource manipilation.
+In `REST`, eventually, it also includes information for interaction and resource manipulation.
 Hypermedia can be dynamic or static but regardless **they are not considered part of the response data, because they define
 ways to interact with the data**.
 
 Hypermedia is a very broad term and needs to be broken down in different parts.
-Although there isn't any clear definition or concencus in the literature and the community, we will try to provide definitions and descriptions for
+Although there isn't any clear definition or consensus in the literature and the community, we will try to provide definitions and descriptions for
 all the different types of Hypermedia, according to our model's perception.
 
 ##### 9.1.2.1. Links
-The most basic class of hypermedia, basically URIs or IRIs that can be used to provide linking between releated resources to the primary resource.
+The most basic class of hypermedia, basically URIs that can be used to provide linking between related resources to the primary resource.
 The properties of a link, like placement inside the response, strictly follow the semantics of the Media Type agreed.
 
 ##### 9.1.2.2. Actions
@@ -1269,7 +1272,8 @@ Metadata could be **API-specific, resource-specific, action-specific or even obj
 There could also be different kinds of metadata: runtime (i.e. pagination information), structural (i.e. data types of a resource object),
 hypermedia (i.e. links, actions, forms), informational targeted to humans (i.e. general information, descriptions), etc.
 
-Usually metadata is much less volatile than data, if not static, except runtime metadata that depend on the request and the resource at the given time and state respectively.
+Usually metadata is much less volatile than data, if not static, except runtime metadata
+that depend on the request and the resource at the given time and state respectively.
 
 
 ### 9.2. MicroTypes: reusable modules composing a Media Type
@@ -1279,7 +1283,7 @@ Usually metadata is much less volatile than data, if not static, except runtime 
 > --- Roy Fielding, on [Twitter](https://twitter.com/fielding/status/769318894045507584), 27 Aug 2016
 >
 
-We have been talking so much about the concept of MicroTypes but what exatly are ?
+We have been talking so much about the concept of MicroTypes but what exactly are ?
 
 Currently, Media Types act as big monoliths that clients need to understand beforehand through human involvement.
 We believe that Media Types should be broken in smaller
@@ -1287,34 +1291,34 @@ reusable media types, MicroTypes, each describing very carefully a specific func
 The reasoning is that, in our experience, we have seen that different APIs and API specs define the same functionalities in similar,
 but not identical, ways.
 
-Examples of MicroTyes could be semantics for:
+Examples of MicroTypes could be semantics for:
 * pagination
 * querying over url (applying filters, aggregations, pagination/sorting on a resource),
-* resource/assotiation inclusion in the same response
+* resource/association inclusion in the same response
 * semantic/linked data
 * hypermedia actions (required fields, available fields),
-* data types and resource scehmas
+* data types and resource schemas
 * error information
 * and more advanced, like HTTP/2 server push for specific resources/states etc
 
 Each one of these could be defined as separate MicroTypes that specify in isolation how that part of the API works.
 At the same time they should be generic enough or follow some specific semantics so that it's possible to be referenced parent
-Media Types targetd for Introspected APIs.
+Media Types targeted for Introspected APIs.
 The parent Media Type doesn't need to know in advance all the MicroTypes that the API designer intends to use
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
-Instead, each MicroType should be attachable to a parent Media Type that defines introspected behaviour.
+Instead, each MicroType should be attachable to a parent Media Type that defines introspected behavior.
 
 #### 9.2.1. Benefits of MicroTypes
 The benefits when leveraging such architecture are multi-fold.
 
 ##### 9.2.1.1. Granular parameterization of API functionality by clients
 First, by allowing the client and server to do the regular negotiation flow even for those sub-media-types, the communication
-between the 2 ends is parametrized to the needs of the client, down to the semantics level.
+between the 2 ends is parameterized to the needs of the client, down to the semantics level.
 For instance, a server might provide 3 MicroTypes for error information, each one having different representation or semantics.
 By letting the server to decide the appropriate MicroType for the client by analyzing the client's incoming request,
 might not be efficient as the client can only send a part of its properties through the request, for various reasons like privacy concerns and performance,
 and thus the server has partial knowledge of the client's state and properties.
-The server has to make an arbiratry choice for the client, what it thinks it's thinks best, using this partial knowledge.
+The server has to make an arbitrary choice for the client, what it thinks it's thinks best, using this partial knowledge.
 
 Instead, by giving the client the option to negotiate parts of the API functionality, we shift the responsibility towards the client
 to select the best representation and semantics of various, isolated, API functionalities.
@@ -1336,7 +1340,7 @@ Imagine that we want to use an existing spec as a MicroType, like [JSON Schema](
 We cannot create a MicroType out of it with just a reference
 to the original spec because it lacks the context of the underlying protocol (like HTTP) and Media Type with which it will be
 used.
-It also lacks information about the requirements of the parent Media Type and the compatability with other MicroTypes.
+It also lacks information about the requirements of the parent Media Type and the compatibility with other MicroTypes.
 Instead, we need to extend the original spec with the necessary, additional, semantics in the context
 of Media Types.
 Those semantics should be as minimal as possible, with respect to the initial specification and without altering its core semantics
@@ -1389,7 +1393,7 @@ It should be noted that **this information must not be needed for a client to pa
 and even for humans such information should weight very little compared to the rest metadata.
 
 In the same way, the API should **automate the generation of the documentation using all metadata from all MicroTypes for every resource**.
-The way the documentation is requested and its format should be distincly defined by a MicroType or the parent Media Type.
+The way the documentation is requested and its format should be distinctly defined by a MicroType or the parent Media Type.
 
 ## 10. Introspected REST applied to HTTP
 Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
@@ -1404,7 +1408,7 @@ only header which can be used by the server to determine the appropriate represe
 `Accept-Charset`, `Accept-Encoding`, `Accept-Language` request headers can also be used.
 In practice, `User-Agent` header is also used by the server for choosing the right content for the client
 because it contains some device and agent characteristics, although it's not part of the negotiation standard headers.
-Lately even, a new draft stadard is being created, [HTTP Client Hints](http://httpwg.org/http-extensions/client-hints.html),
+Lately even, a new draft standard is being created, [HTTP Client Hints](http://httpwg.org/http-extensions/client-hints.html),
 that extends the HTTP with new request headers which indicate device and agent characteristics.
 The server uses all those headers as hints in order to determine the most suitable representation of the content
 to be served to the client.
@@ -1419,7 +1423,7 @@ if anything can be introspected on the side instead of runtime, it will be
 defined as non-runtime, introspective metadata.
 
 Interestingly, [RFC 7231](https://tools.ietf.org/html/rfc7231) notes that reactive negotiation has
-some serious disadvanteges:
+some serious disadvantages:
 
 >   Proactive negotiation has serious disadvantages:
 >
@@ -1475,7 +1479,7 @@ As the RFC notes, such negotiation has the advantage of choosing the best combin
 because the client does the selection out of a predefined list that the server publishes.
 
 ### 10.2. Runtime MicroTypes
-Runtime MicroTypes are targeted for API functonality that is used during the request/response cycle
+Runtime MicroTypes are targeted for API functionality that is used during the request/response cycle
 of plain data.
 Such functionality could be pagination, URI  querying language, error descriptions etc or it could even be
 semantics around the data itself.
@@ -1513,7 +1517,7 @@ Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql;
 ```
 
 In the aforementioned example, the client asks for representation of `application/vnd.api+json`,
-(which as we have seen earlier it vageuly means a vendor application that follows the semantics of `api`, in JSON representation)
+(which as we have seen earlier it vaguely means a vendor application that follows the semantics of `api`, in JSON representation)
 but wants the pagination to follow the semantics of `simple-spec` and the querying language of `graphql`.
 
 The client should be able to even set a preference order:
@@ -1536,7 +1540,7 @@ with specific preferences on MicroType level, as we explained above.
 However if this Media Type is not available then it will accept the next most preferred, `application/vnd.api2+json`, by requesting
 specific MicroTypes.
 
-If the server can provide only the less preferred Media Type with the less preferred quering it would answer:
+If the server can provide only the less preferred Media Type with the less preferred querying it would answer:
 ```
 Content-Type: application/vnd.api2+json; pagination=simple-spec; querying=graphql
 ```
@@ -1590,7 +1594,7 @@ this issue and we will let the community to choose what is the more appropriate 
 
 #### 10.4.1 The HTTP OPTIONS method
 The server can describe the meta-data of a resource in the response body of the `OPTIONS` request.
-In fact, OPTIONS method has historically been used for getting informtation on methods supported on a specific resource.
+In fact, OPTIONS method has historically been used for getting information on methods supported on a specific resource.
 
 According to [RFC 7231](https://tools.ietf.org/html/rfc7231) this method should be used to
 determine the capabilities of the server for the targeted resource:
@@ -1754,7 +1758,7 @@ As the [next (draft) version of RFC 5988 notes](https://tools.ietf.org/html/draf
 >
 
 As a result, this RFC provides us a representation-agnostic mechanism through which we can
-announce link relations of the current visitied URL, along with their relation types.
+announce link relations of the current visited URL, along with their relation types.
 For instance, the following example
 ```
 Link: <http://example.com/TheBook/chapter2>; rel="previous";
@@ -1794,8 +1798,8 @@ but instead return an HTTP error possibly "413 Request Entity Too Large" or "414
 although there isn't an HTTP status code explicitly defined for such case.
 A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC proposal 
 (a work also by Erik Wilde) but currently it's in draft state.
-Once published, a linkset could group together a set of links and provide them to the client by reference.
-However linksets don't actually solve our issue because eventually the MicroTypes announcement would not
+Once published, a Linkset could group together a set of links and provide them to the client by reference.
+However Linksets don't actually solve our issue because eventually the MicroTypes announcement would not
 be solved in the HTTP level as a Linkset would have to provide a body format as well.
 
 Another issue is that the server cannot specify a caching strategy for all links at once because there
@@ -1838,17 +1842,17 @@ This is the biggest breaking change to existing HTTP specs that Introspected RES
 Unfortunately for a reason unknown to us, HTTP spec requires the clients to not cache responses of
 HTTP OPTIONS, essentially breaking out thinking of detaches hypermedia and other metadata from plain data.
 In practice though, adding cache headers in that HTTP method should be possible although
-limittions by existing client implementations could exist.
+limitations by existing client implementations could exist.
 If an API designer doesn't want to break this part of HTTP spec then she should define the introspection
 process through the other suggested solutions, or come up with a new one.
 What is important though is that, as Introspected REST specifies, introspection process should be recognizably distinct from regular
 requests.
 
 The authors of Introspected REST don't see the reasoning of this constraint by HTTP spec and advise the community to investigate
-the possibility of ingonring this limitation and proceed with HTTP OPTIONS introspection
+the possibility of ignoring this limitation and proceed with HTTP OPTIONS introspection
 process that fits best to this architectural style.
 Eventually, that would lead the IETF to completely drop it from HTTP spec.
-Also, although the change itself could be considererd as breaking because we alter a
+Also, although the change itself could be considered as breaking because we alter a
 functionality that [RFC 7231](https://tools.ietf.org/html/rfc7231) specifies,
 this alteration does not break existing clients but only the existing spec, because
 allowing clients to cache a response, which previously was not allowed, is backwards compatible.
@@ -1865,10 +1869,10 @@ According to [RFC 6831](https://tools.ietf.org/html/rfc6838) any Media Type para
 >   specified as completely as possible when media types are registered
 >   in the vendor or personal trees.
 
-This goes against our concept of arbiratry number of autonomous MicroTypes that can be included by a parent Media Type parameters.
+This goes against our concept of arbitrary number of autonomous MicroTypes that can be included by a parent Media Type parameters.
 However, we feel that given the sparse use of Media Types parameters, such breaking change will have a very small effect.
 The authors of Introspected REST advice the community to investigate the possibility of pushing IETF to drop this requirement,
-or extend Media Type parameters with specialized parameters that can have arbiratry names.
+or extend Media Type parameters with specialized parameters that can have arbitrary names.
 
 ##### 10.5.3. Media Types must function as actual media formats
 Another thing that we differentiate is that according to same spec, each Media Type's
@@ -1920,7 +1924,7 @@ Accept: application/vnd.api+json; pagination=simple-spec; querying=graphql, appl
 In our experience though, negotiation in HTTP is not used that extensively (although it should): clients
 are usually prepared before hand for one Media Type (and its MicroTypes in our context).
 Thus, we don't think this will be an issue in practice, at least initially, until community embraces Introspectiveness and new standards are created
-solving these limimtations.
+solving these limitations.
 
 This is also not a breaking change per-se but it's good to have it in mind and possibly reconsider it or alter it
 when eventually patterns for MicroTypes and parent Media Types for Introspected REST APIs are settled down.
@@ -1948,7 +1952,7 @@ However, according to Introspected REST, the client can cache all this informati
 which could be different for each MicroType.
 In that way, Introspected REST could possibly be more performant than regular REST because the client might have to actually
 request metadata very sparsely compared to actual data requests and given that the data responses will be much
-smaller than REST's equivelent responses (which would also hold all the necessary metadata), **it should lead to better performance
+smaller than REST's equivalent responses (which would also hold all the necessary metadata), **it should lead to better performance
 in the long run**.
 We should also note that Introspected REST is not ideal for all API designs and there could be cases that REST
 becomes a better choice than Introspected REST.
@@ -1972,7 +1976,7 @@ and [`problem+json`](https://tools.ietf.org/html/rfc7807)
 each representing a different MicroType.
 But the reader could apply the same ideas using any message format and spec.
 
-Our use case will be the same as the one in [section 7.1](#71-our-use-case), a minature of yet another Social App.
+Our use case will be the same as the one in [section 7.1](#71-our-use-case), a miniature of yet another Social App.
 Given that Introspected REST differs only in HATEOAS part of REST, the identification of the resources _should_ be kept the same, namely:
 * `Users` resource (`/users`):
   * List users (`GET /users`): Gets a collection of `User` resources
@@ -2082,7 +2086,7 @@ it anyway.
 
 ### 11.2. Runtime Metadata
 #### 11.2.1. Pagination
-It goes without sayng that when a client requests a collection of resources,
+It goes without saying that when a client requests a collection of resources,
 it expects some kind of pagination with it.
 For pagination MicroType we have a number of different options.
 One option is to use the `Link` header and define the links there, in a representation-agnostic way.
@@ -2159,8 +2163,8 @@ the pagination links from this introspective content.
 
 
 Which is the best solution? It depends, and that's why we should embrace MicroTypes.
-The `Link` header-based solution is representation agnoistic and could benefit some clients
-that don't deal much with the conent but in practice such clients are very rary, especially in our use case.
+The `Link` header-based solution is representation-agnostic and could benefit some clients
+that don't deal much with the content but in practice such clients are very rare, especially in our use case.
 The second solution would limit the client application developer if she wanted to have a link
 of a specific page, while the last solution would limit the API developer to avoid
 having the number of total pages in the response, because it could be a huge cost to the database level.
