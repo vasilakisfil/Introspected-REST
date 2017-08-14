@@ -1211,7 +1211,7 @@ The model itself steps on Roy's initial `REST` model but with the difference tha
 runtime, **it provides them on the side, only if requested**.
 Hence, by keeping the _uniform interface_ the derived 3 out of 4 REST constraints that Roy defined still exist in this model:
 _identification of resources_; _manipulation of resources through representations_ and _self-descriptive messages_.
-However instead of having the constraint of _hypermedia as the engine of application state_ (HATEOAS), we have
+However, instead of having the constraint of _hypermedia as the engine of application state_ (HATEOAS), we have
 **_introspection as the engine of application state_ (IATEOAS)**.
 Moreover, the introspection process can provide other kind of information, apart from hypermedia and links, that
 can facilitate the client to take decisions on how to proceed with the application's requests.
