@@ -2193,7 +2193,7 @@ If you inspect the spec you will notice that **the spec limits us by omitting sp
 As a result, we can only specify the falsy attribute in the title or details attribute of the error object, which are human-targeted,
 and thus informing only the end user and not the client.
 We could add extension members, as the spec suggests, to customize the error object in our needs but the final response object wouldn't be
-self-descriptive, unless we customly extended it.
+self-descriptive, unless we customly extended it and wrap it in a [MicroType shim](#922-microtype-shims).
 
 
 The good thing though is that normally such errors should be caught on the client-side by the introspected MicroTypes for the resource structure,
