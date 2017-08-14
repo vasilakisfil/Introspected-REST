@@ -2225,7 +2225,7 @@ Media Type.
 
 In HTTP that would be achieved using the `Accept` header, which could look like that:
 ```
-application/vnd.api+json, application/problem+json
+Accept: application/vnd.api+json, application/problem+json
 ```
 
 But that reminds us the concept of (runtime) MicroTypes, right?
@@ -2242,7 +2242,7 @@ For instance, the client might show preference to another problems Media Type be
 seen in the following Accept header example:
 
 ```
-application/vnd.api+json, errors=problem/extensive+json, errors=problem+json;
+Accept: application/vnd.api+json, errors=problem/extensive+json, errors=problem+json;
 ```
 
 
