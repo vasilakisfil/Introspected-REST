@@ -2693,8 +2693,8 @@ So again in our use case, we can specify some actions using Hydra:
 }
 ```
 
-Again, Hydra's-specific content, like operations, can become dereferencable thus
-making response's load much smaller, although this is not a requiremend as in
+Again, **Hydra's-specific content, like operations, can become dereferencable thus
+making response's load much smaller**, although this is not a requiremend as in
 Introspected REST.
 
 Although we support initiatives that allow API designers to serve metadata on the side,
