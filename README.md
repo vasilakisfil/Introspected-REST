@@ -2044,34 +2044,46 @@ but it would look like this:
 
 ```json
 {
-  "runtime": {
-    "pagination": {
-      "url": "/api/users/1?microtype=pagination",
-      "method": "OPTIONS",
-      "content-type": "application/simple-pagination+json"
+  "micro-types": {
+    "runtime": {
+      "pagination": {
+        "url": "/api/users/1?microtype=pagination",
+        "method": "OPTIONS",
+        "content-type": "application/simple-pagination+json"
+      },
+      "errors": {
+        "url": "/api/users/1?microtype=errors",
+        "method": "OPTIONS",
+        "content-type": "application/simple-pagination+json"
+      }
     },
-    "errors": {
-      "url": "/api/users/1?microtype=errors",
-      "method": "OPTIONS",
-      "content-type": "application/simple-pagination+json"
+    "introspective": {
+      "json-schema": {
+        "url": "/api/users/1?microtype=json-schema",
+        "method": "OPTIONS",
+        "content-type": "application/schema+json"
+      },
+      "json-hyper-schema": {
+        "url": "/api/users/1?microtype=json-hyper-schema",
+        "method": "OPTIONS",
+        "content-type": "application/schema+json"
+      },
+      "json-ld": {
+        "url": "/api/users/1?microtype=json-ld",
+        "method": "OPTIONS",
+        "content-type": "application/ld+json"
+      },
+      "simple-description": {
+        "url": "/api/users/1?microtype=simple-description",
+        "method": "OPTIONS",
+        "content-type": "application/json"
+      }
     }
   },
-  "introspective": {
-    "json-schema": {
-      "url": "/api/users/1?microtype=json-schema",
-      "method": "OPTIONS",
-      "content-type": "application/schema+json"
-    },
-    "json-hyper-schema": {
-      "url": "/api/users/1?microtype=json-hyper-schema",
-      "method": "OPTIONS",
-      "content-type": "application/schema+json"
-    },
-    "json-ld": {
-      "url": "api/users/1?microtype=json-ld",
-      "method": "OPTIONS",
-      "content-type": "application/ld+json"
-    }
+  "documentation": {
+    "url": "/documentation#user",
+    "method": "GET",
+    "content-type": "text/html"
   }
 }
 ```
