@@ -2707,8 +2707,6 @@ MicroTypes, like data types, that fits best for her.
 Specifications that try to define everything in one place, like Hydra does, limit
 the API designers a lot and eventually such specs
 deliver an mediocre set of choices to choose from.
-Moreover, there could be cases where developers might have to provide the related
-metadata in runtime.
 
 ### 12.3. The 'profile' Link Relation Type
 Similar to [the profile media type parameter](https://buzzword.org.uk/2009/draft-inkster-profile-parameter-00.html)
