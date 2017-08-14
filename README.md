@@ -2256,7 +2256,8 @@ One of the most important things for a client to know is the expected structure 
 along with information on the data types.
 For that we will use JSON Schemas, a powerful spec that enables you to describe and validate your JSON data.
 
-Given that this specification has been published as an Internet-Draft and its popularity it is very probable that there _is_
+Given that this specification has been published using the RFC method and taking into account its popularity,
+it is very probable that there _is_
 an implementation for that MicroType for the client's environment.
 Also, a cool side effect of having the structure definition of the resource as a MicroType available through resource's introspection,
 is that the client can use this information to first validate the object before sending it over the wire to the server.
