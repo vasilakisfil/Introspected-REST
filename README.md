@@ -1,11 +1,6 @@
 # Introspected REST: An alternative to REST and GraphQL
 (Sliding away from Roy's `REST` model)
 
-What is REST?
-Unfortunately, although REST acronym has become so popular,
-the majority of API designers fail to understand what REST brings into the table
-and when it is needed.
-
 In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
 and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
 We will see what problems a RESTful API brings why API designers have been constantly
