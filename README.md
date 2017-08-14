@@ -1321,7 +1321,7 @@ to select the best representation and semantics of various, isolated, API functi
 Given that the client can know much more about its needs than the server, it will make the best available choice
 for each API functionality, from the server's options, which eventually will lead to the optimized combination of
 MicroTypes.
-As we will see later, this is called reactive negotiation, a forgotten but still valid negotiation mechanism in HTTP protocol.
+As we will see later, in HTTP protocol, this is called reactive negotiation, a forgotten but still valid negotiation mechanism.
 
 ##### 9.2.1.2. Reusability
 Secondly, the MicroTypes specs and possibly implementations can be re-used by both the servers and clients.
