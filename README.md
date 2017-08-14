@@ -1,18 +1,29 @@
 # Introspected REST: An alternative to REST and GraphQL
 (Sliding away from Roy's `REST` model)
 
-There has been a great confusion of what a `REST` API is.
-Most people think that `REST` API is just a CRUD over HTTP.
-Or a CRUD with some links.
-Or a nicely formatted, a sophisticated CRUD.
+What is REST?
+Unfortunately, although REST acronym has become so popular,
+the majority of API designers fail to understand what REST brings into the table
+and when it is needed.
 
 In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
 and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
-Then, we will propose a **new model** that brings into the table the same things,
-yet it's much simpler to implement while at the same time being backwards compatible with any current (sane) API.
+We will see what problems a RESTful API brings why API designers have been constantly
+avoiding using it but instead come up with half-way solutions or fall back to alternative
+models like RPC or, lately, GraphQL.
+Then, we will propose a new model, Introspected REST,
+that solves the issues that REST creates and allows the design of progressively evolvable APIs,
+in a much simpler way than conventional REST.
+As part of this manifesto we will also present the concept of MicroTypes,
+small reusable modules that compose a Media Type and facilitate the evolvability
+and extensability of our new model.
 
-As part of this _manifesto_ we will also present the concept of MicroTypes, small reusable modules that compose a Media Type and facilitates
-the evolvability and extensability of our new model.
+For the implemtation of our new model in HTTP, we will have to go back in time,
+dig deep in existing RFCs and uncover forgotten concepts, like reactive content
+negotiation and Media Type parameters, in order to bend the existing Internet
+infrastructure, which has been mostly built upon REST, and successfully use
+our new model.
+
 
 * [1. Definitions](#1-definitions)
 * [2. Introduction](#2-introduction)
