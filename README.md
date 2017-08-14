@@ -1654,7 +1654,7 @@ information by sending an `OPTIONS` request to the resource's url.
     "url": "api/users/1?microtype=json-ld",
     "method": "OPTIONS",
     "content-type": "application/ld+json"
-  },
+  }
 }
 ```
 The problem though is that such functionality (sending an `OPTIONS` request to `/api/users/1`) must be described
