@@ -1379,7 +1379,7 @@ Another example is the **detached evolvability** of each MicroType's metadata, i
 An Introspected REST API _should_ provide an **capabilities discovery** per resource that provides
 all the necessary information to the client to understand what it is possible to request from the API.
 
-#### 9.3.5. Access bootstraping
+#### 9.3.5. API bootstraping
 An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all MicroTypes that are used API-wide along
 along with other informational data, like resources that can be accessed directly, that might be of interest
 to the client and ease the client's bootstrap.
