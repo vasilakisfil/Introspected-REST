@@ -2642,7 +2642,7 @@ but instead, both concepts could complement each other**.
 In fact, we feel that using linked data is just great and API designers should employ it more often.
 
 #### 12.2.1 Hydra
-To that extend, Markus Lantaler developed Hydra, which not only allows us to associate
+To that extend, Markus Lantaler developed [Hydra](http://www.hydra-cg.com), which not only allows us to associate
 common resources and attributes with their representation but also RESTful hypermedia
 concepts on them, like actions (called operations), links, status codes etc.
 
