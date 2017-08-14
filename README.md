@@ -11,10 +11,10 @@ and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/fo
 We will see what problems a RESTful API brings why API designers have been constantly
 avoiding using it but instead come up with half-way solutions or retreat to alternative
 models like RPC or, lately, GraphQL.
-Then, we will propose a new model, Introspected REST,
+Then, we will propose a **new model**, Introspected REST,
 that solves the issues that REST creates and allows the design of progressively evolvable APIs,
 in a much simpler way than conventional REST.
-As part of this manifesto we will also present the concept of MicroTypes,
+As part of this manifesto we will also present the **concept of MicroTypes**,
 small reusable modules that compose a Media Type and facilitate the evolvability
 and extensability of our new model.
 
