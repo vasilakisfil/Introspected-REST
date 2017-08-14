@@ -2813,8 +2813,8 @@ semantically identical for all APIs, JSON-specific, home document**.
 
 However we can't neglect the fact that people are finally recognizing the
 dissimilarity of browser-based, driven by humans clients and machine-based clients.
-In fact, **carving our infrastructure for machine-based clients to be similar with human-driven clients we
-undestimate their capabilities: machines can be much more powerful and smart than humans.**
+In fact, carving our infrastructure for machine-based clients to be similar with human-driven clients we
+undestimate their capabilities: **machines can be much more powerful and smart than humans.**
 
 ### 12.5. RESTful API Description Languages
 Over the past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
