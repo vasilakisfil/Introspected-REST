@@ -2701,7 +2701,7 @@ Although we support initiatives that allow API designers to serve metadata on th
 like Hydra does with dereferencable content, we can't miss the fact that Hydra
 has become a very complex specification and still it's type system is a weak one.
 We firmly believe that MicroTypes for actions (Hydra's equivelent to operations)
-will be much more powerful than hydra's semantics of required, writable, readable,
+will be much more powerful than hydra's semantics of `required`, `writable`, `readable`,
 and soon an API designer will be able to choose one MicroType from the same class of
 MicroTypes, like data types, that fits best for her.
 Specifications that try to define everything in one place, like Hydra does, limit
