@@ -1818,7 +1818,7 @@ the point that **having a link in the HTTP level through `Link` header might be 
 for related resources that all clients would understand**, which is not always the case in Introspected REST.
 The API designer could add more MicroTypes, progressively, as the time passes and simultaneously,
 some clients might not be interested or understand all MicroTypes of an Introspected REST.
-Requiring the client to receive all MicroType information when it does a simple data request
+Requiring the client to receive all MicroType information for every data request is made
 would probably be against the principles of Introspected REST.
 
 ### 10.5. Considerations
