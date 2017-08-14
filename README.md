@@ -2563,7 +2563,7 @@ Then the client should match this information in combination with the runtime da
 ##### 11.3.5.2. Considering it as runtime metadata
 Our second option is to exploit the IATEOAS principles regarding runtime metadata
 and append them inside the response by considering them as object-specific runtime metadata.
-However, we feel that such dicision should be taken only if nothing else is possible,
+However, we feel that such decision should be taken only if nothing else is possible,
 given that in Introspected REST data and metadata should be distinctively separated.
 
 
