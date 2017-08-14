@@ -1301,7 +1301,8 @@ At the same time they should be generic enough or follow some specific semantics
 Media Types targeted for Introspected APIs.
 The parent Media Type doesn't need to know in advance all the MicroTypes that the API designer intends to use
 because that would mean that adding new MicroTypes would require a new parent Media Type which consequently means breaking the clients.
-Instead, each MicroType should be attachable to a parent Media Type that defines introspected behavior.
+Instead, each MicroType should be attachable to a parent Media Type that defines introspected behavior and clients
+would take into account only MicroTypes that are programmed to understand, ideally all of them.
 
 #### 9.2.1. Benefits of MicroTypes
 The benefits when leveraging such architecture are multi-fold.
