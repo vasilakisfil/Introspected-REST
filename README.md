@@ -2193,7 +2193,7 @@ If you inspect the spec you will notice that **the spec limits us by omitting sp
 As a result, we can only specify the falsy attribute in the title or details attribute of the error object, which are human-targeted,
 and thus informing only the end user and not the client.
 We could add extension members, as the spec suggests, to customize the error object in our needs but the final response object wouldn't be
-self-descriptive, unless we customly extended it and wrap it in a [MicroType shim](#922-microtype-shims).
+self-descriptive, unless we customly extended it.
 
 
 The good thing though is that normally such errors should be caught on the client-side by the introspected MicroTypes for the resource structure,
@@ -2230,6 +2230,8 @@ application/vnd.api+json, application/problem+json
 
 But that reminds us the concept of (runtime) MicroTypes, right?
 Even the negotiation looks very similar.
+To that extend, creating a [wrapper MicroType shim](#922-microtype-shims) around this Media Type, that other API designers
+can also use, should be efortless.
 
 To take one step further, given that such error information is crucial for the user to understand why her action is not advancing,
 we feel that the client should be able to **negotiate** the errors MicroType, that is, the information and structure of the
@@ -2240,7 +2242,7 @@ For instance, the client might show preference to another problems Media Type be
 seen in the following Accept header example:
 
 ```
-application/vnd.api+json, application/problem-extensive+json, application/problem+json; q=0.8
+application/vnd.api+json, errors=problem/extensive+json, errors=problem+json;
 ```
 
 
