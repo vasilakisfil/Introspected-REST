@@ -2707,6 +2707,7 @@ MicroTypes, like data types, that fits best for her.
 Specifications that try to define everything in one place, like Hydra does, limit
 the API designers a lot and eventually such specs
 deliver an mediocre set of choices to choose from.
+
 In any case, we feel tht Hydra spec is one of the few API specs that significantly
 differs from the conventional API specs and **can provide almost completely self descriptive
 responses**, an unfortunately rare key property of modern APIs.
