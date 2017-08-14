@@ -2234,7 +2234,7 @@ Even the negotiation looks very similar.
 To take one step further, given that such error information is crucial for the user to understand why her action is not advancing,
 we feel that the client should be able to **negotiate** the errors MicroType, that is, the information and structure of the
 returned errors object.
-Some clients might need the most basic error information, might use only the HTTP status code, other clients might
+Some clients might need the most basic error information and use only the HTTP status code, other clients might
 be interested in as much possible information available in order to show it to the user.
 For instance, the client might show preference to another problems Media Type before falling back to `problem+json`, as
 seen in the following Accept header example:
