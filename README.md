@@ -2516,7 +2516,7 @@ is not part of the API client responsibility but it's vital for the application 
 This metadata will be used for the documentation generation, as we will se in section [11.7](#117-automating-the-documentation-generation).
 
 #### 11.3.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD
-For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
+For denoting the semantic meaning of each attribute of our resources we will employ [JSON-LD](https://json-ld.org).
 It should be noted that JSON-LD spec was developed with the goal to require as little effort as possible from developers
 to transform their existing JSON to JSON-LD but also to not require breaking changes to your
 existing API, which makes it backwards compatible with any current deployed API.
