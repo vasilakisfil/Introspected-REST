@@ -2513,7 +2513,7 @@ is not part of the API client responsibility but it's vital for the application 
 }
 ```
 
-This metadata will be used for the documentation generation, as we will se in section [10.6](#106-automating-the-documentation-generation).
+This metadata will be used for the documentation generation, as we will se in section [11.7.](#117-automating-the-documentation-generation).
 
 #### 11.3.5. The case of a non-compatible spec for introspection: Linked Data metadata using JSON-LD
 For denoting the semantic meaning of each attribute of our resources we will employ JSON-LD.
