@@ -21,8 +21,7 @@ and extensability of our new model.
 For the implemtation of our new model in HTTP, we will have to go back in time,
 dig deep in existing RFCs and uncover forgotten concepts, like reactive content
 negotiation and Media Type parameters, in order to bend the existing Internet
-infrastructure, which has been mostly built upon REST, and successfully use
-our new model.
+infrastructure which has been mostly influenced by REST.
 
 
 * [1. Definitions](#1-definitions)
