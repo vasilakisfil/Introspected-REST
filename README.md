@@ -1413,7 +1413,7 @@ This hint-based mechanism, which according to [RFC 7231](https://tools.ietf.org/
 or proactive content negotiation, has been extensively used in HTTP protocol.
 In the context of MicroTypes and Introspected REST, using this mechanism, the client
 can negotiate for [runtime MicroTypes](#102-runtime-microtypes): API functionalities that define semantics
-for the runtime data and metadata.
+for the data and runtime metadata.
 This type of MicroTypes, should tend to appear less often because
 if anything can be introspected on the side instead of runtime, it will be
 defined as non-runtime, introspective metadata.
