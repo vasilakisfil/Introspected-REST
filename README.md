@@ -1366,7 +1366,7 @@ adoptability, clarity** and possibly implementation, for both ends of the commun
 
 #### 9.3.2. Plain data separated from metadata
 The process of introspection **should be distinctly different** from requesting data.
-To that extend, introspection responses should not include any data but only metadata and data
+To that extend, introspection responses should not include any data but only metadata, and data
 responses should not include any metadata, except, possibly, runtime metadata.
 
 #### 9.3.3. Identifiable metadata of each Microtype
