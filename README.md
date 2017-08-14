@@ -1914,7 +1914,7 @@ Given this header, the client sets the priorities in the following order:
 3. `application/vnd.api2+json`
 
 But how can the client prioritize (3) choice over (2) ?
-Having multilevel priorities is difficult in this context and could be solved only by sending 3 options to the server,
+Having multilevel priorities is difficult in this context and could be only solved by sending 3 options to the server,
 essentially flatting and removing the MicroTypes priority scheme that we showed and falling back to the classic Media Type negotiation:
 
 ```
