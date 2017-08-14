@@ -1629,7 +1629,7 @@ to the root url.
 However, we feel that this is the perfect case for hosting an API's discovery for available capabilities using
 reactive negotiation.
 We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
-`/` for listing all API's capabilities through MicroTypes for all resources, as [IATEOAS](#934-discovery-of-api-wide-capabilities-and-resources) denotes.
+`/` for listing all API's capabilities through MicroTypes for all resources, as [IATEOAS](#935-api-bootstraping) denotes.
 
 Now that we know how to fetch the MicroTypes that the server offers, we need to find
 an appropriate representation for it.
