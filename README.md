@@ -1372,18 +1372,21 @@ responses should not include any metadata, except, possibly, runtime metadata.
 #### 9.3.3. Identifiable metadata of each Microtype
 Given that metadata are already separated from plain data, by being able to identify and retrieve metadata
 of a specific MicroType there are various advantages because each MicroType becomes independent and self-sufficient.
-
 For instance, **caching** will be possible using the underlying protocol's mechanisms, for each metadata type separately.
 Another example is the **detached evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
 
-#### 9.3.4. Discovery of API-wide capabilities and resources
-An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all MicroTypes that are used API-wide possibly
+#### 9.3.4. Discovery of resource capabilities
+An Introspected REST API _should_ provide an **capabilities discovery** per resource that provides
+all the necessary information to the client to understand what it is possible to request from the API.
+
+#### 9.3.5. Access bootstraping
+An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all MicroTypes that are used API-wide along
 along with other informational data, like resources that can be accessed directly, that might be of interest
-to the client.
+to the client and ease the client's bootstrap.
 
 The location of this detailed list should be in the conceptual _root_ resource/URL of the API.
 
-#### 9.3.5. Automatic documentation generation
+#### 9.3.6. Automatic documentation generation
 Possibly the API will provide a MicroType targeted to humans and not machines that contains informational descriptions and explanations.
 It should be noted that **this information must not be needed for a client to parse and understand the API responses**,
 and even for humans such information should weight very little compared to the rest metadata.
@@ -1626,7 +1629,7 @@ to the root url.
 However, we feel that this is the perfect case for hosting an API's discovery for available capabilities using
 reactive negotiation.
 We could keep the `/*` for "ping" or "no-op" type of method as the RFC notes and have the root
-`/` for listing all API's capabilities through MicroTypes for all resources, as [IATEOAS]() denotes.
+`/` for listing all API's capabilities through MicroTypes for all resources, as [IATEOAS](#934-discovery-of-api-wide-capabilities-and-resources) denotes.
 
 Now that we know how to fetch the MicroTypes that the server offers, we need to find
 an appropriate representation for it.
