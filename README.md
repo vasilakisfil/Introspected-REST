@@ -5,7 +5,7 @@ In this _manifesto_, we will give a specific definition of what `REST` is, accor
 and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
 We will see what problems a RESTful API brings why API designers have been constantly
 avoiding using it but instead come up with half-way solutions or retreat to alternative
-models like RPC or, lately, GraphQL.
+models like RPC-over-HTTP or, lately, GraphQL.
 Then, we will propose a **new model**, Introspected REST,
 that solves the issues that REST creates and allows the design of progressively evolvable APIs,
 in a much simpler way than conventional REST.
@@ -16,7 +16,7 @@ and extensibility of our new model.
 For the implemetation of our new model in HTTP, we will have to go back in time,
 dig deep in existing RFCs and uncover forgotten concepts, like reactive content
 negotiation and Media Type parameters, in order to bend the existing Internet
-infrastructure which has been mostly influenced by REST concepts.
+infrastructure, which has been mostly influenced by REST concepts, and succussfully apply our new model.
 
 
 * [1. Definitions](#1-definitions)
@@ -159,7 +159,7 @@ We will use the term APIs and networked APIs interchangeably.
 
 ## 2. Introduction
 `REST` defined by Roy was a magnificent piece of work, much ahead of its time
-which took us 10+ years to understand what its capabilities are.
+which took us many years to understand what its capabilities are.
 However, now, almost 20 years later `REST` model shows its age. It's inflexible,
 difficult to implement, difficult to test, with performance and implementation issues.
 But most importantly, **any implementation of `REST` model is _very_ complex**.
@@ -216,7 +216,7 @@ As Roy notes:
 Instead, the client derives the state on demand, using introspection, by retrieving the necessary metadata
 that are of interest.
 Eventually this brings the same advantages as Roy's model while being it's much simpler,
-much more flexible and backwards compatible with any RESTful API.
+much more flexible and backwards compatible with any RESTly or RESTless API.
 
 But first let's discuss about Networked Services.
 
@@ -419,7 +419,7 @@ For instance, with `application/json` Media Type this wouldn't work as JSON itse
 
 Instead, the server and client must agree on a format that provide such mechanisms.
 
-In practice however, we put `application/json` in our Content-Type header denoting
+Unfortunately though, the common practice is to put `application/json` in our Content-Type header denoting
 that the response type follows that Media Type and then inside the response we add
 semantics regarding hypermedia. Then we hand off out-of-band information to the client,
 like documentation, and demand to check them before identifying parsing and using the hypermedia
@@ -538,7 +538,7 @@ has maximum length of 255 characters, it follows a specific regex etc.
 #### 6.1.7 Plot twist: this list is endless
 Although we feel that _today_ these capabilities should exist in any modern API, **this list is not exclusive**.
 In fact, there could be capabilities in the future that might not seem necessary today.
-For example, joining together one or more resources, other db-inspired operations applied on resources,
+For example, joining together one or more resources, other database-inspired operations applied on resources,
 internationalization and localization of the data, HTTP/2 Server Push on some requests, Generic Event Delivery Using HTTP Push on other
 resources on specific states and other capabilities that we haven't even imagined yet.
 In any case, **these capabilities must be transparent and self-descriptive to the client without any documentation or human involvement**, other
@@ -580,7 +580,7 @@ to design the API the way she wants.
 
 For instance, for pagination, most RESTy APIs use a `page` and a `per_page` parameter in the URL.
 If the Media Type describes how to do pagination using, say, a URL template on the resource path (like `/{resource}?page={page}&per_page={per_page}&offset={offset}`)
-this would mean that all APIs following this Media Type should have the pagination following that URL template.
+this would mean that **all** APIs following this Media Type should have the pagination following that URL template.
 The level of restriction becomes more obvious when describing more complex capabilities.
 
 On the other hand, if everyone follows that Media Type then it's easier to program our clients.
@@ -601,9 +601,10 @@ Also, instead of mixing up data with HATEOAS in the API responses, we will intro
 
 
 ## 7. API Specs Today
-Now that we defined what REST is, according to Roy, and what capabilities modern APIs should provide,
+Now that we defined what REST is, according to Roy, what capabilities modern APIs should support, and where
+they should provide them,
 let's see the specs for REST(y) APIs available as today, April 2017, what they provide and how
-closely follow the REST model.
+closely these follow the REST model.
 
 ### 7.1. Our use case
 Our use case is a miniature of yet another Social App.
@@ -890,7 +891,7 @@ The resources of our use case that are presented here use JSON as a message form
 
 #### 7.3.3. Reflections
 
-While the spec does have templated links, we see some notable issues. Namely:
+Although this spec does have templated links, we see some notable issues. Namely:
  * No actions (they are supported by an unofficial extension)
  * No info on available attributes
  * No info on data types
@@ -1018,8 +1019,8 @@ still some issues that require human-involvement:
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human factor.
 
 ## 8. Ideal `REST` API
-**How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
-built with a life span of 50 years?**
+How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
+built with a life span of 50 years?
 
 ### 8.1. Capabilities of an Ideal `REST` API
 In an ideal REST API, the client should be able to have all the necessary information for both
@@ -1041,20 +1042,19 @@ the request and response.
   * associations that are required or can be embedded to the initial request
     * recursively apply the same information for each association available for embedding
 
-Although this list is not exhaustive, an architecture style is timeless anyway,
+Although **this list is not exhaustive**, an architecture style is timeless anyway,
 we feel that the aforementioned capabilities ought to appear in an idealized modern REST API.
 
 We should also note that the reason we don't mention anything about the headers that are required, or, the status codes
 is because we feel that these belong to the Protocol level and not in the Application level.
 Any changes on this level imply that the API breaks the protocol.
-
 However, we are pragmatic and we understand that an API designer could want to _add_ (not change)
 a status code or a header in a given request/response and as a result, ideally, this should also be possible to be described.
 
 #### 8.1.1. Today's REST is far from ideal
 Now to the reader, it should be obvious that even if we manage to offload some of the aforementioned information
-to the Media Type, we would still have a _very_ complex, massive, response from the server that mostly includes HATEOAS
-and not actual data.
+to the Media Type, we would still have a _very_ complex, massive, response from the server **that mostly includes HATEOAS
+and not actual data**.
 
 In our experience, such responses are very hard to implement correctly, test, be performant and even debug. After all,
 a human will sit down and write the initial code and debugging the code by the eye is important.
@@ -1082,7 +1082,7 @@ temperature: 25
 ```
 
 This API _should_ be REST-compliant by not providing any API capabilities, hypermedia or actions.
-The imaginary Media Type `application/vnd.weather+yaml` is supposed to provide all the necessary information
+Of course, the imaginary Media Type `application/vnd.weather+yaml` is supposed to provide all the necessary information
 because otherwise the client would fail to understand things like
 
 * what are the attributes of the response
@@ -1137,12 +1137,12 @@ In fact, such design is quite difficult to implement and test from the server si
 #### 8.2.2. REST enforces possibly useless information
 In REST, even if the hypermedia are rendered by taking into account the user's role, eventually we might send more data that the client wants.
 **Exactly because we don't know in advance what the client might need, we must send all the possible hypermedia information to the client, just in case**.
-The client however could only be interested in the data, or specific hypermedia types, like only links, but instead gets a fully bloated response by the server.
+The client however could only be interested in the data, or specific hypermedia types, like links, but instead gets a fully bloated response by the server.
 
 #### 8.2.3. REST sacrifices performance for evolvability
 Complex or long-lived APIs tend to have many hypermedia data (links, actions, custom metadata)
 related to the resource itself, its associations and related resources.
-As a result, even if the actual data could be very small the resulted response object gets much larger in size slowing down the server rendering
+As a result, even if the actual data could be very small **the resulted response object gets much larger** in size slowing down the server rendering
 and the client receiving and parsing.
 The performance issues become more apparent on lossy networks like mobile clients, a trend that has increased over the past decade,
 or on constrained devices and environments, like IoT.
@@ -1376,13 +1376,13 @@ For instance, **caching** will be possible using the underlying protocol's mecha
 Another example is the **detached evolvability** of each MicroType's metadata, independently, given that the MicroType's semantics permit that.
 
 #### 9.3.4. Discovery of resource capabilities
-An Introspected REST API _should_ provide an **capabilities discovery** per resource that provides
+An Introspected REST API _should_ provide **capabilities discovery** per resource that provides
 all the necessary information to the client to understand what it is possible to request from the API.
 
-#### 9.3.5. API bootstraping
+#### 9.3.5. Client bootstraping
 An Introspected REST API _should_ provide an **API-wide capabilities discovery** that lists all MicroTypes that are used API-wide along
-along with other informational data, like resources that can be accessed directly, that might be of interest
-to the client and ease the client's bootstrap.
+with resources that can be accessed directly and in general, any information that could be of interest and could help the client
+to bootstrap faster.
 
 The location of this detailed list should be in the conceptual _root_ resource/URL of the API.
 
@@ -2636,6 +2636,8 @@ The resource ony needs to have the `vocab` attribute inside JSON-LD's `context`.
 }
 ```
 
++ introspect how you can open a door
+
 In Introspected REST we embrace semantic web by employing the necessary MicroTypes
 and **we don't really feel that this work is related to Introspected REST in a competing sence
 but instead, both concepts could complement each other**.
@@ -2848,6 +2850,67 @@ and can give API information for client bootstraping.
 > --- Paul Clements
 >
 
+In this manifesto we spent a lot of time proving why REST is not a good architectural style.
+The reason is because there seems to exist a paradox: most APIs are RPC-over-HTTP, a few number of API evangelists
+put the blaim on API designers of failing understanding what REST brings into the table and at the same time
+no API spec that provides a modern API interface is REST compliant and depend on documentation and eventually on humans.
+
+* the majority of APIs fail to provide evolvability, even in the level of links
+* API evangelists put the blaim on API designers who fail to understand what REST brings into the table
+* no API spec that follows REST principles is really 100% evolvable and documentation-free
+
+
+
+REST is all about evolvability by applying a uniform interface in our implementation.
+If an API architecture doesn't support evolvability of its resources, like most RPC-over-HTTP APIs do,
+then there is no point of comparing it to evolvable architecture, like REST because it's two different things.
+Does this mean that having an non evolvable API is bad?
+Although we believe that well-designed, evolvable, APIs can move things faster in the development process of a product,
+after a long survey, we found that most APIs and API specs miss crucial parts of REST's
+evolvability and instead depend on human-targeted documentation.
+Putting the blame on the API designers for not following REST to have an evolvable API would be the naive thing to do.
+After all, REST has been published 20 years ago and it has been a hot topic in networked APIs more than 10 years now.
+We feel that an API designer is happier to drop REST's evolvability properties, **consciously**, in order to deliver
+a more manageable API, instead of creating a fully evolvable, REST-compliant API.
+
+Out model, Introspected REST, is much better.
+
+
+
+Here, we propose an alternative to REST and GraphQL, Introspected REST.
+It's a new architectural style that tries to mitigate drawbacks of REST (mostly it's complexity)
+by requesting metadata/hypermedia on demand instead of mixing up everything in the same response object.
+Introspected REST is not perfect either, it does have it's own drawbacks and limitations.
+But we feel that in order to move forward to evolvable, managable, sustainable APIs, we need to levarage
+such architectures that use composable, reusable modules and serve the metadata/hypermedia on the side, on demand.
+
+
+Challenging REST is not an easy task. It needs strength and courage to overcome the REST-fangirls and fanboys.
+REST architectural style was never really applied, and if it were would have been much more complex.
+
+We tried to break down
+
+In this _manifesto_ we started by challenging current practices of documentation-driven APIs.
+We showed that, for simple changes, such patterns are inefficient and we pointed out that evolvability
+is a requirement for fast moving APIs but it also guarantees longetivity of networked APIs.
+Then we analyzed REST, an architectural style that provides evolvability and we compare modern API and API specs
+finding out that these are not REST-compliant, meaning that they are not evolvable.
+In the search of creating a modern API that is also evolvable through REST, we found out that
+creating and maintaining one is very complex.
+
+Puting the blame in API designers is not always the right thing to do.
+How can we inform the client that a resource gets updates through HTTP/2 Stream Server Push, in a REST API ?
+Such task would be an extreme challenge and there is no surprise if most API designers would fall back to the
+solution of documentation.
+
+
+
+Such task would be a huge challenge in conventional REST, as everything would have to be defined in the parent Media Type
+and details would have to be given in the resource's response.
+The funny thing with REST is that there has been numerous complaints that it hasn't been applied correctly,
+yet we saw that when applied correctly it becomes extremely complex.
+
+
 We are not giving a solution here. We are giving food for thought.
 The actual solutions will come by the community
 
@@ -2881,9 +2944,6 @@ The manifesto is still on draft stage, open for suggestions/feedback/pull reques
 it will be locked in one year from now (already got introspected.rest domain for it :) )
 
 ### 13.1. The future is full of posibilities
-**How do we negotiate to the client that a resource is available through HTTP/2 Stream Server Push without documentation ?**
-That requirement would be very impractical using a REST interface because everything would have to be in the same response.
-The profile RFC does not do a correct negotiation and it's problematic
 With Introspected REST, we can solve such problems by providing such information only to the clients that are really interested,
 in an easy, composable way.
 
@@ -2891,8 +2951,6 @@ Our solution is by far **not** complete but we have set the basis for the commun
 
 We call the community to start experiment in this model and come up with patterns.
 In any case we feel that to reach a sustainable API with the evolvability span of REST model, Introspected REST model is necessary.
-
-Another reason is to have a real REST alternative with arguments and remove the develper roy shadow and fear to deprecate Roy's REST.a
 
 We are sure that without such design/architecture we can't have complex yet self-described APIs.
 
@@ -2905,15 +2963,6 @@ The ratio of data/hypermedia of a resource
 
 ### 13.2. The future is in the hands of the community
 
-#### 8.2.3. REST does not make it easy to integrate different APIs together
-Consider a product resource.
-The product resource contains information about the product itself, as well as related information and services such as similar products.
-However, information about payment options is not provided by the product resource itself, and is provided via a linkset instead.
-This means any client requesting payment options will request payment links from a separate server.
-This not only decouples product resources from payment management; it also allows the payment options to be more easily customized based on the specifics of the client, meaning that the complete "product and payment options" view is a combination of the product resource (and associated hypermedia controls), and payment links provided by the specialized payment options service.
-
-say about atom+json example!! A totally new Media Type that we need to manually understand..
-
 
 ### What Introspected REST does in bullets
 For introduction: There is a confusion of what REST is. REST is all about evolvability (copy blog post).
@@ -2921,10 +2970,6 @@ We will start by analyzing and giving concrete definitions of what REST is.
 Then we will show REST's drawbacks explaining why REST never flew off, why people have been unconciously avoiding it.
 We will propose a new model, alternative to REST. We will also present the concept of MicroTypes.
 
-+ lately we have seen the rise of GraphQL? Say why, say in summury what it solves and why it lacks.
-Then introduce the new model.
-
-+ the profile link relation
 + I should say in the conclusion that all protocols are build upon REST so parametrizing them was a great challenge
 + say that emulating Machine2Machine communication with what the browser/human does when visiting a web page is a wrong approach
 Machines can be more powerful, smarter an decisive if we program them correctly.
@@ -2948,6 +2993,7 @@ is it a good idea that we advice community ?
 is diversify correct word ?
 I think I have mixed you/we and your/our. I prefer we/our but I can see that there could be cases where
 you/your could be a better choice.
+1-fold, multi-fold, good names?
 
 Final review:
 1. check paragraphs
@@ -2955,39 +3001,6 @@ Final review:
 3. check links
 4. check bolds
 
-
-12.3.3. [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) (draft)
-As we saw previously in Introspective MicroTypes, [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
-proposal tries to offload HTTP Link links from a resource or url, when having them in there is
-costly or even not possible for the server.
-
->  Resources on the Web often convey typed Web Links [RFC5988] as a part
->   of resource representations, for example, using the <link> element
->   for HTML representations, or the "Link" header field in HTTP response
->   headers for representations of any media type.  In some cases,
->   however, providing links by value is impractical or impossible.  In
->   these cases, an approach to provide links by reference (instead of by
->   value) can solve the problem.  This specification defines the
->   "linkset" relation type that allows to link resources to sets of
->   links, thereby making it possible to represent links by reference,
->   and not by value.
->
-> --- [Linkset Internet-Draft](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02)
->
-
-For instance, imagine that a resource needs to link a set of links that are managed by not the host owning the resource, but
-by a 3rd party origin.
-Another case scenario is when the Link header is overloaded by holding a large number of links that are needed to be inlcluded along with
-the resource and would result in HTTP error ("413 Request Entity Too Large" and "414 Request-URI Too Long").
-By providing a dereferancable link that points to the 3rd party link set, there could be advantages in numerous cases,
-like different caching policies between the 2 origins and decoupling in general.
-
-As we discussed previously, HTTP Link header tends to be overloaded because it's our only way to signal Hypermedia detached
-by the response representation and message format.
-Also, we think that `Link` HTTP header should carefully be used for related resources that if not all, most clients understand
-and care about and at the same time are application-independent.
-We think that linksets is anohter small piece towards a introspectiveness and hence we support such initiatives.
-However we feel that overloading the Link relation type as we discuss in the next question is not the right way.
 
 + ADD LICENSE
 + add deprecations, querying language microtype reference in prototype
