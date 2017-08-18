@@ -2862,9 +2862,6 @@ solution is so common that has even become natural.
 
 Is it API spec designers to blame for creating non self-descriptive specs or did they make a deliberable choice
 to avoid fully support the HATEOAS constraint of REST and instead delegate such information to documentation?
-By understanding what a fully REST API means, we firmly believe that people have been
-consicouly been avoiding applying REST to the full extent in their designs.
-
 In the research of a fully REST API, we determined that REST is complex,
 unflexible, slow and its implementation in HTTP that used Media Types tends to make
 API specifications a large single upright block of stone, stored in a Media Type.
@@ -2874,6 +2871,9 @@ How can we add deprecations for existing resource attributes ?
 Implementing such requirements using REST's HATEOAS process becomes an extreme challenge
 for both the server and the client developer, that usually it's preferrable to write
 crystal clear documentation that creating a fully REST API.
+Thus, our understanding is that API designers have been
+consicouly avoiding applying REST to the full extent in their designs.
+
 
 
 When REST was introduced, the internet was in its infancy.
