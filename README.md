@@ -27,12 +27,12 @@ infrastructure, which has been mostly influenced by REST concepts, and succussfu
   + [3.4. Network level](#34-network-level)
 * [4. Roy's `REST` model](#4-roys-rest-model)
   + [4.1. Access methods have the same semantics for all resources](#41-access-methods-have-the-same-semantics-for-all-resources)
-  + [4.2. All important resources are identifed by one resource identifer mechanism](#42-all-important-resources-are-identifed-by-one-resource-identifer-mechanism)
+  + [4.2. All important resources are identified by one resource identifier mechanism](#42-all-important-resources-are-identified-by-one-resource-identifier-mechanism)
   + [4.3. Resources are manipulated through the exchange of representations](#43-resources-are-manipulated-through-the-exchange-of-representations)
   + [4.4. Representations are exchanged via self-descriptive messages](#44-representations-are-exchanged-via-self-descriptive-messages)
   + [4.5. Hypertext as the engine of application state (HATEOAS)](#45-hypertext-as-the-engine-of-application-state-hateoas)
 * [5. API Clients and Applications](#5-api-clients-and-applications)
-  + [5.1. Client and Application responibilities](#51-client-and-application-responibilities)
+  + [5.1. Client and Application responsibilities](#51-client-and-application-responsibilities)
   + [5.2. The Human factor principle](#52-the-human-factor-principle)
 * [6. REST applied in a modern API](#6-rest-applied-in-a-modern-api)
   + [6.1. Requirements from a modern REST API](#61-requirements-from-a-modern-rest-api)
@@ -95,8 +95,9 @@ infrastructure, which has been mostly influenced by REST concepts, and succussfu
     - [9.3.1. Composability over monoliths](#931-composability-over-monoliths)
     - [9.3.2. Plain data separated from metadata](#932-plain-data-separated-from-metadata)
     - [9.3.3. Identifiable metadata of each Microtype](#933-identifiable-metadata-of-each-microtype)
-    - [9.3.4. Discovery of API-wide capabilities and resources](#934-discovery-of-api-wide-capabilities-and-resources)
-    - [9.3.5. Automatic documentation generation](#935-automatic-documentation-generation)
+    - [9.3.4. Discovery of resource capabilities](#934-discovery-of-resource-capabilities)
+    - [9.3.5. Client bootstraping](#935-client-bootstraping)
+    - [9.3.6. Automatic documentation generation](#936-automatic-documentation-generation)
 * [10. Introspected REST applied to HTTP](#10-introspected-rest-applied-to-http)
   + [10.1 Revisiting content negotiation in HTTP](#101-revisiting-content-negotiation-in-http)
   + [10.2. Runtime MicroTypes](#102-runtime-microtypes)
@@ -142,8 +143,6 @@ infrastructure, which has been mostly influenced by REST concepts, and succussfu
   + [12.5. RESTful API Description Languages](#125-restful-api-description-languages)
   + [12.6. API directories](#126-api-directories)
 * [13. Conclusion](#13-conclusion)
-  + [13.1. The future is full of posibilities](#131-the-future-is-full-of-posibilities)
-  + [13.2. The future is in the hands of the community](#132-the-future-is-in-the-hands-of-the-community)
 
 
 ## 1. Definitions
@@ -2849,3 +2848,51 @@ and can give API information for client bootstraping.
 > --- Paul Clements
 >
 
+From the very beginning of this document, we identified that networked services have idiomatic characteristics
+and need to be solved differently, especially when such services are unmanned.
+For instance, evolvability cannot be achieved using conventional software engineering patterns.
+REST, designed in the 90s and influenced by the state of the Internet at that time, solves such issues
+by applying a number of key properties that form a uniform interface in the impementation.
+
+However, by going through popular API specs, that also reflect popular API implementations
+we saw that all of them fail to be REST compliant.
+Specifically, all of them fail to provide self-descriptive messages to the client through HATEOAS.
+Instead, documentation is the usual solution to provide the missing information and this
+solution is so common that has even become natural.
+
+Is it API spec designers to blame for creating non self-descriptive specs or did they make a deliberable choice
+to avoid fully support the HATEOAS constraint of REST and instead delegate such information to documentation?
+By understanding what a fully REST API means, we firmly believe that people have been
+consicouly been avoiding applying REST to the full extent in their designs.
+
+In the research of a fully REST API, we determined that REST is complex,
+unflexible, slow and its implementation in HTTP that used Media Types tends to make
+API specifications a large single upright block of stone, stored in a Media Type.
+ow can we inform the client that a resource can get updates through HTTP/2 Stream Server Push,
+through HATEOAS and without documentation ?
+How can we add deprecations for existing resource attributes ?
+Implementing such requirements using REST's HATEOAS process becomes an extreme challenge
+for both the server and the client developer, that usually it's preferrable to write
+crystal clear documentation that creating a fully REST API.
+
+
+When REST was introduced, the internet was in its infancy.
+Few services were actually prefered HTTP over other protocols, hypermedia, whenever they were used, were
+a very small part of the resource's, and mostly links, foobar.
+20 years later, HTTP has become as the main mean of communication between different services and Microservices,
+networked services that often commnicate through HTTP, has become a popular architecture for delivering faster.
+
+
+
+Here we state that REST's HATOAS part is deprecated.
+Don't take us wrong: REST still has 4 other key properties.
+
+Do we completely erase REST? No.
+
+Introspected REST which is powered by MicroTypes gives enormous possibilities.
+New MicroTypes will solve every new API functionality that will be needed my new, modern, APIs.
+MicroTypes for data types, push events, error messages, querying languages, deprecations and warnings
+are few of the possibilities.
+
+
+The community should start experimenting with
