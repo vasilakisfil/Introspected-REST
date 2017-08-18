@@ -2849,10 +2849,36 @@ and can give API information for client bootstraping.
 > --- Paul Clements
 >
 
-In this manifesto we spent a lot of time proving why REST is not a good architectural style.
-The reason is because there seems to exist a paradox: most APIs are RPC-over-HTTP, a few number of API evangelists
-put the blaim on API designers of failing understanding what REST brings into the table and at the same time
-no API spec that provides a modern API interface is REST compliant and depend on documentation and eventually on humans.
+How can we inform the client that a resource can get updates through HTTP/2 Stream Server Push,
+through hypermedia and without documentation ?
+Given that GraphQL doesn't provide inherent support for it, it's only REST that can help us implement such challenge.
+Maybe for RPC-over-HTTP APIs we can blame software developers who took the role of API designers without fully understanding
+the unique characteristics of unmanned Networked APIs but we can't put all the blame there.
+After all, today's API specs, some publicly designed and peer reviewed many times but still fail to eliminate the need of documentation.
+
+
+Challenging REST was not an easy task. REST thesis justifies every signle design decision taken and most of them still apply today
+
+from his experience on
+the web of the 1990s.
+The model he suggested and which has influenced existing Internet infrastructure works perfect for the requirements of the
+Internet of that age.
++evolvability
+In theory, it still works today.
+In practice though, unfortunately, it doesn't.
+Not only almost all APIs fail to follow such model in terms of evolvability and self-descriptive messages to the client
+but also it's extremely complex.
+Yes, maybe for RPC-over-HTTP APIs we can put the blame in software developers who happened to take the role of API designers without fully understanding
+the idiosyncrasies of the networked services.
+But would you blaim the API designed if she choose the documentation, and not hypermedia, as the most appropriate solution to
+inform the client that specific resources can get updates through HTTP/2 Stream Server Push ?
+After all, REST has been published 20 years ago and it has been a hot topic in networked APIs more than 10 years now
+and yet, most APIs and API specs fail to fully follow REST model.
+Such task would be extremely challenging and there would be no surprise if most API designers would fall back to the
+solution of documentation.
+
+
+
 
 * the majority of APIs fail to provide evolvability, even in the level of links
 * API evangelists put the blaim on API designers who fail to understand what REST brings into the table
@@ -2872,7 +2898,7 @@ After all, REST has been published 20 years ago and it has been a hot topic in n
 We feel that an API designer is happier to drop REST's evolvability properties, **consciously**, in order to deliver
 a more manageable API, instead of creating a fully evolvable, REST-compliant API.
 
-Out model, Introspected REST, is much better.
+Our model, Introspected REST, is much better.
 
 
 
