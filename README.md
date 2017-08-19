@@ -2634,7 +2634,7 @@ in a random way for the server.
 In such cases, it's impractical to optimize beforehand and solving scaling issue becomes
 a real challenge that possibly only companies with huge amount of resources can really afford.
 
-And again, as with existing Media Types, GraphQL creates a closed silo in your API and differentiating from the existing
+And again, as with existing Media Types design, GraphQL creates a closed silo in your API and differentiating from the existing
 spec is nearly impossible.
 For instance, if you need to support an additional type, it's impossible
 because you are dependent to the existing libraries (creating your own GraphQL library is out of the question)
