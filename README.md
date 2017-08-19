@@ -1309,7 +1309,7 @@ between the 2 ends is parameterized to the needs of the client, down to the sema
 For instance, a server might provide 3 MicroTypes for error information, each one having different representation or semantics.
 By letting the server to decide the appropriate MicroType for the client by analyzing the client's incoming request,
 might not be efficient as the client can only send a part of its properties through the request, for various reasons like privacy concerns and performance,
-and thus the server has partial knowledge of the client's state and properties.
+and thus the server has **partial knowledge** of the client's state and properties.
 The server has to make an arbitrary choice for the client, what it thinks it's thinks best, using this partial knowledge.
 
 Instead, by giving the client the option to negotiate parts of the API functionality, we shift the responsibility towards the client
