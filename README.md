@@ -170,18 +170,18 @@ We firmly believe that `REST` is much better than any API that does not follow `
 (like `RESTly` APIs), even for short-term APIs.
 Networked services have very peculiar characteristics which, until now, only `REST` has fully addressed them
 (see [related Work](#related-work) for an explanation why GraphQL is not an equivalent alternative).
-**Being able to evolve your API without breaking the clients is critical.**
+**Being able to evolve our API without breaking the clients is critical.**
 
-Imagine the following scenario: you have built an Online Social Network and an iOS app that talks to the API on your backend.
-Now imagine that, after a company meeting, your CEO needs you to make tiny yet important change in the signup page: require the user
-to fill in her age, a field in the signup form you didn't have before.
+Imagine the following scenario: we have built an Online Social Network and an iOS app that talks to the API on our backend.
+Now imagine that, after a company meeting, our CEO needs us to make tiny yet important change in the signup page: require the user
+to fill in her age, a field in the signup form we didn't have before.
 Essentially, this means, in API terms, add an extra field in the accepted object and require it from the client to be filled in
 by the user before sending it over.
 
-If your API is `RESTly` and not `REST`, this means that you need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
-It takes roughly 1 week for Apple to review your app and if your app doesn't get rejection during the review process for some reason, your
+If our API is `RESTly` and not `REST`, this means that we need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
+It takes roughly 1 week for Apple to review our app and if our app doesn't get rejection during the review process for some reason, our
 tiny change will take action at least a week later after requested.
-If your API _was_ `REST` that would mean a change on the server's response denoting which fields are required to submit the form.
+If our API _was_ `REST` that would mean a change on the server's response denoting which fields are required to submit the form.
 You would have the change deployed 10 minutes later.
 
 Roy notes in his thesis:
@@ -289,10 +289,10 @@ The actual protocol depends on the protocol used in the protocol level.
 ## 4. Roy's `REST` model
 Roy came up with the REST model in order to solve issues that were arising by the unique propertied of networked services
 during the infancy of Internet.
-When you develop an application that will be deployed in a networked environment and is expected to be accessed by other networked services,
-you need to think about its evolvability:
-if you need to add, remove or change functionality of that application
-**you cannot expect services on the other end that talk with your application to be updated by humans**.
+When we develop an application that will be deployed in a networked environment and is expected to be accessed by other networked services,
+we need to think about its evolvability:
+if we need to add, remove or change functionality of that application
+**we cannot expect services on the other end that talk with our application to be updated by humans**.
 Such problems that arise from the peculiarities of networks, like discovery and evolvability must be solved using
 machine-to-machine communication.
 
@@ -308,8 +308,8 @@ When Roy talks about `REST`, he mentions 5 crucial properties of `REST` model:
 ### 4.1. Access methods have the same semantics for all resources
 > induces visible, scalable, available through layered system, cacheable, and shared caches
 
-Failure to provide consistency on access would imply that you don't provide a generic interface but instead
-you have resource-specific or even object-specific interfaces.
+Failure to provide consistency on access would imply that we don't provide a generic interface but instead
+we have resource-specific or even object-specific interfaces.
 
 Actually a common interface is one of the most crucial parts of REST: without a common uniform interface
 it would be impossible to derive REST.
@@ -356,11 +356,11 @@ Roy explains that very well in his thesis:
 ### 4.3. Resources are manipulated through the exchange of representations
 > induces simple, visible, reusable, cacheable, and evolvable (information hiding)
 
-The representation that you expose from your public API could be totally different from
-your implementation internally or how the data are stored in your database.
+The representation that we expose from our public API could be totally different from
+our implementation internally or how the data are stored in our database.
 It could also be the same.
 Nevertheless the client expects and is expected to manipulate any resource using the representation
-you expose.
+we expose.
 
 ### 4.4. Representations are exchanged via self-descriptive messages
 > induces visible, scalable, available through layered system, cacheable, and shared caches
@@ -377,10 +377,10 @@ Given that the client negotiated for that Media Type, **it should be able to par
 > --- Roy Fielding
 >
 
-If your Media Type is very weak (like `application/json`) and you need functionality that the Media Type does not describe
-then you need to define another Media Type which will describe the new semantics and wait until client(s) incorporate the new Media Type changes.
+If our Media Type is very weak (like `application/json`) and we need functionality that the Media Type does not describe
+then we need to define another Media Type which will describe the new semantics and wait until client(s) incorporate the new Media Type changes.
 
-Breaking your Media Type's semantics, or just extending them with new functionality, will have exactly the same result for the client:
+Breaking our Media Type's semantics, or just extending them with new functionality, will have exactly the same result for the client:
 not self-descriptive messages that will require out-of-band information, like documentation.
 
 ### 4.5. Hypertext as the engine of application state (HATEOAS)
@@ -478,8 +478,8 @@ As a result, such APIs are very special and a bit rare.
 
 On the other hand, the data-driven APIs, are more generic and facilitate any application to request the data optimized
 (in the framework of the API's capabilities) for its use case.
-Being able to specify your application's needs when requesting data from an API is crucial,
-especially if your business depends on the adoptability of your API.
+Being able to specify our application's needs when requesting data from an API is crucial,
+especially if our business depends on the adoptability of our API.
 
 For the following subsections, we will mostly focus in the generic data APIs,
 however most of the things mentioned here can also be applied in a specialized or UI-driven API.
@@ -489,8 +489,8 @@ however most of the things mentioned here can also be applied in a specialized o
 REST model is built for machine-to-machine communication, of any type.
 However, as this form of communication is getting more and more common,
 clients are expecting more options (capabilities) from the server for their responses.
-It's not enough to just request and get the resource but you should be able to specify
-to the server what transformations should apply, according to your needs.
+It's not enough to just request and get the resource but we should be able to specify
+to the server what transformations should apply, according to our needs.
 
 Nowadays we have been using networked APIs so much that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
@@ -563,9 +563,9 @@ follow this Media Type or API responses that their media type also include this 
 
 
 #### 6.2.2. HATEOAS can get pretty heavy
-Imagine if you have to describe in a resource, all the available actions along with the available API
+Imagine if we have to describe in a resource, all the available actions along with the available API
 capabilities _in that specific resource_.
-Your API response would just explode in terms of size while making your API super complex.
+Our API response would just explode in terms of size while making our API super complex.
 
 #### 6.2.3. Balancing between Media Types and HATEOAS
 The idea is that Media Types describe the generic capabilities while HATEOAS
@@ -1174,7 +1174,7 @@ However, we are in a pragmatic world where nothing is perfect and clients are bu
 Although we firmly believe that a REST API is better than any RESTly or RESTless API, we understand that there could be cases where API designers
 _have to_ initially skip hypermedia part.
 
-The problem is that when REST is applied to HTTP, it doesn't allow you to easily integrate hypermedia at a later point.
+The problem is that when REST is applied to HTTP, it doesn't allow us to easily integrate hypermedia at a later point.
 The reason is that, in a RESTless API, **adding hypermedia at a later stage would mean that we would need a new Media Type because
 otherwise it would break the current semantics**.
 
@@ -1244,7 +1244,7 @@ The properties of a link, like placement inside the response, strictly follow th
 Actions are links along with information for manipulating a resource.
 Although CRUD are the most popular actions of a resource, the beauty with REST, and consequently with Introspected REST,
 is that actions can go beyond plain CRUD.
-In fact, you can define any type of action or meta-action of your internal resource, through the representation that you expose.
+In fact, we can define any type of action or meta-action of our internal resource, through the representation that we expose.
 As a result, actions of a resource could be quite complex or simplistic depending on the needs and decisions of the API designer.
 Actions should also describe any relevant information for the client to perform it, unless the Media Type itself describe those details.
 
@@ -1800,7 +1800,7 @@ However Linksets don't actually solve our issue because eventually the MicroType
 be solved in the HTTP level as a Linkset would have to provide a body format as well.
 
 Another issue is that the server cannot specify a caching strategy for all links at once because there
-is no mechanism in HTTP which allows you to specify caching directives for specific headers only.
+is no mechanism in HTTP which allows us to specify caching directives for specific headers only.
 As a result, unless we used a Linkset which we can't yet and would cancel any advantages that `Link` header provides
 due to the need of a response body,
 the client would have to dereference all MicroTypes to figure out their caching properties.
@@ -2177,7 +2177,7 @@ that don't deal much with the content but in practice such clients are very rare
 The second solution would limit the client application developer if she wanted to have a link
 of a specific page, while the last solution would limit the API developer to avoid
 having the number of total pages in the response, because it could be a huge cost to the database level.
-In any case, **Introspected REST doesn't restrict you to specify two or more alternative MicroTypes for the same API
+In any case, **Introspected REST doesn't restrict us to specify two or more alternative MicroTypes for the same API
 functionality**, like pagination.
 
 #### 11.2.2 The Errors MicroType
@@ -2381,7 +2381,7 @@ distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 For the Hypermedia part we will use JSON Hyper Schemas.
 Specifically we will use the draft [V4](https://tools.ietf.org/html/draft-luff-json-hyper-schema-00) of JSON Hyper Schemas as the
 next versions ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
-are HTML-equivelents. For instance, there is no way you can define a `method` attribute, restricting you to `GET` and `POST`
+are HTML-equivelents. For instance, there is no way we can define a `method` attribute, restricting us to `GET` and `POST`
 depending whether there is a body to send or not.
 In the Introspected REST terminology, [V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00) and [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)
 provide hypermedia semantics only for forms and not actions.
@@ -2634,10 +2634,10 @@ in a way that for the server is random.
 In such cases, it's impractical to optimize beforehand and solving scaling issue becomes
 a real challenge that possibly only companies with huge amount of resources can really afford.
 
-And again, as with existing Media Types design, GraphQL creates a closed silo in your API and differentiating from the existing
+And again, as with existing Media Types design, GraphQL creates a closed silo in our API and differentiating from the existing
 spec is nearly impossible.
-For instance, if you need to support an additional data type, it's impossible
-because you are dependent to the existing libraries and creating your own GraphQL library woulr require too much time.
+For instance, if we need to support an additional data type, it's impossible
+because we are dependent to the existing libraries and creating our own GraphQL library woulr require too much time.
 But even if that was solved, a possible modification in the current spec would probably break most existing clients.
 We feel that a MicroType-based architecture is more powerful than a specification that, although powerful,
 limits the users to its semantics.
@@ -2898,8 +2898,8 @@ As we have already noted, in a REST API documentation, in the sense of offline c
 shouldn't even exist and thus **such approach is fundamentaly wrong**.
 By giving so much weight on the documentation but at the same time treating it as something different, separated from the code
 leads to inconsistencies beteween the actual API and the API description.
-Those tools have been improved so much lately that now allow you to write the documentation and let them generate
-the basis of your code, depending on your language/framework, which could fix the inconsistencies issues.
+Those tools have been improved so much lately that now allow us to write the documentation and let them generate
+the basis of our code, depending on our language/framework, which could fix the inconsistencies issues.
 Unfortunatey though, such approach leads to an RPC design instead of a hypermedia-based system.
 
 
