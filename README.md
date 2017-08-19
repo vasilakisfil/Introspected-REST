@@ -599,7 +599,7 @@ Also, instead of mixing up data with HATEOAS in the API responses, we will intro
 ## 7. API Specs Today
 Now that we defined what REST is, according to Roy, what capabilities modern APIs should support, and where
 they should provide them,
-let's see the specs for REST(y) APIs available as today, April 2017, what they provide and how
+let's see the specs for REST(y) APIs available as today, September 2017, what they provide and how
 closely these follow the REST model.
 
 ### 7.1. Our use case
