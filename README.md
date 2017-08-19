@@ -2723,7 +2723,8 @@ The resource ony needs to have the `vocab` attribute inside JSON-LD's `context`.
 ```
 
 The idea of semantic web can be found even in real life.
-In an example taken by [Donald Norman](https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things), 
+In an example taken by [Donald Norman](https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things), and
+oftenly quoted by Mike Amundsen's taks,
 in real life when we see a door, we know instantly how it opens because we have associated
 the design of the door with its opening mechanism:
 if a door has a bar across it then we push while if there is a little handle in the door then we pull.
