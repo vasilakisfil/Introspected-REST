@@ -2637,13 +2637,13 @@ a real challenge that possibly only companies with huge amount of resources can 
 And again, as with existing Media Types design, GraphQL creates a closed silo in our API and differentiating from the existing
 spec is nearly impossible.
 For instance, if we need to support an additional data type, it's impossible
-because we are dependent to the existing libraries and creating our own GraphQL library woulr require too much time.
+because we are dependent to the existing libraries and creating our own GraphQL library would require too much time.
 But even if that was solved, a possible modification in the current spec would probably break most existing clients.
 We feel that a MicroType-based architecture is more powerful than a specification that, although powerful,
 limits the users to its semantics.
 
 The fact that REST API designers haven't really treated very well front-end
-developers and that REST can become quite complex for a modern API, has given a lot of
+developers in combination with the complexity a modern REST API could have, has given a lot of
 space to GraphQL to rise as one of the most prominent API designs.
 Although GraphQL is a great asset to have it around, we don't think that it's practical for
 all API cases, but instead it mostly suits best big companies that can afford the costs.
