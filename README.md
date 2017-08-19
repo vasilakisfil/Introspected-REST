@@ -2865,11 +2865,11 @@ For each resource, the document can provide a link for the client to access it d
 figuring out the link using REST state trantitions) and more information, mostly hints, like
 permitted methods, media types etc.
 
-**It should be noted that JSON Home it's one of the few specifications along with [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807)
+_It should be noted that JSON Home it's one of the few specifications along with [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807)
 and possibly [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) that
 slide away from Roy's REST model and acknowledge the distinction between
 browser-based clients that are drived by real humans, and non-browser, machine based-clients and suggests
-that the latter should be treated differently.**
+that the latter should be treated differently._
 
 As the draft notes the benefits of using such a home document are mutifold:
 >
