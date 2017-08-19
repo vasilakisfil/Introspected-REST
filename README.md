@@ -1841,7 +1841,7 @@ limitations by existing client implementations could exist.
 If an API designer doesn't want to break this part of HTTP spec then she should define the introspection
 process through the other suggested solutions, or come up with a new one.
 What is important though is that, as Introspected REST specifies, introspection process should be recognizably distinct from regular
-requests.
+data requests.
 
 The authors of Introspected REST don't see the reasoning of this constraint by HTTP spec and advise the community to investigate
 the possibility of ignoring this limitation and proceed with HTTP OPTIONS introspection
