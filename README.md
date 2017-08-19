@@ -2619,7 +2619,7 @@ However, we feel that GraphQL does have some costs and it's not a solution that 
 business can apply.
 First, GraphQL doesn't play well with the existing HTTP infrastructure.
 For instance, most GraphQL implementations, use a single endpoint with the same
-HTTP method, HTTP POST, for the client-server communication.
+HTTP method, `POST`, for the client-server communication.
 As a result, the specification cannot take advantage of existing HTTP protocols
 and mechanisms but instead has to re-invent the wheel on some of them, like caching.
 
