@@ -2628,27 +2628,25 @@ Although there are libraries for most languages and frameworks that facilitate t
 GraphQL API, this is not always the case.
 But apart from that, the server engineer must take full responsibility for supporting all
 kind of queries the client might need and at the same time these queries need to be efficient and scalable.
-When you can know in advance what are the limits of a query, you are able to optimize for it,
+When we can know in advance what are the limits of a query, we are able to optimize for it,
 however, with GraphQL, client can send any query from all the possible resources and structure them
 in a random way for the server.
 In such cases, it's impractical to optimize beforehand and solving scaling issue becomes
 a real challenge that possibly only companies with huge amount of resources can really afford.
 
-Although GraphQL is a great asset to have it around, we don't think that it's practical for
-all API cases, but instead it mostly suits best big companies that can afford the costs.
-If an API designer needs to spend 10 times more on development to create a GraphQL-powered API
-and have happy API clients, she might reconsider.
-Is it really needed? What are the alternatives ?
-we agree that in the past REST API designers haven't really treated well front-end
-developers we can't miss the fact that a modern API _should_ fit most client's needs.
-
-Again, as other specs, GraphQL creates a closed silo in your API and differentiating from the existing
+And again, as with existing Media Types, GraphQL creates a closed silo in your API and differentiating from the existing
 spec is nearly impossible.
 For instance, if you need to support an additional type, it's impossible
 because you are dependent to the existing libraries (creating your own GraphQL library is out of the question)
 and also you will need to break "the spec".
-Also, although we agree that in the past REST API designers haven't really treated well front-end
-developers we can't miss the fact that a modern API _should_ fit most client's needs.
+
+The fact that REST API designers haven't really treated very well front-end
+developers and that REST can become quite complex for a modern API, has given a lot of
+space to GraphQL to rise as one of the most prominent API designs.
+Although GraphQL is a great asset to have it around, we don't think that it's practical for
+all API cases, but instead it mostly suits best big companies that can afford the costs.
+The API designer must balance the trade off between the cost of development and the
+client's affordances.
 
 We feel that a MicroType-based architecture is more powerful than a specification that, although powerful,
 limits the users to its semantics.
