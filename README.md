@@ -2654,8 +2654,8 @@ client's affordances.
 With Introspected REST and a number of powerful MicroTypes it is possible to replicate the existing GraphQL
 specification and even laverage existing HTTP infrastructure.
 In fact, we feel that Introspected REST is far more powerful than GraphQL:
-not only it gives us the ability to balance the costs of implementation and client performance,
-but also we can support multiple, different, querying specs for different classes of clients,
+not only it gives you the ability to balance the costs of implementation and client performance,
+but also it can support multiple, different, querying specs for different classes of clients,
 all these by leveraging the existing HTTP infrastructure.
 
 
