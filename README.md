@@ -2167,7 +2167,8 @@ We could provide the URI template when introspecting the pagination MicroType:
 ```
 Of course, the MicroType spec would specify how the client should parse and determine
 the pagination links from this introspective content.
-
+In that way, we don't treat the clients as stupid but smart enough to understand
+what they need to do on their part to get what they want.
 
 Which is the best solution? It depends, and that's why we should embrace MicroTypes.
 The `Link` header-based solution is representation-agnostic and could benefit some clients
@@ -2459,8 +2460,10 @@ Such functionality would have to be described by both MicroTypes.
 }
 ```
 
-Notice how we define the pagination, by referencing parts of the user's `meta` object.
-We don't treat the clients as stupid but smart enough to understand what they need to do on their part to get what they want.
+Notice that we also define here the pagination, by referencing parts of the user's `meta` object.
+Our strategy is duplicate common functionality, wherever we can, in MicroTypes because we cannot know in advance
+which MicroTypes each client will be programmed to understand.
+
 
 
 #### 11.3.4. Descriptions metadata
