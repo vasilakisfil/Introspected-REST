@@ -180,8 +180,8 @@ by the user before sending it over.
 If our API is `RESTly` and not `REST`, this means that we need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
 It takes roughly 1 week for Apple to review our app and if our app doesn't get rejection during the review process for some reason, our
 tiny change will take action at least a week later after requested.
-If our API _was_ `REST` that would mean a change on the server's response denoting which fields are required to submit the form.
-You would have the change deployed 10 minutes later.
+If our API _was_ `REST`, that would mean a simple change on the server's response, denoting which fields are required to submit the form.
+We would have the change deployed 10 minutes later.
 
 Roy notes in his thesis:
 
