@@ -490,7 +490,6 @@ However, as this form of communication is getting more and more common,
 clients are expecting more options (capabilities) from the server for their responses.
 It's not enough to just request and get the resource but we should be able to specify
 to the server what transformations should apply, according to our needs.
-
 Nowadays we have been using networked APIs so much that now we essentially have to
 provide an ORM to the client over the HTTP (or any other protocol).
 
