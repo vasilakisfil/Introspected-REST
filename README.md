@@ -2045,34 +2045,40 @@ but it would look like this:
       "pagination": {
         "url": "/api/users/1?microtype=pagination",
         "method": "OPTIONS",
-        "content-type": "application/simple-pagination+json"
+        "content-type": "application/simple-pagination+json",
+        "priority": "1.0"
       },
       "errors": {
         "url": "/api/users/1?microtype=errors",
         "method": "OPTIONS",
-        "content-type": "application/simple-pagination+json"
+        "content-type": "application/simple-pagination+json",
+        "priority": "1.0"
       }
     },
     "introspective": {
       "json-schema": {
         "url": "/api/users/1?microtype=json-schema",
         "method": "OPTIONS",
-        "content-type": "application/schema+json"
+        "content-type": "application/schema+json",
+        "priority": "0.8"
       },
       "json-hyper-schema": {
         "url": "/api/users/1?microtype=json-hyper-schema",
         "method": "OPTIONS",
-        "content-type": "application/schema+json"
+        "content-type": "application/schema+json",
+        "priority": "0.8"
       },
       "json-ld": {
         "url": "/api/users/1?microtype=json-ld",
         "method": "OPTIONS",
-        "content-type": "application/ld+json"
+        "content-type": "application/ld+json",
+        "priority": "0.5"
       },
       "simple-description": {
         "url": "/api/users/1?microtype=simple-description",
         "method": "OPTIONS",
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "priority": "0.2"
       }
     }
   },
@@ -2086,10 +2092,14 @@ but it would look like this:
 
 Each entry describes the url which the client can access it, the HTTP method
 the client should use along with the Media Type of the expected response.
+Finally, the `priority` number specifies the preceding order of each MicroType
+in case a functionality is described by one or more MicroTypes.
+
 Note that the Media Type of the introspective content will be described
 by the MicroType the client tries to access.
 As a result, if a client doesn't recognize a MicroType, it wouldn't try to access
 it anyway.
+
 
 ### 11.2. Runtime Metadata
 #### 11.2.1. Pagination
