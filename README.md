@@ -2637,8 +2637,10 @@ a real challenge that possibly only companies with huge amount of resources can 
 And again, as with existing Media Types design, GraphQL creates a closed silo in your API and differentiating from the existing
 spec is nearly impossible.
 For instance, if you need to support an additional data type, it's impossible
-because you are dependent to the existing libraries (creating your own GraphQL library is out of the question)
-and also you will need to break "the spec".
+because you are dependent to the existing libraries and creating your own GraphQL library woulr require too much time.
+But even if that was solved, a possible modification in the current spec would probably break most existing clients.
+We feel that a MicroType-based architecture is more powerful than a specification that, although powerful,
+limits the users to its semantics.
 
 The fact that REST API designers haven't really treated very well front-end
 developers and that REST can become quite complex for a modern API, has given a lot of
@@ -2648,12 +2650,12 @@ all API cases, but instead it mostly suits best big companies that can afford th
 The API designer must balance the trade off between the cost of development and the
 client's affordances.
 
-We feel that a MicroType-based architecture is more powerful than a specification that, although powerful,
-limits the users to its semantics.
 With Introspected REST and a number of powerful MicroTypes it is possible to replicate the existing GraphQL
 specification and even laverage existing HTTP infrastructure.
-Introspected REST powered by MicroTypes concept gives you the ability to balance the costs
-of implementation and the client requirements and deliver something in-between.
+In fact, we feel that Introspected REST is far more powerful than GraphQL.
+Not only it gives us the ability to balance the costs of implementation and client performance,
+but also we can support multiple, different, querying specs for different classes of clients,
+all these by leveraging the existing HTTP infrastructure.
 
 
 ### 12.2. Linked Data and Semantic Web
