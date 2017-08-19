@@ -2578,8 +2578,8 @@ programmatically wrapped in a human-friendly format.
 in 2015.
 The specification of the query language is not tight to the protocol used
 underneath or the message format, although HTTP in combination with JSON is usually used.
-What is different about GraphQL is that it makes the client's requirements and performance
-as a top priority, regardless of the internal implementation of the data layer in the server.
+What is different about GraphQL is that **it makes the client's requirements and performance
+as a top priority**, regardless of the internal implementation of the data layer in the server.
 As a result, front-end developers tend to love it due to its expressiveness that
 usually is not found in REST APIs.
 
