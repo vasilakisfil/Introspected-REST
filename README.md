@@ -2600,7 +2600,7 @@ implementation support those filters:
 }
 ```
 
-The query not only specifies what the client wants to retrieve it but also it specifies
+The query not only specifies what the client wants to retrieve but also it specifies
 the structure of the response that it should have.
 Also, GraphQL supports an introspection process that clients can use in order to figure
 out the available fiels of each resource along with other useful information, like
