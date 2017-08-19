@@ -2867,7 +2867,8 @@ permitted methods, media types etc.
 
 _It should be noted that JSON Home it's one of the few specifications along with [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807)
 and possibly [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) that
-slide away from Roy's REST model and acknowledge the distinction between
+because of their semantics and specifications, they slide away from Roy's REST model and
+acknowledge the distinction between
 browser-based clients that are drived by real humans, and non-browser, machine based-clients and suggests
 that the latter should be treated differently._
 
