@@ -1089,7 +1089,7 @@ We feel that although this is true, most APIs are not as simple as that.
 Moreover such APIs can't actually be evolved without releasing a new Media Type and breaking the existing API clients.
 **There is no way of introducing change, which essentially breaks REST's principles.**
 
-However we are pragmatic: we understand that such APIs will exist and engineers want to spend as less time as possible to build such APIs.
+However we are pragmatic: we understand that such APIs will exist and API designers want to spend as less time as possible to build such APIs.
 Introspected REST, an architecture that we will describe later, solves that by serving hypermedia
 information on side and in an incremental way without breaking the simplicity.
 
