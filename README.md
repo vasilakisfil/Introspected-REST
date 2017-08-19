@@ -2471,8 +2471,9 @@ Such functionality would have to be described by both MicroTypes.
 ```
 
 Notice that we also define here the pagination, by referencing parts of the user's `meta` object.
-Our strategy is duplicate common functionality, wherever we can, in MicroTypes because we cannot know in advance
-which MicroTypes each client will be programmed to understand.
+Our strategy is duplicate common functionality in MicroTypes, wherever we can, in order to help
+our clients. Possibly not all clients will be programmed for all our MicroTypes, especially if we
+release them progressively.
 
 
 
