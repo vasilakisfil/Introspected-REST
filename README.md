@@ -2574,14 +2574,83 @@ programmatically wrapped in a human-friendly format.
 
 ## 12. Related Work
 ### 12.1. GraphQL
-no urls, basically a query language, no MicroTypes
+[GraphQL](http://graphql.org/) is a data query language that was created by Facebook and released to the public
+in 2015.
+The specification of the query language is not tight to the protocol used
+underneath or the message format, although HTTP in combination with JSON is usually used.
+What is different about GraphQL is that it makes the client's requirements and performance
+as a top priority, regardless of the internal implementation of the data layer in the server.
+As a result, front-end developers tend to love it due to its expressiveness that
+usually is not found in REST APIs.
 
-It's Apple for APIs (cost + compatibility)
+For instance, retrieving a `User` object with a subset of it's attributes, along
+with some microposts ordered by creation date, is very easy, given that the server
+implementation support those filters:
 
-The reason we have it in related work is because it's related to REST but not REST.
+```
+{
+  user(id: "1") {
+    name
+    email
+    birth_date
+    microposts (limit: 10, orderBy: created_at)
+      title
+    }
+  }
+}
+```
 
-We are happy that people are trying new things and we support such initiatives.
-However it has some issues.
+The query not only specifies what the client wants to retrieve it but also it specifies
+the structure of the response that it should have.
+Also, GraphQL supports an introspection process that clients can use in order to figure
+out the available fiels of each resource along with other useful information, like
+data types, the available operations those resource support (mutations in GraphQL terminoloty) etc.
+
+GraphQL solves common issues in networked APIs in a radical, unique way.
+Facebook engineers figured out that instead of trying to adapt
+existing Internet infrastructure and protocols to their needs, they designed
+a query language that solves their problems and use HTTP as a dumb pipe to do the hard work of
+communicating both queries and data.
+In terms of REST principles, GraphQL responses are both evolvable and self-descriptive, as GraphQL's
+introspection is very powerful allowing the clients to learn anything that is needed
+about the resources.
+
+However, we feel that GraphQL does have some costs and it's not a solution that any
+business can apply.
+First, GraphQL doesn't play well with the existing HTTP infrastructure.
+For instance, most GraphQL implementations, use a single endpoint with the same
+HTTP method, HTTP POST, for the client-server communication.
+As a result, the specification cannot take advantage of existing HTTP protocols
+and mechanisms but instead has to re-invent the wheel on some of them, like caching.
+
+Also, adding GraphQL to an existing service has huge costs.
+Although there are libraries for most languages and frameworks that facilitate the development of
+GraphQL API, this is not always the case.
+But apart from that, the server engineer must take full responsibility for supporting all
+kind of queries the client might need and at the same time these queries need to be efficient and scalable.
+When you can know in advance what are the limits of a query, you are able to optimize for it,
+however, with GraphQL, client can send any query from all the possible resources and structure them
+in a random way for the server.
+In such cases, it's impractical to optimize beforehand and solving scaling issue becomes
+a real challenge that possibly only companies with huge amount of resources can really afford.
+
+Although GraphQL is a great asset to have it around, we don't think that it's practical for
+most use cases, but instead it suits best big companies that can afford the costs.
+What is more, GraphQL creates a closed silo in your API and differentiating from the existing
+spec is nearly impossible.
+For instance, if you need to support an additional type, it's impossible
+because you are dependent to the existing libraries (creating your own GraphQL library is out of the question)
+and also you will need to break "the spec".
+Also, although we agree that in the past REST API designers haven't really treated well front-end
+developers we can't miss the fact that a modern API _should_ fit most client's needs.
+
+We feel that a MicroType-based architecture is more powerful than a specification that, although powerful,
+limits the users to its semantics.
+With Introspected REST and a number of powerful MicroTypes it is possible to replicate the existing GraphQL
+specification and even laverage existing HTTP infrastructure.
+Introspected REST powered by MicroTypes concept gives you the ability to balance the costs
+of implementation and the client requirements and deliver something in-between.
+
 
 ### 12.2. Linked Data and Semantic Web
 Linked data and semantic web has been trying to solve the problem of mutual understandment
