@@ -2635,8 +2635,14 @@ In such cases, it's impractical to optimize beforehand and solving scaling issue
 a real challenge that possibly only companies with huge amount of resources can really afford.
 
 Although GraphQL is a great asset to have it around, we don't think that it's practical for
-most use cases, but instead it suits best big companies that can afford the costs.
-What is more, GraphQL creates a closed silo in your API and differentiating from the existing
+all API cases, but instead it mostly suits best big companies that can afford the costs.
+If an API designer needs to spend 10 times more on development to create a GraphQL-powered API
+and have happy API clients, she might reconsider.
+Is it really needed? What are the alternatives ?
+we agree that in the past REST API designers haven't really treated well front-end
+developers we can't miss the fact that a modern API _should_ fit most client's needs.
+
+Again, as other specs, GraphQL creates a closed silo in your API and differentiating from the existing
 spec is nearly impossible.
 For instance, if you need to support an additional type, it's impossible
 because you are dependent to the existing libraries (creating your own GraphQL library is out of the question)
