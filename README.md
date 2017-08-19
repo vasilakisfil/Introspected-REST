@@ -2611,7 +2611,7 @@ Facebook engineers figured out that instead of trying to adapt
 existing Internet infrastructure and protocols to their needs, they designed
 a query language that solves their problems and use HTTP as a dumb pipe to do the hard work of
 communicating both queries and data.
-In terms of REST principles, GraphQL responses are both evolvable and self-descriptive, as GraphQL's
+In terms of REST principles, **GraphQL responses are both evolvable and self-descriptive**, as GraphQL's
 introspection is very powerful allowing the clients to learn anything that is needed
 about the resources.
 
