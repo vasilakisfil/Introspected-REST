@@ -2642,8 +2642,8 @@ But even if that was solved, a possible modification in the current spec would p
 We feel that a MicroType-based architecture is more powerful than a specification that, although powerful,
 limits the users to its semantics.
 
-The fact that REST API designers haven't really treated very well front-end
-developers in combination with the complexity a [modern](#61-requirements-from-a-modern-rest-api)
+The fact that REST API designers haven't treated very well front-end
+developers in the past, in combination with the complexity a [modern](#61-requirements-from-a-modern-rest-api)
 REST API could have, has given a lot of space to GraphQL to rise as one of the most prominent
 API designs.
 Although GraphQL is a great asset to have it around, we don't think that it's practical for
