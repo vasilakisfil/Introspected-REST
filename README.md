@@ -218,7 +218,7 @@ much more flexible and backwards compatible with any RESTly or RESTless API.
 But first let's discuss about Networked Services.
 
 ## 3. Networked Services and APIs
-Nowadays JSON has become so popular that engineers almost forget that there is whole bunch of
+Nowadays JSON has become so popular that developers almost forget that there is whole bunch of
 protocols below it.
 Engineers also forget that JSON is just a specification in the message level, like XML.
 It's not the only one and definitely it's not the best we could use.
