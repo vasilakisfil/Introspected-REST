@@ -2853,7 +2853,7 @@ the one that fits best.
 Although the negotiation part is skipped from the RFC, we feel that such works are towards the right direction that will allow us
 to build evolvable, self-described APIs.
 
-### 12.4. JSON Home (draft)
+### 12.4. JSON Home
 _Note that JSON Home is still in a draft state._
 
 [JSON home](https://tools.ietf.org/html/draft-nottingham-json-home-02) is a draft specification
