@@ -2629,7 +2629,7 @@ GraphQL API, this is not always the case.
 But apart from that, the server engineer must take full responsibility for supporting all
 kind of queries the client might need and at the same time these queries need to be efficient and scalable.
 When we can know in advance what are the limits of a query, we are able to optimize for it,
-however, with GraphQL, client can send any query using any of the all the possible resources and structure them
+however, with GraphQL, a client can send any query using any of the all the possible resources and structure them
 in a way that for the server is random.
 In such cases, it's impractical to optimize beforehand and solving scaling issue becomes
 a real challenge that possibly only companies with huge amount of resources can really afford.
