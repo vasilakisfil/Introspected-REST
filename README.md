@@ -1791,7 +1791,7 @@ First and foremost, the link header size is limited and if other headers of the 
 are already overloaded then the server might refuse to render the response to the client
 but instead return an HTTP error possibly "413 Request Entity Too Large" or "414 Request-URI Too Long"
 although there isn't an HTTP status code explicitly defined for such case.
-A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC proposal 
+A possible solution to this could be [Linkset: A Link Relation Type for Link Sets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) RFC proposal
 (a work also by Erik Wilde) but currently it's in draft state.
 Once published, a Linkset could group together a set of links and provide them to the client by reference.
 However Linksets don't actually solve our issue because eventually the MicroTypes announcement would not
@@ -2585,7 +2585,7 @@ For instance, retrieving a `User` object with a subset of it's attributes, along
 with some microposts ordered by creation date, is very easy, given that the server
 implementation support those filters:
 
-```
+```graphql
 {
   user(id: "1") {
     name
