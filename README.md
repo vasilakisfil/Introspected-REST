@@ -2708,9 +2708,18 @@ The resource ony needs to have the `vocab` attribute inside JSON-LD's `context`.
 }
 ```
 
-+ introspect how you can open a door
+The idea of semantic web can be found even in real life.
+In an example taken by [Donald Norman](https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things), 
+in real life when we see a door, we know instantly how it opens because we have associated
+the design of the door with its opening mechanism:
+if a door has a bar across the door, then we push while if there is a little handle in the door then we pull.
 
-In Introspected REST we embrace semantic web by employing the necessary MicroTypes
+While semantic web allow us to associate resources in the web with entities that hold
+metadata and have specific properties, in Introspected REST we ask the door itself how its mechanism works:
+using the door's metadata we can learn how to open any door and eventually we can even
+open doors whose opening mechanism we have never seen before.
+
+In any case, in Introspected REST we embrace semantic web by employing the necessary MicroTypes
 and **we don't really feel that this work is related to Introspected REST in a competing sence
 but instead, both concepts could complement each other**.
 In fact, we feel that using linked data is just great and API designers should employ it more often.
