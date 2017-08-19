@@ -218,9 +218,9 @@ much more flexible and backwards compatible with any RESTly or RESTless API.
 But first let's discuss about Networked Services.
 
 ## 3. Networked Services and APIs
-Nowadays JSON has become so popular that developers almost forget that there is whole bunch of
+Nowadays JSON has become so popular that engineers almost forget that there is whole bunch of
 protocols below it.
-Developers also forget that JSON is just a specification in the message level, like XML.
+Engineers also forget that JSON is just a specification in the message level, like XML.
 It's not the only one and definitely it's not the best we could use.
 Nevertheless it's simple and simplicity is a virtue.
 
@@ -2174,7 +2174,7 @@ Which is the best solution? It depends, and that's why we should embrace MicroTy
 The `Link` header-based solution is representation-agnostic and could benefit some clients
 that don't deal much with the content but in practice such clients are very rare, especially in our use case.
 The second solution would limit the client application developer if she wanted to have a link
-of a specific page, while the last solution would limit the API developer to avoid
+of a specific page, while the last solution would limit the API designer to avoid
 having the number of total pages in the response, because it could be a huge cost to the database level.
 In any case, **Introspected REST doesn't restrict us to specify two or more alternative MicroTypes for the same API
 functionality**, like pagination.
@@ -2579,7 +2579,7 @@ The specification of the query language is not tight to the protocol used
 underneath or the message format, although HTTP in combination with JSON is usually used.
 What is different about GraphQL is that **it makes the client's requirements and performance
 as a top priority**, regardless of the internal implementation of the data layer in the server.
-As a result, front-end developers tend to love it due to its expressiveness that
+As a result, front-end engineers tend to love it due to its expressiveness that
 usually is not found in REST APIs.
 
 For instance, retrieving a `User` object with a subset of it's attributes, along
@@ -2642,7 +2642,7 @@ We feel that a MicroType-based architecture is more powerful than a specificatio
 limits the users to its semantics.
 
 The fact that REST API designers haven't treated very well front-end
-developers in the past, in combination with the complexity a [modern](#61-requirements-from-a-modern-rest-api)
+engineers in the past, in combination with the complexity a [modern](#61-requirements-from-a-modern-rest-api)
 REST API could have, has given a lot of space to GraphQL to rise as one of the most prominent
 API designs.
 Although GraphQL is a great asset to have it around, we don't think that it's practical for
