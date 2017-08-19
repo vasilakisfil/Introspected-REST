@@ -1393,8 +1393,8 @@ The way the documentation is requested and its format should be distinctly defin
 ## 10. Introspected REST applied to HTTP
 Introspected REST architectural style is not bound to any protocol or spec, just as is REST.
 Here we will review the challenges that are rising through its adaptation in HTTP protocol.
-For instance, we need to solve issues like MicroTypes of a Media Type announcement,
-negotiation, priority order in case of overlaps or collisions, identification, and
+For instance, we need to solve issues like announcement and negotiation of MicroTypes bound to a Media Type,
+priority order in case of overlaps or collisions, identification, and
 the actual introspection process in HTTP.
 
 ### 10.1 Revisiting content negotiation in HTTP
