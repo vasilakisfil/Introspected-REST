@@ -2726,7 +2726,7 @@ The idea of semantic web can be found even in real life.
 In an example taken by [Donald Norman](https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things), 
 in real life when we see a door, we know instantly how it opens because we have associated
 the design of the door with its opening mechanism:
-if a door has a bar across the door, then we push while if there is a little handle in the door then we pull.
+if a door has a bar across it, then we push while if there is a little handle in the door then we pull.
 
 While semantic web allow us to associate resources in the web with entities that hold
 metadata and have specific properties, **in Introspected REST we ask the door itself how its mechanism works**:
