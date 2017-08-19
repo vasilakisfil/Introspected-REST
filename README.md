@@ -2854,6 +2854,8 @@ Although the negotiation part is skipped from the RFC, we feel that such works a
 to build evolvable, self-described APIs.
 
 ### 12.4. JSON Home (draft)
+_note that JSON Home is still in a draft state_
+
 [JSON home](https://tools.ietf.org/html/draft-nottingham-json-home-02) is a draft specification
 that defines a "home document" format for non-browser HTTP clients to first request in order to discover
 the server's capabilities that it support.
