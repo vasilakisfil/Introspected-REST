@@ -12,10 +12,10 @@ As part of this manifesto we will also present the **concept of MicroTypes**,
 small reusable modules that compose a Media Type and facilitate the evolvability
 and extensibility of our new model.
 
-For the implemetation of our new model in HTTP, we will have to go back in time,
+For the implementation of our new model in HTTP, we will have to go back in time,
 dig deep in existing RFCs and uncover forgotten concepts, like reactive content
 negotiation and Media Type parameters, in order to bend the existing Internet
-infrastructure, which has been mostly influenced by REST concepts, and succussfully apply our new model.
+infrastructure, which has been mostly influenced by REST concepts, and successfully apply our new model.
 
 
 * [1. Definitions](#1-definitions)
@@ -1248,7 +1248,7 @@ Actions should also describe any relevant information for the client to perform 
 
 ##### 9.1.2.3. Forms
 Another way of describing the manipulation options of a resource is the notion of forms.
-The difference between actions and forms is that the latter are strictly semantically **equivelent to an HTML form**,
+The difference between actions and forms is that the latter are strictly semantically **equivalent to an HTML form**,
 for the client to render.
 
 
@@ -1345,7 +1345,7 @@ The idea of introspection is to be able to examine properties of a system at run
 In the case of Introspected REST, **introspection defines a process for a client to be able to introspect
 the API's, resource's, action's or even object's metadata at runtime**.
 Through those metadata, server provides all the available states, manipulation actions as well as the available transitions.
-The implementation of the process is up to the API designer although usually a RESTish interface even for each MicroType's metadata is a wise choise.
+The implementation of the process is up to the API designer although usually a RESTish interface even for each MicroType's metadata is a wise choice.
 In any case, we would like to point out some key properties that should appear on any introspection process.
 
 #### 9.3.1. Composability over monoliths
@@ -2390,7 +2390,7 @@ distinct JSON attributes (like `accepts`/`produces` or `accepts`/`returns`).
 For the Hypermedia part we will use JSON Hyper Schemas.
 Specifically we will use the draft [V4](https://tools.ietf.org/html/draft-luff-json-hyper-schema-00) of JSON Hyper Schemas as the
 next versions ([V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00), [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)) are targeted to hypermedia APIs that
-are HTML-equivelents. For instance, there is no way we can define a `method` attribute, restricting us to `GET` and `POST`
+are HTML-equivalents. For instance, there is no way we can define a `method` attribute, restricting us to `GET` and `POST`
 depending whether there is a body to send or not.
 In the Introspected REST terminology, [V5](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-00) and [V6](https://tools.ietf.org/html/draft-wright-json-schema-hyperschema-01)
 provide hypermedia semantics only for forms and not actions.
@@ -2615,8 +2615,8 @@ implementation support those filters:
 The query not only specifies what the client wants to retrieve but also it specifies
 the structure the response should have.
 Also, GraphQL supports an **introspection** process that clients can use in order to figure
-out the available fiels of each resource along with other useful information, like
-data types, the available operations those resource support (mutations in GraphQL terminoloty) etc.
+out the available fields of each resource along with other useful information, like
+data types, the available operations those resource support (mutations in GraphQL terminology) etc.
 
 GraphQL solves common issues in networked APIs in a radical, unique way.
 Facebook engineers figured out that instead of trying to adapt
@@ -2664,7 +2664,7 @@ The API designer must balance the trade off between the cost of development and 
 client's affordances.
 
 With Introspected REST and a number of powerful MicroTypes it is possible to replicate the existing GraphQL
-specification and even laverage existing HTTP infrastructure.
+specification and even leverage existing HTTP infrastructure.
 In fact, we feel that Introspected REST is far more powerful than GraphQL:
 not only it gives you the ability to balance the costs of implementation and client performance,
 but also it can support multiple, different, querying specs for different classes of clients,
@@ -2672,9 +2672,9 @@ all these by leveraging the existing HTTP infrastructure.
 
 
 ### 12.2. Linked Data and Semantic Web
-Linked data and semantic web has been trying to solve the problem of mutual understandment
+Linked data and semantic web has been trying to solve the problem of mutual understanding
 between machines many years now.
-Using a pre-defined vocubulary, machines can determine the type of a resource, like if
+Using a pre-defined vocabulary, machines can determine the type of a resource, like if
 it's a person, an employee, an athlete or
 even the types of each attribute of a resource, like a name, an email etc.
 It is a step close to have self-descriptive APIs that machines can understand and process.
@@ -2700,7 +2700,7 @@ For instance, using JSON-LD as we saw earlier, we can specify all attributes of 
 }
 ```
 
-Moreover, modern specifications like JSON-LD allow us to ommit
+Moreover, modern specifications like JSON-LD allow us to omit
 the definitions from the response's data and instead provide only a link to
 a publicly accessible directory that a machine can **dereference**,
 similarly to the introspection method of Introspected REST.
@@ -2724,7 +2724,7 @@ The resource ony needs to have the `vocab` attribute inside JSON-LD's `context`.
 
 The idea of semantic web can be found even in real life.
 In an example taken by [Donald Norman](https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things), and
-oftenly quoted by Mike Amundsen's taks,
+often quoted by Mike Amundsen's talks,
 in real life when we see a door, we know instantly how it opens because we have associated
 the design of the door with its opening mechanism:
 if a door has a bar across it then we push while if there is a little handle in the door then we pull.
@@ -2735,7 +2735,7 @@ using the door's metadata we can learn how to open any door and eventually we ca
 open doors whose opening mechanism we have never seen before.
 
 In any case, in Introspected REST we embrace semantic web by employing the necessary MicroTypes
-and we don't really feel that this work is related to Introspected REST in a competing sence
+and we don't really feel that this work is related to Introspected REST in a competing sense
 but instead, both concepts could complement each other.
 In fact, we feel that using linked data is just great and API designers should employ it more often.
 
@@ -2792,13 +2792,13 @@ So again in our use case, we can specify some actions using Hydra:
 ```
 
 Again, **Hydra's-specific content, like operations, can become dereferencable thus
-making response's load much smaller**, although this is not a requiremend as in
+making response's load much smaller**, although this is not a requirement as in
 Introspected REST.
 
 Although we support initiatives that allow API designers to serve metadata on the side,
 like Hydra does with dereferencable content, we can't miss the fact that Hydra
 has become a very complex specification and still it's type system is a weak one.
-We firmly believe that MicroTypes for actions (Hydra's equivelent to operations)
+We firmly believe that MicroTypes for actions (Hydra's equivalent to operations)
 will be much more powerful than hydra's semantics of `required`, `writable`, `readable`,
 and soon an API designer will be able to choose one MicroType from the same class of
 MicroTypes, like data types, that fits best for her.
@@ -2862,7 +2862,7 @@ the server's capabilities that it support.
 Specifically, the document specifies semantics to describe the API itself (like author, documentation link etc)
 along with its resources.
 For each resource, the document can provide a link for the client to access it directly (instead of
-figuring out the link using REST state trantitions) and more information, mostly hints, like
+figuring out the link using REST state transitions) and more information, mostly hints, like
 permitted methods, media types etc.
 
 _It should be noted that JSON Home it's one of the few specifications along with [RFC 7807 (Problem Details for HTTP APIs)](https://tools.ietf.org/html/rfc7807)
@@ -2872,7 +2872,7 @@ acknowledge the distinction between
 browser-based clients that are drived by real humans, and non-browser, machine based-clients and suggests
 that the latter should be treated differently._
 
-As the draft notes the benefits of using such a home document are mutifold:
+As the draft notes the benefits of using such a home document are multifold:
 >
 >   o  Extensibility - Because new server capabilities can be expressed
 >      as link relations, new features can be layered in without
@@ -2899,10 +2899,10 @@ As the draft notes the benefits of using such a home document are mutifold:
 
 Although we can instantly see the benefits of such structure, we believe that a specification like JSON Home
 is very weak. Specifically, it is tight in JSON message format which, although very popular, could possibly be
-inapropriate in some use cases.
+inappropriate in some use cases.
 Instead, a better idea would be to define the necessary attributes and semantics that a Home document
 should provide and then let the API designer to choose if these will be implemented in JSON, XML or binary format.
-Such architecture would be more rebust and would give more options to an API designer.
+Such architecture would be more robust and would give more options to an API designer.
 
 Secondly, the document resource hints are very abstract and generic that probably are not sufficient
 for the client to parse them without some documentation.
@@ -2921,12 +2921,12 @@ undestimate their capabilities: **machines can be much more powerful and smart t
 Over the past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
 
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
-shouldn't even exist and thus **such approach is fundamentaly wrong**.
+shouldn't even exist and thus **such approach is fundamentally wrong**.
 By giving so much weight on the documentation but at the same time treating it as something different, separated from the code
 leads to inconsistencies beteween the actual API and the API description.
 Those tools have been improved so much lately that now allow us to write the documentation and let them generate
 the basis of our code, depending on our language/framework, which could fix the inconsistencies issues.
-Unfortunatey though, such approach leads to an RPC design instead of a hypermedia-based system.
+Unfortunately though, such approach leads to an RPC design instead of a hypermedia-based system.
 
 
 We believe that API designers are limited by marrying these tools.
@@ -2937,7 +2937,7 @@ but also, having tools that aim to provide all-in-one to the API designer is aga
 ### 12.6. API directories
 Another trend for APIs is to register them  in an online service, called API dictionary and possible push there the API documentation as well.
 We feel that this is not a very helpful structure. APIs should be discoverable by themselves without using centralized services.
-The API's [conceptual root url](#935-api-bootstraping) should provide everyhing that is needed, and using already published protocols
+The API's [conceptual root url](#935-api-bootstraping) should provide everything that is needed, and using already published protocols
 like [WebFinger](https://tools.ietf.org/html/rfc7033), which builds upon [Well-Known Uniform Resource Identifiers RFC](https://www.rfc-editor.org/rfc/rfc5785.txt)
 and can give API information for client bootstraping.
 
