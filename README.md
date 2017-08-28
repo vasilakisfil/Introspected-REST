@@ -781,7 +781,7 @@ API specs as of 2017 in terms of tools and libraries.
 
 While the spec makes a great effort describing the structure of the document, we see some
 notable issues. Namely:
- * Limited links (no URI templates, treats the client as completely stupid)
+ * Limited links (no URI templates, treats the client as dumb)
  * No actions
  * No info on available attributes
  * No info on data types
@@ -2869,7 +2869,7 @@ _It should be noted that JSON Home it's one of the few specifications along with
 and possibly [Linksets](https://tools.ietf.org/html/draft-wilde-linkset-link-rel-02) that
 because of their semantics and specifications, they slide away from Roy's REST model and
 acknowledge the distinction between
-browser-based clients that are drived by real humans, and non-browser, machine based-clients and suggests
+browser-based clients that are driven by real humans, and non-browser, machine based-clients and suggests
 that the latter should be treated differently._
 
 As the draft notes the benefits of using such a home document are multifold:
@@ -2915,7 +2915,7 @@ semantically identical for all APIs, JSON-specific, home document**.
 However we can't neglect the fact that influencing engineers are finally recognizing the
 dissimilarity of browser-based, driven by humans clients and machine-based clients.
 In fact, carving our infrastructure for machine-based clients to be similar with human-driven clients we
-undestimate their capabilities: **machines can be much more powerful and smart than humans.**
+underestimate their capabilities: **machines can be much more powerful and smart than humans.**
 
 ### 12.5. RESTful API Description Languages
 Over the past years, there has been a trend on creating API documentation through specialized tools, like OpenAPI specification (ex. Swagger).
@@ -2923,7 +2923,7 @@ Over the past years, there has been a trend on creating API documentation throug
 As we have already noted, in a REST API documentation, in the sense of offline contracts,
 shouldn't even exist and thus **such approach is fundamentally wrong**.
 By giving so much weight on the documentation but at the same time treating it as something different, separated from the code
-leads to inconsistencies beteween the actual API and the API description.
+leads to inconsistencies between the actual API and the API description.
 Those tools have been improved so much lately that now allow us to write the documentation and let them generate
 the basis of our code, depending on our language/framework, which could fix the inconsistencies issues.
 Unfortunately though, such approach leads to an RPC design instead of a hypermedia-based system.
@@ -2948,3 +2948,34 @@ and can give API information for client bootstraping.
 >
 > --- Paul Clements
 >
+
+Is it the API spec designers to blame for creating non self-descriptive REST specifications or did they make a deliberate choice
+to avoid fully support the HATEOAS constraint of REST and instead delegate such information to documentation?
+
+In the research of a fully REST API, we determined that REST is complex and
+inflexible.
+Moreover, its adaptation in HTTP goes through the mechanism of Media Types
+which specifies the whole API vocabulary in a sole place
+while HATEOAS need to bear the brunt of communicating to the client the available
+capabilities of the server, based on Media Type's vocabulary,
+for each resource.
+The result is very complex API responses that tangle together hypermedia with data making development is a real
+challenge for both the client and the server.
+
+Our new model, Introspected REST, which solves most of REST issues, steps on Roy's initial model
+but takes a different path regarding hypermedia. It requires the server to deliver only
+data when a resource is requested, stripping out any HATEOAS-related information and instead deliver
+the hypermedia on the side whenever a client needs it.
+However, Introspected REST goes beyond conventional hypermedia by supporting more classes of metadata, other
+than hypermedia, through our concept of MicroTypes which act as small reusable components of API
+functionality.
+MicroTypes are not intended to be used only for allowing the client to derive the application state
+at runtime. They also make the clients smarter by allowing them to take an active role
+in the client-server communication
+while enabling them to provide essential feedback to the application layer.
+
+We firmly believe that Introspected REST is the key to the evolvable unmanned services of the future.
+Our model allows the API designers to fine-tune the flexibility and extensibility of the API to their needs,
+even progressively or asymmetrically for different classes of clients.
+Choosing between REST or GraphQL won't be necessary as our model can support both styles simultaneously,
+using multiple sets of MicroTypes.
