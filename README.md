@@ -2,7 +2,7 @@
 
 In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
 and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
-We will see what problems a RESTful API brings why API designers have been constantly
+We will see what problems a RESTful API brings and why API designers have been constantly
 avoiding using it but instead come up with half-way solutions or retreat to alternative
 models like RPC-over-HTTP or, lately, GraphQL.
 Then, we will propose a **new model**, Introspected REST,
