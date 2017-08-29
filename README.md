@@ -167,7 +167,7 @@ The former is true but even if the latter is also true could it mean that this m
 not suitable for short-term APIs?
 
 We firmly believe that REST is much better than any API that does not follow `REST` principles
-(like `RESTly` APIs), even for short-term APIs.
+(like RESTly APIs), even for short-term APIs.
 Networked services have very peculiar characteristics which, until now, only REST and [GraphQL](#121-graphql) have fully addressed them.
 **Being able to evolve our API without breaking the clients is critical.**
 
@@ -177,7 +177,7 @@ to fill in her age, a field in the signup form we didn't have before.
 Essentially, this means, in API terms, add an extra field in the accepted object and require it from the client to be filled in
 by the user before sending it over.
 
-If our API is `RESTly` and not REST, this means that we need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
+If our API is RESTly and not REST, this means that we need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
 It takes roughly 1 week for Apple to review our app and if our app doesn't get rejection during the review process for some reason, our
 tiny change will take action at least a week later after requested.
 If our API _was_ REST, that would mean a simple change on the server's response, denoting which fields are required to submit the form.
