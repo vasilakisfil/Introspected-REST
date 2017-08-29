@@ -1,6 +1,6 @@
 # Introspected REST: An alternative to REST
 
-In this _manifesto_, we will give a specific definition of what `REST` is, according to Roy,
+In this _manifesto_, we will give a specific definition of what REST is, according to Roy,
 and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
 We will see what problems a RESTful API brings and why API designers have been constantly
 avoiding using it but instead come up with half-way solutions or retreat to alternative
@@ -25,7 +25,7 @@ infrastructure, which has been mostly influenced by REST concepts, and successfu
   + [3.2. Message level](#32-message-level)
   + [3.3. Protocol level](#33-protocol-level)
   + [3.4. Network level](#34-network-level)
-* [4. Roy's `REST` model](#4-roys-rest-model)
+* [4. Roy's REST model](#4-roys-rest-model)
   + [4.1. Access methods have the same semantics for all resources](#41-access-methods-have-the-same-semantics-for-all-resources)
   + [4.2. All important resources are identified by one resource identifier mechanism](#42-all-important-resources-are-identified-by-one-resource-identifier-mechanism)
   + [4.3. Resources are manipulated through the exchange of representations](#43-resources-are-manipulated-through-the-exchange-of-representations)
@@ -64,8 +64,8 @@ infrastructure, which has been mostly influenced by REST concepts, and successfu
     - [7.4.1. User resource](#741-user-resource)
     - [7.4.2. Users resource (a collection of User resources)](#742-users-resource-a-collection-of-user-resources)
     - [7.4.3. Reflections](#743-reflections)
-* [8. Ideal `REST` API](#8-ideal-rest-api)
-  + [8.1. Capabilities of an Ideal `REST` API](#81-capabilities-of-an-ideal-rest-api)
+* [8. Ideal REST API](#8-ideal-rest-api)
+  + [8.1. Capabilities of an Ideal REST API](#81-capabilities-of-an-ideal-rest-api)
     - [8.1.1. Today's REST is far from ideal](#811-todays-rest-is-far-from-ideal)
     - [8.1.2. Making an API REST-compliant by downplaying its capabilities](#812-making-an-api-rest-compliant-by-downplaying-its-capabilities)
     - [8.1.3. A JSON API back in time](#813-a-json-api-back-in-time)
@@ -149,26 +149,26 @@ infrastructure, which has been mostly influenced by REST concepts, and successfu
 First some definitions, that we will use through the text:
 
 * `REST`, `RESTful`: The model that Roy defined in his [thesis](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) (along with his blog post [REST APIs must be hypertext-driven](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)).
-* `RESTly`: APIs that follows all parts `REST` model, except HATEOAS in which they support mostly links (specs like [JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
-* `RESTless`: APIs that have a plain JSON API without any links (follows `REST` model other than HATEOAS)
+* `RESTly`: APIs that follows all parts REST model, except HATEOAS in which they support mostly links (specs like [JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc)
+* `RESTless`: APIs that have a plain JSON API without any links (follows REST model other than HATEOAS)
 * `Introspected REST`: APIs that follow the definition of the model we provide in this _manifesto_
 
 We will use the term APIs and networked APIs interchangeably.
 
 ## 2. Introduction
-`REST` defined by Roy was a magnificent piece of work, much ahead of its time
+REST defined by Roy was a magnificent piece of work, much ahead of its time
 which took us many years to understand what its capabilities are.
-However, now, almost 20 years later `REST` model shows its age. It's inflexible,
+However, now, almost 20 years later REST model shows its age. It's inflexible,
 difficult to implement, difficult to test, with performance and implementation issues.
-But most importantly, **any implementation of `REST` model is _very_ complex**.
+But most importantly, **any implementation of REST model is _very_ complex**.
 Now, one could say that, most APIs are not build with mind to last for decades and maybe
 that's the reason that this model hasn't seen much adoption.
 The former is true but even if the latter is also true could it mean that this model is
 not suitable for short-term APIs?
 
-We firmly believe that `REST` is much better than any API that does not follow `REST` principles
+We firmly believe that REST is much better than any API that does not follow `REST` principles
 (like `RESTly` APIs), even for short-term APIs.
-Networked services have very peculiar characteristics which, until now, only `REST` and [GraphQL](#121-graphql) have fully addressed them.
+Networked services have very peculiar characteristics which, until now, only REST and [GraphQL](#121-graphql) have fully addressed them.
 **Being able to evolve our API without breaking the clients is critical.**
 
 Imagine the following scenario: we have built an Online Social Network and an iOS app that talks to the API on our backend.
@@ -177,10 +177,10 @@ to fill in her age, a field in the signup form we didn't have before.
 Essentially, this means, in API terms, add an extra field in the accepted object and require it from the client to be filled in
 by the user before sending it over.
 
-If our API is `RESTly` and not `REST`, this means that we need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
+If our API is `RESTly` and not REST, this means that we need to fix the code in the iOS side, test it and send a new iOS app to Apple store.
 It takes roughly 1 week for Apple to review our app and if our app doesn't get rejection during the review process for some reason, our
 tiny change will take action at least a week later after requested.
-If our API _was_ `REST`, that would mean a simple change on the server's response, denoting which fields are required to submit the form.
+If our API _was_ REST, that would mean a simple change on the server's response, denoting which fields are required to submit the form.
 We would have the change deployed 10 minutes later.
 
 Roy notes in his thesis:
@@ -197,8 +197,8 @@ In the world of startups and money-driven companies, the following will sound mo
 
 An API that can change the state of the client without needing the latter to change.
 
-Given that, **how can we have a simpler model than `REST`, yet derive the same, if not more, functionality of
-`REST`?**
+Given that, **how can we have a simpler model than REST, yet derive the same, if not more, functionality of
+REST?**
 As we will show, `Introspected REST` is an API architectural style that solves that.
 An architectural style is not an implementation and it's not a spec either.
 As Roy notes:
@@ -285,7 +285,7 @@ in one of the TCP, UDP, etc.
 The actual protocol depends on the protocol used in the protocol level.
 
 
-## 4. Roy's `REST` model
+## 4. Roy's REST model
 Roy came up with the REST model in order to solve issues that were arising by the unique propertied of networked services
 during the infancy of Internet.
 When we develop an application that will be deployed in a networked environment and is expected to be accessed by other networked services,
@@ -295,14 +295,14 @@ if we need to add, remove or change functionality of that application
 Such problems that arise from the peculiarities of networks, like discovery and evolvability must be solved using
 machine-to-machine communication.
 
-`REST` model that solves such issues is an architectural style which is not tight to any spec, protocol or format of the
+REST model that solves such issues is an architectural style which is not tight to any spec, protocol or format of the
 aforementioned levels.
 
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
 >
 > --- Roy Fielding
 
-When Roy talks about `REST`, he mentions 5 crucial properties of `REST` model:
+When Roy talks about REST, he mentions 5 crucial properties of `REST` model:
 
 ### 4.1. Access methods have the same semantics for all resources
 > induces visible, scalable, available through layered system, cacheable, and shared caches
@@ -454,7 +454,7 @@ Then modify the client to parse and understand the API correctly using some offl
 every time the API evolves (like adding a resource or a field), reprogram the client accordingly. The extend of human involvement
 during that phase depends on the weakness of the Media Type.
 
-An API that follows the `REST` model should be evolvable without the need
+An API that follows the REST model should be evolvable without the need
 of human involvement in the client side, given that the client understands the Media Type.
 A side effect of such evolvability and 1-fold clients is that the **versioning should not take place in the URL but in the Media Type itself**.
 
@@ -616,7 +616,7 @@ For our message format, we will use JSON as it's the most popular but it could b
   * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
   * `microposts_count` an Integer
 
-So given those `REST` model properties we _could_ have the following routes:
+So given those REST model properties we _could_ have the following routes:
 * `Users` resource (`/api/users`):
   * List users (`GET /api/users`): Gets a collection of `User` resources
   * Create a new user (`/api/users`): Creates a new `User` with the specified attributes.
@@ -678,7 +678,7 @@ have a lot of similarities with the following specs, namely the structure and th
 linking), and as a result by comparing those specs with our model would be sufficient.
 
 We will evaluate the specs for the following:
-* whether they follow Roy's `REST` model
+* whether they follow Roy's REST model
 * whether their messages are **not** self descriptive, meaning that other than supporting the API's Media Type in our client
 we also need to read and understand the documentation to develop our client
 * whether they require multi-fold human factor while the API evolves
@@ -787,7 +787,7 @@ notable issues. Namely:
  * No info on data types
  * No attributes description
 
-To sum up, it doesn't entirely follow `REST` model while it requires both
+To sum up, it doesn't entirely follow REST model while it requires both
 documentation and multi-fold human factor.
 
 ### 7.3. HAL
@@ -1014,11 +1014,11 @@ still some issues that require human-involvement:
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human factor.
 
-## 8. Ideal `REST` API
+## 8. Ideal REST API
 How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
 built with a life span of 50 years?
 
-### 8.1. Capabilities of an Ideal `REST` API
+### 8.1. Capabilities of an Ideal REST API
 In an ideal REST API, the client should be able to have all the necessary information for both
 the request and response.
 
@@ -1202,8 +1202,8 @@ yet have all of them on demand and separated by the actual data.
 >
 >
 
-In the following section we will describe our new architectural style based on a model for Networked APIs that goes beyond `REST`.
-The model itself steps on Roy's initial `REST` model but with the difference that instead of providing resource hypermedia at
+In the following section we will describe our new architectural style based on a model for Networked APIs that goes beyond REST.
+The model itself steps on Roy's initial REST model but with the difference that instead of providing resource hypermedia at
 runtime, **it provides them on the side, only if requested**.
 Hence, by keeping the _uniform interface_ the derived 3 out of 4 REST constraints that Roy defined still exist in this model:
 _identification of resources_; _manipulation of resources through representations_ and _self-descriptive messages_.
@@ -1226,7 +1226,7 @@ Data is very volatile compared to other parts of a response.
 
 #### 9.1.2. Hypermedia
 Originally the hypermedia term was mostly used for linked data, in the sense of hyperlinks.
-In `REST`, eventually, it also includes information for interaction and resource manipulation.
+In REST, eventually, it also includes information for interaction and resource manipulation.
 Hypermedia can be dynamic or static but regardless **they are not considered part of the response data, because they define
 ways to interact with the data**.
 
