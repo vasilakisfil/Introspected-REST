@@ -139,10 +139,11 @@ infrastructure, which has been mostly influenced by REST concepts, and successfu
   + [12.2. Linked Data and Semantic Web](#122-linked-data-and-semantic-web)
     - [12.2.1 Hydra](#1221-hydra)
   + [12.3. The 'profile' Link Relation Type](#123-the-profile-link-relation-type)
-  + [12.4. JSON Home](#124-json-home-draft)
+  + [12.4. JSON Home](#124-json-home)
   + [12.5. RESTful API Description Languages](#125-restful-api-description-languages)
   + [12.6. API directories](#126-api-directories)
 * [13. Conclusion](#13-conclusion)
+
 
 
 ## 1. Definitions
