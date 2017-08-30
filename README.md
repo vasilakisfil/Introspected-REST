@@ -589,7 +589,7 @@ for the client to work properly.
 For instance, HATEOAS could describe on a per-resource basis if the pagination is supported, what is the maximum `per_page` etc.
 
 #### 6.2.4. An alternative architecture
-We feel that the current Media Type specification and use is dated.
+We feel that the current Media Type specification and use is outdated.
 If Software Engineering has learned us something, is that composition can enforce Single Responsibility Principle, if used correctly.
 Inspired by that, later, we will suggest a new concept,  MicroTypes, small reusable modules that combined together can form a Media Type.
 As a result, clients should be able to even negotiate parts of the Media Type and not the Media Type as a whole.
@@ -794,8 +794,8 @@ documentation and multi-fold human factor.
 ### 7.3. HAL
 [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) was created by Mike Kelly in 2012.
 The key feature of HAL when it was released was the browsability/explorability of any API that adopted.
-Another feature is the idea of curies, links inside the resource that lead to the documentation.
-However, this feature is rather controversial since the information these links provide are targeted for humans and not machines.
+Another feature is the idea of curies, links inside the resource that lead to the documentation, targeted to
+humans and not machines.
 
 The resources of our use case that are presented here use JSON as a message format, but HAL is not tight to that.
 
@@ -892,7 +892,7 @@ Although this spec does have templated links, we see some notable issues. Namely
  * No actions (they are supported by an unofficial extension)
  * No info on available attributes
  * No info on data types
- * No attributes description, requires documentation (however it does provide a link to documentation, through curies)
+ * No attributes description, requires documentation (however it does provide a link to documentation, through curries)
 
 To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human factor (curies facilitate that).
 
@@ -1013,7 +1013,7 @@ still some issues that require human-involvement:
  * No info on data types on response objects
  * Limited description for fields and resources
 
-To sum up, it doesn't entirely follow REST while it requires documentation and multi-fold human factor.
+To sum up, Siren is very close to a self-described REST API but in practice it requires documentation and multi-fold human factor.
 
 ## 8. Ideal REST API
 How many years these specs could sustain in terms of evolvability ? Are they built with a lifespan of 2-3 years or are they
@@ -2960,7 +2960,7 @@ which specifies the whole API vocabulary in a sole place
 while HATEOAS need to bear the brunt of communicating to the client the available
 capabilities of the server, based on Media Type's vocabulary,
 for each resource.
-The result is very complex API responses that tangle together hypermedia with data making development is a real
+The result is very complex API responses that tangle together hypermedia with data making development a real
 challenge for both the client and the server.
 
 Our new model, Introspected REST, which solves most of REST issues, steps on Roy's initial model
@@ -2975,7 +2975,8 @@ at runtime. They also make the clients smarter by allowing them to take an activ
 in the client-server communication
 while enabling them to provide essential feedback to the application layer.
 
-We firmly believe that Introspected REST is the key to the evolvable unmanned services of the future.
+We firmly believe that Introspected REST is the key to evolvable services of the future that are accessed by unmanned clients
+with a lifespan of decades.
 Our model allows the API designers to fine-tune the flexibility and extensibility of the API to their needs,
 even progressively or asymmetrically for different classes of clients.
 Choosing between REST or GraphQL won't be necessary as our model can support both styles simultaneously,
