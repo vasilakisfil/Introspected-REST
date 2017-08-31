@@ -1,4 +1,4 @@
-# Introspected REST: An alternative to REST
+# Introspected REST: An alternative to REST and GraphQL
 
 In this _manifesto_, we will give a specific definition of what REST is, according to Roy,
 and see **the majority of APIs and API specs** ([JSONAPI](https://jsonapi.org/format), [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) etc) **fail to follow this model**.
