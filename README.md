@@ -2052,7 +2052,7 @@ but it would look like this:
       "errors": {
         "url": "/api/users/1?microtype=errors",
         "method": "OPTIONS",
-        "content-type": "application/simple-pagination+json",
+        "content-type": "application/simple-errors+json",
         "priority": "1.0"
       }
     },
