@@ -287,7 +287,7 @@ The actual protocol depends on the protocol used in the protocol level.
 
 
 ## 4. Roy's REST model
-Roy came up with the REST model in order to solve issues that were arising by the unique propertied of networked services
+Roy came up with the REST model in order to solve issues that were arising by the unique properties of networked services
 during the infancy of Internet.
 When we develop an application that will be deployed in a networked environment and is expected to be accessed by other networked services,
 we need to think about its evolvability:
@@ -296,7 +296,7 @@ if we need to add, remove or change functionality of that application
 Such problems that arise from the peculiarities of networks, like discovery and evolvability must be solved using
 machine-to-machine communication.
 
-REST model that solves such issues is an architectural style which is not tight to any spec, protocol or format of the
+REST model that solves such issues is an architectural style which is not tied to any spec, protocol or format of the
 aforementioned levels.
 
 > a RESTful API is just a website for users with a limited vocabulary (machine to machine interaction)
@@ -797,7 +797,7 @@ The key feature of HAL when it was released was the browsability/explorability o
 Another feature is the idea of curies, links inside the resource that lead to the documentation, targeted to
 humans and not machines.
 
-The resources of our use case that are presented here use JSON as a message format, but HAL is not tight to that.
+The resources of our use case that are presented here use JSON as a message format, but HAL is not tied to that.
 
 #### 7.3.1. User resource
 ```json
@@ -899,7 +899,7 @@ To sum up, it doesn't entirely follow REST while it requires documentation and m
 ### 7.4. Siren
 [Siren](https://github.com/kevinswiber/siren) was created by Kevin Swiber in 2012 and revolves around _entities_, a URI-addressable resource that has properties and actions associated with it.
 
-The resources of our use case that are presented here use JSON as a message format, but Siren is not tight to that.
+The resources of our use case that are presented here use JSON as a message format, but Siren is not tied to that.
 
 #### 7.4.1. User resource
 ```json
@@ -1784,7 +1784,7 @@ Link: <https://www.example.com/api/users/1?microtype=json-schema>; rel="microtyp
 Also related, Erik Wilde is working on an IETF draft, named [Link Relation Types for Web Services](https://tools.ietf.org/id/draft-wilde-service-link-rel-04.html)
 that defines a way to announce metadata of a resource through this mechanism.
 Given that and also the fact that this solution has the advantage of solving the MicroTypes announcement
-in the HTTP protocol without being tight to a specific serialization, it's easy to think that it's the
+in the HTTP protocol without being tied to a specific serialization, it's easy to think that it's the
 most appropriate way to specify the MicroTypes supported on a specific resource.
 
 Unfortunately, this solution has a couple of drawbacks.
@@ -2589,7 +2589,7 @@ programmatically wrapped in a human-friendly format.
 ### 12.1. GraphQL
 [GraphQL](http://graphql.org/) is a data query language that was created by Facebook and released to the public
 in 2015.
-The specification of the query language is not tight to the protocol used
+The specification of the query language is not tied to the protocol used
 underneath or the message format, although HTTP in combination with JSON is usually used.
 What is different about GraphQL is that **it makes the client's requirements and performance
 as a top priority**, regardless of the internal implementation of the data layer in the server.
@@ -2899,7 +2899,7 @@ As the draft notes the benefits of using such a home document are multifold:
 >
 
 Although we can instantly see the benefits of such structure, we believe that a specification like JSON Home
-is very weak. Specifically, it is tight in JSON message format which, although very popular, could possibly be
+is very weak. Specifically, it is tied to JSON message format which, although very popular, could possibly be
 inappropriate in some use cases.
 Instead, a better idea would be to define the necessary attributes and semantics that a Home document
 should provide and then let the API designer to choose if these will be implemented in JSON, XML or binary format.
