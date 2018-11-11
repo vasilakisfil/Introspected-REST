@@ -614,7 +614,7 @@ For our message format, we will use JSON as it's the most popular but it could b
   * `email`, a String, never empty or NULL, with maximum length up to 255 characters, email format
   * `name`, a String, with maximum length up to 150 characters
   * `birth_date`, a String, representing a Date according to `iso8601`, in `2017-04-01` format.
-  * `created_at`, a String, never empty or NULL, representing a DateTime according to `is8601`, in UTC
+  * `created_at`, a String, never empty or NULL, representing a DateTime according to `iso8601`, in UTC
   * `microposts_count` an Integer
 
 So given those REST model properties we _could_ have the following routes:
