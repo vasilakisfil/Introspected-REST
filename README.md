@@ -1070,7 +1070,7 @@ them is a bad practice.
 
 
 #### 8.1.2. Making an API REST-compliant by downplaying its capabilities
-One could argue that we require all APIs to support features that shouldn't, like resource manipulation.
+One could argue that we require all APIs to support features that they shouldn't, like resource manipulation.
 For instance, we could have a weather API with `application/vnd.weather+yaml` Media Type
 that is only supposed to provide a single attribute with its value, as Integer:
 
