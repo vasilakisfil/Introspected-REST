@@ -625,7 +625,7 @@ So given those REST model properties we _could_ have the following routes:
 * `User` resource (`/api/users/{id}`):
   * Get a user (`GET /api/users/{id}`): Gets the attributes of the specified `User`
   * Update a user `PATCH /api/users/{id}`: Updates a `User` with the specified attributes
-  * Delete a user `DELETE /api/users/{id}`: Updates a `User` with the specified attributes
+  * Delete a user `DELETE /api/users/{id}`: Deletes a `User`
 
 _`Users` and `User` are 2 distinct resources which are often, mistankenly, misthought as a single, one, resource.
 Also, the fact that `Users` is a collection of `User` objects is because it suits our needs but it doesn't have necessarily
