@@ -515,11 +515,11 @@ based on the page, page size and possibly an offset.
 
 #### 6.1.4. Filtering collections (collection only)
 The client should be able to run any sort of collection filtering, as long as it does not pose
-any security thread or slows down the API performance.
+any security threat or slows down the API performance.
 
 #### 6.1.5. Aggregation queries (collection only)
 The client should be able to run any sort of aggregation queries, as long as it does not pose
-any security thread or slows down the API performance.
+any security threat or slows down the API performance.
 
 #### 6.1.6. Data types !
 The client should know the data types of the attributes of the requested representation of a resource.
@@ -932,7 +932,7 @@ The resources of our use case that are presented here use JSON as a message form
     {
       "name": "delete-user",
       "title": "Get User",
-      "method": "GET",
+      "method": "DELETE",
       "href": "https://example.com/api/users/1",
       "type": "application/json",
     }
