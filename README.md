@@ -2312,7 +2312,7 @@ is that the client can use this information to first validate the object before 
         "created_at":{
           "maxLength":255,
           "type":"string",
-          "formate":"date-time"
+          "format":"date-time"
         },
         "microposts_count":{
           "type":"integer"
@@ -2503,7 +2503,7 @@ is not part of the API client responsibility but it's vital for the application 
       ]
     },
     "name": {
-      "title": "The user's full name (first and last name concataned)",
+      "title": "The user's full name (first and last name concatenated)",
       "description": [
         "This field could be empty or null.",
         "If so, the application should show the email instead for the user's name."
@@ -2886,7 +2886,7 @@ As the draft notes the benefits of using such a home document are multifold:
 >      supporting the old ones.
 >
 >   o  Customisation - Home documents can be tailored for the client,
->      allowing diffrent classes of service or different client
+>      allowing different classes of service or different client
 >      permissions to be exposed naturally.
 >
 >   o  Flexible deployment - Since URLs aren't baked into documentation,
