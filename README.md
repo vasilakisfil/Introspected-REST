@@ -2606,7 +2606,7 @@ implementation support those filters:
     name
     email
     birth_date
-    microposts (limit: 10, orderBy: created_at)
+    microposts (limit: 10, orderBy: created_at) {
       title
     }
   }
