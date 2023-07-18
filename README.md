@@ -1976,7 +1976,7 @@ Our use case will be the same as the one in [section 7.1](#71-our-use-case), a m
 Given that Introspected REST differs only in HATEOAS part of REST, the identification of the resources _should_ be kept the same, namely:
 * `Users` resource (`/users`):
   * List users (`GET /users`): Gets a collection of `User` resources
-  * Create a new user (`/users`): Creates a new `User` with the specified attributes.
+  * Create a new user (`POST /users`): Creates a new `User` with the specified attributes.
 
 * `User` resource (`/users/{id}`):
   * Get a user (`GET /users/{id}`): Gets the attributes of the specified `User`
